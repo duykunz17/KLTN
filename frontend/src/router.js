@@ -4,11 +4,19 @@ import React from 'react';
 import LoginPage from "./views/LoginPage";
 import NotFoundpage from "./views/NotFoundpage";
 
+// test info
+import Info from "./views/Info";
+
 const ROUTERS = [
     {
         path: '/',
         exact: true,
-        main: () => <LoginPage />
+        main: ({history}) => <LoginPage history={history}/>
+    },
+    {
+        path: '/info',
+        exact: false,
+        main: () => <Info />
     },
     {
         path: '',
