@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class RecentTrip extends Component {
     render() {
@@ -22,10 +23,10 @@ class RecentTrip extends Component {
                             <div className="date">
                             <span>Oct 12, 2019</span>
                             </div>
-                            <a href>
+                            <Link to="">
                             <h3>Journeys Are Best Measured In
                                 New Friends</h3>
-                            </a>
+                            </Link>
                         </div>
                         </div>
                     </div>
@@ -38,10 +39,10 @@ class RecentTrip extends Component {
                             <div className="date">
                             <span>Oct 12, 2019</span>
                             </div>
-                            <a href>
+                            <Link to="">
                             <h3>Journeys Are Best Measured In
                                 New Friends</h3>
-                            </a>
+                            </Link>
                         </div>
                         </div>
                     </div>
@@ -54,10 +55,10 @@ class RecentTrip extends Component {
                             <div className="date">
                             <span>Oct 12, 2019</span>
                             </div>
-                            <a href>
+                            <Link to="">
                             <h3>Journeys Are Best Measured In
                                 New Friends</h3>
-                            </a>
+                            </Link>
                         </div>
                         </div>
                     </div>

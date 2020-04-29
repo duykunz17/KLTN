@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Banner extends Component {
     render() {
@@ -12,7 +13,7 @@ class Banner extends Component {
                             <div className="slider_text text-center">
                             <h3>Indonesia</h3>
                             <p>Pixel perfect design with awesome contents</p>
-                            <a href="#" className="boxed-btn3">Explore Now</a>
+                            <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                         </div>
@@ -25,7 +26,7 @@ class Banner extends Component {
                             <div className="slider_text text-center">
                             <h3>Australia</h3>
                             <p>Pixel perfect design with awesome contents</p>
-                            <a href="#" className="boxed-btn3">Explore Now</a>
+                            <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                         </div>
@@ -38,7 +39,7 @@ class Banner extends Component {
                             <div className="slider_text text-center">
                             <h3>Switzerland</h3>
                             <p>Pixel perfect design with awesome contents</p>
-                            <a href="#" className="boxed-btn3">Explore Now</a>
+                            <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                         </div>

@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 class Header extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: {}
+        }
+    }
+
+    componentWillMount() {
+        let user = JSON.parse(sessionStorage.getItem("user"));
+        this.setState({user});
+    }
+
     isLogout = () => {
-        if(sessionStorage.getItem("username")){
-            sessionStorage.removeItem("username");
+        if(sessionStorage.getItem("user")){
+            sessionStorage.removeItem("user");
             window.location.href = '/';
         }
         
     }
     render() {
+        let { user } = this.state;
         return (
             <header>
                 <div className="header-area">
@@ -17,31 +32,31 @@ class Header extends Component {
                         <div className="row align-items-center">
                             <div className="col-xl-2 col-lg-2">
                             <div className="logo">
-                                <a href="index.html">
+                                <Link to="index.html">
                                 <img src="images/logo.png" alt="" style={{marginLeft:'-50px'}}/>
-                                </a>
+                                </Link>
                             </div>
                             </div>
                             <div className="col-xl-6 col-lg-6">
                             <div className="main-menu  d-none d-lg-block">
                                 <nav>
                                 <ul id="navigation">
-                                    <li><a className="active" href="index.html">home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a className href="travel_destination.html">Destination</a>
-                                    </li><li><a href>pages <i className="fa fa-angle-down" /></a>
+                                    <li><Link className="active" to="index.html">home</Link></li>
+                                    <li><Link to="about.html">About</Link></li>
+                                    <li><Link className to="travel_destination.html">Destination</Link>
+                                    </li><li><Link >pages <i className="fa fa-angle-down" /></Link>
                                     <ul className="submenu">
-                                        <li><a href="destination_details.html">Destinations details</a></li>
-                                        <li><a href="elements.html">elements</a></li>
+                                        <li><Link to="destination_details.html">Destinations details</Link></li>
+                                        <li><Link to="elements.html">elements</Link></li>
                                     </ul>
                                     </li>
                                     <li><a href>blog <i className="fa fa-angle-down" /></a>
                                     <ul className="submenu">
-                                        <li><a href="blog.html">blog</a></li>
-                                        <li><a href="single-blog.html">single-blog</a></li>
+                                        <li><Link to="blog.html">blog</Link></li>
+                                        <li><Link to="single-blog.html">single-blog</Link></li>
                                     </ul>
                                     </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><Link to="contact.html">Contact</Link></li>
                                 </ul>
                                 </nav>
                             </div>
@@ -49,14 +64,14 @@ class Header extends Component {
                             <div className="col-xl-4 col-lg-4 d-none d-lg-block">
                             <div className="social_wrap d-flex align-items-center justify-content-end">
                                 <div className="number">
-                                <p> <i className="fa fa-user" /> {sessionStorage.getItem('username')} </p>
+                                <p> <i className="fa fa-user" /> {user.username} </p>
                                 </div>
                             </div>
                             </div>
                             <div className="seach_icon">
-                            <a href>
+                            <Link to=''>
                                 <i className="fa fa-sign-out" onClick={() => this.isLogout()}></i>
-                            </a>
+                            </Link>
                             </div>
                             <div className="col-12">
                             <div className="mobile_menu d-block d-lg-none" />
@@ -65,17 +80,6 @@ class Header extends Component {
                         </div>
                     </div>
                     </div>
-                </div>
-          
-                <div className="modal fade custom_search_pop" id="exampleModalCenter" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
-                    <div className="serch_form">
-                        <input type="text" placeholder="Search" />
-                        <button type="submit">search</button>
-                    </div>
-                    </div>
-                </div>
                 </div>
             </header>
         );

@@ -29,7 +29,7 @@ export default class LoginPage extends Component {
                     })
                 }
                 else{
-                    sessionStorage.setItem('username', username);
+                    sessionStorage.setItem("user", JSON.stringify(res.data.user));
                     //this.props.history.push('/homepage');
                     window.location.href = '/homepage';
                 }   

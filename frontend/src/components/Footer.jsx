@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Footer extends Component {
     render() {
@@ -21,29 +22,29 @@ class Footer extends Component {
                             <div className="socail_links">
                             <ul>
                                 <li>
-                                <a href>
+                                <Link to="">
                                     <i className="fa fa-facebook" />
-                                </a>
+                                </Link>
                                 </li>
                                 <li>
-                                <a href>
+                                <Link to="">
                                     <i className="fa fa-twitter" />
-                                </a>
+                                </Link>
                                 </li>
                                 <li>
-                                <a href>
+                                <Link to="">
                                     <i className="fa fa-instagram" />
-                                </a>
+                                </Link>
                                 </li>
                                 <li>
-                                <a href>
+                                <Link to="">
                                     <i className="fa fa-pinterest" />
-                                </a>
+                                </Link>
                                 </li>
                                 <li>
-                                <a href>
+                                <Link to="">
                                     <i className="fa fa-youtube-play" />
-                                </a>
+                                </Link>
                                 </li>
                             </ul>
                             </div>
@@ -86,34 +87,34 @@ class Footer extends Component {
                             </h3>
                             <div className="instagram_feed">
                             <div className="single_insta">
-                                <a href>
+                                <Link to="">
                                 <img src="images/instagram/1.png" alt="" />
-                                </a>
+                                </Link>
                             </div>
                             <div className="single_insta">
-                                <a href>
+                                <Link to="">
                                 <img src="images/instagram/2.png" alt="" />
-                                </a>
+                                </Link>
                             </div>
                             <div className="single_insta">
-                                <a href>
+                                <Link to="">
                                 <img src="images/instagram/3.png" alt="" />
-                                </a>
+                                </Link>
                             </div>
                             <div className="single_insta">
-                                <a href>
+                                <Link to="">
                                 <img src="images/instagram/4.png" alt="" />
-                                </a>
+                                </Link>
                             </div>
                             <div className="single_insta">
-                                <a href>
+                                <Link to="">
                                 <img src="images/instagram/5.png" alt="" />
-                                </a>
+                                </Link>
                             </div>
                             <div className="single_insta">
-                                <a href>
+                                <Link to="">
                                 <img src="images/instagram/6.png" alt="" />
-                                </a>
+                                </Link>
                             </div>
                             </div>
                         </div>

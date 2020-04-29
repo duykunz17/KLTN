@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class PopularPlaces extends Component {
     render() {
@@ -18,10 +19,10 @@ class PopularPlaces extends Component {
                         <div className="single_place">
                         <div className="thumb">
                             <img src="images/7.png" alt="" />
-                            <a href className="prise">$500</a>
+                            <Link to="" className="prise">$500</Link>
                         </div>
                         <div className="place_info">
-                            <a href="destination_details.html"><h3>California</h3></a>
+                            <Link to="destination_details.html"><h3>California</h3></Link>
                             <p>United State of America</p>
                             <div className="rating_days d-flex justify-content-between">
                             <span className="d-flex justify-content-center align-items-center">
@@ -30,11 +31,11 @@ class PopularPlaces extends Component {
                                 <i className="fa fa-star" /> 
                                 <i className="fa fa-star" /> 
                                 <i className="fa fa-star" />
-                                <a href>(20 Review)</a>
+                                <Link to="">(20 Review)</Link>
                             </span>
                             <div className="days">
                                 <i className="fa fa-clock-o" />
-                                <a href>5 Days</a>
+                                <Link to="">5 Days</Link>
                             </div>
                             </div>
                         </div>
@@ -174,7 +175,7 @@ class PopularPlaces extends Component {
                     <div className="row">
                     <div className="col-lg-12">
                         <div className="more_place_btn text-center">
-                        <a className="boxed-btn4" href>More Places</a>
+                        <Link className="boxed-btn4" to="">More Places</Link>
                         </div>
                     </div>
                     </div>
