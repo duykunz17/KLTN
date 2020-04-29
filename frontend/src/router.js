@@ -6,6 +6,7 @@ import NotFoundpage from "./views/NotFoundpage";
 
 // test info
 import Info from "./views/Info";
+import HomePage from './views/HomePage';
 
 const ROUTERS = [
     {
@@ -17,6 +18,11 @@ const ROUTERS = [
         path: '/info',
         exact: false,
         main: () => <Info />
+    },
+    {
+        path: '/homepage',
+        exact: false,
+        main: () => <HomePage />
     },
     {
         path: '',

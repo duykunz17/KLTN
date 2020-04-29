@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 // call modle account database
-const dbAcount = require('../modles/Account');
+const dbAcount = require('../models/Account');
 
 router.route('/login-social').post((req, res) => {
     let account = req.body;
@@ -34,7 +34,7 @@ router.route('/login-local').post((req, res) => {
     let { username, password } = req.body;
     dbAcount.findOne({username}, (err, user) => {
         if (err) return res.json(err);
-        if (!user) return res.json({message: 'Không tìm thấy tài khoản'});
+        if (!user) return res.json({message: 'Tài khoản không tồn tại'});
         if (!user.validPassword(password, user.password))   // if password is invalid
             return res.json({message: 'Sai mật khẩu'});
 

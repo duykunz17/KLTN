@@ -25,13 +25,12 @@ export default class Facebook extends Component {
             <div>
                 <FacebookLogin
                     appId={ Config.API_FACEBOOK_ID }
-                    // autoLoad={true}
+                    //autoLoad={true}
                     fields="name, email, picture"
                     callback={this.responseFacebook}
                     cssClass="btn btn-facebook btn-user btn-block"
                     textButton ="&nbsp;&nbsp;Đăng nhập bằng Facebook"
-                    icon={<i className="fa fa-facebook" />}
-                />
+                    icon={<i className="fa fa-facebook" />}></FacebookLogin>
             </div>
         );
     }

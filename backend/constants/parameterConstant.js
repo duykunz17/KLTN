@@ -1,5 +1,5 @@
 // create constant for Mongo
-const ATLAS_URI_MONGO = "mongodb+srv://dbuser:123456a@cluster0-bayep.mongodb.net/testProduct";
+const ATLAS_URI_MONGO = "mongodb+srv://ducduy:123456a@cluster0-bayep.mongodb.net/test";
 //-------------------------------------------------------------------------------------------
 
 // create constants for Facebooke

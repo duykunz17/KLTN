@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 import callAPI from './../utils/connectAPI';
 
 // import components Login
@@ -21,9 +21,18 @@ export default class LoginPage extends Component {
         await callAPI('account/login-local', 'POST', {username, password})
             .then(res => {
                 // check if there's a message or not?
-                if (res.data.message)
-                    alert(res.data.message);
-                // else
+                if (res.data.message){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Đăng nhập không thành công',
+                        text: res.data.message,
+                    })
+                }
+                else{
+                    sessionStorage.setItem('username', username);
+                    //this.props.history.push('/homepage');
+                    window.location.href = '/homepage';
+                }   
             })
     }
 

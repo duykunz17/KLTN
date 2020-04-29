@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-
+const PARAMTERS = require('./../constants/parameterConstant');
 require('dotenv').config();
 
 // call constant paramter
@@ -15,4 +15,4 @@ require('dotenv').config();
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/testUser", () => console.log("MongoDB database connection successfully"));
+mongoose.connect(PARAMTERS.ATLAS_URI_MONGO, () => console.log("MongoDB database connection successfully"));
