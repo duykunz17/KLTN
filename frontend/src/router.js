@@ -7,6 +7,7 @@ import NotFoundpage from "./views/NotFoundpage";
 // test info
 import Info from "./views/Info";
 import HomePage from './views/HomePage';
+import SignUpPage from './views/SignUpPage';
 
 const ROUTERS = [
     {
@@ -23,6 +24,11 @@ const ROUTERS = [
         path: '/homepage',
         exact: false,
         main: () => <HomePage />
+    },
+    {
+        path: '/sign-up',
+        exact: false,
+        main: () => <SignUpPage/>
     },
     {
         path: '',

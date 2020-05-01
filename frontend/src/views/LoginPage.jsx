@@ -54,7 +54,7 @@ export default class LoginPage extends Component {
                             <img src="images/logo_login.jpg" alt="IMG" />
                         </div>
 
-                        <div className="login100-form validate-form">
+                        <div className="login100-form validate-form" style={{marginTop:'10px'}}>
                             {/* component Login */}
                             <Login onLogin={this.onLogin} />
 

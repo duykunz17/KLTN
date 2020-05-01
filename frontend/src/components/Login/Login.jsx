@@ -24,7 +24,6 @@ class Login extends Component {
     onSave = (event) => {
         event.preventDefault();
         var { username, password } = this.state;
-
         this.props.onLogin(username, password);
     }
 
@@ -33,7 +32,7 @@ class Login extends Component {
         return (
             <form onSubmit={this.onSave} >
                 <span className="login100-form-title">
-                    Welcome Back
+                    Đăng nhập
                 </span>
                 <div className="wrap-input100 validate-input">
                     <input className="input100" type="text" name="username" placeholder="Tài khoản"
