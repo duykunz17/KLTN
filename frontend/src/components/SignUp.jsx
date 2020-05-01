@@ -65,6 +65,13 @@ class SignUp extends Component {
                         title: 'Đăng ký tài khoản thành công',
                     })
                     document.getElementById('message').innerHTML = '';
+                    this.setState({
+                        name: '',
+                        email: '',
+                        username: '',
+                        password: '',
+                        confirmPassword: ''
+                    });
                 }
                 
             }).catch(err => console.log(err)
