@@ -69,9 +69,9 @@ class Header extends Component {
                             </div>
                             </div>
                             <div className="seach_icon">
-                            <Link to=''>
+                            <a>
                                 <i className="fa fa-sign-out" onClick={() => this.isLogout()}></i>
-                            </Link>
+                            </a>
                             </div>
                             <div className="col-12">
                             <div className="mobile_menu d-block d-lg-none" />
