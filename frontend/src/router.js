@@ -8,6 +8,7 @@ import NotFoundpage from "./views/NotFoundpage";
 import Info from "./views/Info";
 import HomePage from './views/HomePage';
 import SignUpPage from './views/SignUpPage';
+import PlaceDetailPage from './views/PlaceDetailPage';
 
 const ROUTERS = [
     {
@@ -23,12 +24,17 @@ const ROUTERS = [
     {
         path: '/homepage',
         exact: false,
-        main: () => <HomePage />
+        main: () => <HomePage/>
     },
     {
         path: '/sign-up',
         exact: false,
         main: () => <SignUpPage/>
+    },
+    {
+        path: '/place/:id',
+        exact: false,
+        main: (object) => <PlaceDetailPage object={object} />
     },
     {
         path: '',

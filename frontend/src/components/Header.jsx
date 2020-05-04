@@ -33,7 +33,7 @@ class Header extends Component {
                             <div className="col-xl-2 col-lg-2">
                             <div className="logo">
                                 <Link to="index.html">
-                                <img src="images/logo.png" alt="" style={{marginLeft:'-50px'}}/>
+                                <img src="../images/logo.png" alt="" style={{marginLeft:'-50px'}}/>
                                 </Link>
                             </div>
                             </div>
@@ -50,7 +50,7 @@ class Header extends Component {
                                         <li><Link to="elements.html">elements</Link></li>
                                     </ul>
                                     </li>
-                                    <li><a href>blog <i className="fa fa-angle-down" /></a>
+                                    <li><Link to="">blog <i className="fa fa-angle-down" /></Link>
                                     <ul className="submenu">
                                         <li><Link to="blog.html">blog</Link></li>
                                         <li><Link to="single-blog.html">single-blog</Link></li>
@@ -69,7 +69,7 @@ class Header extends Component {
                             </div>
                             </div>
                             <div className="seach_icon">
-                            <a>
+                            <a href>
                                 <i className="fa fa-sign-out" onClick={() => this.isLogout()}></i>
                             </a>
                             </div>

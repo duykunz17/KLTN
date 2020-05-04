@@ -23,7 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 var accountRouter = require('./routes/account');      // handling login and sign in
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-app.use('/account', accountRouter)
+var placeRouter = require('./routes/place');
+app.use('/account', accountRouter);
+app.use('/place', placeRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

@@ -4,47 +4,47 @@ import { Link } from 'react-router-dom';
 class Banner extends Component {
     render() {
         return (
-            <div className="slider_area">
-                <div className="slider_active owl-carousel">
-                    <div className="single_slider  d-flex align-items-center slider_bg_1 overlay">
-                    <div className="container">
-                        <div className="row align-items-center">
-                        <div className="col-xl-12 col-md-12">
-                            <div className="slider_text text-center">
-                            <h3>Indonesia</h3>
-                            <p>Pixel perfect design with awesome contents</p>
-                            <Link to="" className="boxed-btn3">Explore Now</Link>
+            <div className="bd-example">
+                <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
+                    <ol className="carousel-indicators">
+                        <li data-target="#carouselExampleCaptions" data-slide-to={0} className="active" />
+                        <li data-target="#carouselExampleCaptions" data-slide-to={1} />
+                        <li data-target="#carouselExampleCaptions" data-slide-to={2} />
+                    </ol>
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src="/images/banner.png" className="d-block w-100" alt="..." />
+                            <div className="carousel-caption d-md-block">
+                                <h3>Indonesia</h3>
+                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                <Link to="" class="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="single_slider  d-flex align-items-center slider_bg_2 overlay">
-                    <div className="container">
-                        <div className="row align-items-center">
-                        <div className="col-xl-12 col-md-12">
-                            <div className="slider_text text-center">
-                            <h3>Australia</h3>
-                            <p>Pixel perfect design with awesome contents</p>
-                            <Link to="" className="boxed-btn3">Explore Now</Link>
+                        <div className="carousel-item">
+                            <img src="/images/banner2.png" className="d-block w-100" alt="..." />
+                            <div className="carousel-caption d-md-block">
+                                <h3>Australia</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <Link to="" class="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="single_slider  d-flex align-items-center slider_bg_3 overlay">
-                    <div className="container">
-                        <div className="row align-items-center">
-                        <div className="col-xl-12 col-md-12">
-                            <div className="slider_text text-center">
-                            <h3>Switzerland</h3>
-                            <p>Pixel perfect design with awesome contents</p>
-                            <Link to="" className="boxed-btn3">Explore Now</Link>
+                        <div className="carousel-item">
+                            <img src="/images/banner3.png" className="d-block w-100" alt="..." />
+                            <div className="carousel-caption d-md-block">
+                                <h3>Brazil</h3>
+                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                <Link to="" class="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
-                        </div>
                     </div>
-                    </div>
+                    <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true" />
+                        <span className="sr-only">Previous</span>
+                    </a>
+                    <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true" />
+                        <span className="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         );

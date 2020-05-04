@@ -9,10 +9,10 @@ class Footer extends Component {
                     <div className="container">
                     <div className="row">
                         <div className="col-xl-4 col-md-6 col-lg-4 ">
-                        <div className="footer_widget">
+                        <div className="footer_widget" style={{textAlign: "left"}}>
                             <div className="footer_logo">
                             <a href>
-                                <img src="images/footer_logo.png" alt="" />
+                                <img src="../images/footer_logo.png" alt="" />
                             </a>
                             </div>
                             <p>5th flora, 700/D kings road, green <br /> lane New York-1782 <br />
@@ -88,32 +88,32 @@ class Footer extends Component {
                             <div className="instagram_feed">
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="images/instagram/1.png" alt="" />
+                                <img src="../images/instagram/1.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="images/instagram/2.png" alt="" />
+                                <img src="../images/instagram/2.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="images/instagram/3.png" alt="" />
+                                <img src="../images/instagram/3.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="images/instagram/4.png" alt="" />
+                                <img src="../images/instagram/4.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="images/instagram/5.png" alt="" />
+                                <img src="../images/instagram/5.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="images/instagram/6.png" alt="" />
+                                <img src="../images/instagram/6.png" alt="" />
                                 </Link>
                             </div>
                             </div>

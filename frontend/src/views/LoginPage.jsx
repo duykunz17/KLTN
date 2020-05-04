@@ -46,6 +46,7 @@ export default class LoginPage extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="limiter">
                 <div className="container-login100">
