@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
-import axios from 'axios';
 
+import callAPI from './../utils/connectAPI';
 
 class PlaceDetailPage extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class PlaceDetailPage extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/place/' + this.props.object.match.params.id)
+        callAPI(`place/${this.props.object.match.params.id}`, 'GET', null)
             .then(res => {
                 this.setState({
                     name: res.data.name,
