@@ -17,7 +17,7 @@ class Banner extends Component {
                             <div className="carousel-caption d-md-block">
                                 <h3>Indonesia</h3>
                                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                <Link to="" class="boxed-btn3">Explore Now</Link>
+                                <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                         <div className="carousel-item">
@@ -25,7 +25,7 @@ class Banner extends Component {
                             <div className="carousel-caption d-md-block">
                                 <h3>Australia</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <Link to="" class="boxed-btn3">Explore Now</Link>
+                                <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                         <div className="carousel-item">
@@ -33,7 +33,7 @@ class Banner extends Component {
                             <div className="carousel-caption d-md-block">
                                 <h3>Brazil</h3>
                                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                                <Link to="" class="boxed-btn3">Explore Now</Link>
+                                <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                     </div>

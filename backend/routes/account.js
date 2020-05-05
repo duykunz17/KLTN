@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const bcrypt = require('bcrypt-nodejs');
 // call modle account database
 const dbAcount = require('../models/Account');
 
@@ -12,14 +11,20 @@ router.route('/login-social').post((req, res) => {
         // If the user exists, allow login
         if (user) return res.json({user});
 
+        let avatar = account.avatar ? account.avatar : "https://firebasestorage.googleapis.com/v0/b/testapi-272015.appspot.com/o/images%2Faccount_anonymous.jpeg?alt=media&token=4cc2ecef-33dc-4ed0-9135-64d44aef42bd";
+        let email = account.person.email ? account.person.email : '';
+        let gender = account.person.gender ? account.person.gender : true;
+
         let newUser = new dbAcount ({
             username: account.username,
             roles: account.roles,
-            avatar: account.avatar,
+            avatar: avatar,
             person: {
                 name: account.person.name,
-                gender: account.person.gender,
-                email: account.person.email
+                gender: gender,
+                phone: '',
+                address: '',
+                email: email
             }
             
         });
@@ -30,7 +35,6 @@ router.route('/login-social').post((req, res) => {
 });
 
 router.route('/login-local').post((req, res) => {
-    console.log(req.body);
     let { username, password } = req.body;
     dbAcount.findOne({username}, (err, user) => {
         if (err) return res.json(err);
@@ -43,27 +47,50 @@ router.route('/login-local').post((req, res) => {
 });
 
 router.route('/add').post( (req, res) =>{
-    const name = req.body.name;
-    const email = req.body.email;
-    const username = req.body.username;
-    const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(5), null);
-    const newUser = new dbAcount({"person.name":name, "person.email": email, username, password});
-    console.log(newUser);
-
+    let { name, email, username, password } = req.body;
     dbAcount.findOne({'username' : username}, 'username') // chỉ select username để so sánh với req.body.username
-    .then(data => {
-        if(data === null){
-            newUser.save()
-            .then(res.json({username}))
-            .catch(err => res.status(400).json('Error: ' + err));
-        } else {
-            return res.json({message: 'Tài khoản đã tồn tại'});
-        }
-    })
-    .catch(err => {
-        res.status(400).json('Error: ' + err);
-    });
-    
+        .then(data => {
+            if(data === null){
+                let newUser = new dbAcount({
+                    username: username,
+                    roles: 2,
+                    avatar: 'https://firebasestorage.googleapis.com/v0/b/testapi-272015.appspot.com/o/images%2Faccount_anonymous.jpeg?alt=media&token=4cc2ecef-33dc-4ed0-9135-64d44aef42bd',
+                    person: {
+                        name: name,
+                        gender: true,
+                        phone: '',
+                        address: '',
+                        email: email
+                    }
+                });
+                newUser.password = newUser.encryptPassword(password);
+                newUser.save()
+                    .then(res.json({username}))
+                    .catch(err => res.status(400).json('Error: ' + err));
+            }
+            else
+                return res.json({message: 'Tài khoản đã tồn tại'});
+        })
+        .catch(err => {
+            res.status(400).json('Error: ' + err);
+        });
+});
+
+router.route('/update-info/:id').post((req, res) => {
+    let user = req.body;
+    dbAcount.findById(req.params.id)
+        .then(acc => {
+            acc.avatar = user.avatar;
+            acc.person.name = user.person.name;
+            acc.person.gender = user.person.gender;
+            acc.person.phone = user.person.phone;
+            acc.person.address = user.person.address;
+            acc.person.email = user.person.email;
+
+            acc.save()
+                .then(() => res.json({messSuccess: 'Cập nhật thông tin thành công'}))
+                .catch(err => res.status(400).json('Error' + err));
+        })
 })
 
 module.exports = router;

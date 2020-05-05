@@ -1,24 +1,68 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
+
+import Header from '../components/Home/Header';
+import Search from '../components/Home/Search/Search';
+import Footer from '../components/Home/Footer';
+
 import Banner from '../components/Banner';
-import Search from '../components/Search';
-import PopularPlaces from '../components/PopularPlaces';
 import Utilities from '../components/Utilities';
 import RecentTrip from '../components/RecentTrip';
-import Footer from '../components/Footer';
+
+import PopularPlaces from '../components/Places/PopularPlaces';
+import Place from '../components/Places/Place';
+
+import callAPI from '../utils/connectAPI';
+
 class HomePage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            places: []
+        }
+    }
+
+    componentDidMount() {
+        callAPI('place/list-place', 'GET', null)
+            .then(res => {
+                this.setState({
+                    places: res.data
+                })
+                // console.log(res.data);
+            })
+            .catch((err) => { console.log(err) })
+    }
+
     render() {
+        var { places } = this.state;
         return (
             <div>
                 <Header/>
-                <Banner/>
-                <Search/>
-                <PopularPlaces/>
+                <Banner />
+                <Search />
+                <PopularPlaces>
+                    { this.showPlaces(places) }
+                </PopularPlaces>
                 <Utilities/>
                 <RecentTrip/>
                 <Footer/>
             </div>
         );
+    }
+
+    showPlaces = (places) => {
+        let result = null;
+        if (places.length > 0) {
+            result = places.map((currentPlace, index) => {
+                return (
+                    <Place
+                        key={index}
+                        place={currentPlace}
+                    />
+                );
+            });
+        }
+        return result;
     }
 }
 

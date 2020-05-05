@@ -11,13 +11,11 @@ class Footer extends Component {
                         <div className="col-xl-4 col-md-6 col-lg-4 ">
                         <div className="footer_widget" style={{textAlign: "left"}}>
                             <div className="footer_logo">
-                            <a href>
-                                <img src="../images/footer_logo.png" alt="" />
-                            </a>
+                                <Link to=""><img src="../../images/footer_logo.png" alt="footer_logo" /></Link>
                             </div>
                             <p>5th flora, 700/D kings road, green <br /> lane New York-1782 <br />
-                            <a href>+10 367 826 2567</a> <br />
-                            <a href>contact@carpenter.com</a>
+                                <Link to=''>+10 367 826 2567</Link> <br />
+                                <Link to=''>contact@carpenter.com</Link>
                             </p>
                             <div className="socail_links">
                             <ul>
@@ -27,24 +25,24 @@ class Footer extends Component {
                                 </Link>
                                 </li>
                                 <li>
-                                <Link to="">
-                                    <i className="fa fa-twitter" />
-                                </Link>
+                                    <Link to="">
+                                        <i className="fa fa-twitter" />
+                                    </Link>
                                 </li>
                                 <li>
-                                <Link to="">
-                                    <i className="fa fa-instagram" />
-                                </Link>
+                                    <Link to="">
+                                        <i className="fa fa-instagram" />
+                                    </Link>
                                 </li>
                                 <li>
-                                <Link to="">
-                                    <i className="fa fa-pinterest" />
-                                </Link>
+                                    <Link to="">
+                                        <i className="fa fa-pinterest" />
+                                    </Link>
                                 </li>
                                 <li>
-                                <Link to="">
-                                    <i className="fa fa-youtube-play" />
-                                </Link>
+                                    <Link to="">
+                                        <i className="fa fa-youtube-play" />
+                                    </Link>
                                 </li>
                             </ul>
                             </div>
@@ -53,13 +51,13 @@ class Footer extends Component {
                         <div className="col-xl-2 col-md-6 col-lg-2">
                         <div className="footer_widget">
                             <h3 className="footer_title">
-                            Company
+                                Company
                             </h3>
                             <ul className="links">
-                            <li><a href>Pricing</a></li>
-                            <li><a href>About</a></li>
-                            <li><a href>Gallery</a></li>
-                            <li><a href>Contact</a></li>
+                            <li><Link to=''>Pricing</Link></li>
+                            <li><Link to=''>About</Link></li>
+                            <li><Link to=''>Gallery</Link></li>
+                            <li><Link to=''>Contact</Link></li>
                             </ul>
                         </div>
                         </div>
@@ -69,14 +67,14 @@ class Footer extends Component {
                             Popular destination
                             </h3>
                             <ul className="links double_links">
-                            <li><a href>Indonesia</a></li>
-                            <li><a href>America</a></li>
-                            <li><a href>India</a></li>
-                            <li><a href>Switzerland</a></li>
-                            <li><a href>Italy</a></li>
-                            <li><a href>Canada</a></li>
-                            <li><a href>Franch</a></li>
-                            <li><a href>England</a></li>
+                            <li><Link to=''>Indonesia</Link></li>
+                            <li><Link to=''>America</Link></li>
+                            <li><Link to=''>India</Link></li>
+                            <li><Link to=''>Switzerland</Link></li>
+                            <li><Link to=''>Italy</Link></li>
+                            <li><Link to=''>Canada</Link></li>
+                            <li><Link to=''>Franch</Link></li>
+                            <li><Link to=''>England</Link></li>
                             </ul>
                         </div>
                         </div>
@@ -88,32 +86,32 @@ class Footer extends Component {
                             <div className="instagram_feed">
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="../images/instagram/1.png" alt="" />
+                                <img src="../../images/instagram/1.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="../images/instagram/2.png" alt="" />
+                                <img src="../../images/instagram/2.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="../images/instagram/3.png" alt="" />
+                                <img src="../../images/instagram/3.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="../images/instagram/4.png" alt="" />
+                                <img src="../../images/instagram/4.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="../images/instagram/5.png" alt="" />
+                                <img src="../../images/instagram/5.png" alt="" />
                                 </Link>
                             </div>
                             <div className="single_insta">
                                 <Link to="">
-                                <img src="../images/instagram/6.png" alt="" />
+                                <img src="../../images/instagram/6.png" alt="" />
                                 </Link>
                             </div>
                             </div>
@@ -129,7 +127,7 @@ class Footer extends Component {
                         <div className="col-xl-12">
                         <p className="copy_right text-center">
                             {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
-                            {/*Copyright © All rights reserved | This template is made with <i className="fa fa-heart-o" aria-hidden="true" /> by <a href="https://colorlib.com" target="_blank">Colorlib</a>}
+                            {/*Copyright © All rights reserved | This template is made with <i className="fa fa-heart-o" aria-hidden="true" /> by <Link to=''="https://colorlib.com" target="_blank">Colorlib</Link>}
                             {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
                         </p>
                         </div>

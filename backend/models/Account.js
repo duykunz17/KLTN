@@ -14,7 +14,7 @@ const accountSchema = new Schema({
         name: String,
         gender: Boolean,
         phone: String,
-        adress: String,
+        address: String,
         email: String
     }
 }, {

@@ -2,29 +2,22 @@ import React from 'react';
 
 // import Views
 import LoginPage from "./views/LoginPage";
-import NotFoundpage from "./views/NotFoundpage";
-
-// test info
-import Info from "./views/Info";
 import HomePage from './views/HomePage';
 import SignUpPage from './views/SignUpPage';
 import PlaceDetailPage from './views/PlaceDetailPage';
+import NotFoundpage from "./views/NotFoundpage";
+
 
 const ROUTERS = [
     {
         path: '/',
         exact: true,
-        main: ({history}) => <LoginPage history={history}/>
-    },
-    {
-        path: '/info',
-        exact: false,
-        main: () => <Info />
-    },
-    {
-        path: '/homepage',
-        exact: false,
         main: () => <HomePage/>
+    },
+    {
+        path: '/login',
+        exact: false,
+        main: ({history}) => <LoginPage history={history}/>
     },
     {
         path: '/sign-up',

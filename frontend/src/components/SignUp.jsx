@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
-import * as Config from '../constants/parameterConfig';
+
+import callAPI from '../utils/connectAPI';
 
 class SignUp extends Component {
     constructor (props) {
@@ -35,31 +35,20 @@ class SignUp extends Component {
             password: this.state.password,
             confirmPassword: this.state.confirmPassword
         }
-        console.log(user);
 
-        // axios.post('http://localhost:3001/account/add', user)
-        // .then(() => Swal.fire({
-        //     icon: 'success',
-        //     title: 'Đăng ký tài khoản thành công',
-        // }))
-        // .catch(err => console.log(err.response.data));
-        if(user.password === user.confirmPassword){
-            axios({
-                url: Config.API_URL_NODEJS_SERVER + `/account/add`,
-                method: 'post',
-                data: {
-                    name: this.state.name,
-                    email: this.state.email,
-                    username: this.state.username,
-                    password: this.state.password
-                }
+        if (user.password === user.confirmPassword) {
+            callAPI('account/add', 'POST', {
+                name: this.state.name,
+                email: this.state.email,
+                username: this.state.username,
+                password: this.state.password
             }).then(res =>{
                 if (res.data.message){
                     Swal.fire({
                         icon: 'error',
                         title: res.data.message
                     })
-                }else{
+                } else {
                     Swal.fire({
                         icon: 'success',
                         title: 'Đăng ký tài khoản thành công',
@@ -74,9 +63,8 @@ class SignUp extends Component {
                     });
                 }
                 
-            }).catch(err => console.log(err)
-            )
-        }else{
+            }).catch(err => console.log(err))
+        } else {
             document.getElementById('message').style.color = 'red';
             document.getElementById('message').innerHTML = 'Mật khẩu không khớp. Hãy thử lại!';
         }

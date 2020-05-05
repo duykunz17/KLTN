@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import callAPI from './../utils/connectAPI';
 
@@ -11,13 +11,16 @@ export default class LoginPage extends Component {
 
     componentWillMount() {
         if (sessionStorage.getItem("user")) {
-            let { history } = this.props;
-            return history.push('/info');
+            this.redirectHome();
         }
     }
 
+    redirectHome = () => {
+        let { history } = this.props;
+        return history.push('/');
+    }
+
     onLogin = async (username, password) => {
-        console.log(username + ' - ' + password);
         await callAPI('account/login-local', 'POST', {username, password})
             .then(res => {
                 // check if there's a message or not?
@@ -30,23 +33,20 @@ export default class LoginPage extends Component {
                 }
                 else{
                     sessionStorage.setItem("user", JSON.stringify(res.data.user));
-                    //this.props.history.push('/homepage');
-                    window.location.href = '/homepage';
+                    this.redirectHome();
                 }   
             })
     }
 
     onLinkSocialNetWorks = async (data) => {
-        let { history } = this.props;
         await callAPI('account/login-social', 'POST', data)
             .then(res => {
                 sessionStorage.setItem("user", JSON.stringify(res.data.user));
-                history.push('/info');
+                this.redirectHome();
             })
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="limiter">
                 <div className="container-login100">
@@ -63,7 +63,7 @@ export default class LoginPage extends Component {
                             <LinkSocialNetworks onLinkSocialNetWorks={this.onLinkSocialNetWorks} />
 
                             <div className="text-center p-t-20">
-                                <Link to='' className="txt2">
+                                <Link to='/sign-up' className="txt2">
                                     Đăng ký
                                     <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
                                 </Link>
