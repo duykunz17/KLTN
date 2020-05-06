@@ -23,12 +23,12 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        callAPI('place/list-place', 'GET', null)
+        callAPI('place/popular-place', 'GET', null)
             .then(res => {
                 this.setState({
                     places: res.data
                 })
-                // console.log(res.data);
+                //console.log(res.data);
             })
             .catch((err) => { console.log(err) })
     }
@@ -36,10 +36,10 @@ class HomePage extends Component {
     render() {
         var { places } = this.state;
         return (
-            <div>
+            <div className="HomePage">
                 <Header/>
                 <Banner />
-                <Search />
+                <Search title="Bạn muốn đi đâu?" input="Nhập tên địa điểm"/>
                 <PopularPlaces>
                     { this.showPlaces(places) }
                 </PopularPlaces>

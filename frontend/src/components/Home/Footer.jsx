@@ -9,14 +9,22 @@ class Footer extends Component {
                     <div className="container">
                     <div className="row">
                         <div className="col-xl-4 col-md-6 col-lg-4 ">
-                        <div className="footer_widget" style={{textAlign: "left"}}>
+                        <div className="footer_widget" >
                             <div className="footer_logo">
                                 <Link to=""><img src="../../images/footer_logo.png" alt="footer_logo" /></Link>
                             </div>
-                            <p>5th flora, 700/D kings road, green <br /> lane New York-1782 <br />
-                                <Link to=''>+10 367 826 2567</Link> <br />
-                                <Link to=''>contact@carpenter.com</Link>
-                            </p>
+                            <p><i class="fa fa-map-marker"></i>  328 Phạm Văn Đồng, phường 1, <br />quận Gò Vấp, Tp. Hồ Chí Minh</p><br />
+                            <p><i class="fa fa-phone"></i>  (+84) 585868587</p><br />
+                            <p><i class="fa fa-envelope"></i>  contact@travelo.com.vn</p>
+                            
+                            
+                        </div>
+                        </div>
+                        <div className="col-xl-2 col-md-6 col-lg-2">
+                        <div className="footer_widget">
+                            <h3 className="footer_title">
+                                Mạng xã hội
+                            </h3>
                             <div className="socail_links">
                             <ul>
                                 <li>
@@ -26,17 +34,12 @@ class Footer extends Component {
                                 </li>
                                 <li>
                                     <Link to="">
-                                        <i className="fa fa-twitter" />
+                                        <i className="fa fa-google" />
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="">
                                         <i className="fa fa-instagram" />
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="">
-                                        <i className="fa fa-pinterest" />
                                     </Link>
                                 </li>
                                 <li>
@@ -48,40 +51,27 @@ class Footer extends Component {
                             </div>
                         </div>
                         </div>
-                        <div className="col-xl-2 col-md-6 col-lg-2">
-                        <div className="footer_widget">
-                            <h3 className="footer_title">
-                                Company
-                            </h3>
-                            <ul className="links">
-                            <li><Link to=''>Pricing</Link></li>
-                            <li><Link to=''>About</Link></li>
-                            <li><Link to=''>Gallery</Link></li>
-                            <li><Link to=''>Contact</Link></li>
-                            </ul>
-                        </div>
-                        </div>
                         <div className="col-xl-3 col-md-6 col-lg-3">
                         <div className="footer_widget">
                             <h3 className="footer_title">
-                            Popular destination
+                            Địa điểm
                             </h3>
                             <ul className="links double_links">
-                            <li><Link to=''>Indonesia</Link></li>
-                            <li><Link to=''>America</Link></li>
-                            <li><Link to=''>India</Link></li>
-                            <li><Link to=''>Switzerland</Link></li>
-                            <li><Link to=''>Italy</Link></li>
-                            <li><Link to=''>Canada</Link></li>
-                            <li><Link to=''>Franch</Link></li>
-                            <li><Link to=''>England</Link></li>
+                            <li><Link to=''>Lâm Đồng</Link></li>
+                            <li><Link to=''>Vũng Tàu</Link></li>
+                            <li><Link to=''>Cà Mau</Link></li>
+                            <li><Link to=''>Tp. Hồ Chí Minh</Link></li>
+                            <li><Link to=''>Cần Thơ</Link></li>
+                            <li><Link to=''>Bến Tre</Link></li>
+                            <li><Link to=''>Khánh Hòa</Link></li>
+                            <li><Link to=''>Đà Nẵng</Link></li>
                             </ul>
                         </div>
                         </div>
                         <div className="col-xl-3 col-md-6 col-lg-3">
                         <div className="footer_widget">
                             <h3 className="footer_title">
-                            Instagram
+                            Hình ảnh nổi bật
                             </h3>
                             <div className="instagram_feed">
                             <div className="single_insta">
@@ -126,9 +116,8 @@ class Footer extends Component {
                     <div className="row">
                         <div className="col-xl-12">
                         <p className="copy_right text-center">
-                            {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
-                            {/*Copyright © All rights reserved | This template is made with <i className="fa fa-heart-o" aria-hidden="true" /> by <Link to=''="https://colorlib.com" target="_blank">Colorlib</Link>}
-                            {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
+                            Website du lịch và dịch vụ bán sản phẩm du lịch <br />
+                            Bản quyền thuộc về Nhóm 28 - Khóa luận tốt nghiệp ® 2020
                         </p>
                         </div>
                     </div>

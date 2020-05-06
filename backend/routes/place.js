@@ -6,7 +6,11 @@ router.route('/list-place').get((req, res) =>{
         .then(places => res.json(places))
         .catch(err => res.status(400).json('Error'+ err))
 })
-
+router.route('/popular-place').get((req, res) => {
+    dbPlace.find({rating: {$gte: 4}})
+        .then(places => res.json(places))
+        .catch(err => res.status(400).json('Error' + err))
+})
 router.route('/:id').get((req, res) => {
     dbPlace.findById(req.params.id)
         .then(places => res.json(places))

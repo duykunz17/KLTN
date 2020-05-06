@@ -2975,6 +2975,144 @@ h3 {
 }
 
 /* line 1, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list {
+  padding-top: 142px;
+  padding-bottom: 150px;
+  background: #F7FAFD;
+}
+
+@media (max-width: 767px) {
+  /* line 1, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+  .product_list {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+/* line 9, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product {
+  background: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  margin-bottom: 30px;
+}
+
+/* line 15, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 18, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .thumb img {
+  width: 100%;
+}
+
+/* line 21, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .thumb .prise {
+  position: absolute;
+  background: #1EC6B6;
+  padding: 7px 18px 4px 18px;
+  display: inline-block;
+  top: 20px;
+  left: 20px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px;
+  color: #fff;
+  font-size: 16px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+/* line 34, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info {
+  padding: 27px 20px 25px 20px;
+  text-align: left;
+}
+
+/* line 36, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info h3 {
+  font-size: 22px;
+  font-weight: 400;
+  color: #040E27;
+  margin-bottom: 0;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+/* line 43, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7A838B;
+  margin-top: 2px;
+  margin-bottom: 7px;
+}
+
+/* line 52, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info .rating_days span i {
+  font-size: 12px;
+  color: #FDAE5C;
+}
+
+/* line 56, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info .rating_days span a {
+  font-size: 14px;
+  color: #7A838B;
+  margin-left: 5px;
+}
+
+/* line 62, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info .rating_days .days {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7A838B;
+}
+
+/* line 66, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info .rating_days .days i {
+  margin-right: 8px;
+}
+
+/* line 69, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product .product_info .rating_days .days a {
+  font-size: 14px;
+  color: #7A838B;
+}
+
+/* line 76, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product:hover {
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+
+/* line 79, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product:hover .product_info h3 {
+  color: #FF4A52;
+}
+
+/* line 85, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
+.product_list .single_product:hover .thumb .prise {
+  background: #FF4A52;
+}
+
+/* line 1, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
 .popular_places_area {
   padding-top: 142px;
   padding-bottom: 150px;
@@ -3111,6 +3249,7 @@ h3 {
 .popular_places_area .more_place_btn {
   margin-top: 40px;
 }
+
 
 /* line 97, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
 .filter_result_wrap h3 {

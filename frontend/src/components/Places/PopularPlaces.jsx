@@ -10,8 +10,8 @@ class PopularPlaces extends Component {
                     <div className="row justify-content-center">
                         <div className="col-lg-6">
                             <div className="section_title text-center mb_70">
-                                <h3>Popular Places</h3>
-                                <p>Suffered alteration in some form, by injected humour or good day randomised booth anim 8-bit hella wolf moon beard words.</p>
+                                <h3>ĐỊA ĐIỂM NỔI BẬT</h3>
+                                <p>Những địa điểm nổi bật được người trải nghiệm đánh giá từ 4 đến 5 sao</p>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@ class PopularPlaces extends Component {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="more_place_btn text-center">
-                                <Link className="boxed-btn4" to="">More Places</Link>
+                                <Link to='/place' className="boxed-btn4" >Xem thêm</Link>
                             </div>
                         </div>
                     </div>

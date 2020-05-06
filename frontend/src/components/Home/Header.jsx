@@ -14,15 +14,15 @@ class Header extends Component {
 
     componentWillMount() {
         let user = JSON.parse(sessionStorage.getItem("user"));
-        this.setState({user});
+        this.setState({ user });
     }
 
     isLogout = () => {
-        if(sessionStorage.getItem("user")){
+        if (sessionStorage.getItem("user")) {
             sessionStorage.removeItem("user");
             window.location.href = '/login';
         }
-        
+
     }
     render() {
         let { user } = this.state;
@@ -35,8 +35,8 @@ class Header extends Component {
                                 <div className="row align-items-center">
                                     <div className="col-xl-2 col-lg-2">
                                         <div className="logo">
-                                            <Link to="index.html">
-                                                <img src="../images/logo.png" alt="logo" style={{marginLeft:'-50px'}}/>
+                                            <Link to="/">
+                                                <img src="../images/logo.png" alt="logo" style={{ marginLeft: '-50px' }} />
                                             </Link>
                                         </div>
                                     </div>
@@ -45,66 +45,68 @@ class Header extends Component {
                                             <nav>
                                                 <ul id="navigation">
                                                     <li><Link className="active" to="/">home</Link></li>
-                                                    <li><Link to="/about">About</Link></li>
+                                                    <li><Link to="">diễn đàn <i className="fa fa-angle-down" /></Link>
+                                                        <ul className="submenu">
+                                                            <li><Link to="/single-blog">trang cá nhân</Link></li>
+                                                            <li><Link to="/blog">new feed</Link></li>
+                                                        </ul>
+                                                    </li>
                                                     <li>
-                                                        <Link to="/travel_destination">Destination</Link>
+                                                        <Link to="/place">địa điểm</Link>
                                                     </li>
-                                                    <li><Link to=''>pages <i className="fa fa-angle-down" /></Link>
-                                                        <ul className="submenu">
-                                                            <li><Link to="/destination_details">Destinations details</Link></li>
-                                                            <li><Link to="/elements">elements</Link></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><Link to="">blog <i className="fa fa-angle-down" /></Link>
-                                                        <ul className="submenu">
-                                                            <li><Link to="/blog">blog</Link></li>
-                                                            <li><Link to="/single-blog">single-blog</Link></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><Link to="/contact">Contact</Link></li>
+                                                    <li><Link to="/product">sản phẩm</Link></li>
+                                                    <li><Link to="/about">về chúng tôi</Link></li>
+                                                    <li><Link to="/contact">liên hệ</Link></li>
                                                 </ul>
                                             </nav>
                                         </div>
                                     </div>
                                     <div className="col-xl-4 col-lg-4 d-none d-lg-block">
                                         <div className="social_wrap d-flex align-items-center justify-content-end">
+                                        {user ?
+                                            (<div className="avatar">
+                                            {this.state.filePath ?
+                                                <img src={this.state.filePath} className="avatar" alt=""/>
+                                                : <img src={user.avatar} className="avatar" alt="" />}
+                                            </div>)
+                                            : ''
+                                        }
+                                            &nbsp;&nbsp;&nbsp;
                                             <div className="number">
-                                                <p> 
-                                                        {user ? 
-                                                            (   
-                                                                <span>
-                                                                    <i className="fa fa-user" />
-                                                                    <button data-toggle="modal" data-target="#updateInfoModal"> {user.person.name} </button>
-                                                                </span>
-                                                                
-                                                            )
-                                                            : ''
-                                                        }
+                                                <p>
+                                                    {user ?
+                                                        (
+                                                            <span>
+                                                                <button data-toggle="modal" data-target="#updateInfoModal"> {user.person.name} </button>
+                                                            </span>
+                                                        )
+                                                        : ''
+                                                    }
                                                 </p>
                                             </div>
+                                            <Link to=""><i className="fa fa-shopping-cart" style={{fontSize: '1.5rem', color: '#ff4a52', paddingLeft: '-50px'}}></i></Link>
                                         </div>
                                     </div>
+                                    
                                     <div className="seach_icon">
-                                        {user ? 
+                                        {user ?
                                             (<Link to=''>
-                                                <i className="fa fa-sign-out" onClick={() => this.isLogout()}></i>
+                                                <i className="fa fa-sign-out" style={{fontSize: '1.5rem'}} onClick={() => this.isLogout()}></i>
                                             </Link>)
                                             :
                                             (<Link to='/login'>
-                                                <i className="fa fa-sign-in" />
+                                                <i className="fa fa-sign-in" style={{fontSize: '1.5rem'}} />
                                             </Link>)
                                         }
                                     </div>
-                                    <div className="col-12">
-                                        <div className="mobile_menu d-block d-lg-none" />
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                { user ? <Modal  user={user} /> : null }
-                
+                {user ? <Modal user={user} /> : null}
+
             </header>
         );
     }

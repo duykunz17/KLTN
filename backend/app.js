@@ -20,12 +20,14 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // call routes
-var accountRouter = require('./routes/account');      // handling login and sign in
+var accountRouter = require('./routes/account');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var placeRouter = require('./routes/place');
+var productRouter = require('./routes/product');
 app.use('/account', accountRouter);
 app.use('/place', placeRouter);
+app.use('/product', productRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

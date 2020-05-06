@@ -6,7 +6,9 @@ const placeSchema = new Schema({
     name: {type: String} ,
     area: {type: String} ,
     images: {type: String},
-    description: {type: String}
+    description: {type: String},
+    rating: {type: Number},
+    review: {type: Number}
 }, {
     timestamps: true,
 });

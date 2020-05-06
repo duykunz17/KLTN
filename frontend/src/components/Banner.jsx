@@ -15,24 +15,24 @@ class Banner extends Component {
                         <div className="carousel-item active">
                             <img src="/images/banner.png" className="d-block w-100" alt="..." />
                             <div className="carousel-caption d-md-block">
-                                <h3>Indonesia</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                <h3>Dat Mui</h3>
+                                <p>xã Đất Mũi, huyện Ngọc Hiển, tỉnh Cà Mau</p>
                                 <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                         <div className="carousel-item">
                             <img src="/images/banner2.png" className="d-block w-100" alt="..." />
                             <div className="carousel-caption d-md-block">
-                                <h3>Australia</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <h3>Dam Sen</h3>
+                                <p>3 Hòa Bình, phường 3, quận 11, Tp. Hồ Chí Minh</p>
                                 <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>
                         <div className="carousel-item">
                             <img src="/images/banner3.png" className="d-block w-100" alt="..." />
                             <div className="carousel-caption d-md-block">
-                                <h3>Brazil</h3>
-                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                <h3>Da Lat</h3>
+                                <p>Tp. Đà Lạt, tỉnh Lâm Đồng</p>
                                 <Link to="" className="boxed-btn3">Explore Now</Link>
                             </div>
                         </div>

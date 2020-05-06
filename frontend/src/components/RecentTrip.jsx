@@ -9,7 +9,7 @@ class RecentTrip extends Component {
                     <div className="row justify-content-center">
                     <div className="col-lg-6">
                         <div className="section_title text-center mb_70">
-                        <h3>Recent Trips</h3>
+                        <h3>CHUYẾN ĐI GẦN ĐÂY</h3>
                         </div>
                     </div>
                     </div>

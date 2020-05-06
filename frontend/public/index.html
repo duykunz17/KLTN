@@ -88,7 +88,21 @@
     <script src="%PUBLIC_URL%/js/mail-script.js"></script>
 
     <script src="%PUBLIC_URL%/js/main.js"></script>
+    <script>
+      $('#datepicker').datepicker({
+          iconsLibrary: 'fontawesome',
+          icons: {
+           rightIcon: '<span class="fa fa-caret-down"></span>'
+       }
+      });
+      $('#datepicker2').datepicker({
+          iconsLibrary: 'fontawesome',
+          icons: {
+           rightIcon: '<span class="fa fa-caret-down"></span>'
+       }
 
+      });
+  </script>
     <!-- Xử lý chọn ảnh -->
     <script>
       $('#Upload-Ava').click(function(){ $('#imgUpload').trigger('click') });

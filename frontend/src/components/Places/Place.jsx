@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import StarRatingComponent from 'react-star-rating-component';
 
 export default class Place extends Component {
+    constructor() {
+        super();
+    
+        this.state = {
+          rating: ''
+        };
+      }
+    
+    // onStarClick(nextValue, prevValue, name) {
+    //     this.setState({rating: nextValue});
+    // }
+
     render() {
         var { place } = this.props;
         return (
@@ -15,19 +28,22 @@ export default class Place extends Component {
                         <Link to={"/place/" + place._id} key={place._id}><h3> {place.name}</h3></Link>
                         <p>{place.area}</p>
                         <div className="rating_days d-flex justify-content-between">
+                            <StarRatingComponent
+                            numberOfStars={5}
+                            name="rate" 
+                            value={place.rating}
+                            disableOnSelect={false}
+                            // onStarClick={this.onStarClick.bind(this)}
+                            />
                             <span className="d-flex justify-content-center align-items-center">
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <Link to="">(20 Review)</Link>
+                                <Link to="">{place.review} đánh giá</Link>
                             </span>
                             <div className="days">
                                 <i className="fa fa-clock-o" />
                                 <Link to="">5 Days</Link>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
