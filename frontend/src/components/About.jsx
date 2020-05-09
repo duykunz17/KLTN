@@ -33,7 +33,7 @@ class About extends Component {
                     <div className="row align-items-center">
                         <div className="col-lg-6 order-lg-2">
                             <div className="p-4">
-                                <img className="img-fluid rounded-circle" style={{width:'400px',height:'300px'}} src="images/thanhduy.jpg" alt="" />
+                                <img className="img-fluid rounded-circle" style={{width:'400px',height:'300px'}} src="images/thanhduy.jpeg" alt="" />
                             </div>
                         </div>
                         <div className="col-lg-6 order-lg-1">
