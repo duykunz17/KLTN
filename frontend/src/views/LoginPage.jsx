@@ -9,7 +9,7 @@ import LinkSocialNetworks from '../components/Login/LinkSocialNetworks';
 
 export default class LoginPage extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         if (sessionStorage.getItem("user")) {
             this.redirectHome();
         }

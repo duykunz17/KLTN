@@ -5,21 +5,47 @@ import Place from '../components/Places/Place';
 import callAPI from '../utils/connectAPI';
 import Search from '../components/Home/Search/Search';
 
+// import components PagesNumber in Menu
+import PagesNumber from '../components/Menu/PagesNumber/PagesNumber';
+
 class PlacePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            places: []
+            places: [],
+            pages: [
+                {
+                  number: 1
+                }  
+              ],
+            currentPage: 1
         }
     }
 
     componentDidMount() {
         callAPI('place/list-place', 'GET', null)
             .then(res => {
+                let { places, totalPages } = res.data;
+                let pages = [];
+                for (let i = 1; i <= totalPages; i++)
+                    pages.push({number: i});
                 this.setState({
-                    places: res.data
-                })
+                    places, pages
+                });
                 // console.log(res.data);
+            })
+            .catch((err) => { console.log(err) })
+    }
+
+    onChangePage = (pageNumber) => {
+        this.setState({currentPage: pageNumber});
+        
+        callAPI(`place/list-place/page=${pageNumber}`, 'GET', null)
+            .then(res => {
+                let { places } = res.data;
+                this.setState({
+                    places
+                });
             })
             .catch((err) => { console.log(err) })
     }
@@ -40,7 +66,7 @@ class PlacePage extends Component {
     }
 
     render() {
-        var { places } = this.state;
+        var { places, pages, currentPage } = this.state;
         return (
             <div>
                 <Header />
@@ -59,6 +85,13 @@ class PlacePage extends Component {
                             {this.showPlaces(places)}
                         </div>
                     </div>
+
+                    {
+                        (pages.length > 1) ? (
+                            /* Phân trang */
+                            <PagesNumber pages={pages} currentPage={currentPage} onChangePage={this.onChangePage} />
+                        ) : null
+                    }
                 </div>
                 <Footer />
             </div>

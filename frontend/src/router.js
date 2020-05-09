@@ -20,7 +20,7 @@ const ROUTERS = [
     {
         path: '/login',
         exact: false,
-        main: ({history}) => <LoginPage history={history}/>
+        main: ({history}) => <LoginPage history={history} />
     },
     {
         path: '/sign-up',
