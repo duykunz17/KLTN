@@ -9,6 +9,7 @@ import NotFoundpage from "./views/NotFoundpage";
 import ProductPage from './views/ProductPage';
 import PlacePage from './views/PlacePage';
 import AboutPage from './views/AboutPage';
+import AdminPage from './views/AdminPage';
 
 
 const ROUTERS = [
@@ -46,6 +47,11 @@ const ROUTERS = [
         path: '/about',
         exact: false,
         main: () => <AboutPage/>
+    },
+    {
+        path: '/admin/product-management',
+        exact: false,
+        main: () => <AdminPage/>
     },
     {
         path: '',

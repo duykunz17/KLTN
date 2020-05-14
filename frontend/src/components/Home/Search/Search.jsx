@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 class Search extends Component {
 
 
-    onSubmit = () => {
-        
-    }
-
     render() {
         return (
             <div className="where_togo_area">
@@ -21,7 +17,7 @@ class Search extends Component {
                         <div className="search_wrap">
                             <form className="search_form" onSubmit={this.onSubmit}>
                                 <div className="input_field" style={{width: '650px'}}>
-                                    <input type="text" placeholder={this.props.input} />
+                                    <input type="text" placeholder={this.props.input} name="search" />
                                 </div>
 
                                 <div className="search_btn">

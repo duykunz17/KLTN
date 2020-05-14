@@ -25,9 +25,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var placeRouter = require('./routes/place');
 var productRouter = require('./routes/product');
+var adminRouter = require('./routes/admin');
 app.use('/account', accountRouter);
 app.use('/place', placeRouter);
 app.use('/product', productRouter);
+app.use('/admin', adminRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

@@ -1702,6 +1702,7 @@ h3 {
   color: #fff;
   text-transform: capitalize;
   margin-bottom: 45px;
+  margin-top: 8px;
   font-family: "Rubik", sans-serif;
 }
 
@@ -2978,6 +2979,7 @@ h3 {
   padding-top: 50px;
   padding-bottom: 25px;
   background: #F7FAFD;
+  text-align: center;
 }
 
 @media (max-width: 767px) {

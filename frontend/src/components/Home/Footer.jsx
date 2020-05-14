@@ -20,7 +20,7 @@ class Footer extends Component {
                             </div>
                             <div className="col-xl-2 col-md-6 col-lg-2">
                                 <div className="footer_widget">
-                                    <h3 className="footer_title">
+                                    <h3 className="footer_title" style={{marginLeft:'8px'}}>
                                         Mạng xã hội
                                     </h3>
                                     <div className="socail_links">
