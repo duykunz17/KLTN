@@ -28,7 +28,7 @@ router.route('/list-place/page=:page').get((req, res) => {
 })
 
 router.route('/popular-place').get((req, res) => {
-    dbPlace.find({rating: {$gte: 4}})
+    dbPlace.find({rating: {$gte: 3.49}})
         .then(places => res.json(places))
         .catch(err => res.status(400).json('Error' + err))
 })
@@ -36,6 +36,16 @@ router.route('/:id').get((req, res) => {
     dbPlace.findById(req.params.id)
         .then(places => res.json(places))
         .catch(err => res.status(400).json('Error' + err))
+})
+
+router.route('/evaluate-place/:id').post((req, res) => {
+    let { rating, review, account, voted } = req.body;
+    dbPlace.updateOne(
+        {_id: req.params.id},
+        {$push: { evaluations: {account, voted} },
+        $set: { rating: rating, review: review}
+    }).then(result => res.json({result}))
+    .catch(err => res.status(400).json('Error' + err));
 })
 
 module.exports = router;

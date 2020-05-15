@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class HeaderAdmin extends Component {
+    isLogout = () => {
+        if (sessionStorage.getItem("user")) {
+            sessionStorage.removeItem("user");
+            window.location.href = '/login';
+        }
+    }
+    
     render() {
         return (
             <header>
@@ -21,7 +28,7 @@ class HeaderAdmin extends Component {
                                         <div className="main-menu  d-none d-lg-block">
                                             <nav>
                                                 <ul id="navigation">
-                                                    <li><Link className="active" to="/">home</Link></li>
+                                                    <li><Link className="active" to="/">Trang chủ</Link></li>
                                                     <li><Link to="">quản lý <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/admin/product-management">sản phẩm dịch vụ</Link></li>

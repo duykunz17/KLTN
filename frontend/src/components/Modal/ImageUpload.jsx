@@ -3,15 +3,7 @@ import React, { Component } from 'react';
 export default class ImageUpload extends Component {
 
     onChangeImage = (event) => {
-        // let file = event.target.files[0];
-
-        // this.setState({ file });
-
-        // var formData = new FormData();
-        // formData.append('file', file);
-
         this.props.onUploadImage(event);
-        
     };
 
     render() {

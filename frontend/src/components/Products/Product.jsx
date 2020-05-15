@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 export default class Product extends Component {
 
     onChoose = (product, quantity) => {
+        console.log(product.quantity);
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         if (cart == null)
             cart = {
@@ -29,6 +30,17 @@ export default class Product extends Component {
                     if (el._id === product._id) {
                         flag = true;
                         el.quantity += quantity;
+
+                        // kiểm tra số lượng sản phẩm này trong kho có còn cung cấp đủ hay ko?
+                        if (el.quantity > product.quantity) {
+                            el.quantity -= quantity;    // trả lại y củ số lượng sản phẩm này trong giỏ hàng
+                            countCart -= quantity;
+                            Swal.fire({
+                                icon: 'warning',
+                                title: "Cảnh báo",
+                                text: "Số lượng sản phẩm trong kho không đủ để thêm vào giỏ hàng nữa",
+                            })
+                        }
                     }
                     cart.total += el.quantity * el.price;
                 });
@@ -44,6 +56,7 @@ export default class Product extends Component {
                 products.push(tempProduct);
             }
             countCart += quantity;
+            // cart.products = products;
 
             sessionStorage.setItem("cart", JSON.stringify(cart));
             sessionStorage.setItem("countCart", Number(countCart));

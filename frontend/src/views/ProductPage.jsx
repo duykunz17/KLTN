@@ -56,7 +56,15 @@ class ProductPage extends Component {
     }
 
     onAddItemIntoCart = (amountCurrentItemCart) => {
-        this.setState({amountCurrentItemCart});
+        callAPI(`product/page=${this.state.currentPage}`, 'GET', null)
+            .then(res => {
+                let { products } = res.data;
+                this.setState({
+                    products,
+                    amountCurrentItemCart
+                });
+            })
+            .catch((err) => { console.log(err) })
     }
 
     showProductList = (products, amountCurrentItemCart) => {

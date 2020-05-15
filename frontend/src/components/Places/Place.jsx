@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import StarRatingComponent from 'react-star-rating-component';
+
+import StarRating from './Evaluation/StarRating';
 
 export default class Place extends Component {
-    constructor() {
-        super();
-    
-        this.state = {
-          rating: ''
-        };
-      }
-    
-    // onStarClick(nextValue, prevValue, name) {
-    //     this.setState({rating: nextValue});
-    // }
 
     render() {
         var { place } = this.props;
@@ -28,12 +18,11 @@ export default class Place extends Component {
                         <Link to={"/place/" + place._id} key={place._id}><h3> {place.name}</h3></Link>
                         <p>{place.area}</p>
                         <div className="rating_days d-flex justify-content-between">
-                            <StarRatingComponent
-                            numberOfStars={5}
-                            name="rate" 
-                            value={place.rating}
-                            disableOnSelect={false}
-                            // onStarClick={this.onStarClick.bind(this)}
+                            <StarRating
+                                numberOfStars={5}
+                                value={Math.round(place.rating)}
+                                size={10}
+                                editing={false}
                             />
                             <span className="d-flex justify-content-center align-items-center">
                                 <Link to="">{place.review} đánh giá</Link>

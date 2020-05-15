@@ -8,7 +8,8 @@ const placeSchema = new Schema({
     images: {type: String},
     description: {type: String},
     rating: {type: Number},
-    review: {type: Number}
+    review: {type: Number},
+    evaluations: []
 }, {
     timestamps: true,
 });

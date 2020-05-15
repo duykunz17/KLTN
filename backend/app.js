@@ -21,18 +21,15 @@ app.use(express.urlencoded({ extended: false }));
 
 // call routes
 var accountRouter = require('./routes/account');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var placeRouter = require('./routes/place');
 var productRouter = require('./routes/product');
+var billRouter = require('./routes/bill');
 var adminRouter = require('./routes/admin');
 app.use('/account', accountRouter);
 app.use('/place', placeRouter);
 app.use('/product', productRouter);
 app.use('/admin', adminRouter);
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+app.use('/bill', billRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
