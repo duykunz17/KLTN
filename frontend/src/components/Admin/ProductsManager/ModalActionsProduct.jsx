@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-
 // import Utils upload images to firebase
 import uploadImageToFirebase from '../../../utils/uploadImageToFirebase';
 
@@ -21,7 +20,7 @@ export default class ModalActionsProduct extends Component {
     }
 
     onSetSate = (product) => {
-        if (product._id)
+        if (product._id){
             this.setState({
                 _id: product._id,
                 name: product.name,
@@ -33,6 +32,8 @@ export default class ModalActionsProduct extends Component {
                 file: null,
                 filePath: null
             });
+            
+        }
         else
             this.setState({
                 _id: null,

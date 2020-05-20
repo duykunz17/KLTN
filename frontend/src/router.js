@@ -10,6 +10,10 @@ import ProductPage from './views/ProductPage';
 import PlacePage from './views/PlacePage';
 import AboutPage from './views/AboutPage';
 import AdminPage from './views/AdminPage';
+import SchedulePage from './views/SchedulePage';
+import PostPage from './views/PostPage';
+import NewFeedPage from './views/NewFeedPage';
+import PostDetailPage from './views/PostDetailPage';
 
 
 const ROUTERS = [
@@ -52,6 +56,26 @@ const ROUTERS = [
         path: '/admin/product-management',
         exact: false,
         main: () => <AdminPage/>
+    },
+    {
+        path: '/schedule',
+        exact: false,
+        main: () => <SchedulePage/>
+    },
+    {
+        path: '/post',
+        exact: false,
+        main: ({history}) => <PostPage history={history}/>
+    },
+    {
+        path: '/post-detail',
+        exact: false,
+        main: () => <PostDetailPage/>
+    },
+    {
+        path: '/newfeed',
+        exact: false,
+        main: () => <NewFeedPage/>
     },
     {
         path: '',

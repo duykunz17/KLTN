@@ -142,9 +142,12 @@ class DataTable extends Component {
                         return item;
                     })
                     this.onSetStateData(products);
-                    console.log("UPDATE");
+                    console.log("PRODUCT UPDATED");
                 }
             }).catch(err => console.log(err));
+            
+        window.location = '/admin/product-management'                   
+
     }
 
     render() {

@@ -38,6 +38,7 @@ class ProductPage extends Component {
                 this.setState({
                     products, pages
                 });
+                console.log(res.data)
             })
             .catch((err) => { console.log(err) })
     }
@@ -85,7 +86,9 @@ class ProductPage extends Component {
     }
 
     render() {
+        
         var { products, pages, currentPage, amountCurrentItemCart } = this.state;
+        console.log(products)
         return (
             <div>
                 <Header amountCurrentItemCart={amountCurrentItemCart}  />
