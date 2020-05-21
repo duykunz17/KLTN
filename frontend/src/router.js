@@ -10,8 +10,9 @@ import ProductPage from './views/ProductPage';
 import PlacePage from './views/PlacePage';
 import AboutPage from './views/AboutPage';
 import AdminPage from './views/AdminPage';
+import PurchasedPage from './views/PurchasedPage';
 import SchedulePage from './views/SchedulePage';
-import PostPage from './views/PostPage';
+import PersonalPage from './views/PersonalPage';
 import NewFeedPage from './views/NewFeedPage';
 import PostDetailPage from './views/PostDetailPage';
 
@@ -65,7 +66,7 @@ const ROUTERS = [
     {
         path: '/post',
         exact: false,
-        main: ({history}) => <PostPage history={history}/>
+        main: ({history}) => <PersonalPage history={history}/>
     },
     {
         path: '/post-detail',
@@ -76,6 +77,11 @@ const ROUTERS = [
         path: '/newfeed',
         exact: false,
         main: () => <NewFeedPage/>
+    },
+    {
+        path: '/payment-history',
+        exact: false,
+        main: ({history}) => <PurchasedPage history={history} />
     },
     {
         path: '',

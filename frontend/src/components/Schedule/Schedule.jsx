@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import callAPI from '../../utils/connectAPI';
+
 import './Schedule.css'
+
+import callAPI from '../../utils/connectAPI';
+
 class Schedule extends Component {
     constructor(props) {
         super(props);
@@ -142,7 +145,7 @@ class Schedule extends Component {
 
                 <div className="container-fluid bg-image">
                     <div className="container booking">
-                        <h1></h1>
+                        {/* <h1></h1> */}
                         <form className="form-booking">
                             <div className="form-row">
                                 <div className="form-group col-md-6">

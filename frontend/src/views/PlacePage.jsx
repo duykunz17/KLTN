@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
+
 import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
-import Place from '../components/Places/Place';
-import callAPI from '../utils/connectAPI';
 import Search from '../components/Home/Search/Search';
+import Place from '../components/Places/Place';
 
 // import components PagesNumber in Menu
 import PagesNumber from '../components/Menu/PagesNumber/PagesNumber';
+
+import callAPI from '../utils/connectAPI';
 
 class PlacePage extends Component {
     constructor(props) {
@@ -22,19 +25,21 @@ class PlacePage extends Component {
         }
     }
 
-    componentDidMount() {
+    getPlacesWhenConnectMongo = () =>{
         callAPI('place/list-place', 'GET', null)
             .then(res => {
                 let { places, totalPages } = res.data;
                 let pages = [];
                 for (let i = 1; i <= totalPages; i++)
                     pages.push({number: i});
-                this.setState({
-                    places, pages
-                });
+                this.setState({ places, pages });
                 // console.log(res.data);
             })
             .catch((err) => { console.log(err) })
+    }
+
+    componentDidMount() {
+        this.getPlacesWhenConnectMongo();
     }
 
     onChangePage = (pageNumber) => {
@@ -43,9 +48,7 @@ class PlacePage extends Component {
         callAPI(`place/list-place/page=${pageNumber}`, 'GET', null)
             .then(res => {
                 let { places } = res.data;
-                this.setState({
-                    places
-                });
+                this.setState({ places });
             })
             .catch((err) => { console.log(err) })
     }
@@ -65,12 +68,32 @@ class PlacePage extends Component {
         return result;
     }
 
+    receiveInfoSearch = (infoSearch) => {
+        if (infoSearch)
+            callAPI(`place/search=${infoSearch}`, 'GET', null)
+                .then(res => {
+                    if (res.data.message)
+                        Swal.fire({
+                            icon: 'warning',
+                            title: res.data.message,
+                        });
+                    
+                    else {
+                        let { places } = res.data;
+                        this.setState({ places });
+                    }
+                })
+                .catch((err) => { console.log(err) });
+        else
+            this.getPlacesWhenConnectMongo();
+    }
+
     render() {
         var { places, pages, currentPage } = this.state;
         return (
             <div>
                 <Header />
-                <Search title="Bạn muốn tìm địa điểm gì?" input="Nhập tên địa điểm"/>
+                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm địa điểm gì?" input="Nhập tên địa điểm"/>
                 <div className="popular_places_area">
                     <div className="container">
                         <div className="row justify-content-center">

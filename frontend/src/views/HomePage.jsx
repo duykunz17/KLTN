@@ -33,13 +33,17 @@ class HomePage extends Component {
             .catch((err) => { console.log(err) })
     }
 
+    receiveInfoSearch = (infoSearch) => {
+        console.log(infoSearch);
+    }
+
     render() {
         var { places } = this.state;
         return (
             <div className="HomePage">
                 <Header/>
                 <Banner />
-                <Search title="Bạn muốn đi đâu?" input="Nhập tên địa điểm"/>
+                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn đi đâu?" input="Nhập tên địa điểm"/>
                 <PopularPlaces>
                     { this.showPlaces(places) }
                 </PopularPlaces>

@@ -16,8 +16,9 @@ export default class LoginPage extends Component {
     }
 
     redirectHome = () => {
-        let { history } = this.props;
-        return history.push('/');
+        // let { history } = this.props;
+        // return history.push('/');
+        window.location.href = '/';
     }
 
     onLogin = async (username, password) => {

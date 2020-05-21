@@ -13,8 +13,8 @@ class PostDetail extends Component {
                                 </div>
                                 <div className="blog_details">
                                     <h2>Second divided from form fish beast made every of seas
-                                    all gathered us saying he our
-            </h2>
+                                        all gathered us saying he our
+                                    </h2>
                                     <ul className="blog-info-link mt-3 mb-4">
                                         <li><a href><i className="fa fa-user" /> Đức Duy</a></li>
                                         <li><a href><i className="fa fa-comments" /> 03 bình luận</a></li>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import StarRating from './Evaluation/StarRating';
+import StarRating from '../Evaluation/StarRating';
 
 export default class Place extends Component {
 

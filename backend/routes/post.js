@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const moment = require('moment');
+
 const dbPost = require('../models/Post');
 
 router.route('/').get((req, res) => {
@@ -17,25 +19,31 @@ router.route('/add').post((req, res) => {
     console.log(req.body);
     let account = req.body.account;
     let content = req.body.content;
-    let postDate = Date.parse(req.body.postDate);
+    let postDate = moment(new Date());
     let images = req.body.images;
-    let like = req.body.like;
-    let comment = req.body.comment;
+    let status = 'W';         // W: waiting (chờ duyệt), D: deleted (hủy bài đăng), A: accepted (chấp nhận)
 
-    const newPost = new dbPost({account, content, postDate, images, like, comment});
+    var newPost = new dbPost({account, content, postDate, images, status, sumLike: 0, sumComment: 0});
     newPost.save()
-        .then(() => res.json('Post added'))
+        .then(() => res.json({result: newPost}))
         .catch(err => res.status(400).json('Error'+ err))
+});
+
+router.route('/:id').delete((req, res) =>{
+    dbPost.findByIdAndDelete(req.params.id)
+        .then(() => res.json({message: 'Bài đăng đã được xóa'}))
+        .catch(err => res.status(400).json('Error' + err));
 })
 
 router.route('/update/:id').post((req, res) =>{
     console.log(req.params);
     dbPost.findById(req.params.id)
         .then(post => {
+            // xem lại nữa tăng sumLike và update comments []
             post.like = req.body.like
 
             post.save()
-                .then(() => res.json('Post updated'))
+                .then(() => res.json({result: post}))
                 .catch(err => res.status(400).json('Error' + err))
         })
         .catch(err => res.status(400).json('Error' + err)) 
