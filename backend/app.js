@@ -1,5 +1,6 @@
 var express = require('express');
 var cors = require('cors');
+var http = require('http');
 
 var createError = require('http-errors');
 // var path = require('path');
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
+var server = http.createServer(app);
 
 // call routes
 var accountRouter = require('./routes/account');
@@ -48,7 +50,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-app.listen(port, () =>{
+server.listen(port, () =>{
     console.log(`Server is running on port: ${port}`);
 });
 

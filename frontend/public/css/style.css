@@ -3038,6 +3038,23 @@ h3 {
   -o-transition: 0.3s;
   transition: 0.3s;
 }
+.product_list .single_product .thumb .product-hot {
+  position: absolute;
+  background: red;
+  padding: 7px 7px 5px 10px;
+  display: inline-block;
+  top: 20px;
+  right: 20px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px;
+  color: #fff;
+  font-size: 16px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
 
 /* line 34, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
 .product_list .single_product .product_info {

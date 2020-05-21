@@ -27,6 +27,9 @@ router.route('/add').post((req, res) => {
                 // update quantity of product
                 dbProduct.findById(item._id).then(el => {
                     el.quantity = product.quantity - item.quantity;
+
+                    // update amountPurchase
+                    el.amountPurchase += item.quantity;
                     el.save();
                 });
             }
@@ -58,5 +61,34 @@ router.route('/add').post((req, res) => {
     }
 });
 
+router.route('/account/:id').get((req, res) => {
+    dbBill.find({"account._id": req.params.id}).sort({orderdate: -1}) 
+        .then(bills => res.json(bills))
+        .catch(err => res.status(400).json('Error'+ err))
+});
+
+router.route('/update/:id').post((req, res) => {
+    let product = req.body;
+    dbBill.updateOne(
+        {_id: req.params.id, "billDetail._id": product._id},
+        {$set: {"billDetail.$.itemEvaluation": product.itemEvaluation}}
+    )
+        .then(() => {
+                dbProduct.findById(product._id).then(el => {
+                    if (el) {
+                        if (el.rating && el.review) {
+                            el.rating = (el.rating + product.itemEvaluation) / 2;
+                            el.review += 1;
+                        }
+                        else {
+                            el.rating = product.itemEvaluation;
+                            el.review = 1;
+                        }
+                        el.save().then(res => res.json({product}));
+                    }
+                });
+            })
+        .catch(err => res.status(400).json('Error' + err));
+});
 
 module.exports = router;

@@ -3,7 +3,7 @@ import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
 
 // import component evaluation
-import Evaluation from '../components/Places/Evaluation/Evaluation';
+import EvaluationPlace from '../components/Evaluation/EvaluationPlace';
 
 import callAPI from './../utils/connectAPI';
 
@@ -61,7 +61,7 @@ class PlaceDetailPage extends Component {
                                 </div>
                             </div>
 
-                            { place._id ? <Evaluation place={place} /> : null }
+                            { place._id ? <EvaluationPlace place={place} /> : null }
                         </div>
                     </div>
                 </div>

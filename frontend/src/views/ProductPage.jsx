@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 
 import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
@@ -28,7 +29,7 @@ class ProductPage extends Component {
         }
     }
 
-    componentDidMount() {
+    getProductsWhenConnectMongo = () => {
         callAPI('product', 'GET', null)
             .then(res => {
                 let { products, totalPages } = res.data;
@@ -38,9 +39,12 @@ class ProductPage extends Component {
                 this.setState({
                     products, pages
                 });
-                console.log(res.data)
             })
             .catch((err) => { console.log(err) })
+    }
+
+    componentDidMount() {
+        this.getProductsWhenConnectMongo();
     }
 
     onChangePage = (pageNumber) => {
@@ -68,6 +72,28 @@ class ProductPage extends Component {
             .catch((err) => { console.log(err) })
     }
 
+    receiveInfoSearch = (infoSearch) => {
+        if (infoSearch)
+            callAPI(`product/search=${infoSearch}`, 'GET', null)
+                .then(res => {
+                    if (res.data.message)
+                        Swal.fire({
+                            icon: 'warning',
+                            title: res.data.message,
+                        });
+                    
+                    else {
+                        let { products } = res.data;
+                        this.setState({
+                            products
+                        });
+                    }
+                })
+                .catch((err) => { console.log(err) });
+        else
+            this.getProductsWhenConnectMongo();
+    }
+
     showProductList = (products, amountCurrentItemCart) => {
         let result = null;
         if (products.length > 0) {
@@ -93,7 +119,7 @@ class ProductPage extends Component {
             <div>
                 <Header amountCurrentItemCart={amountCurrentItemCart}  />
                 
-                <Search title="Bạn muốn tìm sản phẩm gì?" input="Nhập tên sản phẩm"/>
+                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm sản phẩm gì?" input="Nhập tên sản phẩm"/>
 
                 <div className="product_list">
                     <ProductList>

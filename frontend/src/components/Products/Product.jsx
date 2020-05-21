@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+import StarRating from '../Evaluation/StarRating';
+
 export default class Product extends Component {
 
     onChoose = (product, quantity) => {
@@ -74,11 +76,22 @@ export default class Product extends Component {
                 <div className="single_product">
                     <div className="thumb">
                         <img src={product.images} alt="product-img" />
-                                <Link to='' className="prise">${product.price}</Link>
+                        <Link to='' className="prise">${product.price}</Link>
+                        {
+                            product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null
+                        }
                     </div>
                     <div className="product_info">
                         <Link to="/destination_details"><h3>{product.name}</h3></Link>
                         <p>{product.description}</p>
+
+                        <StarRating
+                            numberOfStars={5}
+                            value={Math.round(product.rating)}
+                            size={10}
+                            editing={false}
+                        />
+
                         <button type="submit" className="btn btn-primary"><i className="fa fa-info-circle" /> Chi tiết</button>&nbsp;
                         <button className="btn btn-warning" onClick={() => this.onChoose(product, 1)} ><i className="fa fa-shopping-cart" /> Chọn mua</button>
                     </div>

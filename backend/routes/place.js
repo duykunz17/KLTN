@@ -25,8 +25,29 @@ router.route('/list-place/page=:page').get((req, res) => {
     dbPlace.find().skip(skip).limit(6)
         .then(places => res.json({places}))
         .catch(err => res.status(400).json('Error'+ err))
-})
-
+});
+router.route('/search=:info').get((req, res) => {
+    let info = req.params.info;
+    console.log(info)
+    if (info)
+        dbPlace.find({$or: [
+                // $options: 'i' không phân biệt hoa thường
+                {name: {$regex: info, $options: 'i'}},
+                {area: {$regex: info, $options: 'i'}}
+            ]
+        })
+            .then(places => {
+                if (places.length > 0)
+                    res.json({places});
+                else
+                    res.json({message: 'Không tìm thấy thông tin về sản phẩm này'});
+            })
+            .catch(err => res.status(400).json('Error' + err))
+    else
+        dbPlace.find().limit(6)
+            .then(places => res.json({places}))
+            .catch(err => res.status(400).json('Error'+ err))
+});
 router.route('/popular-place').get((req, res) => {
     dbPlace.find({rating: {$gte: 3.49}})
         .then(places => res.json(places))

@@ -4,7 +4,7 @@ import './evaluation.css';
 
 import StarRating from './StarRating';
 
-import callAPI from '../../../utils/connectAPI';
+import callAPI from '../../utils/connectAPI';
 
 export default class Evaluation extends Component {
     constructor(props) {
