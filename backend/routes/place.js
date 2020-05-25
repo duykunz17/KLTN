@@ -19,13 +19,31 @@ router.route('/list-place').get((req, res) => {
             .catch(err => res.status(400).json('Error'+ err))
     });
 });
+
+router.route('/').get((req, res) => {
+        dbPlace.find()
+            .then(places => res.json(places))
+            .catch(err => res.status(400).json('Error'+ err))
+});
+
+// router.route('/destination/:name').get((req, res) => {
+//     dbPlace.find({'name': req.params.name})
+//         .then(places => 
+//             places.map(place => {
+//                 return res.json(place.destination.map(des => des));
+//             })
+//         )
+//         .catch(err => res.status(400).json('Error'+ err))
+// });
+
 router.route('/list-place/page=:page').get((req, res) => {
     let page = req.params.page;
     let skip = (page - 1) * 6;        // bỏ qua số lượng đã tải ban đầu
     dbPlace.find().skip(skip).limit(6)
         .then(places => res.json({places}))
         .catch(err => res.status(400).json('Error'+ err))
-});
+})
+
 router.route('/search=:info').get((req, res) => {
     let info = req.params.info;
     console.log(info)
@@ -48,9 +66,14 @@ router.route('/search=:info').get((req, res) => {
             .then(places => res.json({places}))
             .catch(err => res.status(400).json('Error'+ err))
 });
+
 router.route('/popular-place').get((req, res) => {
-    dbPlace.find({rating: {$gte: 3.49}})
-        .then(places => res.json(places))
+    dbPlace.find({destination:{$elemMatch: {rating: {$gt: 3.49}}}})
+        .then(places => 
+            places.map(place => {
+                return res.json(place.destination.filter(des => des.rating > 3.49));
+            })
+        )
         .catch(err => res.status(400).json('Error' + err))
 })
 router.route('/:id').get((req, res) => {
@@ -59,12 +82,33 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error' + err))
 })
 
-router.route('/evaluate-place/:id').post((req, res) => {
+router.route('/destination/:id').get((req, res) => {
+    dbPlace.find({destination:{$elemMatch: {_id: req.params.id}}})
+        .then(places => 
+            places.map(place => {
+                return res.json(place.destination.filter(des => des._id == req.params.id));
+            })
+        )
+        .catch(err => res.status(400).json('Error' + err))
+})
+
+// router.route('/evaluate-place/:id').post((req, res) => {
+//     let { rating, review, account, voted } = req.body;
+//     dbPlace.updateOne(
+//         {_id: req.params.id},
+//         {$push: { evaluations: {account, voted} },
+//         $set: { rating: rating, review: review}
+//     }).then(result => res.json({result}))
+//     .catch(err => res.status(400).json('Error' + err));
+// })
+
+router.route('/evaluate-destination/:id').post((req, res) => {
     let { rating, review, account, voted } = req.body;
+    // console.log(req.body)
     dbPlace.updateOne(
-        {_id: req.params.id},
-        {$push: { evaluations: {account, voted} },
-        $set: { rating: rating, review: review}
+        {"destination._id":req.params.id},
+        {$push: { "destination.$.evaluations": {account, voted} },
+        $set: { "destination.$.rating": rating,  "destination.$.review": review}
     }).then(result => res.json({result}))
     .catch(err => res.status(400).json('Error' + err));
 })

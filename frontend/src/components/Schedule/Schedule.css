@@ -1,5 +1,4 @@
 .bg-image {
-    background-image: url('/images/banner.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -8,11 +7,12 @@
 }
 
 
-.booking h1 {
+.booking h3 {
     font-size: 3rem;
     text-align: center;
     color: var(--primary-color);
-    padding-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     font-family: Arial, Helvetica, sans-serif;
 }
 

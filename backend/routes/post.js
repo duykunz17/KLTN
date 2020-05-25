@@ -9,6 +9,12 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error'+ err));
 });
 
+router.route('/post-recent').get((req, res) => {
+    dbPost.find({"status":'A'}).limit(6).sort({postDate: -1})
+    .then(posts => res.json(posts))
+    .catch(err => res.status(400).json('Error'+ err));
+});
+
 router.route('/account/:id').get((req, res) => {
     dbPost.find({"account._id": req.params.id}).sort({postDate: -1})
     .then(posts => res.json(posts))

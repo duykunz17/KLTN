@@ -15,6 +15,9 @@ import SchedulePage from './views/SchedulePage';
 import PersonalPage from './views/PersonalPage';
 import NewFeedPage from './views/NewFeedPage';
 import PostDetailPage from './views/PostDetailPage';
+import DestinationDetailPage from './views/DestinationDetailPage';
+import ListSchedulePage from './views/ListSchedulePage';
+import StatisticalProductBestSellerPage from './views/StatisticalProductBestSellerPage';
 
 
 const ROUTERS = [
@@ -45,8 +48,13 @@ const ROUTERS = [
     },
     {
         path: '/place/:id',
-        exact: false,
+        exact: true,
         main: (object) => <PlaceDetailPage object={object} />
+    },
+    {
+        path: '/place/destination/:id',
+        exact : false,
+        main: (object) => <DestinationDetailPage object={object} />
     },
     {
         path: '/about',
@@ -59,9 +67,19 @@ const ROUTERS = [
         main: () => <AdminPage/>
     },
     {
+        path: '/admin/statistical-product-best-seller',
+        exact: false,
+        main: () => <StatisticalProductBestSellerPage/>
+    },
+    {
         path: '/schedule',
         exact: false,
-        main: () => <SchedulePage/>
+        main: ({history}) => <SchedulePage history={history}/>
+    },
+    {
+        path: '/list-schedule',
+        exact: false,
+        main: ({history}) => <ListSchedulePage history={history}/>
     },
     {
         path: '/post',

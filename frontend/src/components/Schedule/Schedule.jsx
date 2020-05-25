@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
+import Moment from 'react-moment';
+
 import "react-datepicker/dist/react-datepicker.css";
 
-import './Schedule.css'
+import Destination from './Destination';
+import './Schedule.css';
 
 import callAPI from '../../utils/connectAPI';
 
@@ -10,20 +14,29 @@ class Schedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            title: '',
             startDate: new Date(),
             endDate: new Date(),
-            from: [],
-            to: [],
-            selectFrom: ''
+            place: [],
+            destination: [],
+            checkedItems: new Map(),
+            statusBtn: false,
+            listDate: [],
+            statusBtnChoose: false,
+            selectDes: [],
+            radio: -1,
+            hashtag: []
         }
     }
 
     componentDidMount() {
-        callAPI('place/list-place', 'GET', null)
+        callAPI('place', 'GET', null)
             .then(res => {
+                for (var i = 0; i < res.data.length; i++) {
+                    this.setState({ checkedItems: this.state.checkedItems.set(res.data[i].name, { status: false, index: i }) });
+                }
                 this.setState({
-                    from: res.data.places,
-                    to: res.data.places
+                    place: res.data
                 });
                 //console.log(res.data)
             })
@@ -49,37 +62,272 @@ class Schedule extends Component {
         return date.toString().substr(4, 12);
     }
 
-    listDate = () => {
-        var dateItems = [];
-        var start = new Date(this.state.startDate);
-        var end = new Date(this.state.endDate);
-        var loop = new Date(start);
-        dateItems.push(<DatePicker selected={start} dateFormat="dd/MM/yyyy" minDate={start} maxDate={start} />)
-        while (loop < end) {
-            let newDate = loop.setDate(loop.getDate() + 1);
-            loop = new Date(newDate);
-            dateItems.push(<DatePicker selected={newDate}
-                dateFormat="dd/MM/yyyy"
-                minDate={newDate}
-                maxDate={newDate}
-                timeIntervals={30}
-                timeCaption="Time"
-                showTimeSelect
-            />);
+    onChangeBtn = () => {
+        if (this.state.title === "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Tên hành trình không rỗng'
+            })
         }
-        // console.log(dateItems);
-        return <div>{dateItems}</div>;
-        //console.log(this.state.endDate.toString().substr(4,12)) 
+        else {
+            let checkedBOX = false, checkedItems = Array.from(this.state.checkedItems);
+            checkedItems.forEach(el => {
+                if (el[1].status === true)
+                    return checkedBOX = true;
+            })
+
+            if (checkedBOX) {
+                var dateItems = [];
+                var start = new Date(this.state.startDate);
+                var end = new Date(this.state.endDate);
+                var loop = new Date(start);
+                var newDate = new Date();
+                dateItems.push({ date: new Date(start).toString().substr(4, 20), desName: [] });
+                while (loop < end) {
+                    newDate = loop.setDate(loop.getDate() + 1);
+                    let convert = new Date(newDate)
+                    loop = new Date(newDate);
+                    dateItems.push({
+                        date: new Date(convert).toString().substr(4, 20),
+                        desName: []
+                    });
+                }
+                // console.log(dateItems);
+
+                this.setState({
+                    listDate: dateItems,
+                    statusBtn: !this.state.statusBtn
+                });
+            }
+            else
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Bạn chưa chọn địa điểm'
+                })
+        }
     }
 
-    listFrom = () => {
-        return this.state.from.map((currentFrom, index) => {
+
+    handleChange = (event, index) => {
+        const item = event.target.value;
+        const isChecked = event.target.checked;
+        this.setState({ checkedItems: this.state.checkedItems.set(item, { status: isChecked, index: index }) });
+    }
+
+
+
+    listPlaceSelected = () => {
+        if (this.state.statusBtn === true) {
+            if (this.state.checkedItems.size > 0) {
+                let keys = Array.from(this.state.checkedItems);
+
+                return keys.map((item, index) => {
+                    let result = null;
+                    if (item[1].status === true) {
+                        result = (
+                            <div key={index}>
+                                <div style={{ textAlign: 'center', padding: '20px 0px 20px 0px' }}>
+                                    <b>Điểm đến du lịch ở {this.state.place[item[1].index].name}</b>
+                                </div>
+                                <div className="row">
+                                    {this.listDestination(this.state.place[item[1].index].destination)}
+                                </div>
+                                <hr className="my-2" />
+                            </div>
+                        )
+                    }
+                    return result;
+                })
+            }
+        }
+    }
+
+    listDestination = (destination) => {
+        return destination.map((des, index) => {
             return (
-                <option value={currentFrom.name}>
-                    {currentFrom.name}
-                </option>
+                <Destination key={index} des={des} onChoose={this.onChoose} />
             )
         })
+    }
+
+    onChoose = (des) => {
+        var temp = this.state.listDate.map((item, index) => {
+            if (this.state.radio === -1)
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Bạn đã chọn ngày đến địa điểm này'
+                })
+            else if (index === this.state.radio) {
+                let flag = false;
+                if (item.desName.length > 0)
+                    item.desName.forEach(el => {
+                        console.log(el._id)
+
+                        if (el._id === des._id)
+                            return flag = true;
+                    });
+
+                if (flag)
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Bạn đã chọn điểm này'
+                    })
+                else
+                    item.desName.push(des);
+            }
+            return item;
+        })
+        this.setState({
+            listDate: temp
+        });
+    }
+
+    onClickDelete = (des, index) => {
+        var temp = this.state.listDate.map((item, i) => {
+            if (index === i) {
+                item.desName = item.desName.filter(el => {
+                    return el._id !== des._id
+                });
+            }
+            return item;
+        })
+        this.setState({
+            listDate: temp
+        });
+    }
+
+    listDes = (des, index) => {
+        return des.map((item, k) => {
+            return (
+                <tr key={k}>
+                    <td>{item.name}</td>
+                    <td>
+                        <button type="button"><i className="fa fa-trash" onClick={() => this.onClickDelete(item, index)} /></button>
+                    </td>
+                </tr>
+            )
+        })
+    }
+
+    onChangeRadio = (event) => {
+        var name = event.target.name;
+        var value = event.target.value;
+
+        this.setState({
+            [name]: Number(value)
+        });
+    }
+
+    onSubmit = (event) => {
+        event.preventDefault();
+        let { checkedItems, hashtag, title, startDate, endDate, listDate } = this.state;
+
+        let flag = true;
+        for (let i = 0; i < listDate.length; i++) {
+            if (listDate[i].desName.length === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Bạn chưa chọn địa điểm cho ngày ' + listDate[i].date.toString().substr(0,11)
+                })
+
+                return flag = false;
+            }
+        }
+
+        if (flag) {
+            for (var el of checkedItems) {
+                if (el[1].status === true)
+                    this.setState({
+                        hashtag: hashtag.push(el[0])
+                    });
+            }
+            var schedule = {
+                account: this.props.account,
+                title: title,
+                startDate: startDate,
+                endDate: endDate,
+                scheduleList: listDate,
+                hashtag: hashtag
+            }
+            console.log(schedule);
+            callAPI('schedule/add', 'POST', schedule)
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Tạo lịch trình thành công',
+                    });
+    
+                    this.setState({
+                        title: '',
+                        startDate: new Date(),
+                        endDate: new Date(),
+                        destination: [],
+                        statusBtn: false,
+                        listDate: [],
+                        statusBtnChoose: false,
+                        selectDes: [],
+                        radio: -1,
+                        hashtag: []
+                    })
+                })
+                .catch(err => console.log(err))
+        }
+    }
+
+    date = () => {
+        return this.state.listDate.map((d, index) => {
+            return (
+                <div key={index} className="accordion md-accordion accordion-blocks" id="accordionEx78" role="tablist" aria-multiselectable="true">
+                    <div className="card">
+                        <div className="card-header" role="tab" id="heading79">
+                            <a data-toggle="collapse" data-parent={'#' + { index }} href={'#' + { index }} aria-expanded="true" aria-controls="collapse79">
+                                <h5 className="mt-1 mb-0">
+                                    <span>
+                                        <input type="radio" name="radio" value={index} onChange={(event) => this.onChangeRadio(event)} /> 
+                                        &nbsp;
+                                        <Moment format="DD/MM/YYYY">
+                                            {d.date}
+                                        </Moment>
+                                    </span>
+                                </h5>
+                            </a>
+                        </div>
+                        <div id={d} className="collapse show" role="tabpanel" aria-labelledby="heading79" data-parent={'#' + { index }}>
+                            <div className="card-body">
+                                <div className="table-responsive mx-3">
+                                    <table className="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th className="th-lg">Tên điểm đến</th>
+                                                <th />
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.listDes(d.desName, index)}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>)
+        })
+    }
+
+    listPlace = () => {
+        if (this.state.checkedItems.size > 0) {
+            let temp = Array.from(this.state.checkedItems);
+            return temp.map((item, index) => {
+                return (
+                    <div key={index} className="form-check" style={{ float: 'left', width: '25%' }}>
+                        <label>
+                            <input type="checkbox" name="checkedItems" value={item[0]} checked={item[1].status} onChange={(event) => this.handleChange(event, index)} /><span className="label-text"> {item[0]}</span>
+                        </label>
+                    </div>
+                )
+            })
+        }
+
     }
 
     onChange = (event) => {
@@ -91,50 +339,11 @@ class Schedule extends Component {
         });
     };
 
-    listTo = (selectFrom) => {
-        var tempTo = this.state.to.filter(item => item.name !== selectFrom);
-        console.log(tempTo);
-        return tempTo.map((currentTo, index) => {
-            return (
-                <option value={currentTo.name}>{currentTo.name}</option>
-            )
-        })
-    }
-
     render() {
-        let { startDate, endDate, selectFrom } = this.state
-        console.log(selectFrom)
+        let { startDate, endDate } = this.state
+        // console.log(this.state.checkedItems)
         return (
             <div>
-                {/* Khoảng ngày
-                <DatePicker
-                    minDate={this.state.startDate}
-                    maxDate={this.state.endDate}
-                    showDisabledMonthNavigation
-                    dateFormat="dd/MM/yyyy">
-
-                </DatePicker> */}
-
-                {/* Ngày 1:
-                <DatePicker
-                selected={startDate}
-                minDate={this.state.startDate}
-                maxDate={this.state.endDate}
-                showDisabledMonthNavigation
-                dateFormat="dd/MM/yyyy"
-                />
-
-                Ngày 2:
-                
-                <input type="text" value={this.addDays(1)}/>
-                <DatePicker
-                timeIntervals={30}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-                showTimeSelect
-                showTimeSelectOnly
-                showDisabledMonthNavigation
-                /> */}
                 <div className="where_togo_area">
                     <div className="row justify-content-center">
                         <div className="container">
@@ -145,34 +354,30 @@ class Schedule extends Component {
 
                 <div className="container-fluid bg-image">
                     <div className="container booking">
-                        {/* <h1></h1> */}
+                        <h3>Chọn tỉnh thành bạn muốn khám phá nè</h3>
                         <form className="form-booking">
                             <div className="form-row">
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="selectFrom">ĐIỂM ĐI</label>
-                                    <div className="input-group mb-2">
-                                        <select value={selectFrom}
-                                            onChange={(event) => this.onChange(event)}
-                                            name="selectFrom"
-                                            onClick={() => { return <select> {this.listTo(selectFrom)}</select> }}
-                                            className="form-control" id="selectFrom">
-                                            {this.listFrom()}
-                                        </select>
-                                    </div>
+                                <div className="form-group col-md-12">
+                                    <label htmlFor="title">Tên chuyến đi: </label>
+                                    <input type="text" className="form-control"
+                                        value={this.state.title}
+                                        name="title"
+                                        placeholder="Nhập tên chuyến đi của bạn"
+                                        onChange={(event) => this.onChange(event)}
+                                    ></input>
                                 </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="selectTo">ĐIỂM ĐẾN</label>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-12">
+                                    <label>Chọn điểm đến muốn khám phá: </label>
                                     <div className="input-group mb-2">
-
-                                        <select className="form-control" id="selectTo">
-                                            {this.listTo(selectFrom)}
-                                        </select>
                                     </div>
+                                    {this.listPlace()}
                                 </div>
                             </div>
                             <div className="form-row">
                                 <div className="form-group col-md-6">
-                                    <label htmlFor="startDate">NGÀY ĐI</label>
+                                    <label htmlFor="startDate">Chọn ngày đi: </label>
                                     <div className="input-group mb-2">
                                         <DatePicker
                                             selected={startDate}
@@ -184,7 +389,7 @@ class Schedule extends Component {
                                     </div>
                                 </div>
                                 <div className="form-group col-md-6">
-                                    <label htmlFor="startDate">NGÀY VỀ</label>
+                                    <label htmlFor="startDate">Chọn ngày về: </label>
                                     <div className="input-group mb-2">
                                         <DatePicker
                                             selected={endDate}
@@ -195,11 +400,25 @@ class Schedule extends Component {
                                         />
                                     </div>
                                 </div>
-                                {this.listDate()}
                             </div>
                             <div className="form-row">
-                                <div className="form-group col text-center">
-                                    <button type="submit" className="btn btn-warning">TẠO LỊCH</button>
+                                <div className="form-group col text-center" style={{ marginBottom: '-80px' }}>
+                                    <button type="button" className="btn btn-warning" onClick={() => this.onChangeBtn()}><i className="fa fa-plus-circle"></i> TẠO LỊCH</button>
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col d-flex justify-content-end" style={{ marginBottom: '-80px' }}>
+                                    {
+                                        this.state.statusBtn ?
+                                            <button type="submit" className="btn btn-info" onClick={this.onSubmit} ><i className="fa fa-save"></i> Hoàn thành</button>
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="col-4">{this.date()}</div>
+                                <div className="col-8" style={{ border: '0.5px solid black' }}>
+                                    {this.listPlaceSelected()}
                                 </div>
                             </div>
                         </form>

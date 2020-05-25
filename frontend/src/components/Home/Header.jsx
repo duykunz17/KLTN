@@ -177,15 +177,25 @@ class Header extends Component {
                                                     <li><Link to="">diễn đàn <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/post">trang cá nhân</Link></li>
-                                                            <li><Link to="/newfeed">new feed</Link></li>
+                                                            <li><Link to="/newfeed">cộng đồng</Link></li>
                                                         </ul>
                                                     </li>
                                                     <li>
                                                         <Link to="/place">địa điểm</Link>
                                                     </li>
-                                                    <li><Link to="/product">sản phẩm</Link></li>
+                                                    <li><Link to="">sản phẩm <i className="fa fa-angle-down" /></Link>
+                                                        <ul className="submenu">
+                                                            <li><Link to="/product">DS sản phẩm</Link></li>
+                                                            <li><Link to="/payment-history">lịch sử mua hàng</Link></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><Link to="">hành trình <i className="fa fa-angle-down" /></Link>
+                                                        <ul className="submenu">
+                                                            <li><Link to="/schedule">Tạo lịch trình</Link></li>
+                                                            <li><Link to="/list-schedule">Xem lịch trình</Link></li>
+                                                        </ul>
+                                                    </li>
                                                     <li><Link to="/about">về chúng tôi</Link></li>
-                                                    <li><Link to="/contact">liên hệ</Link></li>
                                                 </ul>
                                             </nav>
                                         </div>

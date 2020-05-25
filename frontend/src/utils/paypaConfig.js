@@ -8,7 +8,6 @@ class PaypalButton extends Component {
         super(props);
         window.React = React;
         window.ReactDOM = ReactDOM;
-
         this.state = {
             showButton: false
         }

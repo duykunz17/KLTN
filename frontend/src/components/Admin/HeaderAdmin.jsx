@@ -37,7 +37,7 @@ class HeaderAdmin extends Component {
                                                     </li>
                                                     <li><Link to="">thống kê <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
-                                                            <li><Link to="/spbc">sản phẩm bán chạy</Link></li>
+                                                            <li><Link to="/admin/statistical-product-best-seller">sản phẩm bán chạy</Link></li>
                                                             <li><Link to="/dtsp">doanh thu sản phẩm</Link></li>
                                                             <li><Link to="/dddlyt">địa điểm du lịch yêu thích</Link></li>
                                                         </ul>

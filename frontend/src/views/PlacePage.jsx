@@ -94,7 +94,7 @@ class PlacePage extends Component {
             <div>
                 <Header />
                 <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm địa điểm gì?" input="Nhập tên địa điểm"/>
-                <div className="popular_places_area">
+                <div className="popular_places_area" style={{textAlign:'center'}}>
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-6">

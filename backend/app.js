@@ -28,12 +28,14 @@ var productRouter = require('./routes/product');
 var billRouter = require('./routes/bill');
 var postRouter = require('./routes/post');
 var adminRouter = require('./routes/admin');
+var scheduleRouter = require('./routes/schedule');
 app.use('/account', accountRouter);
 app.use('/place', placeRouter);
 app.use('/product', productRouter);
 app.use('/admin', adminRouter);
 app.use('/bill', billRouter);
 app.use('/post', postRouter);
+app.use('/schedule', scheduleRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
