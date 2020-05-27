@@ -9,6 +9,7 @@ import Destination from './Destination';
 import './Schedule.css';
 
 import callAPI from '../../utils/connectAPI';
+// import ChooseDate from './ChooseDate';
 
 class Schedule extends Component {
     constructor(props) {
@@ -22,10 +23,10 @@ class Schedule extends Component {
             checkedItems: new Map(),
             statusBtn: false,
             listDate: [],
-            statusBtnChoose: false,
             selectDes: [],
-            radio: -1,
-            hashtag: []
+            hashtag: [],
+            radio: 0,
+            hover: -1
         }
     }
 
@@ -62,59 +63,60 @@ class Schedule extends Component {
         return date.toString().substr(4, 12);
     }
 
-    onChangeBtn = () => {
-        if (this.state.title === "") {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Tên hành trình không rỗng'
-            })
-        }
+    onChangeBtn = (statusBtn) => {
+        if (statusBtn)
+            this.setStateEmpty();
         else {
-            let checkedBOX = false, checkedItems = Array.from(this.state.checkedItems);
-            checkedItems.forEach(el => {
-                if (el[1].status === true)
-                    return checkedBOX = true;
-            })
-
-            if (checkedBOX) {
-                var dateItems = [];
-                var start = new Date(this.state.startDate);
-                var end = new Date(this.state.endDate);
-                var loop = new Date(start);
-                var newDate = new Date();
-                dateItems.push({ date: new Date(start).toString().substr(4, 20), desName: [] });
-                while (loop < end) {
-                    newDate = loop.setDate(loop.getDate() + 1);
-                    let convert = new Date(newDate)
-                    loop = new Date(newDate);
-                    dateItems.push({
-                        date: new Date(convert).toString().substr(4, 20),
-                        desName: []
-                    });
-                }
-                // console.log(dateItems);
-
-                this.setState({
-                    listDate: dateItems,
-                    statusBtn: !this.state.statusBtn
-                });
-            }
-            else
+            if (this.state.title === "") {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Bạn chưa chọn địa điểm'
+                    title: 'Tên hành trình không rỗng'
                 })
+            }
+            else {
+                let checkedBOX = false, checkedItems = Array.from(this.state.checkedItems);
+                checkedItems.forEach(el => {
+                    if (el[1].status === true)
+                        return checkedBOX = true;
+                })
+
+                if (checkedBOX) {
+                    var dateItems = [];
+                    var start = new Date(this.state.startDate);
+                    var end = new Date(this.state.endDate);
+                    var loop = new Date(start);
+                    var newDate = new Date();
+                    dateItems.push({ date: new Date(start).toString().substr(4, 20), desName: [] });
+                    while (loop < end) {
+                        newDate = loop.setDate(loop.getDate() + 1);
+                        let convert = new Date(newDate);
+                        loop = new Date(newDate);
+                        dateItems.push({
+                            date: new Date(convert).toString().substr(4, 20),
+                            desName: []
+                        });
+                    }
+                    // console.log(dateItems);
+
+                    this.setState({
+                        listDate: dateItems,
+                        statusBtn: !this.state.statusBtn
+                    });
+                }
+                else
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Bạn chưa chọn địa điểm'
+                    })
+            }
         }
     }
-
 
     handleChange = (event, index) => {
         const item = event.target.value;
         const isChecked = event.target.checked;
         this.setState({ checkedItems: this.state.checkedItems.set(item, { status: isChecked, index: index }) });
     }
-
-
 
     listPlaceSelected = () => {
         if (this.state.statusBtn === true) {
@@ -155,7 +157,7 @@ class Schedule extends Component {
             if (this.state.radio === -1)
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Bạn đã chọn ngày đến địa điểm này'
+                    title: 'Bạn chưa chọn ngày đến địa điểm này'
                 })
             else if (index === this.state.radio) {
                 let flag = false;
@@ -209,25 +211,34 @@ class Schedule extends Component {
         })
     }
 
-    onChangeRadio = (event) => {
-        var name = event.target.name;
-        var value = event.target.value;
+    setStateEmpty = () => {
+        let checkedItems = this.state.checkedItems;
+        for (var el of checkedItems)
+            this.setState({ checkedItems: checkedItems.set(el[0], { status: false, index: el[1].index }) });
 
         this.setState({
-            [name]: Number(value)
-        });
+            title: '',
+            startDate: new Date(),
+            endDate: new Date(),
+            destination: [],
+            statusBtn: false,
+            listDate: [],
+            selectDes: [],
+            hashtag: [],
+            radio: 0,
+            hover: -1
+        })
     }
 
     onSubmit = (event) => {
         event.preventDefault();
         let { checkedItems, hashtag, title, startDate, endDate, listDate } = this.state;
-
         let flag = true;
         for (let i = 0; i < listDate.length; i++) {
             if (listDate[i].desName.length === 0) {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Bạn chưa chọn địa điểm cho ngày ' + listDate[i].date.toString().substr(0,11)
+                    title: 'Bạn chưa chọn địa điểm cho ngày ' + listDate[i].date.toString().substr(0, 11)
                 })
 
                 return flag = false;
@@ -256,42 +267,57 @@ class Schedule extends Component {
                         icon: 'success',
                         title: 'Tạo lịch trình thành công',
                     });
-    
-                    this.setState({
-                        title: '',
-                        startDate: new Date(),
-                        endDate: new Date(),
-                        destination: [],
-                        statusBtn: false,
-                        listDate: [],
-                        statusBtnChoose: false,
-                        selectDes: [],
-                        radio: -1,
-                        hashtag: []
-                    })
+
+                    this.setStateEmpty();
                 })
                 .catch(err => console.log(err))
         }
     }
 
+    onChangeRadio = (event) => {
+        var name = event.target.name;
+        var value = event.target.value;
+
+        this.setState({
+            [name]: Number(value)
+        });
+    }
+    onSetHover = (value) => {
+        this.setState({ hover: value });
+    }
+    onAddDate = () => {
+        let end = new Date(this.state.endDate);
+        let convert = new Date(end.setDate(end.getDate() + 1));
+        let dateItems = this.state.listDate;
+        dateItems.push({ date: new Date(convert).toString().substr(4, 20), desName: [] });
+        this.setState({
+            endDate: convert,
+            listDate: dateItems
+        })
+    }
     date = () => {
+        let { radio, hover } = this.state;
         return this.state.listDate.map((d, index) => {
+            let styleColor = (hover === index || radio === index) ? "#ffc107" : "gray";
             return (
                 <div key={index} className="accordion md-accordion accordion-blocks" id="accordionEx78" role="tablist" aria-multiselectable="true">
                     <div className="card">
-                        <div className="card-header" role="tab" id="heading79">
-                            <a data-toggle="collapse" data-parent={'#' + { index }} href={'#' + { index }} aria-expanded="true" aria-controls="collapse79">
+                        <label>
+                            <input type="radio" name="radio" value={index} onChange={(event) => this.onChangeRadio(event)} />
+                            <div className="card-header choose-date" style={{ background: styleColor }} role="tab" id="heading79"
+                                onMouseLeave={() => this.onSetHover(-1)}
+                                onMouseEnter={() => this.onSetHover(index)}
+                            >
                                 <h5 className="mt-1 mb-0">
                                     <span>
-                                        <input type="radio" name="radio" value={index} onChange={(event) => this.onChangeRadio(event)} /> 
                                         &nbsp;
                                         <Moment format="DD/MM/YYYY">
                                             {d.date}
                                         </Moment>
                                     </span>
                                 </h5>
-                            </a>
-                        </div>
+                            </div>
+                        </label>
                         <div id={d} className="collapse show" role="tabpanel" aria-labelledby="heading79" data-parent={'#' + { index }}>
                             <div className="card-body">
                                 <div className="table-responsive mx-3">
@@ -310,7 +336,8 @@ class Schedule extends Component {
                             </div>
                         </div>
                     </div>
-                </div>)
+                </div>
+            )
         })
     }
 
@@ -327,7 +354,6 @@ class Schedule extends Component {
                 )
             })
         }
-
     }
 
     onChange = (event) => {
@@ -340,7 +366,8 @@ class Schedule extends Component {
     };
 
     render() {
-        let { startDate, endDate } = this.state
+        let { startDate, endDate, statusBtn } = this.state
+        let titleStatusBtn = statusBtn ? 'hủy tạo' : 'tạo lịch', iconStatusBtn = statusBtn ? 'fa-times-circle-o' : 'fa-plus-circle';
         // console.log(this.state.checkedItems)
         return (
             <div>
@@ -403,24 +430,34 @@ class Schedule extends Component {
                             </div>
                             <div className="form-row">
                                 <div className="form-group col text-center" style={{ marginBottom: '-80px' }}>
-                                    <button type="button" className="btn btn-warning" onClick={() => this.onChangeBtn()}><i className="fa fa-plus-circle"></i> TẠO LỊCH</button>
+                                    <button type="button" className="btn btn-warning" onClick={() => this.onChangeBtn(statusBtn)} style={{ textTransform: 'uppercase' }} >
+                                        <i className={`fa ${iconStatusBtn}`} /> {titleStatusBtn}
+                                    </button>
                                 </div>
                             </div>
-                            <div className="form-row">
-                                <div className="form-group col d-flex justify-content-end" style={{ marginBottom: '-80px' }}>
-                                    {
-                                        this.state.statusBtn ?
-                                            <button type="submit" className="btn btn-info" onClick={this.onSubmit} ><i className="fa fa-save"></i> Hoàn thành</button>
-                                        : null
-                                    }
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="col-4">{this.date()}</div>
-                                <div className="col-8" style={{ border: '0.5px solid black' }}>
-                                    {this.listPlaceSelected()}
-                                </div>
-                            </div>
+                            {
+                                this.state.statusBtn ? (
+                                    <div style={{ marginBottom: '35px' }}>
+                                        <div className="form-row">
+                                            <div className="form-group col d-flex justify-content-end" style={{ marginBottom: '-80px' }}>
+                                                <button type="submit" className="btn btn-info" onClick={this.onSubmit} style={{ textTransform: 'uppercase' }} >
+                                                    <i className="fa fa-save"></i> hoàn thành</button>
+                                            </div>
+                                        </div>
+                                        <div className="form-row">
+                                            <div className="col-4 style-choose-date">
+                                                {this.date()}
+                                                <button type="button" className="btn btn-warning" onClick={() => this.onAddDate()} style={{float: 'right', width: '200px'}} >
+                                                    <i className='fa fa-plus-circle' /> Thêm ngày
+                                                </button>
+                                            </div>
+                                            <div className="col-8" style={{ border: '0.5px solid black' }}>
+                                                {this.listPlaceSelected()}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : null
+                            }
                         </form>
                     </div>
                 </div>

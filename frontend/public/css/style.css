@@ -6013,8 +6013,12 @@ h6 {
 
 /* line 1074, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
 .single-post-area .blog_details {
-  padding-top: 26px;
+  padding-top: 0px;
 }
+.single-post-area .blog_details li:hover {
+  color: red;
+}
+
 
 /* line 1077, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
 .single-post-area .blog_details p {

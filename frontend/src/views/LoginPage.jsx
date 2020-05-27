@@ -10,15 +10,18 @@ import LinkSocialNetworks from '../components/Login/LinkSocialNetworks';
 export default class LoginPage extends Component {
 
     componentDidMount() {
-        if (sessionStorage.getItem("user")) {
-            this.redirectHome();
-        }
+        let user = JSON.parse(sessionStorage.getItem("user"))
+        if (user)
+            this.redirectHome(user);
     }
 
-    redirectHome = () => {
-        // let { history } = this.props;
-        // return history.push('/');
-        window.location.href = '/';
+    redirectHome = (user) => {
+        let { history } = this.props;
+        console.log(user)
+        if (user.roles === 2)
+            return history.push('/');
+        else if (user.roles === 1)
+            return history.push('/admin/product-manager');
     }
 
     onLogin = async (username, password) => {
@@ -32,9 +35,10 @@ export default class LoginPage extends Component {
                         text: res.data.message,
                     })
                 }
-                else{
-                    sessionStorage.setItem("user", JSON.stringify(res.data.user));
-                    this.redirectHome();
+                else {
+                    let user = res.data.user;
+                    sessionStorage.setItem("user", JSON.stringify(user));
+                    this.redirectHome(user);
                 }   
             })
     }

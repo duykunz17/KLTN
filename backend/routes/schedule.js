@@ -16,7 +16,7 @@ router.route('/add').post((req, res) => {
 });
 
 router.route('/account/:id').get((req, res) => {
-  dbSchedule.find({"account._id": req.params.id})
+  dbSchedule.find({"account._id": req.params.id}).sort({startDate: -1})
       .then(schedules => res.json(schedules))
       .catch(err => res.status(400).json('Error' + err))
 });

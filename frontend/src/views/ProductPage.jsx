@@ -114,7 +114,7 @@ class ProductPage extends Component {
     render() {
         
         var { products, pages, currentPage, amountCurrentItemCart } = this.state;
-        console.log(products)
+        // console.log(products);
         return (
             <div>
                 <Header amountCurrentItemCart={amountCurrentItemCart}  />

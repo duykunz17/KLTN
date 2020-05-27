@@ -13,9 +13,8 @@ class SchedulePage extends Component {
 
     componentDidMount() {
         let account = JSON.parse(sessionStorage.getItem("user"));
-        if (account !== null) {
+        if (account !== null)
             this.setState({ account });
-        }
         else {
             let history = this.props.history;
             history.push('/login');

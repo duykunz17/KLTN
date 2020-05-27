@@ -183,9 +183,9 @@ class Header extends Component {
                                                     <li>
                                                         <Link to="/place">địa điểm</Link>
                                                     </li>
-                                                    <li><Link to="">sản phẩm <i className="fa fa-angle-down" /></Link>
+                                                    <li><Link to="">mua sắm <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
-                                                            <li><Link to="/product">DS sản phẩm</Link></li>
+                                                            <li><Link to="/product">sản phẩm</Link></li>
                                                             <li><Link to="/payment-history">lịch sử mua hàng</Link></li>
                                                         </ul>
                                                     </li>

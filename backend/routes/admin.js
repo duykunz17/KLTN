@@ -41,4 +41,29 @@ router.route('/place').get((req, res) => {
         .catch(err => res.status(400).json('Error' + err))
 });
 
+/** Handling Post of users */
+const dbPost = require('../models/Post');
+
+router.route('/post').get((req, res) => {
+    dbPost.find({status: 'W'})
+        .then(posts => res.json(posts))
+        .catch(err => res.status(400).json('Error' + err))
+});
+router.route('/post/update/:id').get((req, res) => {
+    dbPost.updateOne(
+        {_id: req.params.id},
+        {$set: {status: 'A'} }
+    )
+        .then(() => res.json({message: 'Bài đăng đã được duyệt'}))
+        .catch(err => res.status(400).json('Error' + err));
+});
+router.route('/post/:id').delete((req, res) => {
+    dbPost.updateOne(
+        {_id: req.params.id},
+        {$set: {status: 'D'} }
+    )
+        .then(() => res.json({message: 'Bài đăng không được duyệt'}))
+        .catch(err => res.status(400).json('Error' + err));
+});
+
 module.exports = router;

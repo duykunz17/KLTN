@@ -125,3 +125,14 @@
   border-radius: 20px;
   padding: 10px 10px 0 10px;
 }
+
+
+/* hiding input */
+.style-btn-post input[type='file'] {
+  display: none;
+}
+.clicked-btn-post {
+  cursor: pointer;
+  transition: color 200ms;
+  /* margin-right: 5px; */
+}

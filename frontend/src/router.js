@@ -9,7 +9,6 @@ import NotFoundpage from "./views/NotFoundpage";
 import ProductPage from './views/ProductPage';
 import PlacePage from './views/PlacePage';
 import AboutPage from './views/AboutPage';
-import AdminPage from './views/AdminPage';
 import PurchasedPage from './views/PurchasedPage';
 import SchedulePage from './views/SchedulePage';
 import PersonalPage from './views/PersonalPage';
@@ -18,6 +17,10 @@ import PostDetailPage from './views/PostDetailPage';
 import DestinationDetailPage from './views/DestinationDetailPage';
 import ListSchedulePage from './views/ListSchedulePage';
 import StatisticalProductBestSellerPage from './views/StatisticalProductBestSellerPage';
+
+// views admin
+import AdminPage from './views/AdminPage';
+import AdminManagerPostPage from './views/AdminManagerPostPage';
 
 
 const ROUTERS = [
@@ -62,16 +65,6 @@ const ROUTERS = [
         main: () => <AboutPage/>
     },
     {
-        path: '/admin/product-management',
-        exact: false,
-        main: () => <AdminPage/>
-    },
-    {
-        path: '/admin/statistical-product-best-seller',
-        exact: false,
-        main: () => <StatisticalProductBestSellerPage/>
-    },
-    {
         path: '/schedule',
         exact: false,
         main: ({history}) => <SchedulePage history={history}/>
@@ -87,9 +80,9 @@ const ROUTERS = [
         main: ({history}) => <PersonalPage history={history}/>
     },
     {
-        path: '/post-detail',
+        path: '/post-detail/:id',
         exact: false,
-        main: () => <PostDetailPage/>
+        main: ({match}) => <PostDetailPage match={match} />
     },
     {
         path: '/newfeed',
@@ -100,6 +93,21 @@ const ROUTERS = [
         path: '/payment-history',
         exact: false,
         main: ({history}) => <PurchasedPage history={history} />
+    },
+    {
+        path: '/admin/product-management',
+        exact: false,
+        main: () => <AdminPage/>
+    },
+    {
+        path: '/admin/post-management',
+        exact: false,
+        main: ({history}) => <AdminManagerPostPage history={history} />
+    },
+    {
+        path: '/admin/statistical-product-best-seller',
+        exact: false,
+        main: () => <StatisticalProductBestSellerPage/>
     },
     {
         path: '',

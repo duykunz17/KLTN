@@ -14,7 +14,7 @@ router.route('/').get((req, res) => {
         // rounds a number up to the next largest whole number
         let totalPages = Math.ceil(cbCount / 6);        // get a amount of product in database
 
-        dbProduct.find({quantity: {$gt: 0}}).sort({amountPurchase: -1}).limit(6)
+        dbProduct.find({quantity: {$gt: 0}}).sort({rating: -1, amountPurchase: -1}).limit(6)
             .then(products => res.json({products, totalPages}))
             .catch(err => res.status(400).json('Error'+ err))
     });
