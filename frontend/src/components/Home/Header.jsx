@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import Modal from '../Modal/UpdateInfo';
 
 import Cart from '../Modal/Cart/Cart';
 import CartItem from '../Modal/Cart/CartItem';
+
+// import button checkout paypal
+import PaypalButton from '../Modal/PaypalCheckout/PaypalButton';
+import callAPI from '../../utils/connectAPI';
 
 class Header extends Component {
     constructor(props) {
@@ -19,7 +24,6 @@ class Header extends Component {
             countCart: 0
         }
     }
-
     componentDidMount() {
         let user = JSON.parse(sessionStorage.getItem("user"));
         let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -94,6 +98,61 @@ class Header extends Component {
         return result;
     }
 
+    resultsPaypalPayment = (success, cancel, err) => {
+        if (success) {
+            this.onSaveBill("thanh toán paypal");            
+        }
+        else if (cancel) {
+            Swal.fire({
+                icon: 'warning',
+                title: cancel,
+            });
+        }
+        else if (err) console.log(err);
+    }
+
+    onSaveBill = (checkout) => {
+        let cart = this.state.cart;
+        sessionStorage.removeItem("cart");
+        sessionStorage.removeItem("countCart");
+        this.setState({
+            cart: {
+                products: [],
+                total: 0
+            },
+            countCart: 0
+        });
+        let bill = {user: this.state.user, cart, checkout};
+        // use to api connect server to save Bill
+        callAPI('bill/add', 'POST', {bill})
+            .then(res => {
+                let icon = 'success', title = "", text = "", outOfStock = res.data.outOfStock;
+                if (res.data.success)
+                    title = res.data.success;
+                else if (res.data.fail) {
+                    icon = "error";
+                    title = res.data.fail;
+                }
+                else if(outOfStock) {
+                    let length = outOfStock.length;
+                    title = "Bạn đã thanh toán thành công!";
+                    text = `Xin lỗi! Chúng tôi đã bỏ qua sản phẩm (`;
+                    for (let i = 0; i < length; i++) {
+                        if (i === length - 1)
+                            text += `${outOfStock[i].name}) do không đủ`;
+                        else
+                            text += `${outOfStock[i].name} - `;
+                    }
+                }
+                Swal.fire({
+                    icon,
+                    title,
+                    text
+                });
+            })
+            .catch((err) => { console.log(err) });
+    }
+
     render() {
         let { user, cart, countCart } = this.state;
         return (
@@ -106,32 +165,42 @@ class Header extends Component {
                                     <div className="col-xl-2 col-lg-2">
                                         <div className="logo">
                                             <Link to="/">
-                                                <img src="../images/logo.png" alt="logo" style={{ marginLeft: '-50px' }} />
+                                                <img src="../../images/logo.png" alt="logo" />
                                             </Link>
                                         </div>
                                     </div>
-                                    <div className="col-xl-6 col-lg-6">
+                                    <div className="col-xl-7 col-lg-7">
                                         <div className="main-menu  d-none d-lg-block">
                                             <nav>
                                                 <ul id="navigation">
-                                                    <li><Link className="active" to="/">home</Link></li>
+                                                    <li><Link className="active" to="/">trang chủ</Link></li>
                                                     <li><Link to="">diễn đàn <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
-                                                            <li><Link to="/single-blog">trang cá nhân</Link></li>
-                                                            <li><Link to="/blog">new feed</Link></li>
+                                                            <li><Link to="/post">trang cá nhân</Link></li>
+                                                            <li><Link to="/newfeed">cộng đồng</Link></li>
                                                         </ul>
                                                     </li>
                                                     <li>
                                                         <Link to="/place">địa điểm</Link>
                                                     </li>
-                                                    <li><Link to="/product">sản phẩm</Link></li>
+                                                    <li><Link to="">mua sắm <i className="fa fa-angle-down" /></Link>
+                                                        <ul className="submenu">
+                                                            <li><Link to="/product">sản phẩm</Link></li>
+                                                            <li><Link to="/payment-history">lịch sử mua hàng</Link></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><Link to="">hành trình <i className="fa fa-angle-down" /></Link>
+                                                        <ul className="submenu">
+                                                            <li><Link to="/schedule">Tạo lịch trình</Link></li>
+                                                            <li><Link to="/list-schedule">Xem lịch trình</Link></li>
+                                                        </ul>
+                                                    </li>
                                                     <li><Link to="/about">về chúng tôi</Link></li>
-                                                    <li><Link to="/contact">liên hệ</Link></li>
                                                 </ul>
                                             </nav>
                                         </div>
                                     </div>
-                                    <div className="col-xl-4 col-lg-4 d-none d-lg-block">
+                                    <div className="col-xl-3 col-lg-3 d-none d-lg-block">
                                         <div className="social_wrap d-flex align-items-center justify-content-end">
                                         {
                                             user ? (
@@ -168,12 +237,32 @@ class Header extends Component {
                                                 {/* import modal cart */}
                                                 {
                                                     countCart > 0 ? (
-                                                        <Cart total={cart.total} >
-                                                            { this.showModalCartItem(cart.products) }
-                                                        </Cart>
+
+                                                        <ul className="option-cart-item">
+                                                            <Cart>
+                                                                { this.showModalCartItem(cart.products) }
+                                                            </Cart>
+
+                                                            <li className="total">
+                                                                <span className="pt-total">Tổng: <strong style={{fontSize: '20px'}}>${cart.total}</strong></span>
+                                                                {
+                                                                    user ? (
+                                                                        <div>
+                                                                            <PaypalButton
+                                                                                resultsPaypalPayment={this.resultsPaypalPayment}
+                                                                                order={cart}
+                                                                            />
+                                                                            <button className="checkout" onClick={() => this.onSaveBill("thanh toán trực tiếp")}>Thanh toán</button>
+                                                                        </div>
+                                                                    ) : <div>
+                                                                            <br />
+                                                                            <p className="css-hasnot-login">Bạn cần phải đăng nhập để thực hiện thanh toán</p>
+                                                                        </div>
+                                                                }
+                                                            </li>
+                                                        </ul>
                                                     ) : null
                                                 }
-                                                
                                             </div>
                                         </div>
                                     </div>

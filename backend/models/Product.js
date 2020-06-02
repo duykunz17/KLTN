@@ -9,7 +9,10 @@ const productSchema = new Schema({
     images: {type: String},
     price: {type: Number},
     quantity: {type: Number},
-    status: {type: Boolean}
+    status: {type: Boolean},
+    amountPurchase: {type: Number},
+    rating: {type: Number},
+    review: {type: Number}
 }, {
     timestamps: true,
 });

@@ -7,7 +7,7 @@ class About extends Component {
             <div className="where_togo_area">
                     <div className="row justify-content-center">
                         <div className="container">
-                                <h2 style={{color:'white'}}>VỀ CHÚNG TÔI</h2>
+                                <h2 style={{color:'white', textAlign:'center'}}>VỀ CHÚNG TÔI</h2>
                         </div>
                     </div>
             </div> 

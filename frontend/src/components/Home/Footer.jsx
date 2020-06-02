@@ -20,30 +20,30 @@ class Footer extends Component {
                             </div>
                             <div className="col-xl-2 col-md-6 col-lg-2">
                                 <div className="footer_widget">
-                                    <h3 className="footer_title">
+                                    <h3 className="footer_title" style={{marginLeft:'8px'}}>
                                         Mạng xã hội
                                     </h3>
                                     <div className="socail_links">
                                     <ul>
                                         <li>
-                                        <Link to="">
-                                            <i className="fa fa-facebook" />
-                                        </Link>
+                                            <a href="http://facebook.com">
+                                                <i className="fa fa-facebook" />
+                                            </a>
                                         </li>
                                         <li>
-                                            <Link to="">
+                                            <a href="http://accounts.google.com">
                                                 <i className="fa fa-google" />
-                                            </Link>
+                                            </a>
                                         </li>
                                         <li>
-                                            <Link to="">
+                                            <a href="http://instagram.com">
                                                 <i className="fa fa-instagram" />
-                                            </Link>
+                                            </a>
                                         </li>
                                         <li>
-                                            <Link to="">
+                                            <a href="http://youtube.com">
                                                 <i className="fa fa-youtube-play" />
-                                            </Link>
+                                            </a>
                                         </li>
                                     </ul>
                                     </div>

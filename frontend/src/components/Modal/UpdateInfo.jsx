@@ -7,8 +7,6 @@ import storage from '../../utils/firebaseStorage';
 // import componet ImageUpload
 import ImageUpload from './ImageUpload';
 
-// import * as API from '../../utils/connectAPI';
-
 export default class UpdateInfo extends Component {
     constructor(props) {
         super(props);
@@ -139,7 +137,8 @@ export default class UpdateInfo extends Component {
                                     <div className="ImgPreview">
                                         { this.state.filePath ? 
                                                 <img src={this.state.filePath} alt="Info" className="ImgPreview" />
-                                            : <img src={user.avatar} alt="Info" className="ImgPreview" /> }                                        
+                                            : <img src={user.avatar} alt="Info" className="ImgPreview" />
+                                        }
                                     </div>
                                     
                                     <ImageUpload onUploadImage={this.onUploadImage} />

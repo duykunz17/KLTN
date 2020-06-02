@@ -1,0 +1,44 @@
+.purchase-content {
+    margin: 35px 0px 0px 70px;
+    width: 90%;
+    
+    /* background-color: gainsboro; */
+}
+
+.purchase-content .header-purchase {
+    line-height: 1.5;
+    padding: 20px 0px 10px 0px;
+    width: 100%;
+    display: inline-block;
+    border-bottom: 1px solid black;
+    
+}
+.style-font {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-purchase {
+    padding-left: 35px;
+    padding-top: 10px;
+}
+
+.item-image img {
+    border: 1px solid black;
+    margin-right: 25px;
+    height: 120px;
+    width: 120px;
+    float: left;
+}
+
+.style-review {
+    text-align: center;
+    padding-top: 35px;
+}
+
+
+.footer-purchase {
+    margin: 10px 0px 35px 0px;
+    padding-top: 25px;
+    border-top: 1px solid black;
+}

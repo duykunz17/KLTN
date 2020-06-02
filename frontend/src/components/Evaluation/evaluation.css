@@ -1,0 +1,36 @@
+/* css Star rating */
+.star-rating input[type='radio'] {
+    display: none;
+}
+.star {
+    cursor: pointer;
+    transition: color 200ms;
+    /* margin-right: 5px; */
+}
+
+/* ------------------------- */
+.containt-review {
+    margin-top: 15px;
+    text-align: center;
+}
+.containt-review .row h3 {
+    margin-left: 80px;
+}
+.style-css {
+    margin-top: 25px;
+}
+.ava-rating p {
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+.your-rating p {
+    font-size: 20px;
+    margin: 5px 0px 20px 0px;
+}
+
+.total-rating p {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 25px;
+}

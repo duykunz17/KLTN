@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -115,4 +111,28 @@
   height: 50px;
   border-radius: 50%;
   border: 1px solid #d8d8d8;
+}
+
+.textarea-info {
+  /* font-family: Poppins-Medium; */
+  font-size: 13px;
+  line-height: 2.5;
+  color: #666666;
+  display: block;
+  width: 100%;
+  background: #fff;
+  height: 120px;
+  border-radius: 20px;
+  padding: 10px 10px 0 10px;
+}
+
+
+/* hiding input */
+.style-btn-post input[type='file'] {
+  display: none;
+}
+.clicked-btn-post {
+  cursor: pointer;
+  transition: color 200ms;
+  /* margin-right: 5px; */
 }

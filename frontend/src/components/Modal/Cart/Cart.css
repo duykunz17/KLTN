@@ -78,11 +78,11 @@
 .cart-item .item-description .name {
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 14px;
     color: #434343;
 }
 .cart-item .item-description p {
-    font-size: 11px;
+    font-size: 13px;
     /* margin-bottom: 2px; */
     color: #898989;
 }
@@ -125,8 +125,6 @@
     margin-left: 2px;
     vertical-align: middle;
     font-size: 13px;
-    padding-top: 10px;
-    text-transform: uppercase;
     border-top: 1px solid gray;
 }
 .option-cart-item .total strong {
@@ -134,28 +132,41 @@
     font-size: 18px;
     color: #f7544a;
 }
-.option-cart-item .checkout {
+.option-cart-item .pt-total {
     float: right;
+    text-transform: uppercase;
+    margin-right: 22px;
+}
+.remove {
+    margin-top: 7px;
 }
 .remove:hover {
     color: #f7544a;
 }
 .option-cart-item .total {
-    padding-top: 10px;
     text-align: center;
 }
 .pt-total {
     line-height: 45px;
     text-align: center;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+.total .css-hasnot-login {
+    color: red;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 12px;
 }
 .checkout {
     background: #fff;
-    padding: 10px 20px;
+    padding: 2px 40px;
     border: 1px solid #cccccc;
     font-size: 14px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
     outline: none;
+    margin-top: 5px;
 }
 .checkout:hover {
     border: 1px solid #f7544a;

@@ -2,9 +2,25 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+import StarRating from '../Evaluation/StarRating';
+import './ProductDetail.css'
 export default class Product extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            isHovering: false,
+        };
+    }
+
+    handleMouseHover = () => {
+        this.setState({
+            isHovering: !this.state.isHovering
+        });
+    }
+
     onChoose = (product, quantity) => {
+        console.log(product.quantity);
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         if (cart == null)
             cart = {
@@ -29,6 +45,17 @@ export default class Product extends Component {
                     if (el._id === product._id) {
                         flag = true;
                         el.quantity += quantity;
+
+                        // kiểm tra số lượng sản phẩm này trong kho có còn cung cấp đủ hay ko?
+                        if (el.quantity > product.quantity) {
+                            el.quantity -= quantity;    // trả lại y củ số lượng sản phẩm này trong giỏ hàng
+                            countCart -= quantity;
+                            Swal.fire({
+                                icon: 'warning',
+                                title: "Cảnh báo",
+                                text: "Số lượng sản phẩm trong kho không đủ để thêm vào giỏ hàng nữa",
+                            })
+                        }
                     }
                     cart.total += el.quantity * el.price;
                 });
@@ -44,6 +71,7 @@ export default class Product extends Component {
                 products.push(tempProduct);
             }
             countCart += quantity;
+            // cart.products = products;
 
             sessionStorage.setItem("cart", JSON.stringify(cart));
             sessionStorage.setItem("countCart", Number(countCart));
@@ -59,14 +87,37 @@ export default class Product extends Component {
         return (
             <div className="col-lg-4 col-md-6">
                 <div className="single_product">
+                {this.state.isHovering === false ?
                     <div className="thumb">
-                        <img src={product.images} alt="product-img" />
-                                <Link to='' className="prise">${product.price}</Link>
+                        <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover}/>
+                        <Link to='' className="prise">${product.price}</Link>
+                        {
+                            product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null
+                        }
                     </div>
+                        :
+                        <div className="thumb">
+                            <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover}/>
+                            <p className="text-bold">- Loại sản phẩm: {product.productType}</p>
+                            <p className="text-bold">- Giá: {product.price}.000 VNĐ</p>
+                            <Link to='' className="prise">${product.price}</Link>
+                        {
+                            product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null
+                        }
+                        </div>
+                    }
                     <div className="product_info">
-                        <Link to="/destination_details"><h3>{product.name}</h3></Link>
+                        <h3>{product.name}</h3>
                         <p>{product.description}</p>
-                        <button type="submit" className="btn btn-primary"><i className="fa fa-info-circle" /> Chi tiết</button>&nbsp;
+
+                        <StarRating
+                            numberOfStars={5}
+                            value={Math.round(product.rating)}
+                            size={10}
+                            editing={false}
+                        />
+
+                        <button type="submit" className="btn btn-primary"><i className="fa fa-info-circle" /><Link to={"/product-detail/"+product._id}> Chi tiết</Link></button>&nbsp;
                         <button className="btn btn-warning" onClick={() => this.onChoose(product, 1)} ><i className="fa fa-shopping-cart" /> Chọn mua</button>
                     </div>
                 </div>

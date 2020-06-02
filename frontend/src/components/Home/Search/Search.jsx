@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 
 class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            infoSearch: '',
+        }
+    }
 
+    onChange = (event) => {
+        var name = event.target.name;
+        var value = event.target.value;
+        this.setState({
+            [name] : value
+        });
+    }
 
-    onSubmit = () => {
-        
+    onSubmit = (event) => {
+        event.preventDefault();
+        this.props.receiveInfoSearch(this.state.infoSearch);
     }
 
     render() {
@@ -21,7 +35,9 @@ class Search extends Component {
                         <div className="search_wrap">
                             <form className="search_form" onSubmit={this.onSubmit}>
                                 <div className="input_field" style={{width: '650px'}}>
-                                    <input type="text" placeholder={this.props.input} />
+                                    <input type="text" name="infoSearch" value={this.state.infoSearch}
+                                        placeholder={this.props.input} onChange={this.onChange}
+                                    />
                                 </div>
 
                                 <div className="search_btn">

@@ -9,6 +9,20 @@ import NotFoundpage from "./views/NotFoundpage";
 import ProductPage from './views/ProductPage';
 import PlacePage from './views/PlacePage';
 import AboutPage from './views/AboutPage';
+import PurchasedPage from './views/PurchasedPage';
+import SchedulePage from './views/SchedulePage';
+import PersonalPage from './views/PersonalPage';
+import NewFeedPage from './views/NewFeedPage';
+import PostDetailPage from './views/PostDetailPage';
+import DestinationDetailPage from './views/DestinationDetailPage';
+import ListSchedulePage from './views/ListSchedulePage';
+import StatisticalProductBestSellerPage from './views/StatisticalProductBestSellerPage';
+
+// views admin
+import AdminPage from './views/AdminPage';
+import AdminManagerPostPage from './views/AdminManagerPostPage';
+import ProductDetailPage from './views/ProductDetailPage';
+import ScheduleDetailPage from './views/ScheduleDetailPage';
 
 
 const ROUTERS = [
@@ -33,19 +47,79 @@ const ROUTERS = [
         main: () => <ProductPage />
     },
     {
+        path: '/product-detail/:id',
+        exact: false,
+        main: (object) => <ProductDetailPage object={object} />
+    },
+    {
         path: '/place',
         exact: true,
         main: () => <PlacePage/>
     },
     {
         path: '/place/:id',
-        exact: false,
+        exact: true,
         main: (object) => <PlaceDetailPage object={object} />
+    },
+    {
+        path: '/place/destination/:id',
+        exact : false,
+        main: (object) => <DestinationDetailPage object={object} />
     },
     {
         path: '/about',
         exact: false,
         main: () => <AboutPage/>
+    },
+    {
+        path: '/schedule',
+        exact: false,
+        main: ({history}) => <SchedulePage history={history}/>
+    },
+    {
+        path: '/schedule-detail/:id',
+        exact: false,
+        main: (object) => <ScheduleDetailPage object={object} />
+    },
+    {
+        path: '/list-schedule',
+        exact: false,
+        main: ({history}) => <ListSchedulePage history={history}/>
+    },
+    {
+        path: '/post',
+        exact: false,
+        main: ({history}) => <PersonalPage history={history}/>
+    },
+    {
+        path: '/post-detail/:id',
+        exact: false,
+        main: ({match}) => <PostDetailPage match={match} />
+    },
+    {
+        path: '/newfeed',
+        exact: false,
+        main: () => <NewFeedPage/>
+    },
+    {
+        path: '/payment-history',
+        exact: false,
+        main: ({history}) => <PurchasedPage history={history} />
+    },
+    {
+        path: '/admin/product-management',
+        exact: false,
+        main: () => <AdminPage/>
+    },
+    {
+        path: '/admin/post-management',
+        exact: false,
+        main: ({history}) => <AdminManagerPostPage history={history} />
+    },
+    {
+        path: '/admin/statistical-product-best-seller',
+        exact: false,
+        main: () => <StatisticalProductBestSellerPage/>
     },
     {
         path: '',

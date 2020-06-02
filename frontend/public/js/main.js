@@ -32,68 +32,7 @@ if(menu.length){
   //   prependTo: ".blog_menu"
   // });
 
-// review-active
-$('.slider_active').owlCarousel({
-  loop:true,
-  margin:0,
-  items:1,
-  autoplay:true,
-  navText:['<i class="ti-angle-left"></i>','<i class="ti-angle-right"></i>'],
-  nav:true,
-  dots:false,
-  autoplayHoverPause: true,
-  autoplaySpeed: 800,
-  animateOut: 'fadeOut',
-  animateIn: 'fadeIn',
-  responsive:{
-      0:{
-          items:1,
-          nav:false,
-      },
-      767:{
-          items:1
-      },
-      992:{
-          items:1
-      },
-      1200:{
-          items:1
-      },
-      1600:{
-          items:1
-      }
-  }
-});
 
-// review-active
-$('.testmonial_active').owlCarousel({
-  loop:true,
-  margin:0,
-  items:1,
-  autoplay:true,
-  navText:['<i class="ti-angle-left"></i>','<i class="ti-angle-right"></i>'],
-  nav:false,
-  dots:true,
-  autoplayHoverPause: true,
-  autoplaySpeed: 800,
-  responsive:{
-      0:{
-          items:1,
-      },
-      767:{
-          items:1,
-      },
-      992:{
-          items:1,
-      },
-      1200:{
-          items:1,
-      },
-      1500:{
-          items:1
-      }
-  }
-});
 
 $( function() {
   $( "#slider-range" ).slider({
@@ -133,9 +72,6 @@ $( function() {
     $(this).addClass('active');
     event.preventDefault();
 	});
-  
-  // wow js
-  new WOW().init();
 
   // counter 
   $('.counter').counterUp({
@@ -189,103 +125,10 @@ $('.popup-video').magnificPopup({
   });
 
 
-  // blog-page
-
-  //brand-active
-$('.brand-active').owlCarousel({
-  loop:true,
-  margin:30,
-items:1,
-autoplay:true,
-  nav:false,
-dots:false,
-autoplayHoverPause: true,
-autoplaySpeed: 800,
-  responsive:{
-      0:{
-          items:1,
-          nav:false
-
-      },
-      767:{
-          items:4
-      },
-      992:{
-          items:7
-      }
-  }
-});
-
-// blog-dtails-page
-
-  //project-active
-$('.project-active').owlCarousel({
-  loop:true,
-  margin:30,
-items:1,
-// autoplay:true,
-navText:['<i class="Flaticon flaticon-left-arrow"></i>','<i class="Flaticon flaticon-right-arrow"></i>'],
-nav:true,
-dots:false,
-// autoplayHoverPause: true,
-// autoplaySpeed: 800,
-  responsive:{
-      0:{
-          items:1,
-          nav:false
-
-      },
-      767:{
-          items:1,
-          nav:false
-      },
-      992:{
-          items:2,
-          nav:false
-      },
-      1200:{
-          items:1,
-      },
-      1501:{
-          items:2,
-      }
-  }
-});
-
 if (document.getElementById('default-select')) {
   $('select').niceSelect();
 }
 
-  //about-pro-active
-$('.details_active').owlCarousel({
-  loop:true,
-  margin:0,
-items:1,
-// autoplay:true,
-navText:['<i class="ti-angle-left"></i>','<i class="ti-angle-right"></i>'],
-nav:true,
-dots:false,
-// autoplayHoverPause: true,
-// autoplaySpeed: 800,
-  responsive:{
-      0:{
-          items:1,
-          nav:false
-
-      },
-      767:{
-          items:1,
-          nav:false
-      },
-      992:{
-          items:1,
-          nav:false
-      },
-      1200:{
-          items:1,
-      }
-  }
-});
 
 });
 
@@ -334,9 +177,6 @@ mailChimp();
         $("#search_1").on("click", function () {
             $("#search_input_box").slideToggle();
             $("#search_input").focus();
-        });
-        $(document).ready(function() {
-          $('select').niceSelect();
         });
 
         // prise slider 

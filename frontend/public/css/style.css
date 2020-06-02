@@ -1702,6 +1702,7 @@ h3 {
   color: #fff;
   text-transform: capitalize;
   margin-bottom: 45px;
+  margin-top: 8px;
   font-family: "Rubik", sans-serif;
 }
 
@@ -2422,6 +2423,11 @@ h3 {
   padding: 50px 0;
 }
 
+.add-modal-product {
+  margin: 30px 0px 30px 15px;
+  padding: 15px;
+}
+
 /* line 5, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_where_to_go.scss */
 .where_togo_area .form_area h3 {
   font-size: 24px;
@@ -2770,7 +2776,7 @@ h3 {
 
 /* line 118, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_destination.scss */
 .destination_details_info {
-  padding-bottom: 150px;
+  padding-bottom: 30px;
   padding-top: 70px;
 }
 
@@ -2978,6 +2984,7 @@ h3 {
   padding-top: 50px;
   padding-bottom: 25px;
   background: #F7FAFD;
+  text-align: center;
 }
 
 @media (max-width: 767px) {
@@ -3021,6 +3028,23 @@ h3 {
   display: inline-block;
   top: 20px;
   left: 20px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px;
+  color: #fff;
+  font-size: 16px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.product_list .single_product .thumb .product-hot {
+  position: absolute;
+  background: red;
+  padding: 7px 7px 5px 10px;
+  display: inline-block;
+  top: 20px;
+  right: 20px;
   -webkit-border-radius: 18px;
   -moz-border-radius: 18px;
   border-radius: 18px;
@@ -3173,6 +3197,7 @@ h3 {
 /* line 34, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
 .popular_places_area .single_place .place_info {
   padding: 27px 20px 25px 20px;
+  text-align: center;
 }
 
 /* line 36, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
@@ -5988,8 +6013,12 @@ h6 {
 
 /* line 1074, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
 .single-post-area .blog_details {
-  padding-top: 26px;
+  padding-top: 0px;
 }
+.single-post-area .blog_details li:hover {
+  color: red;
+}
+
 
 /* line 1077, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
 .single-post-area .blog_details p {

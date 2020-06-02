@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
+import { Link } from 'react-router-dom';
 
 import callAPI from './../utils/connectAPI';
+import StarRating from '../components/Evaluation/StarRating';
 
 class PlaceDetailPage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            name: '',
-            area: '',
-            images: '',
-            description: ''
+            place: null
         }
     }
 
@@ -20,23 +19,60 @@ class PlaceDetailPage extends Component {
         callAPI(`place/${this.props.object.match.params.id}`, 'GET', null)
             .then(res => {
                 this.setState({
-                    name: res.data.name,
-                    area: res.data.area,
-                    images: res.data.images,
-                    description: res.data.description,
+                    place: res.data
                 })
             })
             .catch((err) => console.log(err))
     }
+
+    showDestination = (place) => {
+        return place.destination.map((currentDestination, index) => {
+            return (
+                <div key={index} className="col-lg-4 col-md-6">
+                <div  className="single_place">
+                    <div className="thumb">
+                        <img src={currentDestination.images} alt="" />
+                    </div>
+                    <div className="place_info">
+                    <Link to={"/place/destination/" + currentDestination._id} key={currentDestination._id}><h3> {currentDestination.name}</h3></Link>
+                        <p>{currentDestination.area}</p>
+                        <div className="rating_days d-flex justify-content-between">
+                            <StarRating
+                                numberOfStars={5}
+                                value={Math.round(currentDestination.rating)}
+                                size={10}
+                                editing={false}
+                            />
+                            <span className="d-flex justify-content-center align-items-center">
+                                <Link to="">{currentDestination.review} đánh giá</Link>
+                            </span>
+                            <div className="days">
+                                <i className="fa fa-clock-o" />
+                                <Link to="">5 Days</Link>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            );
+        });
+    }
+
     render() {
+        let { place } = this.state;
+        if (place === null)
+            return null;
         return (
             <div>
+
                 <Header />
+
                 <div>
-                    <div className="destination_banner_wrap overlay" style={{backgroundImage: `url(${this.state.images})`}}>
+                    <div className="destination_banner_wrap overlay" style={{ backgroundImage: `url(${place.images})` }}>
                         <div className="destination_text text-center">
-                            <h3>{this.state.name}</h3>
-                            <p>{this.state.area}</p>
+                            <h3>{place.name}</h3>
+                            <p>{place.area}</p>
                         </div>
                     </div>
                     <div className="destination_details_info">
@@ -44,28 +80,25 @@ class PlaceDetailPage extends Component {
                             <div className="row justify-content-center">
                                 <div className="col-lg-8 col-md-9">
                                     <div className="destination_info">
-                                        <h3>Description: {this.state.description}</h3>
-                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                                        <p>Variations of passages of lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                                        <div className="single_destination">
-                                            <h4>Day-01</h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
-                                        </div>
-                                        <div className="single_destination">
-                                            <h4>Day-02</h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
-                                        </div>
-                                        <div className="single_destination">
-                                            <h4>Day-03</h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
-                                        </div>
+                                        <h3>Chào mừng bạn đến với {place.name}</h3>
+                                        <p>{place.description}</p>
                                     </div>
                                 </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="popular_places_area">
+                        <div className="container">
+                            <h3>Các điểm du lịch tại {place.name}</h3>
+                            <div className="row">
+                                {this.showDestination(place)}
                             </div>
                         </div>
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         );
     }
