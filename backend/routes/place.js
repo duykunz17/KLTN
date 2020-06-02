@@ -117,4 +117,77 @@ router.route('/evaluate-destination/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error' + err));
 })
 
+// const puppeteer = require('puppeteer');
+
+// let placeUrl = 'https://gody.vn/chau-a/viet-nam/tinh-thanh-pho';
+// let destinationUrl = 'https://gody.vn/chau-a/viet-nam/ca-mau/diem-den';
+// (async () => {
+//   const browser = await puppeteer.launch({ headless: true });
+//   const page = await browser.newPage();
+//   await page.goto(placeUrl);
+
+//   let placeData = await page.evaluate(() => {
+//     let places = [];
+//     let listItem = document.querySelectorAll('.list-item');
+//     listItem.forEach((place) => {
+//       let dataJson = {};
+//       try {
+//         dataJson.images = place.querySelector('.ps-relative > img').src;
+//         dataJson.name = place.querySelector('.ps-absolute > span').innerText;
+//       }
+//       catch (err) {
+//           console.log(err)
+//       }
+//       places.push(dataJson);
+//     });
+//     return places;
+//   });
+  
+//   await page.goto(destinationUrl);  
+//     const desData = await page.evaluate(() => {
+//       let destinations = [];
+//       let listItem = document.querySelectorAll('.place-card2 > .ps-relative> .ps-relative');
+//       listItem.forEach((des) => {
+          
+//         const dataJson = {};
+//         try {
+//          dataJson.images = des.querySelector('a > img').src;
+//          dataJson.name = des.querySelector('a > span').innerText;
+//          dataJson.rating = des.querySelector('a > .ps-absolute > span').innerText;
+// 	 dataJson.review = 1;
+//         }
+//         catch (err) {
+//             console.log(err)
+//         }
+//         destinations.push(dataJson);
+//       });
+//       return destinations;
+//     });
+
+   //console.log(placeData);
+//    for(let i=0;i<placeData.length;i++){
+//        if(placeData[i].name==='Cà Mau'){
+//             dbPlace.insertMany({
+//                 "name": placeData[i].name,
+//                 "area": '',
+//                 "images": placeData[i].images,
+//                 "description": '',
+//                 "destination": desData
+//             })
+//        }else{
+//             dbPlace.insertMany({
+//                 "name": placeData[i].name,
+//                 "area": '',
+//                 "images": placeData[i].images,
+//                 "description": '',
+//                 "destination": []
+//             })
+//        }
+       
+//    }
+//   console.log(placeData);
+//   console.log(desData);
+//   await browser.close();
+// })();
+
 module.exports = router;

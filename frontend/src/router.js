@@ -21,6 +21,8 @@ import StatisticalProductBestSellerPage from './views/StatisticalProductBestSell
 // views admin
 import AdminPage from './views/AdminPage';
 import AdminManagerPostPage from './views/AdminManagerPostPage';
+import ProductDetailPage from './views/ProductDetailPage';
+import ScheduleDetailPage from './views/ScheduleDetailPage';
 
 
 const ROUTERS = [
@@ -43,6 +45,11 @@ const ROUTERS = [
         path: '/product',
         exact: false,
         main: () => <ProductPage />
+    },
+    {
+        path: '/product-detail/:id',
+        exact: false,
+        main: (object) => <ProductDetailPage object={object} />
     },
     {
         path: '/place',
@@ -68,6 +75,11 @@ const ROUTERS = [
         path: '/schedule',
         exact: false,
         main: ({history}) => <SchedulePage history={history}/>
+    },
+    {
+        path: '/schedule-detail/:id',
+        exact: false,
+        main: (object) => <ScheduleDetailPage object={object} />
     },
     {
         path: '/list-schedule',
