@@ -1,4 +1,5 @@
 import storage from './firebaseStorage';
+import Swal from 'sweetalert2';
 
 const uploadImages = (files, cbURL) => {
     let arrFiles = [];
@@ -7,7 +8,19 @@ const uploadImages = (files, cbURL) => {
         uploadTask.on('state_changed',
             (snapshot) => {
                 // progress function
-                // const process = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                let process = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                Swal.fire({
+                    title: 'Đang tải ảnh',
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    background: '#19191a',
+                    showConfirmButton: false,
+                    onOpen: () => {
+                        Swal.showLoading();
+                    },
+                    timer: process,
+                    timerProgressBar: true
+                });
             },
             (error) => {
                 console.log('Error: ' + error);
@@ -15,12 +28,12 @@ const uploadImages = (files, cbURL) => {
             () => {
                 // complete function
                 storage.ref('images').child(el.name).getDownloadURL().then(url => {
-                    cbURL(arrFiles=[...arrFiles, url]);
+                    cbURL(arrFiles = [...arrFiles, url]);
                 });
             }
         );
     })
-    
+
 }
 
 export default uploadImages;

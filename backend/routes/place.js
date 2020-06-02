@@ -46,7 +46,6 @@ router.route('/list-place/page=:page').get((req, res) => {
 
 router.route('/search=:info').get((req, res) => {
     let info = req.params.info;
-    console.log(info)
     if (info)
         dbPlace.find({$or: [
                 // $options: 'i' không phân biệt hoa thường
@@ -69,12 +68,16 @@ router.route('/search=:info').get((req, res) => {
 
 router.route('/popular-place').get((req, res) => {
     dbPlace.find({destination:{$elemMatch: {rating: {$gt: 3.49}}}})
-        .then(places => 
-            places.map(place => {
-                return res.json(place.destination.filter(des => des.rating > 3.49));
+        .then(places => {
+            let temps = places.map(place => {
+                let destination = place.destination.filter(des => des.rating > 3.49);
+                return destination;
+                // return res.json(place.destination.filter(des => des.rating > 3.49));
             })
-        )
-        .catch(err => res.status(400).json('Error' + err))
+            // console.log(temps[0]);
+            return res.json(temps[0]);
+        })
+        .catch(err => res.json('Error' + err))
 })
 router.route('/:id').get((req, res) => {
     dbPlace.findById(req.params.id)

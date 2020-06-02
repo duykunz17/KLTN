@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class HeaderAdmin extends Component {
+
+    componentDidMount() {
+        let account = JSON.parse(sessionStorage.getItem("user"));
+        if (account === null) {
+            let history = this.props.history;
+            history.push('/login');
+        }
+    }
+
     isLogout = () => {
         if (sessionStorage.getItem("user")) {
             sessionStorage.removeItem("user");
@@ -32,7 +41,7 @@ class HeaderAdmin extends Component {
                                                     <li><Link to="">quản lý <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/admin/product-management">sản phẩm dịch vụ</Link></li>
-                                                            <li><Link to="/place">địa điểm du lịch</Link></li>
+                                                            <li><Link to="/admin/post-management">bài đăng</Link></li>
                                                         </ul>
                                                     </li>
                                                     <li><Link to="">thống kê <i className="fa fa-angle-down" /></Link>
@@ -82,9 +91,7 @@ class HeaderAdmin extends Component {
                                             <Link to=''>
                                                 <i className="fa fa-sign-out" style={{fontSize: '1.5rem'}} onClick={() => this.isLogout()}></i>
                                             </Link>
-                                            
-                                            
-                                       
+
                                     </div>
                                     
                                 </div>

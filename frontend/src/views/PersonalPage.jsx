@@ -8,9 +8,11 @@ import ListPostPersonal from '../components/Post/Personals/ListPostPersonal';
 import PostPersonal from '../components/Post/Personals/PostPersonal';
 import FormPost from '../components/Post/Personals/FormPost';
 
-
-
+import * as Config from '../constants/parameterConfig';
 import callAPI from '../utils/connectAPI';
+
+import io from 'socket.io-client';
+const socket = io(Config.ENDPOINT_SOKET);
 
 export default class PersonalPage extends Component {
     constructor(props) {
@@ -25,7 +27,7 @@ export default class PersonalPage extends Component {
     getPostsOfAccount = (account) => {
         callAPI('post/account/' + account._id, 'GET', null)
             .then(res => {
-                this.setState({ posts: res.data });
+                this.setState({ posts: res.data, countPost: this.state.countPost + 1 });
             }).catch((err) => { console.log(err) })
     }
 
@@ -34,6 +36,19 @@ export default class PersonalPage extends Component {
         if (account !== null) {
             this.setState({ account });
             this.getPostsOfAccount(account);
+
+            // ask connect socket.server
+            socket.emit('joinAdmin', { account }, () => {});
+
+            // receive result
+            socket.on('resultHandling', post => {
+                let posts = this.state.posts.map(el => {
+                    if (el._id === post.result._id)
+                        el = post.result;
+                    return el;
+                })
+                this.setState({ posts, countPost: this.state.countPost + 1 });
+            })
         }
         else {
             let history = this.props.history;
@@ -41,16 +56,19 @@ export default class PersonalPage extends Component {
         }
     }
 
-    onDeletePost = (post_id) => {
-        callAPI('post/' + post_id, 'DELETE', null)
+    onDeletePost = (post) => {
+        callAPI('post/' + post._id, 'DELETE', null)
             .then(res => {
                 if (res.data.message) {
+                    let { posts, countPost } = this.state;
                     Swal.fire({
                         icon: 'success',
                         title: res.data.message,
                     })
-                    console.log(this.state.posts.filter(el => el._id !== post_id))
-                    this.setState({ posts: this.state.posts.filter(el => el._id !== post_id) });
+                    this.setState({ posts: posts.filter(el => el._id !== post._id), countPost: countPost - 1 });
+
+                    if (post.state !== 'W')
+                        socket.emit('submitPost', post, () => {});
                 }
             }).catch((err) => { console.log(err) })
     }
@@ -63,7 +81,9 @@ export default class PersonalPage extends Component {
                     <PostPersonal
                         key={index}
                         currentPost={currentPost}
+                        account={this.state.account}
                         onDeletePost={this.onDeletePost}
+                        countPost={this.state.countPost}
                     />
                 )
             });
@@ -80,8 +100,11 @@ export default class PersonalPage extends Component {
                         icon: 'success',
                         title: 'Bài đã đăng thành công',
                     })
-                    this.setState({ countPost: this.state.countPost + 1 });
-                    this.getPostsOfAccount(this.state.account)
+                    
+                    post.interactions = []; post.comments = []; post.sumLike = 0;
+                    socket.emit('submitPost', post, () => {});
+
+                    this.getPostsOfAccount(this.state.account);
                 }
             })
             .catch((err) => { console.log(err) })

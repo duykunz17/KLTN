@@ -10,7 +10,19 @@ const postSchema = new Schema({
     sumLike: {type: Number},
     sumComment: {type: Number},
     status: {type: String},
-    interactions: []
+    interactions: [
+        {
+            like: {type: Boolean},
+            account: {type: Object}
+        }
+    ],
+    comments: [
+        {
+            content: {type: String},
+            commentDate: {type: Date},
+            account: {type: Object}
+        }
+    ]
 }, {
     timestamps: true,
 });

@@ -19,13 +19,12 @@ export default class EvaluationDestination extends Component {
     componentDidMount() {
         let destination = this.props.destination;
         let rating = 0, user = JSON.parse(sessionStorage.getItem("user"));
-        console.log(destination)
+        // console.log(destination);
         if (destination.evaluations && user)
             destination.evaluations.forEach(item => {
                 if (item.account._id === user._id)
                     rating += item.voted;
             });
-        
         this.setState({user, destination, rating});        
     }
 

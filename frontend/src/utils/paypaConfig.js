@@ -14,7 +14,7 @@ class PaypalButton extends Component {
     }
 
     componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
-        if (!this.state.show) {
+        if (!this.state.showButton) {
             if (isScriptLoaded && !this.props.isScriptLoaded) {
                 if (isScriptLoadSucceed) {
                     this.setState({ showButton: true });

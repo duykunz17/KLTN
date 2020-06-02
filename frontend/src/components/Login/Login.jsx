@@ -40,7 +40,7 @@ class Login extends Component {
                     />
                     <span className="focus-input100" />
                     <span className="symbol-input100">
-                        <i className="fa fa-envelope" aria-hidden="true" />
+                        <i className="fa fa-user" aria-hidden="true" />
                     </span>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Password is required">

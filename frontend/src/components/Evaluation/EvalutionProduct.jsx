@@ -32,7 +32,7 @@ export default class EvaluationProduct extends Component {
                         </div>
                         <div className="modal-body">
                             <div className="form-group row">
-                                <div className="col-sm-6">
+                                <div className="col-sm-12">
                                     Sản phẩm: &nbsp; <strong>{product.name}</strong>
                                 </div>
                             </div>

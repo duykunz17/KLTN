@@ -3,8 +3,6 @@ import Swal from 'sweetalert2';
 
 import uploadMultipleImagePost from '../../../utils/uploadMultipleImagePost';
 
-// import callAPI from '../../../utils/connectAPI';
-
 export default class FormPost extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +15,8 @@ export default class FormPost extends Component {
 
     onChangeImage = (event) => {
         this.setState({
-            filePath: []
+            filePath: [],
+            files: []
         });
         let files = Array.from(event.target.files);
         //console.log(file)
@@ -88,9 +87,11 @@ export default class FormPost extends Component {
     render() {
         return (
             <form onSubmit={(event) => this.onSubmit(event)} className="w-100">
-                <div className="input-group">
-                    <input id="imgPost" type="file" className="inputFile-avatar" name="files" multiple="multiple" onChange={(event) => this.onChangeImage(event)} />
-                    <button id="Upload-Post" type="button" className="btn btn-info" >Chọn ảnh</button>
+                <div className="input-group style-btn-post">
+                    <label className="clicked-btn-post">
+                        <input type="file" name="files" multiple="multiple" onChange={(event) => this.onChangeImage(event)} />
+                        <span className="btn btn-info" >Chọn ảnh</span>
+                    </label>
                 </div>
                 <div className="input-group" style={{marginTop: "15px"}}>
                     {

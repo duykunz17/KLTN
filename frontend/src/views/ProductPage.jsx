@@ -60,16 +60,21 @@ class ProductPage extends Component {
             .catch((err) => { console.log(err) })
     }
 
-    onAddItemIntoCart = (amountCurrentItemCart) => {
-        callAPI(`product/page=${this.state.currentPage}`, 'GET', null)
-            .then(res => {
-                let { products } = res.data;
-                this.setState({
-                    products,
-                    amountCurrentItemCart
-                });
-            })
-            .catch((err) => { console.log(err) })
+    onAddItemIntoCart = (amountCurrentItemCart, product, tempQuantity) => {
+        this.setState({
+            products: this.state.products.map(el => {
+                if (el._id === product._id)
+                    el.quantity = tempQuantity;
+                return el;
+            }),
+            amountCurrentItemCart
+        });
+        // callAPI(`product/page=${this.state.currentPage}`, 'GET', null)
+        //     .then(res => {
+        //         // let { products } = res.data;
+
+        //     })
+        //     .catch((err) => { console.log(err) })
     }
 
     receiveInfoSearch = (infoSearch) => {
@@ -114,7 +119,7 @@ class ProductPage extends Component {
     render() {
         
         var { products, pages, currentPage, amountCurrentItemCart } = this.state;
-        console.log(products)
+        // console.log(products);
         return (
             <div>
                 <Header amountCurrentItemCart={amountCurrentItemCart}  />

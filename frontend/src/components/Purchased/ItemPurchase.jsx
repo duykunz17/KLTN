@@ -28,7 +28,7 @@ export default class ItemPurchase extends Component {
             onpenModal: !this.state.onpenModal
         });
         let product = this.state.product;
-        console.log(product);
+        // console.log(product);
         product.itemEvaluation = ratingValue;
 
         callAPI(`bill/update/${this.state.bill_id}`, 'POST', product)

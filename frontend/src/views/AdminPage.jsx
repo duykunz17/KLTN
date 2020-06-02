@@ -9,7 +9,8 @@ class AdminPage extends Component {
     render() {
         return (
             <div className="AdminPage">
-                <HeaderAdmin/>
+                <HeaderAdmin history={this.props.history} />
+                
                 <div className="where_togo_area">
                     <div className="row justify-content-center">
                         <div className="container">
