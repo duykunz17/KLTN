@@ -101,7 +101,7 @@ class Header extends Component {
 
     resultsPaypalPayment = (success, cancel, err) => {
         if (success) {
-            this.onSaveBill("thanh toán paypal");            
+            this.onSaveBill("Thanh toán paypal");            
         }
         else if (cancel) {
             Swal.fire({
@@ -136,7 +136,7 @@ class Header extends Component {
                 }
                 else if(outOfStock) {
                     let length = outOfStock.length;
-                    title = "Bạn đã thanh toán thành công!";
+                    title = "Bạn đã đặt hàng thành công!";
                     text = `Xin lỗi! Chúng tôi đã bỏ qua sản phẩm (`;
                     for (let i = 0; i < length; i++) {
                         if (i === length - 1)
@@ -253,7 +253,8 @@ class Header extends Component {
                                                                                 resultsPaypalPayment={this.resultsPaypalPayment}
                                                                                 order={cart}
                                                                             />
-                                                                            <button className="checkout" onClick={() => this.onSaveBill("thanh toán trực tiếp")}>Thanh toán</button>
+                                                                            <Link to="/checkout"> <button className="checkout">Đặt hàng</button> </Link>
+                                                                            {/* <button className="checkout" onClick={() => this.onSaveBill("thanh toán trực tiếp")}>Thanh toán</button> */}
                                                                         </div>
                                                                     ) : <div>
                                                                             <br />

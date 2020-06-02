@@ -47,14 +47,15 @@ router.route('/add').post((req, res) => {
                     orderdate: nowdate,
                     checkout: bill.checkout,
                     total: bill.cart.total,
-                    billDetail: tempProducts
+                    billDetail: tempProducts,
+                    shipAddress: bill.shipAddress
                 });
                 newBill.save();
 
                 if (outOfStock.length > 0)
                     return res.json({outOfStock})
 
-                return res.json({success: 'Bạn đã thanh toán thành công!'});
+                return res.json({success: 'Bạn đã đặt hàng thành công!'});
             }
                 
         });

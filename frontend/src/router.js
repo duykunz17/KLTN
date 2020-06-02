@@ -18,14 +18,13 @@ import DestinationDetailPage from './views/DestinationDetailPage';
 import ListSchedulePage from './views/ListSchedulePage';
 import ProductDetailPage from './views/ProductDetailPage';
 import ScheduleDetailPage from './views/ScheduleDetailPage';
+import CheckoutPage from './views/CheckoutPage';
 
 // views admin
 import AdminPage from './views/AdminPage';
 import AdminManagerPostPage from './views/AdminManagerPostPage';
 import AdminStatisticalProductBestSellerPage from './views/AdminStatisticalProductBestSellerPage';
 import AdminStatisticalRevenueSalePage from './views/AdminStatisticalRevenueSalePage';
-
-
 
 
 const ROUTERS = [
@@ -108,6 +107,11 @@ const ROUTERS = [
         path: '/payment-history',
         exact: false,
         main: ({history}) => <PurchasedPage history={history} />
+    },
+    {
+        path: '/checkout',
+        exact: false,
+        main: () => <CheckoutPage/>
     },
     {
         path: '/admin/product-management',

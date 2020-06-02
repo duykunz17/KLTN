@@ -7,7 +7,8 @@ const billSchema = new Schema({
     orderdate: {type: Date},
     checkout: {type: String},
     total: {type: Number},
-    billDetail: []
+    billDetail: [],
+    shipAddress: {type: String}
 }, {
     timestamps: true,
 });

@@ -8,7 +8,7 @@ export default class ListPurchase extends Component {
     render() {
         let bill = this.props.bill;
         return (
-            <div className="purchase-content">
+            <div className="purchase-content" style={{ backgroundColor: '#f7fafd' }}>
                 <div className="header-purchase">
                     <div className="row">
                         <div className="col-lg-4 col-md-4">

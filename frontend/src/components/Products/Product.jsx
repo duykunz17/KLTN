@@ -115,7 +115,11 @@ export default class Product extends Component {
                         />
 
                         <button type="submit" className="btn btn-primary"><i className="fa fa-info-circle" /><Link to={"/product-detail/" + product._id}> Chi tiết</Link></button>&nbsp;
-                        <button className="btn btn-warning" onClick={() => this.onChoose(product, 1)} ><i className="fa fa-shopping-cart" /> Chọn mua</button>
+                        { product.status === true ?
+                            <button className="btn btn-warning" onClick={() => this.onChoose(product, 1)} ><i className="fa fa-shopping-cart" /> Chọn mua</button>
+                            : null
+                        }
+                        
                     </div>
                 </div>
             </div>
