@@ -8,7 +8,8 @@ class ProductDetailPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: []
+            product: [],
+            amountCurrentItemCart: 0
         }
     }
 
@@ -22,12 +23,29 @@ class ProductDetailPage extends Component {
             .catch((err) => console.log(err))
     }
 
+    onAddItemIntoCart = (amountCurrentItemCart, product, tempQuantity) => {
+        product.quantity = tempQuantity;
+        this.setState({
+            product,
+            amountCurrentItemCart
+        });
+        // callAPI(`product/page=${this.state.currentPage}`, 'GET', null)
+        //     .then(res => {
+        //         // let { products } = res.data;
+
+        //     })
+        //     .catch((err) => { console.log(err) })
+    }
+
     render() {
-        let { product } = this.state;
+        let { product, amountCurrentItemCart } = this.state;
         return (
             <div>
-                <Header/>
-                <ProductDetail product={product} />
+                <Header amountCurrentItemCart={amountCurrentItemCart} />
+                <ProductDetail product={product}
+                    amountCurrentItemCart={amountCurrentItemCart}
+                    onAddItemIntoCart = {this.onAddItemIntoCart}
+                />
                 <Footer/>
             </div>
         );

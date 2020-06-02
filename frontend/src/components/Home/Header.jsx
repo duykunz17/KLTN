@@ -32,6 +32,7 @@ class Header extends Component {
     }
     componentDidUpdate(prevState) {
         let preAmount = prevState.amountCurrentItemCart, currAmount = this.props.amountCurrentItemCart;
+
         if (preAmount != null  && currAmount != null && preAmount < currAmount) {
             let user = JSON.parse(sessionStorage.getItem("user"));
             let cart = JSON.parse(sessionStorage.getItem("cart"));

@@ -88,27 +88,23 @@ export default class Product extends Component {
         return (
             <div className="col-lg-4 col-md-6">
                 <div className="single_product">
-                {this.state.isHovering === false ?
-                    <div className="thumb">
-                        <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover}/>
-                        <Link to='' className="prise">${product.price}</Link>
-                        {
-                            product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null
-                        }
-                    </div>
+                    { this.state.isHovering === false ?
+                        <div className="thumb">
+                            <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover} />
+                            <Link to='' className="prise">${product.price}</Link>
+                            { product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null }
+                        </div>
                         :
                         <div className="thumb">
-                            <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover}/>
+                            <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover} />
                             <p className="text-bold">- Loại sản phẩm: {product.productType}</p>
                             <p className="text-bold">- Giá: {product.price}.000 VNĐ</p>
                             <Link to='' className="prise">${product.price}</Link>
-                        {
-                            product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null
-                        }
+                            { product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null }
                         </div>
                     }
                     <div className="product_info">
-                        <h3>{product.name}</h3>
+                        <Link to={"/product-detail/" + product._id}> <h3> {product.name} </h3> </Link>
                         <p>{product.description}</p>
 
                         <StarRating
@@ -118,7 +114,7 @@ export default class Product extends Component {
                             editing={false}
                         />
 
-                        <button type="submit" className="btn btn-primary"><i className="fa fa-info-circle" /><Link to={"/product-detail/"+product._id}> Chi tiết</Link></button>&nbsp;
+                        <button type="submit" className="btn btn-primary"><i className="fa fa-info-circle" /><Link to={"/product-detail/" + product._id}> Chi tiết</Link></button>&nbsp;
                         <button className="btn btn-warning" onClick={() => this.onChoose(product, 1)} ><i className="fa fa-shopping-cart" /> Chọn mua</button>
                     </div>
                 </div>

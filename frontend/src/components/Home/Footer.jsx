@@ -15,7 +15,7 @@ class Footer extends Component {
                                     </div>
                                     <p><i className="fa fa-map-marker"></i>  328 Phạm Văn Đồng, phường 1, <br />quận Gò Vấp, Tp. Hồ Chí Minh</p><br />
                                     <p><i className="fa fa-phone"></i>  (+84) 585868587</p><br />
-                                    <p><i className="fa fa-envelope"></i>  contact@travelo.com.vn</p>
+                                    <p><i className="fa fa-envelope"></i>  thanhduySofEng@gmail.com</p>
                                 </div>
                             </div>
                             <div className="col-xl-2 col-md-6 col-lg-2">
