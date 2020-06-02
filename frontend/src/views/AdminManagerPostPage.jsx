@@ -45,10 +45,6 @@ export default class AdminMangerPostPage extends Component {
                     this.getListPostsOfUser();
             })
         }
-        else {
-            let history = this.props.history;
-            history.push('/login');
-        }
     }
 
     onHandlingPostOfUser = (post, acctions) => {
@@ -101,7 +97,7 @@ export default class AdminMangerPostPage extends Component {
         let { posts } = this.state;
         return (
             <div>
-                <HeaderAdmin />
+                <HeaderAdmin history={this.props.history} />
 
                 <div className="where_togo_area">
                     <div className="row justify-content-center">

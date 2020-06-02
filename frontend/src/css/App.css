@@ -136,3 +136,52 @@
   transition: color 200ms;
   /* margin-right: 5px; */
 }
+
+/** css post recent */
+.post_populartrip {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  height: auto;
+  margin: 1px;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 1px 1px 0px 0px #f1f1f1;
+}
+.post_populartrip .mask-lable {
+  transition: top .2s, transform .2s, border-radius .2s;
+}
+
+.post_populartrip .mask-lable span {
+  color: lightyellow;
+  opacity: 1;
+  z-index: 99;
+  position: absolute;
+  display: inline-block;
+  top: 30%;
+  left: 35%;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px;
+  font-size: 22px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.post_populartrip .mask-lable .hide-posticon {
+  display: none!important;
+}
+.post_populartrip .mask-lable:hover .hide-posticon {
+  display: block!important;
+  background-image: #23527c;
+}
+
+.post_populartrip .info .css-content {
+  font-size: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+}

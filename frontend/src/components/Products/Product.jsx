@@ -7,7 +7,7 @@ import StarRating from '../Evaluation/StarRating';
 export default class Product extends Component {
 
     onChoose = (product, quantity) => {
-        console.log(product.quantity);
+        let tempQuantity = product.quantity;
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         if (cart == null)
             cart = {
@@ -65,7 +65,7 @@ export default class Product extends Component {
 
             // refresh
             let amount = this.props.amountCurrentItemCart;
-            this.props.onAddItemIntoCart(++amount);
+            this.props.onAddItemIntoCart(++amount, product, tempQuantity);
         }
     }
 
@@ -75,8 +75,8 @@ export default class Product extends Component {
             <div className="col-lg-4 col-md-6">
                 <div className="single_product">
                     <div className="thumb">
-                        <img src={product.images} alt="product-img" />
-                        <Link to='' className="prise">${product.price}</Link>
+                        <img src={product.images} alt="product-img" title={product.name} />
+                        <span className="prise">${product.price}</span>
                         {
                             product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null
                         }

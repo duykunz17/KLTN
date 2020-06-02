@@ -1,13 +1,14 @@
 const router = require('express').Router();
+
 const dbSchedule = require('../models/Schedule');
 
 router.route('/add').post((req, res) => {
-    const account = req.body.account
-    const title = req.body.title
-    const startDate = req.body.startDate
-    const endDate = req.body.endDate
-    const scheduleList = req.body.scheduleList
-    const hashtag = req.body.hashtag
+    const account = req.body.account;
+    const title = req.body.title;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const scheduleList = req.body.scheduleList;
+    const hashtag = req.body.hashtag;
     const newSchedule = new dbSchedule({account, title, startDate, endDate, scheduleList, hashtag});
 
     newSchedule.save()

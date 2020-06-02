@@ -16,11 +16,14 @@ import NewFeedPage from './views/NewFeedPage';
 import PostDetailPage from './views/PostDetailPage';
 import DestinationDetailPage from './views/DestinationDetailPage';
 import ListSchedulePage from './views/ListSchedulePage';
-import StatisticalProductBestSellerPage from './views/StatisticalProductBestSellerPage';
 
 // views admin
 import AdminPage from './views/AdminPage';
 import AdminManagerPostPage from './views/AdminManagerPostPage';
+import AdminStatisticalProductBestSellerPage from './views/AdminStatisticalProductBestSellerPage';
+import AdminStatisticalRevenueSalePage from './views/AdminStatisticalRevenueSalePage';
+
+
 
 
 const ROUTERS = [
@@ -97,7 +100,7 @@ const ROUTERS = [
     {
         path: '/admin/product-management',
         exact: false,
-        main: () => <AdminPage/>
+        main: ({history}) => <AdminPage history={history} />
     },
     {
         path: '/admin/post-management',
@@ -107,7 +110,12 @@ const ROUTERS = [
     {
         path: '/admin/statistical-product-best-seller',
         exact: false,
-        main: () => <StatisticalProductBestSellerPage/>
+        main: ({history}) => <AdminStatisticalProductBestSellerPage history={history} />
+    },
+    {
+        path: '/admin/statistical-renvenue-sale',
+        exact: false,
+        main: ({history}) => <AdminStatisticalRevenueSalePage history={history} />
     },
     {
         path: '',

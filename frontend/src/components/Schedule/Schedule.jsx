@@ -9,7 +9,6 @@ import Destination from './Destination';
 import './Schedule.css';
 
 import callAPI from '../../utils/connectAPI';
-// import ChooseDate from './ChooseDate';
 
 class Schedule extends Component {
     constructor(props) {
@@ -57,11 +56,11 @@ class Schedule extends Component {
         });
     };
 
-    addDays = (days) => {
-        let date = new Date(this.state.startDate);
-        date.setDate(date.getDate() + days);
-        return date.toString().substr(4, 12);
-    }
+    // addDays = (days) => {
+    //     let date = new Date(this.state.startDate);
+    //     date.setDate(date.getDate() + days);
+    //     return date.toString().substr(4, 12);
+    // }
 
     onChangeBtn = (statusBtn) => {
         if (statusBtn)

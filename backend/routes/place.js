@@ -46,7 +46,6 @@ router.route('/list-place/page=:page').get((req, res) => {
 
 router.route('/search=:info').get((req, res) => {
     let info = req.params.info;
-    console.log(info)
     if (info)
         dbPlace.find({$or: [
                 // $options: 'i' không phân biệt hoa thường
