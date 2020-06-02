@@ -49,7 +49,8 @@ class ListSchedule extends Component {
                         </div>
                     </div>
                         <br/>
-                        <Link to=""><h3> {schedule.title}</h3></Link>
+                        <Link to={"/schedule-detail/" + schedule._id}><h3> {schedule.title}</h3></Link>
+                        <i class="fa fa-tag" aria-hidden="true"></i>
                         {this.displayHashTag(schedule.hashtag)}
                         {this.displayDate(schedule.scheduleList)}
                     </div>

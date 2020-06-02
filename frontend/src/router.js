@@ -16,6 +16,8 @@ import NewFeedPage from './views/NewFeedPage';
 import PostDetailPage from './views/PostDetailPage';
 import DestinationDetailPage from './views/DestinationDetailPage';
 import ListSchedulePage from './views/ListSchedulePage';
+import ProductDetailPage from './views/ProductDetailPage';
+import ScheduleDetailPage from './views/ScheduleDetailPage';
 
 // views admin
 import AdminPage from './views/AdminPage';
@@ -48,6 +50,11 @@ const ROUTERS = [
         main: () => <ProductPage />
     },
     {
+        path: '/product-detail/:id',
+        exact: false,
+        main: (object) => <ProductDetailPage object={object} />
+    },
+    {
         path: '/place',
         exact: true,
         main: () => <PlacePage/>
@@ -71,6 +78,11 @@ const ROUTERS = [
         path: '/schedule',
         exact: false,
         main: ({history}) => <SchedulePage history={history}/>
+    },
+    {
+        path: '/schedule-detail/:id',
+        exact: false,
+        main: (object) => <ScheduleDetailPage object={object} />
     },
     {
         path: '/list-schedule',

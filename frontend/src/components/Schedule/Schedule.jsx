@@ -371,11 +371,7 @@ class Schedule extends Component {
         return (
             <div>
                 <div className="where_togo_area">
-                    <div className="row justify-content-center">
-                        <div className="container">
-                            <h2 style={{ color: 'white', textAlign: 'center' }}>TẠO LỊCH CHO CHUYẾN ĐI</h2>
-                        </div>
-                    </div>
+                    <h2 style={{ color: 'white', textAlign: 'center' }}>TẠO LỊCH CHO CHUYẾN ĐI</h2>
                 </div>
 
                 <div className="container-fluid bg-image">

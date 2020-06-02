@@ -22,4 +22,10 @@ router.route('/account/:id').get((req, res) => {
       .catch(err => res.status(400).json('Error' + err))
 });
 
+router.route('/:id').get((req, res) => {
+  dbSchedule.findById(req.params.id)
+      .then(schedules => res.json(schedules))
+      .catch(err => res.status(400).json('Error' + err))
+});
+
 module.exports = router;
