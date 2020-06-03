@@ -58,17 +58,19 @@ export default class ItemPurchase extends Component {
                 </div>
                 <div className="col-lg-3 col-md-3 style-review">
                     {
-                        // if product.itemEvaluation === null
-                        product.itemEvaluation && product.itemEvaluation > 0 ? (
-                            <StartRating
-                                numberOfStars={5}
-                                value={product.itemEvaluation}
-                                size={40}
-                                editing={false}
-                            />
-                        ) : // else show rating
-                            <button type="button" className="btn btn-primary" onClick={this.onToggleEvaluation}
-                                data-toggle="modal" data-target="#toggleEvalutionProduct" >Đánh giá</button>
+                        this.props.isCheckout === false ? null : (
+                            // if product.itemEvaluation === null
+                            product.itemEvaluation && product.itemEvaluation > 0 ? (
+                                <StartRating
+                                    numberOfStars={5}
+                                    value={product.itemEvaluation}
+                                    size={40}
+                                    editing={false}
+                                />
+                            ) : // else show rating
+                                <button type="button" className="btn btn-primary" onClick={this.onToggleEvaluation}
+                                    data-toggle="modal" data-target="#toggleEvalutionProduct" >Đánh giá</button>
+                        )
                     }
                 </div>
 

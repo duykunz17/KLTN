@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import './Checkout.css'
-import callAPI from '../../utils/connectAPI';
 
 class Checkout extends Component {
 
@@ -10,33 +7,15 @@ class Checkout extends Component {
         super(props);
 
         this.state = {
-            user: null,
-            cart: {
-                products: [],
-                total: 0
-            },
-            countCart: 0,
             shipAddress: ''
         }
     }
 
     componentDidMount() {
-        let user = JSON.parse(sessionStorage.getItem("user"));
-        let cart = JSON.parse(sessionStorage.getItem("cart"));
-        let countCart = Number(sessionStorage.getItem("countCart"));
+        let user = this.props.user;
+
         let shipAddress = user.person.address;
-        this.setState({ user, cart, countCart, shipAddress });
-    }
-
-    componentDidUpdate(prevState) {
-        let preAmount = prevState.amountCurrentItemCart, currAmount = this.props.amountCurrentItemCart;
-
-        if (preAmount != null  && currAmount != null && preAmount < currAmount) {
-            let user = JSON.parse(sessionStorage.getItem("user"));
-            let cart = JSON.parse(sessionStorage.getItem("cart"));
-            let countCart = Number(sessionStorage.getItem("countCart"));
-            this.setState({ user, cart, countCart });
-        }
+        this.setState({ shipAddress });
     }
 
     displayCartItem = (products) => {
@@ -44,7 +23,7 @@ class Checkout extends Component {
         if (products.length > 0) {
             result = products.map((element, index) => {
                 return (
-                    <div>
+                    <div key={index} >
                         <h5><img src={element.images} alt="anh" style={{height:'75px', width:'60px', border: '1px solid #cfcfcf'}} />
                             &nbsp;{element.quantity} x {element.name} x {element.price}.000₫</h5>
                         <div className="hr-line-dashed" />
@@ -65,53 +44,12 @@ class Checkout extends Component {
     };
 
     onSaveBill = (checkout) => {
-        let cart = this.state.cart;
-        let shipAddress = this.state.shipAddress;
-        sessionStorage.removeItem("cart");
-        sessionStorage.removeItem("countCart");
-        this.setState({
-            cart: {
-                products: [],
-                total: 0
-            },
-            countCart: 0
-        });
-        let bill = {user: this.state.user, cart, checkout, shipAddress};
-        // use to api connect server to save Bill
-        callAPI('bill/add', 'POST', {bill})
-            .then(res => {
-                let icon = 'success', title = "", text = "", outOfStock = res.data.outOfStock;
-                if (res.data.success)
-                    title = res.data.success;
-                else if (res.data.fail) {
-                    icon = "error";
-                    title = res.data.fail;
-                }
-                else if(outOfStock) {
-                    let length = outOfStock.length;
-                    title = "Bạn đã thanh toán thành công!";
-                    text = `Xin lỗi! Chúng tôi đã bỏ qua sản phẩm (`;
-                    for (let i = 0; i < length; i++) {
-                        if (i === length - 1)
-                            text += `${outOfStock[i].name}) do không đủ`;
-                        else
-                            text += `${outOfStock[i].name} - `;
-                    }
-                }
-                Swal.fire({
-                    icon,
-                    title,
-                    text
-                });
-            })
-            .catch((err) => { console.log(err) });
-            window.location = '/'
+        this.props.onOrderProducts(checkout, this.state.shipAddress);
     }
 
     render() {
-        let { user, cart, countCart } = this.state
-        if (user == null)
-            return null;
+        let { user, cart, countCart } = this.props;
+
         return (
             <div className="container">
                 <div className="container check-out d-flex">
@@ -143,7 +81,7 @@ class Checkout extends Component {
                 </div>
                 <div className="button-redirect">
                     <Link to="/product" className="btn btn-success">Tiếp tục mua hàng</Link>
-                    <Link className="btn btn-warning" onClick={() => this.onSaveBill("Thanh toán khi nhận hàng (COD)")}>Xác nhận đặt hàng</Link>
+                    <button type='button' className="btn btn-warning" onClick={() => this.onSaveBill("Thanh toán khi nhận hàng (COD)")}>Xác nhận đặt hàng</button>
                 </div>
             </div>
         );

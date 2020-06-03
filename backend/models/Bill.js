@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const billSchema = new Schema({
     account: {type: Object},
     orderdate: {type: Date},
+    isCheckout: {type: Boolean},
     checkout: {type: String},
     total: {type: Number},
     billDetail: [],

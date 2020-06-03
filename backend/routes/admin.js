@@ -108,7 +108,7 @@ router.route('/statistical/product/sell-day').post((req, res) => {
     }
 
     dbBill.aggregate([
-        { $match: { orderdate: { $gte: new Date(`${year}-${month}-${day}`), $lt: new Date(`${year}-${checkMonth}-${checkDay}`) } } },
+        { $match: { isCheckout: true, orderdate: { $gte: new Date(`${year}-${month}-${day}`), $lt: new Date(`${year}-${checkMonth}-${checkDay}`) } } },
         { '$unwind': '$billDetail' },
         { '$group': { '_id': "$billDetail.name", sumPurchase: { $sum: "$billDetail.quantity" } } },
         { $sort: { sumPurchase: -1 } },
@@ -135,7 +135,7 @@ router.route('/statistical/product/sell-month').post((req, res) => {
     }
 
     dbBill.aggregate([
-        { $match: { orderdate: { $gte: new Date(`${year}-${month}-${1}`), $lt: new Date(`${checkYear}-${checkMonth}-${1}`) } } },
+        { $match: { isCheckout: true, orderdate: { $gte: new Date(`${year}-${month}-${1}`), $lt: new Date(`${checkYear}-${checkMonth}-${1}`) } } },
         { '$unwind': '$billDetail' },
         { '$group': { '_id': "$billDetail.name", sumPurchase: { $sum: "$billDetail.quantity" } } },
         { $sort: { sumPurchase: -1 } },
@@ -156,7 +156,7 @@ router.route('/statistical/product/sell-year').post((req, res) => {
     let year = date.get('year');
 
     dbBill.aggregate([
-        { $match: { orderdate: { $gte: new Date(`${year}-${1}-${1}`), $lt: new Date(`${year + 1}-${1}-${1}`) } } },
+        { $match: { isCheckout: true, orderdate: { $gte: new Date(`${year}-${1}-${1}`), $lt: new Date(`${year + 1}-${1}-${1}`) } } },
         { '$unwind': '$billDetail' },
         { '$group': { '_id': "$billDetail.name", sumPurchase: { $sum: "$billDetail.quantity" } } },
         { $sort: { sumPurchase: -1 } },
@@ -179,7 +179,7 @@ router.route('/statistical/renvenue-sale').post((req, res) => {
     let year = date.get('year');
 
     dbBill.aggregate([
-        { $match: { orderdate: { $gte: new Date(`${year}-${1}-${1}`), $lt: new Date(`${year + 1}-${1}-${1}`) } } },
+        { $match: { isCheckout: true, orderdate: { $gte: new Date(`${year}-${1}-${1}`), $lt: new Date(`${year + 1}-${1}-${1}`) } } },
         // { '$unwind': '$billDetail' },
         { '$group': { '_id': { $month: "$orderdate" }, total: { $sum: "$total" } } },
         // { $sort: { sumPurchase: -1 } },

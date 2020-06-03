@@ -64,6 +64,10 @@ class Header extends Component {
 
         sessionStorage.setItem("cart", JSON.stringify(cart));
         sessionStorage.setItem("countCart", Number(countCart));
+
+        if (this.props.isUpdateCheckout !== undefined)
+            this.props.updateCartInCheckout(cart, countCart);
+
     }
     onChangQuantity = (_id, newQuantity) => {
         let { cart } = this.state;
@@ -113,7 +117,7 @@ class Header extends Component {
     }
 
     onSaveBill = (checkout) => {
-        let cart = this.state.cart;
+        let {user, cart} = this.state;
         sessionStorage.removeItem("cart");
         sessionStorage.removeItem("countCart");
         this.setState({
@@ -123,7 +127,7 @@ class Header extends Component {
             },
             countCart: 0
         });
-        let bill = {user: this.state.user, cart, checkout};
+        let bill = {user, cart, isCheckout: true, checkout, shipAddress: user.person.address};
         // use to api connect server to save Bill
         callAPI('bill/add', 'POST', {bill})
             .then(res => {
@@ -136,7 +140,7 @@ class Header extends Component {
                 }
                 else if(outOfStock) {
                     let length = outOfStock.length;
-                    title = "Bạn đã đặt hàng thành công!";
+                    title = "Bạn đã mua hàng thành công!";
                     text = `Xin lỗi! Chúng tôi đã bỏ qua sản phẩm (`;
                     for (let i = 0; i < length; i++) {
                         if (i === length - 1)

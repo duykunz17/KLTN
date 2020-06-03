@@ -111,7 +111,7 @@ const ROUTERS = [
     {
         path: '/checkout',
         exact: false,
-        main: () => <CheckoutPage/>
+        main: ({history}) => <CheckoutPage history={history} />
     },
     {
         path: '/admin/product-management',

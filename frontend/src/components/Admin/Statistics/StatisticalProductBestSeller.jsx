@@ -56,6 +56,7 @@ class StatisticalProductBestSeller extends Component {
     }
 
     handlingStatical = (date) => {
+
         callAPI('admin/statistical/product/sell-day', 'POST', { date })
             .then(res => this.onSetStatisticalDays(res.data));
         
@@ -154,7 +155,7 @@ class StatisticalProductBestSeller extends Component {
     };
     render() {
         let {startDate, years, months, days} = this.state;
-        console.log(startDate)
+        // console.log(startDate)
         return (
             <div style={{marginBottom: '60px'}}>
                 <div style={{textAlign: 'center', marginTop: '50px'}} >
