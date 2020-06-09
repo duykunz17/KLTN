@@ -270,6 +270,10 @@ class Schedule extends Component {
                     this.setStateEmpty();
                 })
                 .catch(err => console.log(err))
+
+            callAPI('schedule/sendMail', 'POST', '')
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
         }
     }
 
@@ -442,7 +446,7 @@ class Schedule extends Component {
                                         <div className="form-row">
                                             <div className="col-4 style-choose-date">
                                                 {this.date()}
-                                                <button type="button" className="btn btn-warning" onClick={() => this.onAddDate()} style={{float: 'right', width: '200px'}} >
+                                                <button type="button" className="btn btn-warning" onClick={() => this.onAddDate()} style={{ float: 'right', width: '200px' }} >
                                                     <i className='fa fa-plus-circle' /> Thêm ngày
                                                 </button>
                                             </div>

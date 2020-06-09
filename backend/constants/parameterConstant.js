@@ -2,7 +2,7 @@
 const ATLAS_URI_MONGO = "mongodb+srv://ducduy:123456a@cluster0-bayep.mongodb.net/test";
 //-------------------------------------------------------------------------------------------
 
-// create constants for Facebooke
+// create constants for Facebook
 const FACEBOOK_ID = "1089146518102635";
 const FACEBOOK_SECRET = "00f42e0c3aa4e096cbaf62d3de253017";
 const FACEBOOK_CALLBACK_URL = "http://localhost:3000/login/fb/cb";
@@ -20,7 +20,9 @@ const TWITTER_SECRET = "59twSKjhvruzRydCdsQVwom00KHWse1LP0RinDg5PVp7D1sYZW";
 const TWITTER_CALLBACK_URL = "http://localhost:3000/login/twitter/cb";
 //-------------------------------------------------------------------------------------------
 
-
+// user and password send mail after schedule
+const USER_SENDMAIL = "testsend312@gmail.com"
+const PASS_SENDMAIL = "ABC@abc123"
 
 module.exports = {
     ATLAS_URI_MONGO,
@@ -32,5 +34,7 @@ module.exports = {
     GOOGLE_CALLBACK_URL,
     TWITTER_ID,
     TWITTER_SECRET,
-    TWITTER_CALLBACK_URL
+    TWITTER_CALLBACK_URL,
+    USER_SENDMAIL,
+    PASS_SENDMAIL
 }
