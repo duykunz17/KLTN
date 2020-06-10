@@ -111,7 +111,13 @@ class DataTable extends Component {
                 this.onSetStateData(tempData);
         
                 callAPI(`admin/product/`+id, 'DELETE', null)
-                    .then(res => console.log(res.data))
+                    .then(res => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: res.data.messSuccess,
+                        });
+                    })
+                    .catch((err) => { console.log(err) })
             }
         })
     }
@@ -126,28 +132,50 @@ class DataTable extends Component {
 
     updateInfoProduct = (product) => {
         let products = this.state.data.rows;
-        callAPI(`admin/product/update/${product._id}`, 'POST', product)
-            .then(res => {
-                if (res.data.messSuccess) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: res.data.messSuccess,
-                    });
+                          
+        if (product._id) {
+            callAPI(`admin/product/update/${product._id}`, 'POST', product)
+                .then(res => {
+                    if (res.data.messSuccess) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: res.data.messSuccess,
+                        });
 
-                    console.log(product)
-                    products = products.map(item => {
-                        item.images = item.images.props.src;  // vì sao khi update thì field images trở thành 1 object nên phải chuyển nó thành String
-                        if (item._id === product._id)
-                            item = product;
-                        return item;
-                    })
-                    this.onSetStateData(products);
-                    console.log("PRODUCT UPDATED");
-                }
-            }).catch(err => console.log(err));
-            
-        window.location = '/admin/product-management'                   
+                        // console.log(product);
+                        products = products.map(item => {
+                            item.images = item.images.props.src;  // vì sao khi update thì field images trở thành 1 object nên phải chuyển nó thành String
+                            if (item._id === product._id)
+                                item = product;
+                            return item;
+                        })
+                        this.onSetStateData(products);
+                        // console.log("PRODUCT UPDATED");
+                    }
+                }).catch(err => console.log(err));
+        }
+        else {
+            callAPI('admin/product/add', 'POST', product)
+                .then(res => {
+                    if (res.data.result) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sản phẩm đã được thêm thành công',
+                        });
 
+                        // console.log(product);
+                        products = products.map(item => {
+                            item.images = item.images.props.src;  // vì sao khi update thì field images trở thành 1 object nên phải chuyển nó thành String
+                            if (item._id === product._id)
+                                item = product;
+                            return item;
+                        })
+                        products.unshift(res.data.result);
+                        this.onSetStateData(products);
+                    }
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     render() {

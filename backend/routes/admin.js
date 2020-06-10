@@ -11,8 +11,27 @@ router.route('/product').get((req, res) => {
 
 router.route('/product/:id').delete((req, res) => {
     dbProduct.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Product deleted'))
+        .then(() => res.json({messSuccess: 'Xóa sản phẩm thành công'}))
         .catch(err => res.status(400).json('Error' + err))
+});
+
+router.route('/product/add').post((req, res) => {
+    let {name, productType, description, images, price, quantity} = req.body;
+    let status = false, amountPurchase = 0, rating = 0, review = 0;
+
+    if (quantity > 0)
+        status = true;
+
+    let newProduct = new dbProduct({name, productType, description, images, price, quantity, status, amountPurchase, rating, review});
+
+    newProduct.save()
+        .then(product => {
+            // console.log(product);
+            res.json({result: product});
+        })
+        .catch(err => {
+            res.status(400).json('Error'+ err)
+        });
 });
 
 router.route('/product/update/:id').post((req, res) => {
@@ -27,7 +46,7 @@ router.route('/product/update/:id').post((req, res) => {
             product.quantity = req.body.quantity;
 
             product.save()
-                .then(() => res.json('Product updated'))
+                .then(() => res.json({messSuccess: 'Cập nhật sản phẩm thành công'}))
                 .catch(err => res.status(400).json('Error' + err))
         })
         .catch(err => res.status(400).json('Error' + err))

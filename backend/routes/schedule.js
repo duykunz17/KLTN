@@ -13,7 +13,7 @@ router.route('/add').post((req, res) => {
     const newSchedule = new dbSchedule({account, title, startDate, endDate, scheduleList, hashtag});
       
     newSchedule.save()
-      .then((res) => res.json('Schedule added!'))
+      .then((res) => res.json('Tạo lịch trình thành công'))
       .catch(err => res.status(400).json('Error' + err))
 
     let mailOptions = {

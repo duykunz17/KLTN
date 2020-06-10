@@ -20,7 +20,7 @@ export default class ModalActionsProduct extends Component {
     }
 
     onSetSate = (product) => {
-        if (product._id){
+        if (product._id) {
             this.setState({
                 _id: product._id,
                 name: product.name,
@@ -32,7 +32,7 @@ export default class ModalActionsProduct extends Component {
                 file: null,
                 filePath: null
             });
-            
+
         }
         else
             this.setState({
@@ -69,10 +69,10 @@ export default class ModalActionsProduct extends Component {
             Swal.fire({
                 icon: 'warning',
                 title: 'Số lượng bạn nhập quá lớn',
-           });
+            });
 
         this.setState({
-            [name] : value
+            [name]: value
         });
     };
     onChangeImage = (event) => {
@@ -81,14 +81,14 @@ export default class ModalActionsProduct extends Component {
             this.setState({ file, images: file.name });
 
             let reader = new FileReader();
-        
+
             reader.onloadend = () => {
                 this.setState({
                     filePath: reader.result
                 });
             }
             reader.readAsDataURL(event.target.files[0])
-        }        
+        }
     };
 
     onSubmit = async (event) => {
@@ -99,19 +99,20 @@ export default class ModalActionsProduct extends Component {
                 icon: 'warning',
                 title: 'Ảnh không được để rỗng',
             });
-
-        if (file) {
-            await uploadImageToFirebase(file, url => {
-                console.log(url);
-                images = url;
-                let product = {_id, name, productType, description, images, price, quantity};
-
-                this.props.updateInfoProduct(product);
-            })
-        }
         else {
-            let product = {_id, name, productType, description, images, price, quantity};
-            this.props.updateInfoProduct(product);
+            if (file) {
+                await uploadImageToFirebase(file, url => {
+                    // console.log(url);
+                    images = url;
+                    let product = { _id, name, productType, description, images, price, quantity };
+
+                    this.props.updateInfoProduct(product);
+                })
+            }
+            else {
+                let product = { _id, name, productType, description, images, price, quantity };
+                this.props.updateInfoProduct(product);
+            }
         }
     }
     render() {
@@ -122,11 +123,11 @@ export default class ModalActionsProduct extends Component {
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalCenterTitle">{titleModal}</h5>                          
+                            <h5 className="modal-title" id="exampleModalCenterTitle">{titleModal}</h5>
                             <button type="submit" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
-                            
+
                         </div>
                         <div className="modal-body">
                             <form onSubmit={this.onSubmit}>
@@ -141,23 +142,23 @@ export default class ModalActionsProduct extends Component {
                                     <div className="col-sm-1" />
                                     <label htmlFor="productType" className="col-sm-3 col-form-label text-right" required >Loại sản phẩm</label>
                                     <div className="col-sm-6">
-                                        <input className="form-control" name="productType" value={productType} onChange={this.onChange}/>
+                                        <input className="form-control" name="productType" value={productType} onChange={this.onChange} />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-sm-1" />
                                     <label htmlFor="description" className="col-sm-3 col-form-label text-right">Mô tả</label>
                                     <div className="col-sm-6">
-                                        <input className="form-control" name="description" value={description} onChange={this.onChange}/>
+                                        <input className="form-control" name="description" value={description} onChange={this.onChange} />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-sm-1" />
                                     <label htmlFor="images" className="col-sm-3 col-form-label text-right">Hình ảnh</label>
                                     <div className="col-sm-6">
-                                        { filePath ? 
-                                                <img src={filePath} alt="product" style={{width:"70px"}} />
-                                            : <img src={images} alt="" style={{width:"70px"}} />
+                                        {filePath ?
+                                            <img src={filePath} alt="product" style={{ width: "70px" }} />
+                                            : <img src={images} alt="" style={{ width: "70px" }} />
                                         }
                                         <input type="file" name="file" onChange={this.onChangeImage} />
                                     </div>
@@ -179,13 +180,13 @@ export default class ModalActionsProduct extends Component {
                                 <div className="form-group row">
                                     <div className="col-sm-4" />
                                     <div className="col-sm-6">
-                                        <button type="submit" className="btn btn-info" style={{width: '90px'}} >Lưu</button>
+                                        <button type="submit" className="btn btn-info" style={{ width: '90px' }} >Lưu</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" style={{width: '90px'}} data-dismiss="modal" >Đóng</button>
+                            <button type="button" className="btn btn-secondary" style={{ width: '90px' }} data-dismiss="modal" >Đóng</button>
                         </div>
                     </div>
                 </div>
