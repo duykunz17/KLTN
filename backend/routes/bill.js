@@ -90,6 +90,7 @@ router.route('/update/:id').post((req, res) => {
                         el.rating = product.itemEvaluation;
                         el.review = 1;
                     }
+                    el.rating = el.rating.toFixed(1);
                     el.save().then(res => res.json({ product }));
                 }
             });

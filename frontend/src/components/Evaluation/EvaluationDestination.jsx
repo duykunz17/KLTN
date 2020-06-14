@@ -43,6 +43,7 @@ export default class EvaluationDestination extends Component {
 
     render() {
         let {destination, user, rating} = this.state;
+        let toFixedRating = Number(destination.rating).toFixed(1);
         return (
             <div className="containt-review">
                 <div className="row">
@@ -52,10 +53,10 @@ export default class EvaluationDestination extends Component {
                 </div>
                 <div className="row">
                     <div className="col-lg-6 col-md-6 style-css">
-                        <div className="ava-rating"> <p>{destination.rating}</p> </div>
+                        <div className="ava-rating"> <p>{toFixedRating}</p> </div>
                         <StarRating
                             numberOfStars={5}
-                            value={Math.round(destination.rating)}
+                            value={toFixedRating}
                             size={40}
                             editing={false}
                         />

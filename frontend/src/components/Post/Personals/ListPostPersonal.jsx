@@ -10,7 +10,7 @@ export default class ListPostUser extends Component {
 
                 <MDBCardBody className="text-center">
                     <h2 className="h1-responsive font-weight-bold text-center my-5">
-                        Bài đăng chờ duyệt
+                        Bài đăng
                     </h2>
                     <MDBRow>
 

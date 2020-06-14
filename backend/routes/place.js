@@ -107,6 +107,7 @@ router.route('/destination/:id').get((req, res) => {
 
 router.route('/evaluate-destination/:id').post((req, res) => {
     let { rating, review, account, voted } = req.body;
+    rating = rating.toFixed(1);
     // console.log(req.body)
     dbPlace.updateOne(
         {"destination._id":req.params.id},

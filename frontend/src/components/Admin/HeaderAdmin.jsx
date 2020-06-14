@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 class HeaderAdmin extends Component {
 
@@ -8,6 +9,10 @@ class HeaderAdmin extends Component {
         if (account === null) {
             let history = this.props.history;
             history.push('/login');
+        }
+        else if (account.roles !== 1) {
+            let history = this.props.history;
+            history.push('/notfound');
         }
     }
 
@@ -47,8 +52,7 @@ class HeaderAdmin extends Component {
                                                     <li><Link to="">thống kê <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/admin/statistical-product-best-seller">sản phẩm bán chạy</Link></li>
-                                                            <li><Link to="/dtsp">doanh thu sản phẩm</Link></li>
-                                                            <li><Link to="/dddlyt">địa điểm du lịch yêu thích</Link></li>
+                                                            <li><Link to="/admin/statistical-renvenue-sale">doanh thu sản phẩm</Link></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
