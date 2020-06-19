@@ -95,6 +95,7 @@ export default class UpdateInfo extends Component {
                                         icon: 'success',
                                         title: res.data.messSuccess,
                                     });
+                                    window.location = '/blog'
                                 }
                             })
                             .catch(err => console.log(err));
@@ -102,6 +103,7 @@ export default class UpdateInfo extends Component {
                     );
                 }
             );
+            
         }
         else {
             // update into database
@@ -113,10 +115,12 @@ export default class UpdateInfo extends Component {
                             icon: 'success',
                             title: res.data.messSuccess,
                         });
+                        window.location = '/blog'
                     }
                 })
                 .catch(err => console.log(err));
         }
+      
     }
 
     render() {

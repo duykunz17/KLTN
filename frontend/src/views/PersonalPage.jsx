@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 
-import Header from '../components/Home/Header';
-import Footer from '../components/Home/Footer';
-
 import ListPostPersonal from '../components/Post/Personals/ListPostPersonal';
 import PostPersonal from '../components/Post/Personals/PostPersonal';
 import FormPost from '../components/Post/Personals/FormPost';
@@ -49,10 +46,6 @@ export default class PersonalPage extends Component {
                 })
                 this.setState({ posts, countPost: this.state.countPost + 1 });
             })
-        }
-        else {
-            let history = this.props.history;
-            history.push('/login');
         }
     }
 
@@ -114,12 +107,9 @@ export default class PersonalPage extends Component {
         let { posts, countPost } = this.state;
         return (
             <div>
-                <Header />
-
-                <div className="popular_places_area">
                     <div className="container">
-                        <div className="row">
-
+                        <div className="row mr-1" >
+                            
                             {/* Form use to post */}
                             <FormPost onSavePost={this.onSavePost} countPost={countPost} />
 
@@ -127,10 +117,7 @@ export default class PersonalPage extends Component {
                                 {this.displayListPostByUser(posts)}
                             </ListPostPersonal>
                         </div>
-                    </div>
                 </div>
-
-                <Footer />
             </div>
         );
     }

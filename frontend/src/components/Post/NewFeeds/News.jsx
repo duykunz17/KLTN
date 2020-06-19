@@ -114,6 +114,7 @@ export default class News extends Component {
                         className="img-fluid"
                         src={currentPost.images}
                         alt=""
+                        style={{width:'350px', height:'233px'}}    
                     />
                     <MDBMask overlay="white-slight" />
                 </MDBView>

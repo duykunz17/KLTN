@@ -21,7 +21,7 @@ export default class LoginPage extends Component {
         if (user.roles === 2)
             return history.push('/');
         else if (user.roles === 1)
-            return history.push('/admin/product-manager');
+            return history.push('/admin/product-management');
     }
 
     onLogin = async (username, password) => {

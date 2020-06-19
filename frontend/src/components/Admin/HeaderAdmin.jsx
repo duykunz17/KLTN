@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 class HeaderAdmin extends Component {
 

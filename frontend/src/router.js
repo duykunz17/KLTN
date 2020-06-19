@@ -11,7 +11,6 @@ import PlacePage from './views/PlacePage';
 import AboutPage from './views/AboutPage';
 import PurchasedPage from './views/PurchasedPage';
 import SchedulePage from './views/SchedulePage';
-import PersonalPage from './views/PersonalPage';
 import NewFeedPage from './views/NewFeedPage';
 import PostDetailPage from './views/PostDetailPage';
 import DestinationDetailPage from './views/DestinationDetailPage';
@@ -25,6 +24,7 @@ import AdminPage from './views/AdminPage';
 import AdminManagerPostPage from './views/AdminManagerPostPage';
 import AdminStatisticalProductBestSellerPage from './views/AdminStatisticalProductBestSellerPage';
 import AdminStatisticalRevenueSalePage from './views/AdminStatisticalRevenueSalePage';
+import BlogPage from './views/BlogPage';
 
 
 const ROUTERS = [
@@ -88,11 +88,7 @@ const ROUTERS = [
         exact: false,
         main: ({history}) => <ListSchedulePage history={history}/>
     },
-    {
-        path: '/post',
-        exact: false,
-        main: ({history}) => <PersonalPage history={history}/>
-    },
+    
     {
         path: '/post-detail/:id',
         exact: false,
@@ -102,6 +98,11 @@ const ROUTERS = [
         path: '/newfeed',
         exact: false,
         main: () => <NewFeedPage/>
+    },
+    {
+        path: '/blog',
+        exact: false,
+        main: ({history}) => <BlogPage history={history}/>
     },
     {
         path: '/payment-history',

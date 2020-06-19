@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 
-import { MDBRow, MDBCard, MDBCardBody, } from "mdbreact";
+import { MDBRow, MDBCardBody } from "mdbreact";
 
 export default class ListPostUser extends Component {
 
     render() {
         return (
-            <MDBCard className="my-5 px-5 pb-5 w-100">
-
+            <div className="card my-5 px-5 pb-5 w-100" style={{borderRadius:'10px'}}>
                 <MDBCardBody className="text-center">
-                    <h2 className="h1-responsive font-weight-bold text-center my-5">
+                    <p className=" text-center" style={{ fontWeight: 'bold', fontSize:'30px', color:'black' }}>
                         Bài đăng
-                    </h2>
+                    </p>
+                    <hr/>
                     <MDBRow>
-
                         {this.props.children}
-
                     </MDBRow>
                 </MDBCardBody>
-            </MDBCard>
+            </div>
         );
     }
 }

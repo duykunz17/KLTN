@@ -63,8 +63,8 @@ export default class PostPersonal extends Component {
                 break;
         }
         return (
-            <label>
-                {strStatus} &nbsp;&nbsp; <img src={icon} alt='icon' />
+            <label style={{fontSize:'20px'}}>
+                {strStatus} &nbsp; <img src={icon} alt='icon' />
             </label>
         )
     }
@@ -152,26 +152,33 @@ export default class PostPersonal extends Component {
         return (
             <MDBCol lg="12" xl="12">
                 <div className="d-flex">
-                    <div style={{ float: "left", width: "95%", textAlign: "left" }}>
-                        <p>
-                            Đăng bởi: &nbsp;&nbsp; <strong> {currentPost.account.person.name} </strong>
-                        </p>
-                    </div>
-                    <div style={{ float: "right", width: "50%", textAlign: "left" }}>
-                        <p>
-                            Trang thái: &nbsp; {this.showStatusOfPost(currentPost.status)}
-                        </p>
+                    <div className="info">
+                        <div className="social_wrap d-flex align-items-center justify-content">
+                            <div className="avatar">
+                                <img src={currentPost.account.avatar} className="avatar" alt="ava" />
+                            </div>
+                                &nbsp;&nbsp;
+                            <div className="number">
+                                <span>
+                                    <span style={{fontWeight:'bold', paddingRight:'130px', fontSize:'20px'}}>{currentPost.account.person.name}</span>
+
+                                    <br />
+                                    <Moment format="DD-MM-YYYY" style={{fontSize:'20px'}}>
+                                        {currentPost.postDate} 
+                                    </Moment>
+                                    <span style={{fontSize:'20px'}}>&nbsp;lúc&nbsp;</span>
+                                    <Moment format="HH:mm:ss" style={{fontSize:'20px'}}>
+                                        {currentPost.postDate}
+                                    </Moment>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p className="d-flex">
-                    Ngày đăng: &nbsp;&nbsp;
-                    <Moment format="YYYY-MM-DD HH:mm:ss">
-                        {currentPost.postDate}
-                    </Moment>
-                </p>
-                <p className="d-flex">
+                <p className="mt-3 mb-2 d-flex justify-content" style={{fontSize:'20px'}}>
                     {currentPost.content}
                 </p>
+                <p className="d-flex justify-content-end" style={{fontSize:'20px'}}>Trạng thái: &nbsp; {this.showStatusOfPost(currentPost.status)}</p>
                 <MDBRow>
                     {currentPost.images.map((img, index) => {
                         if (currentPost.images.length === 1) {
@@ -230,9 +237,10 @@ export default class PostPersonal extends Component {
                     <span>
                         <MDBIcon icon="comment" /> {currentPost.comments.length} bình luận
                     </span>
+                    
                 </MDBCardBody>
-                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}> Xem thêm </Link>
-                <button className="btn btn-danger" onClick={this.onDeletePost}> &nbsp;Xóa bài&nbsp; </button>
+                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i class="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
+                <button className="btn btn-danger" onClick={this.onDeletePost}><i class="fa fa-trash" aria-hidden="true"></i> Xóa bài </button>
                 <hr className="my-5" />
             </MDBCol>
         );

@@ -100,7 +100,7 @@ class PlacePage extends Component {
                             <div className="col-lg-6">
                                 <div className="section_title text-center mb_70">
                                     <h3>ĐỊA ĐIỂM</h3>
-                                    <p>Suffered alteration in some form, by injected humour or good day randomised booth anim 8-bit hella wolf moon beard words.</p>
+                                    <p>Các tỉnh thành, địa điểm du lịch ở đất nước Việt Nam</p>
                                 </div>
                             </div>
                         </div>

@@ -3174,7 +3174,22 @@ h3 {
 
 /* line 18, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
 .popular_places_area .single_place .thumb img {
-  width: 100%;
+  width: 350px;
+  height: 233px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .popular_places_area .single_place .thumb img {
+    width: 330px;
+    height: 233px;
+  }
+}
+
+@media (max-width: 767px) {
+  .popular_places_area .single_place .thumb img {
+    width: 500px;
+    height: 300px;
+  }
 }
 
 /* line 21, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */

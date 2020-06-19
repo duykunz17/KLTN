@@ -181,7 +181,7 @@ class Header extends Component {
                                                     <li><Link className="active" to="/">trang chủ</Link></li>
                                                     <li><Link to="">diễn đàn <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
-                                                            <li><Link to="/post">trang cá nhân</Link></li>
+                                                            <li><Link to="/blog">trang cá nhân</Link></li>
                                                             <li><Link to="/newfeed">cộng đồng</Link></li>
                                                         </ul>
                                                     </li>

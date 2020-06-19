@@ -117,4 +117,54 @@ router.route('/evaluate-destination/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error' + err));
 })
 
+
+// const puppeteer = require("puppeteer");
+
+// (async () => {
+//   const browser = await puppeteer.launch();
+//   const page = await browser.newPage();
+//   await page.goto("https://gody.vn/chau-a/viet-nam/tinh-thanh-pho");
+
+//   const places = await page.evaluate(() => {
+//     let items = document.querySelectorAll('.checkin');
+//     let place = [];
+//     items.forEach(item => {
+//       place.push({
+//         name: item.querySelector('div > a').innerText,
+//         url: item.querySelector('div > a').getAttribute('href') + '/diem-den',
+//         images: item.querySelector('img').src
+//       });
+//     });
+//     return place;
+//   });
+
+//   for (let place of places) {
+//     await page.goto(place.url);
+//     const destination = await page.evaluate(() => {
+//       let listDes = document.querySelectorAll('.list-destination > div > div');
+//       let des = [];
+//       listDes.forEach(item => {
+//         des.push({
+//           images: item.querySelector('a > img').src,
+//           name: item.querySelector('div > a.fc-nineth').innerText,
+//           rating: item.querySelector('span.fc-nineth > span').innerText,
+//           review: item.querySelector('span > span.fc-primary').innerText,
+//         });
+//       });
+//       return des;
+//     });
+//     // console.log(places);
+//     // console.log(destination);
+    
+//     dbPlace.insertMany({
+//         "name": place.name,
+//         "area": '',
+//         "images": place.images,
+//         "description": '',
+//         "destination": destination
+//    })
+//   }
+//   await browser.close();
+// })();
+
 module.exports = router;

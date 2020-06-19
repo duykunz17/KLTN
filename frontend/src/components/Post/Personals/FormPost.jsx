@@ -86,36 +86,40 @@ export default class FormPost extends Component {
 
     render() {
         return (
+            <div className="card w-100" style={{borderRadius:'10px'}}>
+            <p className="text-center mt-3" style={{ fontWeight: 'bold', fontSize:'30px', color:'black' }}> Tạo bài viết </p>
+            <hr />
             <form onSubmit={(event) => this.onSubmit(event)} className="w-100">
                 <div className="input-group style-btn-post">
                     <label className="clicked-btn-post">
                         <input type="file" name="files" multiple="multiple" onChange={(event) => this.onChangeImage(event)} />
-                        <span className="btn btn-info" >Chọn ảnh</span>
+                        <span className="btn btn-outline-secondary btn-lg ml-2"  style={{borderRadius:'15px'}}><i class="fa fa-picture-o" aria-hidden="true"></i> Chọn ảnh</span>
                     </label>
                 </div>
-                <div className="input-group" style={{marginTop: "15px"}}>
+                <hr/>
+                <div className="input-group">
                     {
                         this.state.filePath.length > 0
                             ? this.displayListImagePost(this.state.filePath)
                             : null
                     }
                 </div>
-                <div className="input-group" style={{marginTop: "15px"}}>
+                <div className="input-group mt-2 mb-4">
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="basic-addon">
                             <i className="fa fa-pencil-alt prefix"></i>
                         </span>
                     </div>
-                    <textarea className="textarea-info" id="exampleFormControlTextarea1" rows="50"
+                    <textarea className="textarea-info" id="exampleFormControlTextarea1" rows="50" required placeholder="Bạn đang nghĩ gì nào? Hãy viết những lời chia sẻ vào đây!" style={{backgroundColor:'#f2f0f5', fontSize:'24px'}}
                         name="content" value={this.state.content} onChange={(event) => this.onChange(event)}>
-
                     </textarea>
                 </div>
-
-                <div className="d-flex justify-content-end w-100 mt-10">
-                    <button type="submit" className="btn btn-primary"> Đăng </button>
+                <hr />
+                <div className="d-flex justify-content-center mt-4 mb-4 ml-2 mr-2">
+                    <button type="submit" className="btn btn-outline-primary btn-lg btn-block" style={{borderRadius:'20px'}}> Đăng bài </button>
                 </div>
             </form>
+            </div>
         );
     }
 }
