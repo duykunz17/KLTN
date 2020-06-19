@@ -20,9 +20,7 @@ class BlogPage extends Component {
             phone: '',
             adress: '',
             email: '',
-            user: null,
-            file: null,
-            filePath: null
+            user: null
         }
     }
 
@@ -42,89 +40,6 @@ class BlogPage extends Component {
         else {
             let history = this.props.history;
             history.push('/login');
-        }
-    }
-
-    onUploadImage = (event) => {
-        let file = event.target.files[0];
-
-        if (file) {
-            this.setState({ file });
-
-            let reader = new FileReader();
-
-            reader.onloadend = () => {
-                this.setState({
-                    filePath: reader.result
-                });
-            }
-            reader.readAsDataURL(event.target.files[0])
-        }
-    }
-
-    onChange = (event) => {
-        var target = event.target;
-        var name = target.name;
-        var value = target.type === 'checkbox' ? target.checked : target.value;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    onSubmit = async () => {
-        let { user, name, gender, phone, address, email, file } = this.state;
-        user.person.name = name;
-        user.person.gender = gender;
-        user.person.phone = phone;
-        user.person.address = address;
-        user.person.email = email;
-
-        if (file) {
-            let uploadTask = storage.ref(`images/${file.name}`).put(file);
-            await uploadTask.on('state_changed',
-                (snapshot) => {
-                    // progress function
-                },
-                (error) => {
-                    console.log('Error: ' + error);
-                },
-                () => {
-                    // complete function
-                    storage.ref('images').child(file.name).getDownloadURL().then(url => {
-                        // console.log('url: ' + url);
-                        user.avatar = url;
-
-                        // update into database
-                        callAPI(`account/update-info/${user._id}`, 'POST', user)
-                            .then(res => {
-                                if (res.data.messSuccess) {
-                                    sessionStorage.setItem("user", JSON.stringify(user));
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: res.data.messSuccess,
-                                    });
-                                }
-                            })
-                            .catch(err => console.log(err));
-                    }
-                    );
-                }
-            );
-        }
-        else {
-            // update into database
-            callAPI(`account/update-info/${user._id}`, 'POST', user)
-                .then(res => {
-                    if (res.data.messSuccess) {
-                        sessionStorage.setItem("user", JSON.stringify(user));
-                        Swal.fire({
-                            icon: 'success',
-                            title: res.data.messSuccess,
-                        });
-                    }
-                })
-                .catch(err => console.log(err));
         }
     }
 
@@ -150,10 +65,7 @@ class BlogPage extends Component {
                                     </MDBView>
                                     {user ?
                                         <MDBCardBody cascade className="text-center">
-                                            {this.state.filePath ?
-                                                <img src={this.state.filePath} alt="Info" className="ImgPreview" />
-                                                : <img src={user.avatar} alt="Info" className="ImgPreview" />
-                                            }
+                                            <img src={user.avatar} alt="Info" className="ImgPreview" />
                                             <h2 className="font-weight-bold">
                                                 {name}
                                             </h2>

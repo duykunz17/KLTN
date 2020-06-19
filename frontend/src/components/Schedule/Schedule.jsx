@@ -18,11 +18,9 @@ class Schedule extends Component {
             startDate: new Date(),
             endDate: new Date(),
             place: [],
-            destination: [],
             checkedItems: new Map(),
             statusBtn: false,
             listDate: [],
-            selectDes: [],
             hashtag: [],
             radio: 0,
             hover: -1

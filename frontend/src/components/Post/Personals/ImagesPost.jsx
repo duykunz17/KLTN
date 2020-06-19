@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import callAPI from '../../../utils/connectAPI';
+import { Link } from 'react-router-dom';
 
 class ImagesPost extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class ImagesPost extends Component {
         return images.map((img, index) => {
             console.log(img)
             return (
-                <img src={img} className="img-thumbnail" alt=""/>
+                <img key={index} src={img} className="img-thumbnail" alt=""/>
             )
         })
     }
@@ -35,10 +36,10 @@ class ImagesPost extends Component {
                     <div className="mdb-lightbox">
                         {posts.map((item, index) => {
                             return (
-                                <figure key={index} className="col">
-                                    <a href={'post-detail/' + item._id} >
+                                <figure key={index} className="col-sm">
+                                    <Link to={'post-detail/' + item._id} >
                                        {this.displayImagesPost(item.images)}
-                                    </a>
+                                    </Link>
                                 </figure>
                             )
                         })}

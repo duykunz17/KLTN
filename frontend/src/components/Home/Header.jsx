@@ -225,7 +225,7 @@ class Header extends Component {
                                                     {user ?
                                                         (
                                                             <span>
-                                                                <button data-toggle="modal" data-target="#updateInfoModal"> {user.person.name} </button>
+                                                                {user.person.name}
                                                             </span>
                                                         )
                                                         : ''
