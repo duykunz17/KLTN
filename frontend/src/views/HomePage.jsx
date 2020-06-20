@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Header from '../components/Home/Header';
-import Search from '../components/Home/Search/Search';
 import Footer from '../components/Home/Footer';
 
 import Banner from '../components/Banner';
@@ -41,17 +40,13 @@ class HomePage extends Component {
             .catch((err) => { console.log(err) })
     }
 
-    receiveInfoSearch = (infoSearch) => {
-        console.log(infoSearch);
-    }
-
     render() {
         var { places, posts } = this.state;
         return (
             <div className="HomePage">
                 <Header />
                 <Banner />
-                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn đi đâu?" input="Nhập tên địa điểm" />
+                {/* <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn đi đâu?" input="Nhập tên địa điểm" /> */}
                 <PopularPlaces>
                     {this.showPlaces(places)}
                 </PopularPlaces>

@@ -3,11 +3,11 @@ import StarRating from '../Evaluation/StarRating';
 
 class Destination extends Component {
     render() {
-        let { des } = this.props;
+        let { des, place_id } = this.props;
         return (
             <div className="col-6 recommend-pois" >
                 <div className="list-item">
-                    <button className="mask-gb-btn" type="button" onClick={() => this.props.onChoose(des)} >
+                    <button className="mask-gb-btn" type="button" onClick={() => this.props.onChoose(des, place_id)} >
                         <img src={des.images} alt="err" className="image_lmimg" />
                         <i className="fa fa-plus-circle hide" aria-hidden="true" />
                     </button>

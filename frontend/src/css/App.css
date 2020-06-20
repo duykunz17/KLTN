@@ -39,8 +39,14 @@
   width: 150px;
   text-align: center;
 }
-.m-l-75-uploadInfo {
-  padding-left: 75px;
+.mt-uploadInfo {
+  padding-top: 50px;
+}
+.mt-uploadInfo .mr-inputInfo {
+  margin-left: -40px;
+}
+.btn-Widthinfo {
+  width: 120px;
 }
 .mb-padding-top {
   margin-top: 20px;
@@ -114,16 +120,15 @@
 }
 
 .textarea-info {
-  /* font-family: Poppins-Medium; */
-  font-size: 13px;
+  font-size: 24px;
   line-height: 2.5;
   color: #666666;
   display: block;
   width: 100%;
-  background: #fff;
+  background-color: #f2f0f5;
   height: 120px;
   border-radius: 20px;
-  padding: 10px 10px 0 10px;
+  padding: 0px 10px 0 10px;
 }
 
 

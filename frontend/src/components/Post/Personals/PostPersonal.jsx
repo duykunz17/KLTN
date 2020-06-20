@@ -239,8 +239,8 @@ export default class PostPersonal extends Component {
                     </span>
                     
                 </MDBCardBody>
-                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i class="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
-                <button className="btn btn-danger" onClick={this.onDeletePost}><i class="fa fa-trash" aria-hidden="true"></i> Xóa bài </button>
+                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i className="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
+                <button className="btn btn-danger" onClick={this.onDeletePost}><i className="fa fa-trash" aria-hidden="true"></i> Xóa bài </button>
                 <hr className="my-5" />
             </MDBCol>
         );

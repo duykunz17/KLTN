@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import Modal from '../Modal/UpdateInfo';
-
 import Cart from '../Modal/Cart/Cart';
 import CartItem from '../Modal/Cart/CartItem';
 
@@ -290,7 +288,6 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
-                { user ? <Modal user={user} /> : null }
 
             </header>
         );

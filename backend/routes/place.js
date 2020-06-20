@@ -21,13 +21,24 @@ router.route('/list-place').get((req, res) => {
 });
 
 router.route('/').get((req, res) => {
-        dbPlace.find()
-            .then(places => res.json(places))
+        dbPlace.aggregate( [ { $project : { name : 1 } } ] )
+            .then(places => res.json(places) )
             .catch(err => res.status(400).json('Error'+ err))
+
+        // dbPlace.find()
+        //     .then(places => res.json(places))
+        //     .catch(err => res.status(400).json('Error'+ err))
 });
 
-// router.route('/destination/:name').get((req, res) => {
-//     dbPlace.find({'name': req.params.name})
+// router.route('/des/:id/:amount').get((req, res) => {
+//     let limit = req.params.amount + 6;
+
+//     dbPlace.aggregate(
+//         { $match: {_id: req.params.id} },
+//         { $project: {destination: 1} }
+//     )
+
+//     dbPlace.find({'name': req.params.name}).limit(6)
 //         .then(places => 
 //             places.map(place => {
 //                 return res.json(place.destination.map(des => des));
@@ -67,10 +78,10 @@ router.route('/search=:info').get((req, res) => {
 });
 
 router.route('/popular-place').get((req, res) => {
-    dbPlace.find({destination:{$elemMatch: {rating: {$gt: 3.49}}}})
+    dbPlace.find({destination:{$elemMatch: {rating: {$gt: 3.49}}}}).sort({'destination.$.review': -1}).limit(15)
         .then(places => {
             let temps = places.map(place => {
-                let destination = place.destination.filter(des => des.rating > 3.49);
+                let destination = place.destination.filter(des => des.rating > 3.49 && des.review >= 20);
                 return destination;
                 // return res.json(place.destination.filter(des => des.rating > 3.49));
             })
@@ -81,7 +92,7 @@ router.route('/popular-place').get((req, res) => {
 })
 router.route('/:id').get((req, res) => {
     dbPlace.findById(req.params.id)
-        .then(places => res.json(places))
+        .then(place => res.json(place))
         .catch(err => res.status(400).json('Error' + err))
 })
 
