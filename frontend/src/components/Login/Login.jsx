@@ -24,7 +24,29 @@ class Login extends Component {
     onSave = (event) => {
         event.preventDefault();
         var { username, password } = this.state;
-        this.props.onLogin(username, password);
+
+        let checkUsername = false, checkPass = false;
+
+        if (username !== '') {
+            checkUsername = true;
+            document.getElementById('errUsername').innerHTML = '';
+        }
+        else {
+            document.getElementById('errUsername').style.color = 'red';
+            document.getElementById('errUsername').innerHTML = 'Tài khoản không được rỗng.';
+        }
+
+        if (password !== '') {
+            checkPass = true;
+            document.getElementById('errPass').innerHTML = '';
+        }
+        else {
+            document.getElementById('errPass').style.color = 'red';
+            document.getElementById('errPass').innerHTML = 'Mật khẩu không được rỗng.';
+        }
+
+        if (checkUsername && checkPass)
+            this.props.onLogin(username, password);
     }
 
     render() {
@@ -43,6 +65,8 @@ class Login extends Component {
                         <i className="fa fa-user" aria-hidden="true" />
                     </span>
                 </div>
+                <span id="errUsername"></span>
+
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
                     <input className="input100" type="password" name="password" placeholder="Mật khẩu"
                         onChange={this.onChange} value={password}
@@ -52,6 +76,8 @@ class Login extends Component {
                         <i className="fa fa-lock" aria-hidden="true" />
                     </span>
                 </div>
+                <span id="errPass"></span>
+
                 <div className="container-login100-form-btn">
                     <button type="submit" className="login100-form-btn"> Đăng nhập </button>
                 </div>

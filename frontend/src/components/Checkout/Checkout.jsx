@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 class Checkout extends Component {
 
@@ -44,7 +45,13 @@ class Checkout extends Component {
     };
 
     onSaveBill = (checkout) => {
-        this.props.onOrderProducts(checkout, this.state.shipAddress);
+        if (this.state.shipAddress !== '')
+            this.props.onOrderProducts(checkout, this.state.shipAddress);
+        else
+            Swal.fire({
+                icon: 'warning',
+                title: 'Chưa nhập địa chỉ nhận hàng',
+            });
     }
 
     render() {

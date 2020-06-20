@@ -17,7 +17,7 @@ class Schedule extends Component {
             title: '',
             startDate: new Date(),
             endDate: new Date(),
-            place: [],
+            places: [],
             checkedItems: new Map(),
             statusBtn: false,
             listDate: [],
@@ -33,9 +33,7 @@ class Schedule extends Component {
                 for (var i = 0; i < res.data.length; i++) {
                     this.setState({ checkedItems: this.state.checkedItems.set(res.data[i].name, { status: false, index: i }) });
                 }
-                this.setState({
-                    place: res.data
-                });
+                this.setState({ places: res.data });
                 //console.log(res.data)
             })
             .catch((err) => { console.log(err) })
@@ -109,9 +107,33 @@ class Schedule extends Component {
         }
     }
 
-    handleChange = (event, index) => {
-        const item = event.target.value;
-        const isChecked = event.target.checked;
+    handleChange = async (event, index) => {
+        let item = event.target.value;
+        let isChecked = event.target.checked;
+
+        let places = this.state.places;
+        if (isChecked === true) {
+            await callAPI(`place/${places[index]._id}`, 'GET', null)
+                .then(res => {
+                    places[index].limit = 6;
+                    places[index].destination = res.data.destination;
+
+                    this.setState({ places });
+                })
+                .catch((err) => console.log(err));
+        }
+        else {
+            var temp = this.state.listDate.map(item => {
+                item.desName = item.desName.filter(el => {
+                    return el.place_id !== places[index]._id
+                });
+                return item;
+            })
+            this.setState({
+                listDate: temp
+            });
+        }
+
         this.setState({ checkedItems: this.state.checkedItems.set(item, { status: isChecked, index: index }) });
     }
 
@@ -123,14 +145,22 @@ class Schedule extends Component {
                 return keys.map((item, index) => {
                     let result = null;
                     if (item[1].status === true) {
+                        let place = this.state.places[item[1].index];
                         result = (
                             <div key={index}>
                                 <div style={{ textAlign: 'center', padding: '20px 0px 20px 0px' }}>
-                                    <b>Điểm đến du lịch ở {this.state.place[item[1].index].name}</b>
+                                    <b>Điểm đến du lịch ở {place.name}</b>
                                 </div>
                                 <div className="row">
-                                    {this.listDestination(this.state.place[item[1].index].destination)}
+                                    {this.listDestination(place, index)}
                                 </div>
+                                {
+                                    place.limit >= place.destination.length ? null
+                                        :
+                                        <button type="button" className="btn btn-info" onClick={() => this.onAddShownDestinations(index, place.limit + 6)} style={{ marginLeft: '270px', marginBottom: '0px', width: '200px' }} >
+                                            Xem thêm
+                                    </button>
+                                }
                                 <hr className="my-2" />
                             </div>
                         )
@@ -141,15 +171,25 @@ class Schedule extends Component {
         }
     }
 
-    listDestination = (destination) => {
+    listDestination = (place) => {
+        let destination = place.destination.slice(0, place.limit);
         return destination.map((des, index) => {
             return (
-                <Destination key={index} des={des} onChoose={this.onChoose} />
+                <Destination key={index} des={des} place_id={place._id} onChoose={this.onChoose} />
             )
         })
     }
 
-    onChoose = (des) => {
+    onAddShownDestinations = (index, limit) => {
+        let places = this.state.places;
+
+        if (limit > places[index].destination.length)
+            limit = places[index].destination.length;
+        places[index].limit = limit;
+        this.setState(places);
+    }
+
+    onChoose = (des, place_id) => {
         var temp = this.state.listDate.map((item, index) => {
             if (this.state.radio === -1)
                 Swal.fire({
@@ -160,8 +200,7 @@ class Schedule extends Component {
                 let flag = false;
                 if (item.desName.length > 0)
                     item.desName.forEach(el => {
-                        console.log(el._id)
-
+                        // console.log(el._id)
                         if (el._id === des._id)
                             return flag = true;
                     });
@@ -171,8 +210,10 @@ class Schedule extends Component {
                         icon: 'warning',
                         title: 'Bạn đã chọn điểm này'
                     })
-                else
+                else {
+                    des.place_id = place_id;
                     item.desName.push(des);
+                }
             }
             return item;
         })
@@ -217,7 +258,6 @@ class Schedule extends Component {
             title: '',
             startDate: new Date(),
             endDate: new Date(),
-            destination: [],
             statusBtn: false,
             listDate: [],
             selectDes: [],
@@ -257,7 +297,7 @@ class Schedule extends Component {
                 scheduleList: listDate,
                 hashtag: hashtag
             }
-            console.log(schedule);
+            // console.log(schedule);
             callAPI('schedule/add', 'POST', schedule)
                 .then(res => {
                     Swal.fire({
@@ -269,9 +309,11 @@ class Schedule extends Component {
                 })
                 .catch(err => console.log(err))
 
-            callAPI('schedule/sendMail', 'POST', '')
-                .then(res => console.log(res))
-                .catch(err => console.log(err))
+            // checking email of user
+            if (schedule.account.person.email)
+                callAPI('schedule/sendMail', 'POST', '')
+                    .then(res => console.log(res))
+                    .catch(err => console.log(err))
         }
     }
 

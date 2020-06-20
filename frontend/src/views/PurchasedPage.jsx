@@ -111,6 +111,10 @@ export default class PurchasedPage extends Component {
             <div>
                 <Header />
 
+                <div className="section_title text-center mb_70">
+                    <h3>LỊCH SỬ ĐẶT/MUA HÀNG</h3>
+                </div>
+
                 {this.showListBills(billsOfAccount)}
 
                 <Footer />

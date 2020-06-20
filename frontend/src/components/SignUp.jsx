@@ -28,45 +28,81 @@ class SignUp extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        const user = {
-            name: this.state.name,
-            email: this.state.email,
-            username: this.state.username,
-            password: this.state.password,
-            confirmPassword: this.state.confirmPassword
+
+        var { name, email, username, password, confirmPassword } = this.state;
+
+        let checkName = false, checkEmail = false, checkUsername = false, checkPass = false, checkConPass = false;
+        if (name !== '') {
+            checkName = true;
+            document.getElementById('errName').innerHTML = '';
+        }
+        else {
+            document.getElementById('errName').style.color = 'red';
+            document.getElementById('errName').innerHTML = 'Tên không được rỗng.';
         }
 
-        if (user.password === user.confirmPassword) {
-            callAPI('account/add', 'POST', {
-                name: this.state.name,
-                email: this.state.email,
-                username: this.state.username,
-                password: this.state.password
-            }).then(res =>{
-                if (res.data.message){
-                    Swal.fire({
-                        icon: 'error',
-                        title: res.data.message
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Đăng ký tài khoản thành công',
-                    })
-                    document.getElementById('message').innerHTML = '';
-                    this.setState({
-                        name: '',
-                        email: '',
-                        username: '',
-                        password: '',
-                        confirmPassword: ''
-                    });
-                }
-                
-            }).catch(err => console.log(err))
+        let rexEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        if (email === '') {
+            document.getElementById('errEmail').style.color = 'red';
+            document.getElementById('errEmail').innerHTML = 'Email không được rỗng.';
+        }
+        else if (!rexEmail.test(email)) {
+            document.getElementById('errEmail').style.color = 'red';
+            document.getElementById('errEmail').innerHTML = 'Email không hợp lệ. Hãy thử lại!';
+        }
+        else {
+            checkEmail = true;
+            document.getElementById('errEmail').innerHTML = '';
+        }
+
+        if (username !== '') {
+            checkUsername = true;
+            document.getElementById('errUsername').innerHTML = '';
+        }
+        else {
+            document.getElementById('errUsername').style.color = 'red';
+            document.getElementById('errUsername').innerHTML = 'Tài khoản không được rỗng.';
+        }
+
+        if (password !== '') {
+            checkPass = true;
+            document.getElementById('errPass').innerHTML = '';
+        }
+        else {
+            document.getElementById('errPass').style.color = 'red';
+            document.getElementById('errPass').innerHTML = 'Mật khẩu không được rỗng.';
+        }
+
+        if (password === confirmPassword) {
+            checkConPass = true;
+            document.getElementById('errConPass').innerHTML = '';
         } else {
-            document.getElementById('message').style.color = 'red';
-            document.getElementById('message').innerHTML = 'Mật khẩu không khớp. Hãy thử lại!';
+            document.getElementById('errConPass').style.color = 'red';
+            document.getElementById('errConPass').innerHTML = 'Mật khẩu không khớp.';
+        }
+
+        if (checkName && checkEmail && checkUsername && checkPass && checkConPass) {
+            callAPI('account/add', 'POST', { name, email, username, password })
+                .then(res =>{
+                    if (res.data.message){
+                        Swal.fire({
+                            icon: 'error',
+                            title: res.data.message
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Đăng ký tài khoản thành công',
+                        })
+                        this.setState({
+                            name: '',
+                            email: '',
+                            username: '',
+                            password: '',
+                            confirmPassword: ''
+                        });
+                    }
+                }).catch(err => console.log(err))
         }
     }
 
@@ -86,6 +122,8 @@ class SignUp extends Component {
                         <i className="fa fa-user-circle-o" aria-hidden="true" />
                     </span>
                 </div>
+                <span id="errName"></span>
+
                 <div className="wrap-input100 validate-input" data-validate="Email là bắt buộc">
                     <input className="input100" type="email" name="email" placeholder="Email" required
                         value={this.state.email}
@@ -96,6 +134,8 @@ class SignUp extends Component {
                         <i className="fa fa-envelope" aria-hidden="true" />
                     </span>
                 </div>
+                <span id="errEmail"></span>
+
                 <div className="wrap-input100 validate-input" data-validate="Tài khoản là bắt buộc">
                     <input className="input100" type="text" name="username" placeholder="Tài khoản" required
                         value={this.state.username}
@@ -106,6 +146,8 @@ class SignUp extends Component {
                         <i className="fa fa-user" aria-hidden="true" />
                     </span>
                 </div>
+                <span id="errUsername"></span>
+
                 <div className="wrap-input100 validate-input" data-validate="Mật khẩu là bắt buộc" > 
                     <input className="input100" type="password" name="password" placeholder="Mật khẩu" required
                         value={this.state.password}
@@ -116,6 +158,8 @@ class SignUp extends Component {
                         <i className="fa fa-lock" aria-hidden="true" />
                     </span>
                 </div>
+                <span id="errPass"></span>
+
                 <div className="wrap-input100 validate-input" data-validate="Xác nhận mật khẩu là bắt buộc">
                     <input className="input100" type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu" required
                         value={this.state.confirmPassword}
@@ -126,7 +170,8 @@ class SignUp extends Component {
                         <i className="fa fa-check-circle" aria-hidden="true" />
                     </span>
                 </div>
-                <span id="message"></span>
+                <span id="errConPass"></span>
+
                 <div className="container-login100-form-btn">
                     <button type="submit" className="login100-form-btn"> Đăng ký </button>
                 </div>
