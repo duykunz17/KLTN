@@ -88,7 +88,7 @@ class ProductDetail extends Component {
                             }
                             <hr />
                             <p className="text-bold">Loại sản phẩm: {product.productType}</p>
-                            <p className="text-bold">Giá: {product.price}.000 VNĐ</p>
+                            <p className="text-bold">Giá: ${product.price}</p>
                             <div className="rating_days d-flex justify-content">
                                 <StarRating
                                     numberOfStars={5}

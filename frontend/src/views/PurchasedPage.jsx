@@ -111,8 +111,12 @@ export default class PurchasedPage extends Component {
             <div>
                 <Header />
 
-                <div className="section_title text-center mb_70">
-                    <h3>LỊCH SỬ ĐẶT/MUA HÀNG</h3>
+                <div className="where_togo_area">
+                    <div className="row justify-content-center">
+                        <div className="container">
+                            <h2 style={{ color: 'white', textAlign: 'center' }}>LỊCH SỬ ĐẶT MUA HÀNG</h2>
+                        </div>
+                    </div>
                 </div>
 
                 {this.showListBills(billsOfAccount)}

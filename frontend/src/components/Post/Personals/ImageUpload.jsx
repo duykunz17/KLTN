@@ -8,7 +8,7 @@ export default class ImageUpload extends Component {
 
     render() {
         return (
-            <div className="uploadAvatar">
+            <div className="uploadAvatar m-l-80">
                 <label>Ảnh đại diện</label>
                 <div className="input-group-avatar">
                     <label className="clicked-btn-post">

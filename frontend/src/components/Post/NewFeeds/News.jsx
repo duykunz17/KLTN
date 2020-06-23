@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Moment from 'react-moment';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import { MDBCol, MDBCardBody, MDBMask, MDBIcon, MDBView } from "mdbreact";
+import { MDBCol, MDBRow, MDBCardBody, MDBMask, MDBIcon, MDBView } from "mdbreact";
 
 import callAPI from '../../../utils/connectAPI';
 
@@ -108,45 +108,95 @@ export default class News extends Component {
         let { currentPost } = this.props;
         let styleCSS = this.state.liked ? "red" : null;
         return (
-            <MDBCol lg="4" md="12" className="mb-lg-0 mb-4">
-                <MDBView hover className="rounded z-depth-2 mb-4" waves>
-                    <img
-                        className="img-fluid"
-                        src={currentPost.images}
-                        alt=""
-                        style={{width:'350px', height:'233px'}}    
-                    />
-                    <MDBMask overlay="white-slight" />
-                </MDBView>
-                <p>
-                    <span>Tác giả: &nbsp;
-                        <label className="font-weight-bold" style={{ fontWeight: "bold" }}> {currentPost.account.person.name} </label>
-                    </span>
-                    <br />
-                    <span>Ngày đăng: &nbsp;
-                        <label style={{ fontWeight: "bold" }}>
-                            <Moment format="YYYY-MM-DD HH:mm:ss">
-                                {currentPost.postDate}
-                            </Moment>
-                        </label>
-                    </span>
-                </p>
-                <p className="dark-grey-text">
+            <MDBCol lg="12" xl="12">
+                <div className="d-flex">
+                    <div className="info">
+                        <div className="social_wrap d-flex align-items-center justify-content">
+                            <div className="avatar">
+                                <img src={currentPost.account.avatar} className="avatar" alt="ava" />
+                            </div>
+                                &nbsp;&nbsp;
+                            <div className="number">
+                                <span>
+                                    <span style={{fontWeight:'bold', paddingRight:'130px', fontSize:'20px'}}>{currentPost.account.person.name}</span>
+
+                                    <br />
+                                    <Moment format="DD-MM-YYYY" style={{fontSize:'20px'}}>
+                                        {currentPost.postDate} 
+                                    </Moment>
+                                    <span style={{fontSize:'20px'}}>&nbsp;lúc&nbsp;</span>
+                                    <Moment format="HH:mm:ss" style={{fontSize:'20px'}}>
+                                        {currentPost.postDate}
+                                    </Moment>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p className="mt-3 mb-2 d-flex justify-content" style={{fontSize:'20px'}}>
                     {currentPost.content}
                 </p>
+                <MDBRow>
+                    {currentPost.images.map((img, index) => {
+                        if (currentPost.images.length === 1) {
+                            return (
+                                <MDBCol key={index} lg="12" md="12" className="mb-lg-0 mb-4">
+                                    <MDBView hover className="rounded z-depth-2 mb-4" waves>
 
+                                        <img
+                                            className="img-fluid"
+                                            src={img}
+                                            alt=""
+                                            width="100%" />
+
+                                        <MDBMask overlay="white-slight" />
+                                    </MDBView>
+                                </MDBCol>
+                            )
+                        } else if (currentPost.images.length === 2) {
+                            return (
+                                <MDBCol key={index} lg="6" md="12" className="mb-lg-0 mb-4">
+                                    <MDBView hover className="rounded z-depth-2 mb-4" waves>
+
+                                        <img
+                                            className="img-fluid"
+                                            src={img}
+                                            alt=""
+                                            width="100%" />
+
+                                        <MDBMask overlay="white-slight" />
+                                    </MDBView>
+                                </MDBCol>
+                            )
+                        } else {
+                            return (
+                                <MDBCol key={index} lg="4" md="12" className="mb-lg-0 mb-4">
+                                    <MDBView hover className="rounded z-depth-2 mb-4" waves>
+
+                                        <img
+                                            className="img-fluid"
+                                            src={img}
+                                            alt=""
+                                            width="100%" />
+
+                                        <MDBMask overlay="white-slight" />
+                                    </MDBView>
+                                </MDBCol>
+                            )
+                        }
+                    })}
+                </MDBRow>
                 <MDBCardBody>
                     <span className="mr-2">
-                        <button onClick={() => this.actionsLike(currentPost)} style={{ color: styleCSS }} >
-                            <MDBIcon icon="heart" />
-                        </button> {this.state.sumLike} thích
+                        <button onClick={() => this.actionsLike(currentPost)} style={{ color: styleCSS }} ><MDBIcon icon="heart" /></button> {this.state.sumLike} thích
                     </span>
+
                     <span>
-                        <MDBIcon icon="comment" />
-                        {currentPost.comments.length} bình luận
+                        <MDBIcon icon="comment" /> {currentPost.comments.length} bình luận
                     </span>
+                    
                 </MDBCardBody>
-                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}> Xem thêm </Link>
+                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i className="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
                 <hr className="my-5" />
             </MDBCol>
         );

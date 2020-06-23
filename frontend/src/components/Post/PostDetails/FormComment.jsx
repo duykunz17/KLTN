@@ -44,8 +44,8 @@ export default class FormComment extends Component {
                         <div className="col-12">
                             <div className="form-group">
                                 <textarea className="form-control w-100" name="content" cols={30} rows={9}
-                                    placeholder="Viết bình luận..." value={content}
-                                    onChange={this.onChange}
+                                    placeholder="Viết bình luận..." style={{fontSize:'24px'}} value={content}
+                                    onChange={this.onChange} required title="Nhập nội dung bình luận"
                                 />
                             </div>
                         </div>

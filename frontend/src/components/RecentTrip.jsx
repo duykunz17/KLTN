@@ -6,7 +6,7 @@ class RecentTrip extends Component {
     render() {
         let { post } = this.props;
         return (
-            <div className="col-lg-4 col-md-6">
+            <div className="col-lg-4 col-md-6 mb-5">
                 <div className="post_populartrip">
                     <label className="mask-lable">
                         <img src={post.images} alt="err" style={{ width: '349.98px', height: '261.04px' }} />

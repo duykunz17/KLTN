@@ -168,7 +168,7 @@ class Header extends Component {
                                     <div className="col-xl-2 col-lg-2">
                                         <div className="logo">
                                             <Link to="/">
-                                                <img src="../../images/logo.png" alt="logo" />
+                                                <img src="../../images/ddtravel.png" width="170px" height="100px" alt="logo" />
                                             </Link>
                                         </div>
                                     </div>

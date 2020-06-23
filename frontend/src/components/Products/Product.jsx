@@ -6,20 +6,6 @@ import StarRating from '../Evaluation/StarRating';
 import './Product.css'
 
 export default class Product extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            isHovering: false,
-        };
-    }
-
-    handleMouseHover = () => {
-        this.setState({
-            isHovering: !this.state.isHovering
-        });
-    }
-
     onChoose = (product, quantity) => {
         let tempQuantity = product.quantity;
         let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -88,21 +74,11 @@ export default class Product extends Component {
         return (
             <div className="col-lg-4 col-md-6">
                 <div className="single_product">
-                    { this.state.isHovering === false ?
-                        <div className="thumb">
-                            <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover} />
-                            <Link to='' className="prise">${product.price}</Link>
-                            { product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null }
-                        </div>
-                        :
-                        <div className="thumb">
-                            <img src={product.images} alt="product-img" onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover} />
-                            <p className="text-bold">- Loại sản phẩm: {product.productType}</p>
-                            <p className="text-bold">- Giá: {product.price}.000 VNĐ</p>
-                            <Link to='' className="prise">${product.price}</Link>
-                            { product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null }
-                        </div>
-                    }
+                    <div className="thumb">
+                        <img src={product.images} alt="product-img" title={product.name}/>
+                        <Link to='' className="prise">${product.price}</Link>
+                        {product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null}
+                    </div>
                     <div className="product_info">
                         <Link to={"/product-detail/" + product._id}> <h3> {product.name} </h3> </Link>
                         <p>{product.description}</p>
@@ -115,11 +91,11 @@ export default class Product extends Component {
                         />
 
                         <button type="submit" className="btn btn-primary"><i className="fa fa-info-circle" /><Link to={"/product-detail/" + product._id}> Chi tiết</Link></button>&nbsp;
-                        { product.status === true ?
+                        {product.status === true ?
                             <button className="btn btn-warning" onClick={() => this.onChoose(product, 1)} ><i className="fa fa-shopping-cart" /> Chọn mua</button>
                             : null
                         }
-                        
+
                     </div>
                 </div>
             </div>

@@ -73,7 +73,7 @@ class NewFeedPage extends Component {
                                 <div className="row justify-content-center">
                                     <div className="col-lg-6">
                                         <div className="section_title text-center mb_70">
-                                            <h3 style={{textTransform: "uppercase"}} > bài đăng nổi bật </h3>
+                                            <h2 style={{ fontWeight: 'bold', fontSize:'30px', color:'black' }} > Bài đăng nổi bật </h2>
                                         </div>
                                     </div>
                                 </div>

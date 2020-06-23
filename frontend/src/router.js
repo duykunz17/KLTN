@@ -25,6 +25,7 @@ import AdminManagerPostPage from './views/AdminManagerPostPage';
 import AdminStatisticalProductBestSellerPage from './views/AdminStatisticalProductBestSellerPage';
 import AdminStatisticalRevenueSalePage from './views/AdminStatisticalRevenueSalePage';
 import BlogPage from './views/BlogPage';
+import GalleryPage from './views/GalleryPage';
 
 
 const ROUTERS = [
@@ -113,6 +114,11 @@ const ROUTERS = [
         path: '/checkout',
         exact: false,
         main: ({history}) => <CheckoutPage history={history} />
+    },
+    {
+        path: '/gallery',
+        exact: false,
+        main: ({history}) => <GalleryPage history={history} />
     },
     {
         path: '/admin/product-management',

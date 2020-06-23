@@ -16,9 +16,6 @@ export default class ListComments extends Component {
                                     <img src={el.account.avatar} alt="error" />
                                 </div>
                                 <div className="desc">
-                                    <p className="comment">
-                                        {el.content}
-                                    </p>
                                     <div className="d-flex justify-content-between">
                                         <div className="d-flex align-items-center">
                                             <h5>
@@ -31,6 +28,9 @@ export default class ListComments extends Component {
                                             </p>
                                         </div>
                                     </div>
+                                    <p className="quotes">
+                                        {el.content}
+                                    </p>
                                 </div>
                             </div>
                         </div>

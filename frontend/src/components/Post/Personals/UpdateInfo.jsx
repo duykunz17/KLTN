@@ -157,11 +157,12 @@ export default class UpdateInfo extends Component {
     render() {
         let { name, gender, phone, address, email, user } = this.state;
         return (
-            <div className="card my-5 px-5 pb-5 w-100" style={{ borderRadius: '10px' }}>
+            <div className="card w-100 mb-3" style={{ borderRadius: '10px' }}>
                 <p className="text-center mt-3 " style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}> Cập nhật thông tin cá nhân </p>
+                <hr />
                 <div className="row">
-                    <div className="col-md-4 mt-uploadInfo">
-                        <div className="ImgPreview">
+                    <div className="col-md-4 mt-uploadInfo" style={{borderRight: '2px solid #e5e5e5', height: '380px'}}>
+                        <div className="ImgPreview m-l-80 m-t-20">
                             {this.state.filePath ?
                                 <img src={this.state.filePath} alt="Info" className="ImgPreview" />
                                 : <img src={user.avatar} alt="Info" className="ImgPreview" />
@@ -170,11 +171,11 @@ export default class UpdateInfo extends Component {
 
                         <ImageUpload onUploadImage={this.onUploadImage} />
                     </div>
-                    <div className="col-md-8 mt-uploadInfo">
+                    <div className="col-md-8 mt-uploadInfo" style={{marginTop:'-40px', marginBottom:'20px'}}>
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-4 ml-1">
                                 <div className="form-group">
-                                    <label className="p-tl-info">Họ và tên</label>
+                                    <p className="p-tl-info">Họ và tên:</p>
                                 </div>
                             </div>
                             <div className="col-md-8 mr-inputInfo">
@@ -186,9 +187,9 @@ export default class UpdateInfo extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-4 ml-1">
                                 <div className="form-group">
-                                    <label className="p-tl-info">Email</label>
+                                    <p className="p-tl-info">Email:</p>
                                 </div>
                             </div>
                             <div className="col-md-8 mr-inputInfo">
@@ -200,9 +201,9 @@ export default class UpdateInfo extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-4 ml-1">
                                 <div className="form-group">
-                                    <label className="p-tl-info">Số điện thoại</label>
+                                    <p className="p-tl-info">Số điện thoại:</p>
                                 </div>
                             </div>
                             <div className="col-md-8 mr-inputInfo">
@@ -213,9 +214,9 @@ export default class UpdateInfo extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-4 ml-1">
                                 <div className="form-group">
-                                    <label className="p-tl-address">Địa chỉ</label>
+                                    <p className="p-tl-address">Địa chỉ:</p>
                                 </div>
                             </div>
                             <div className="col-md-8 mr-inputInfo">
@@ -226,9 +227,9 @@ export default class UpdateInfo extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-4 ml-1">
                                 <div className="form-group">
-                                    <label className="p-tl-info">Giới tính</label>
+                                    <p className="p-tl-info">Giới tính:</p>
                                 </div>
                             </div>
                             <div className="form-group mr-inputInfo p-tl-gender">
@@ -236,9 +237,9 @@ export default class UpdateInfo extends Component {
                                     value={gender} onChange={this.onChange} checked={gender} /> Nam
                         </div>
                         </div>
-                        <div className="row">
-                            <button type="button" className="btn btn-secondary m-r-15 btn-Widthinfo" onClick={() => this.props.onOpenFormUpdateInfo(false, null)}>Đóng</button>
-                            <button type="button" className="btn btn-primary btn-Widthinfo" onClick={this.onSubmit}>Lưu</button>
+                        <div className="row col-md-6" style={{float:'right'}}>
+                            <button type="button" className="btn btn-secondary m-r-15 ml-2 btn-Widthinfo" onClick={() => this.props.onOpenFormUpdateInfo(false, null)}><i class="fa fa-window-close" aria-hidden="true"></i> Đóng</button>
+                            <button type="button" className="btn btn-primary btn-Widthinfo" onClick={this.onSubmit}><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu</button>
                         </div>
                     </div>
                 </div>

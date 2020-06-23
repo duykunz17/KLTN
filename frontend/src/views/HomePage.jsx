@@ -55,7 +55,7 @@ class HomePage extends Component {
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-6">
-                                <div className="section_title text-center mb_70">
+                                <div className="section_title text-center mb_50" style={{marginTop:'-90px'}}>
                                     <h3>CHUYẾN ĐI GẦN ĐÂY</h3>
                                 </div>
                             </div>

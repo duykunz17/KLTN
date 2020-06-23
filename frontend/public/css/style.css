@@ -849,7 +849,7 @@ h3 {
 .header-area .main-header-area {
   background: #fff;
   background: transparent;
-  padding: 25px 100px 25px 35px;
+  padding: 10px 100px 0px 35px;
 }
 
 /* line 21, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_header.scss */
@@ -1721,7 +1721,8 @@ h3 {
   font-weight: 400;
   color: #fff;
   text-transform: capitalize;
-  margin-bottom: 40px;
+  margin-top: -20px;
+  margin-left: -15px;
 }
 
 @media (max-width: 767px) {

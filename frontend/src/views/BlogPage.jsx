@@ -30,7 +30,7 @@ class BlogPage extends Component {
             email: '',
             account: null,
 
-            isOnpenForm: false,
+            isOpenForm: false,
 
             posts: [],
             countPost: 0        // use to init this.state in componentDidUpdate
@@ -143,11 +143,11 @@ class BlogPage extends Component {
                 email: person.email ? person.email : ''
             });
         }
-        this.setState({ isOnpenForm: isOpen });
+        this.setState({ isOpenForm: isOpen });
     }
 
     render() {
-        let { name, gender, phone, address, email, account, isOnpenForm, posts, countPost } = this.state;
+        let { name, gender, phone, address, email, account, isOpenForm, posts, countPost } = this.state;
         return (
             <div>
                 <Header />
@@ -204,9 +204,9 @@ class BlogPage extends Component {
                                             </div>
                                         </div>
                                         <div className="col-lg-8 col-md-6">
-                                            <div className="row mr-1" >
+                                            <div className="row mr-3" >
 
-                                                { isOnpenForm ? <UpdateInfo user={account} onOpenFormUpdateInfo={this.onOpenFormUpdateInfo} /> : null}
+                                                { isOpenForm ? <UpdateInfo user={account} onOpenFormUpdateInfo={this.onOpenFormUpdateInfo} /> : null}
 
                                                 {/* Form use to post */}
                                                 <FormPost onSavePost={this.onSavePost} countPost={countPost} />

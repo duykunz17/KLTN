@@ -53,4 +53,44 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error' + err))
 });
 
+// const puppeteer = require("puppeteer");
+
+// (async () => {
+//   const browser = await puppeteer.launch();
+//   const page = await browser.newPage();
+//   await page.goto("https://www.zemzemshop.com/san_pham");
+
+//   const products = await page.evaluate(() => {
+//     let items = document.querySelectorAll('.part');
+//     let product = [];
+//     items.forEach(item => {
+//         if(item.querySelector('div > .current_price').innerText !== 'Liên hệ'){
+//             product.push({
+//                 name: item.querySelector('div > .intro1 > a').innerText,
+//                 images: item.querySelector('div > a > img').src,
+//                 price: item.querySelector('div > .current_price').innerText
+//               });
+//         }
+//     });
+//     return product;
+//   });
+//   products.map(item => {
+//         dbProduct.insertMany({
+//             "name": item.name,
+//             "productType": '',
+//             "description": '',
+//             "images": item.images,
+//             "price": parseFloat(item.price),
+//             "status": true,
+//             "amountPurchase": 0,
+//             "quantity": 50,
+//             "rating": 5,
+//             "review": 1
+//           })
+//   })
+//    //console.log(products);
+    
+//   await browser.close();
+// })();
+
 module.exports = router;

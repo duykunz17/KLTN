@@ -11,7 +11,7 @@ class Footer extends Component {
                             <div className="col-xl-4 col-md-6 col-lg-4 ">
                                 <div className="footer_widget" >
                                     <div className="footer_logo">
-                                        <Link to=""><img src="../../images/footer_logo.png" alt="footer_logo" /></Link>
+                                        <Link to=""><img src="../../images/ddtravel.png" width="250px" height="100px" alt="footer_logo" /></Link>
                                     </div>
                                     <p><i className="fa fa-map-marker"></i>  328 Phạm Văn Đồng, phường 1, <br />quận Gò Vấp, Tp. Hồ Chí Minh</p><br />
                                     <p><i className="fa fa-phone"></i>  (+84) 585868587</p><br />

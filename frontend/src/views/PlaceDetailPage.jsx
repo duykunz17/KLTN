@@ -43,13 +43,9 @@ class PlaceDetailPage extends Component {
                                 size={10}
                                 editing={false}
                             />
-                            <span className="d-flex justify-content-center align-items-center">
+                            <span className="d-flex justify-content-end align-items-center">
                                 <Link to="">{currentDestination.review} đánh giá</Link>
                             </span>
-                            <div className="days">
-                                <i className="fa fa-clock-o" />
-                                <Link to="">5 Days</Link>
-                            </div>
                         </div>
 
                     </div>
