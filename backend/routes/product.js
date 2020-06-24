@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const dbProduct = require('../models/Product');
+const { db } = require('../models/Product');
 
 var countAllProducts = (cbCount) => {
-    dbProduct.estimatedDocumentCount((err, result) => {
-        if (err) return err;
-        // console.log(result);
-        cbCount(result);
-    });
+    dbProduct.aggregate([
+        { $match: {quantity: {$gt: 0}} },
+        { $count: "total" }
+    ])
+    .then (result => cbCount(result[0].total))
 }
 
 router.route('/').get((req, res) => {
@@ -14,15 +15,19 @@ router.route('/').get((req, res) => {
         // rounds a number up to the next largest whole number
         let totalPages = Math.ceil(cbCount / 6);        // get a amount of product in database
 
-        dbProduct.find({quantity: {$gt: 0}}).sort({rating: -1, amountPurchase: -1}).limit(6)
+        dbProduct.aggregate([
+            { $match: {quantity: {$gt: 0}} },
+            { $sort : { amountPurchase : -1, rating: -1 } },
+            { $limit: 6}
+        ])
             .then(products => res.json({products, totalPages}))
-            .catch(err => res.status(400).json('Error'+ err))
+            .catch(err => res.status(400).json('Error'+ err))            
     });
 });
 router.route('/page=:page').get((req, res) => {
     let page = req.params.page;
     let skip = (page - 1) * 6;        // bỏ qua số lượng đã tải ban đầu
-    dbProduct.find({quantity: {$gt: 0}}).sort({amountPurchase: -1}).skip(skip).limit(6)
+    dbProduct.find({quantity: {$gt: 0}}).sort({amountPurchase : -1, rating: -1}).skip(skip).limit(6)
         .then(products => res.json({products}))
         .catch(err => res.status(400).json('Error'+ err))
 });

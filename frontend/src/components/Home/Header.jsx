@@ -29,6 +29,8 @@ class Header extends Component {
         this.setState({ user, cart, countCart });
     }
     componentDidUpdate(prevState) {
+
+        // check about post
         let preAmount = prevState.amountCurrentItemCart, currAmount = this.props.amountCurrentItemCart;
 
         if (preAmount != null  && currAmount != null && preAmount < currAmount) {
@@ -36,6 +38,14 @@ class Header extends Component {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
             let countCart = Number(sessionStorage.getItem("countCart"));
             this.setState({ user, cart, countCart });
+        }
+
+        if (this.props.updateInfo !== undefined) {
+            let preUpdateInfo = prevState.updateInfo, currUpdateInfo = this.props.updateInfo;
+            if (preUpdateInfo != null && currUpdateInfo != null && preUpdateInfo < currUpdateInfo) {
+                let user = JSON.parse(sessionStorage.getItem("user"));
+                this.setState({ user });
+            }
         }
     }
 

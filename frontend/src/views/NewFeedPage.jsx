@@ -29,10 +29,10 @@ class NewFeedPage extends Component {
 
         callAPI('post/post-popular', 'GET', null)
             .then(res => {
-                console.log(res.data)
-                this.setState({
-                    postsPopular: res.data
-                });
+                if (res.data !== null)
+                    this.setState({
+                        postsPopular: res.data
+                    });
             })
             .catch((err) => { console.log(err) })
     }

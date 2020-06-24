@@ -32,7 +32,7 @@ const ROUTERS = [
     {
         path: '/',
         exact: true,
-        main: () => <HomePage/>
+        main: () => <HomePage />
     },
     {
         path: '/login',

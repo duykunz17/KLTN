@@ -68,7 +68,7 @@ router.route('/search=:info').get((req, res) => {
                 if (places.length > 0)
                     res.json({places});
                 else
-                    res.json({message: 'Không tìm thấy thông tin về sản phẩm này'});
+                    res.json({message: 'Không tìm thấy thông tin về địa điểm này'});
             })
             .catch(err => res.status(400).json('Error' + err))
     else

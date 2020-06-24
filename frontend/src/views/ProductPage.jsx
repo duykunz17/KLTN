@@ -89,6 +89,7 @@ class ProductPage extends Component {
                     
                     else {
                         let { products } = res.data;
+                        console.log(products[0])
                         this.setState({
                             products
                         });

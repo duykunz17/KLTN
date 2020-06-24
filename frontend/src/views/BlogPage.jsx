@@ -33,7 +33,8 @@ class BlogPage extends Component {
             isOpenForm: false,
 
             posts: [],
-            countPost: 0        // use to init this.state in componentDidUpdate
+            countPost: 0,        // use to init this.state in componentDidUpdate
+            updateInfo: 0
         }
     }
 
@@ -131,7 +132,7 @@ class BlogPage extends Component {
             .catch((err) => { console.log(err) })
     }
 
-    onOpenFormUpdateInfo = (isOpen, info) => {
+    onOpenFormUpdateInfo = (isOpen, info, isUpdateAvatar) => {
         if (info) {
             let person = info.person;
             this.setState({
@@ -143,14 +144,20 @@ class BlogPage extends Component {
                 email: person.email ? person.email : ''
             });
         }
-        this.setState({ isOpenForm: isOpen });
+        let updateInfo = this.state.updateInfo; 
+        if (isOpen)
+            updateInfo++;
+        this.setState({ isOpenForm: isOpen, updateInfo });
+
+        if (isUpdateAvatar)
+            this.getPostsOfAccount(info);
     }
 
     render() {
         let { name, gender, phone, address, email, account, isOpenForm, posts, countPost } = this.state;
         return (
             <div>
-                <Header />
+                <Header updateInfo={this.state.updateInfo} />
 
                 <MDBCard className="my-5 px-5 pb-5" >
                     <MDBCardBody >
@@ -193,7 +200,7 @@ class BlogPage extends Component {
                                                 </div>
                                                 <hr />
                                                 <div style={{ marginBottom: '10px' }} className="ml-2 mr-2 mb-3">
-                                                    <button type="button" className="btn btn-secondary btn-lg btn-block" style={{ borderRadius: '20px' }} onClick={() => this.onOpenFormUpdateInfo(true, null)} >Cập nhật thông tin cá nhân</button>
+                                                    <button type="button" className="btn btn-secondary btn-lg btn-block" style={{ borderRadius: '20px' }} onClick={() => this.onOpenFormUpdateInfo(true, null, false)} >Cập nhật thông tin cá nhân</button>
                                                 </div>
                                             </div>
 

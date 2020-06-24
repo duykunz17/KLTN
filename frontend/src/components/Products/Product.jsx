@@ -6,10 +6,17 @@ import StarRating from '../Evaluation/StarRating';
 import './Product.css'
 
 export default class Product extends Component {
-    onChoose = (product, quantity) => {
+    onChoose = (product, quantity) => {        
         let tempQuantity = product.quantity;
+        if (tempQuantity === 0)
+            return Swal.fire({
+                icon: 'warning',
+                title: "Cảnh báo",
+                text: "Sản phẩm này đã hết hàng",
+            });
+
         let cart = JSON.parse(sessionStorage.getItem("cart"));
-        if (cart == null)
+        if (cart === null)
             cart = {
                 products: [],
                 total: 0

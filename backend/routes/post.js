@@ -2,16 +2,43 @@ const router = require('express').Router();
 const moment = require('moment');
 
 const dbPost = require('../models/Post');
+var dbAccount = require('../models/Account');
+
+var getAccountById = async (account_id) => {
+    let account = await dbAccount.findById(account_id)
+        .then(result => {
+            // console.log(result);
+            return result;
+        })
+        .catch(err => err);
+    return account;
+}
 
 router.route('/').get((req, res) => {
     dbPost.find({ "status": 'A' }).sort({ postDate: -1 })
-        .then(posts => res.json(posts))
+        .then(posts => {
+            posts.forEach(async (el, index) => {
+                let acc = await getAccountById(el.account._id);
+                el.account = acc;
+
+                if (index === posts.length - 1)
+                    return res.json(posts);
+            });
+        })
         .catch(err => res.status(400).json('Error' + err));
 });
 
 router.route('/post-recent').get((req, res) => {
     dbPost.find({ "status": 'A' }).sort({ postDate: -1 }).limit(6)
-        .then(posts => res.json(posts))
+        .then(posts => {
+            posts.forEach(async (el, index) => {
+                let acc = await getAccountById(el.account._id);
+                el.account = acc;
+
+                if (index === posts.length - 1)
+                    return res.json(posts);
+            });
+        })
         .catch(err => res.status(400).json('Error' + err));
 });
 
@@ -30,13 +57,29 @@ router.route('/post-popular').get((req, res) => {
     }
 
     dbPost.find({ "status": 'A', postDate: { $gte: new Date(`${checkYear}-${checkMonth}-${checkDay}`), $lt: new Date(`${year}-${month}-${day + 1}`) } }).sort({ sumLike: -1 }).limit(3)
-        .then(result => res.json(result))
+        .then(posts => {
+            if (posts.length <= 0)
+                return res.json(null);
+
+            posts.forEach(async (el, index) => {
+                let acc = await getAccountById(el.account._id);
+                el.account = acc;
+
+                if (index === posts.length - 1)
+                    return res.json(posts);
+            });
+        })
         .catch(err => res.status(400).json('Error' + err));
 });
 
 router.route('/account/:id').get((req, res) => {
     dbPost.find({ "account._id": req.params.id }).sort({ postDate: -1 })
-        .then(posts => res.json(posts))
+        .then(async (posts) => {
+            let acc = await getAccountById(req.params.id);
+            posts.forEach(el => el.account = acc);
+
+            return res.json(posts);
+        })
         .catch(err => res.status(400).json('Error' + err));
 });
 
@@ -74,7 +117,17 @@ router.route('/update/:id').post((req, res) => {
 /** handling 22/05/2020 */
 router.route('/:id').get((req, res) => {
     dbPost.findById(req.params.id)
-        .then(post => res.json({ post }))
+        .then(post => {
+            let comments = post.comments;
+            comments.forEach(async (el, index) => {
+                let acc = await getAccountById(el.account._id);
+                el.account = acc;
+                if (index === comments.length - 1) {
+                    post.comments = comments;
+                    return res.json({post});
+                }
+            });
+        })
         .catch(err => res.status(400).json('Error' + err));
 });
 router.route('/newlike/:id').post((req, res) => {

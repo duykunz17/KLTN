@@ -83,7 +83,10 @@ router.route('/update/:id').post((req, res) => {
             dbProduct.findById(product._id).then(el => {
                 if (el) {
                     if (el.rating && el.review) {
-                        el.rating = (el.rating + product.itemEvaluation) / 2;
+                        if (el.rating === 0)
+                            el.rating = product.itemEvaluation;
+                        else
+                            el.rating = (el.rating + product.itemEvaluation) / 2;
                         el.review += 1;
                     }
                     else {

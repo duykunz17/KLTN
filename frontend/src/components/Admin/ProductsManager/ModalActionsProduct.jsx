@@ -100,21 +100,55 @@ export default class ModalActionsProduct extends Component {
                 title: 'Ảnh không được để rỗng',
             });
         else {
-            if (file) {
-                await uploadImageToFirebase(file, url => {
-                    // console.log(url);
-                    images = url;
-                    let product = { _id, name, productType, description, images, price, quantity };
-
-                    this.props.updateInfoProduct(product);
-                })
+            let checkQuantity = false, checkPrice = false;
+            if (quantity !== '') {
+                if (quantity < 0) {
+                    document.getElementById('errQuantity').style.color = 'red';
+                    document.getElementById('errQuantity').innerHTML = 'Số lượng nhập phải >= 0.';
+                }
+                else {
+                    checkQuantity = true;
+                    document.getElementById('errQuantity').innerHTML = '';
+                }
             }
             else {
-                let product = { _id, name, productType, description, images, price, quantity };
-                this.props.updateInfoProduct(product);
+                document.getElementById('errQuantity').style.color = 'red';
+                document.getElementById('errQuantity').innerHTML = 'Số lượng không được rỗng.';
+            }
+
+            if (price !== '') {
+                if (price < 0) {
+                    document.getElementById('errPrice').style.color = 'red';
+                    document.getElementById('errPrice').innerHTML = 'Giá nhập phải >= 0.';
+                }
+                else {
+                    checkPrice = true;
+                    document.getElementById('errPrice').innerHTML = '';
+                }
+            }
+            else {
+                document.getElementById('errPrice').style.color = 'red';
+                document.getElementById('errPrice').innerHTML = 'Số lượng không được rỗng.';
+            }
+
+            if (checkPrice && checkQuantity) {
+                if (file) {
+                    await uploadImageToFirebase(file, url => {
+                        // console.log(url);
+                        images = url;
+                        let product = { _id, name, productType, description, images, price, quantity };
+    
+                        this.props.updateInfoProduct(product);
+                    })
+                }
+                else {
+                    let product = { _id, name, productType, description, images, price, quantity };
+                    this.props.updateInfoProduct(product);
+                }
             }
         }
     }
+
     render() {
         let { _id, name, productType, description, images, price, quantity, filePath } = this.state;
         let titleModal = _id ? 'Cập nhật sản phẩm' : 'Thêm sản phẩm';
@@ -172,11 +206,27 @@ export default class ModalActionsProduct extends Component {
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-sm-1" />
+                                    <label htmlFor="price" className="col-sm-3 col-form-label text-right"></label>
+                                    <div className="col-sm-6">
+                                        <span id="errPrice" />
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div className="col-sm-1" />
                                     <label htmlFor="quantity" className="col-sm-3 col-form-label text-right">Số lượng</label>
                                     <div className="col-sm-6">
                                         <input type="Number" className="form-control" name="quantity" value={quantity} onChange={this.onChange} required />
                                     </div>
                                 </div>
+                                <div className="form-group row">
+                                    <div className="col-sm-1" />
+                                    <label htmlFor="quantity" className="col-sm-3 col-form-label text-right"></label>
+                                    <div className="col-sm-6">
+                                        <span id="errQuantity" />
+                                    </div>
+                                </div>
+                                
                                 <div className="form-group row">
                                     <div className="col-sm-4" />
                                     <div className="col-sm-6">

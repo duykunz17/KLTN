@@ -43,7 +43,6 @@ export default class UpdateInfo extends Component {
 
         if (file) {
             this.setState({ file });
-
             let reader = new FileReader();
 
             reader.onloadend = () => {
@@ -105,6 +104,19 @@ export default class UpdateInfo extends Component {
                 await uploadTask.on('state_changed',
                     (snapshot) => {
                         // progress function
+                        let process = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                        Swal.fire({
+                            title: 'Đang tải ảnh',
+                            allowEscapeKey: false,
+                            allowOutsideClick: false,
+                            background: '#19191a',
+                            showConfirmButton: false,
+                            onOpen: () => {
+                                Swal.showLoading();
+                            },
+                            timer: process,
+                            timerProgressBar: true
+                        });
                     },
                     (error) => {
                         console.log('Error: ' + error);
@@ -125,7 +137,7 @@ export default class UpdateInfo extends Component {
                                             title: res.data.messSuccess,
                                         });
 
-                                        this.props.onOpenFormUpdateInfo(true, user);
+                                        this.props.onOpenFormUpdateInfo(true, user, true);
                                     }
                                 })
                                 .catch(err => console.log(err));
@@ -146,7 +158,7 @@ export default class UpdateInfo extends Component {
                                 title: res.data.messSuccess,
                             });
 
-                            this.props.onOpenFormUpdateInfo(true, user);
+                            this.props.onOpenFormUpdateInfo(true, user, false);
                         }
                     })
                     .catch(err => console.log(err));
@@ -227,7 +239,7 @@ export default class UpdateInfo extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4 ml-1">
+                            <div className="col-md-3 ml-1">
                                 <div className="form-group">
                                     <p className="p-tl-info">Giới tính:</p>
                                 </div>
@@ -237,9 +249,13 @@ export default class UpdateInfo extends Component {
                                     value={gender} onChange={this.onChange} checked={gender} /> Nam
                         </div>
                         </div>
-                        <div className="row col-md-6" style={{float:'right'}}>
-                            <button type="button" className="btn btn-secondary m-r-15 ml-2 btn-Widthinfo" onClick={() => this.props.onOpenFormUpdateInfo(false, null)}><i class="fa fa-window-close" aria-hidden="true"></i> Đóng</button>
-                            <button type="button" className="btn btn-primary btn-Widthinfo" onClick={this.onSubmit}><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu</button>
+                        <div className="row col-md-9" style={{float:'right'}}>
+                            <button type="button" className="btn btn-secondary m-r-15 ml-2 btn-Widthinfo" onClick={() => this.props.onOpenFormUpdateInfo(false, null, false)}>
+                                <i className="fa fa-window-close" aria-hidden="true" /> Đóng
+                            </button>
+                            <button type="button" className="btn btn-primary btn-Widthinfo" onClick={this.onSubmit}>
+                                <i className="fa fa-floppy-o" aria-hidden="true" /> Lưu
+                            </button>
                         </div>
                     </div>
                 </div>

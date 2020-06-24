@@ -33,7 +33,9 @@ export default class News extends Component {
     }
 
     componentDidMount() {
-        let { currentPost, account } = this.props;
+        let { currentPost } = this.props;
+        let account = JSON.parse(sessionStorage.getItem("user"));
+
         this.onSetSate(currentPost, account);
     }
 
