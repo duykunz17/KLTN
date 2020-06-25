@@ -16,12 +16,10 @@ export default class LoginPage extends Component {
     }
 
     redirectHome = (user) => {
-        let { history } = this.props;
-        // console.log(user)
         if (user.roles === 2)
-            return history.push('/');
+            return window.location = '/'
         else if (user.roles === 1)
-            return history.push('/admin/product-management');
+            return window.location = '/admin/product-management'
     }
 
     onLogin = async (username, password) => {

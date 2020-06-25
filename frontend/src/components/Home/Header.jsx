@@ -173,7 +173,7 @@ class Header extends Component {
                                         </div>
                                     </div>
                                     <div className="col-xl-7 col-lg-7">
-                                        <div className="main-menu  d-none d-lg-block">
+                                        <div className="main-menu d-none d-lg-block">
                                             <nav>
                                                 <ul id="navigation">
                                                     <li><Link className="active" to="/">trang chủ</Link></li>
@@ -207,7 +207,7 @@ class Header extends Component {
                                         <div className="social_wrap d-flex align-items-center justify-content-end">
                                         {
                                             user ? (
-                                                <div className="avatar">
+                                                <div className="social_links d-none d-xl-block">
                                                     {
                                                         this.state.filePath ?
                                                             <img src={this.state.filePath} className="avatar" alt="ava"/>
@@ -222,9 +222,11 @@ class Header extends Component {
                                                 <p>
                                                     {user ?
                                                         (
+                                                            <Link to="/blog">
                                                             <span>
                                                                 {user.person.name}
                                                             </span>
+                                                            </Link>
                                                         )
                                                         : ''
                                                     }
@@ -282,13 +284,14 @@ class Header extends Component {
                                             </Link>)
                                         }
                                     </div>
-                                    
+                                    <div className="col-12">
+                                        <div className="mobile_menu d-block d-lg-none"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </header>
         );
     }

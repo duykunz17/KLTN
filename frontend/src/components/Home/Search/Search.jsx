@@ -34,7 +34,7 @@ class Search extends Component {
                     <div className="col-lg-9">
                         <div className="search_wrap">
                             <form className="search_form" onSubmit={this.onSubmit}>
-                                <div className="input_field" style={{width: '650px'}}>
+                                <div className="input_field">
                                     <input type="text" name="infoSearch" value={this.state.infoSearch}
                                         placeholder={this.props.input} onChange={this.onChange}
                                     />
