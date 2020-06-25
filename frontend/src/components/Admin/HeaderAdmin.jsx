@@ -33,7 +33,7 @@ class HeaderAdmin extends Component {
                                     <div className="col-xl-2 col-lg-2">
                                         <div className="logo">
                                             <Link to="/">
-                                                <img src="../images/logo.png" alt="logo" />
+                                                <img src="../images/ddtravel.png" width="170px" height="100px" alt="logo" />
                                             </Link>
                                         </div>
                                     </div>
@@ -41,7 +41,6 @@ class HeaderAdmin extends Component {
                                         <div className="main-menu  d-none d-lg-block">
                                             <nav>
                                                 <ul id="navigation">
-                                                    <li><Link className="active" to="/">Trang chủ</Link></li>
                                                     <li><Link to="">quản lý <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/admin/product-management">sản phẩm dịch vụ</Link></li>
@@ -91,7 +90,7 @@ class HeaderAdmin extends Component {
                                     
                                     <div className="seach_icon">
                                         
-                                            <Link to=''>
+                                            <Link to='/login'>
                                                 <i className="fa fa-sign-out" style={{fontSize: '1.5rem'}} onClick={() => this.isLogout()}></i>
                                             </Link>
 

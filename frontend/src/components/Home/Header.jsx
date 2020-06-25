@@ -217,7 +217,7 @@ class Header extends Component {
                                         <div className="social_wrap d-flex align-items-center justify-content-end">
                                         {
                                             user ? (
-                                                <div className="avatar">
+                                                <div className="social_links d-none d-xl-block">
                                                     {
                                                         this.state.filePath ?
                                                             <img src={this.state.filePath} className="avatar" alt="ava"/>
@@ -229,16 +229,19 @@ class Header extends Component {
                                         }
                                             &nbsp;&nbsp;
                                             <div className="number">
-                                                <p>
+                                                <Link to="/blog">
                                                     {user ?
                                                         (
                                                             <span>
-                                                                {user.person.name}
+
+                                                                    {user.person.name}
+
                                                             </span>
+
                                                         )
                                                         : ''
                                                     }
-                                                </p>
+                                                </Link>
                                             </div>
                                             
                                             <div className="option-cart">
@@ -292,7 +295,9 @@ class Header extends Component {
                                             </Link>)
                                         }
                                     </div>
-                                    
+                                    <div className="col-12">
+                                        <div className="mobile_menu d-block d-lg-none"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

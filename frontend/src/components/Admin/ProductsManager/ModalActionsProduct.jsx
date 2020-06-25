@@ -216,7 +216,7 @@ export default class ModalActionsProduct extends Component {
                                     <div className="col-sm-1" />
                                     <label htmlFor="quantity" className="col-sm-3 col-form-label text-right">Số lượng</label>
                                     <div className="col-sm-6">
-                                        <input type="Number" className="form-control" name="quantity" value={quantity} onChange={this.onChange} required />
+                                        <input type="Number" className="form-control" name="quantity" min='0' value={quantity} onChange={this.onChange} required />
                                     </div>
                                 </div>
                                 <div className="form-group row">

@@ -88,7 +88,7 @@ export default class Product extends Component {
                     </div>
                     <div className="product_info">
                         <Link to={"/product-detail/" + product._id}> <h3> {product.name} </h3> </Link>
-                        <p>{product.description}</p>
+                        <p>{product.productType}</p>
 
                         <StarRating
                             numberOfStars={5}

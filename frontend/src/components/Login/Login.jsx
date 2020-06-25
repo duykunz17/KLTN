@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class Login extends Component {
     constructor (props) {
@@ -56,9 +55,9 @@ class Login extends Component {
                 <span className="login100-form-title">
                     Đăng nhập
                 </span>
-                <div className="wrap-input100 validate-input">
+                <div className="wrap-input100 validate-input" data-validate="Tài khoản bắt buộc nhập">
                     <input className="input100" type="text" name="username" placeholder="Tài khoản"
-                        onChange={this.onChange} value={username}
+                        onChange={this.onChange} value={username} 
                     />
                     <span className="focus-input100" />
                     <span className="symbol-input100">
@@ -67,7 +66,7 @@ class Login extends Component {
                 </div>
                 <span id="errUsername"></span>
 
-                <div className="wrap-input100 validate-input" data-validate="Password is required">
+                <div className="wrap-input100 validate-input" data-validate="Mật khẩu bắt buộc nhập">
                     <input className="input100" type="password" name="password" placeholder="Mật khẩu"
                         onChange={this.onChange} value={password}
                     />
@@ -81,10 +80,10 @@ class Login extends Component {
                 <div className="container-login100-form-btn">
                     <button type="submit" className="login100-form-btn"> Đăng nhập </button>
                 </div>
-                <div className="text-center p-t-8">
-                    <Link className="txt" to='/'>
+                <div className="text-center p-t-15">
+                    {/* <Link className="txt" to='/'>
                         Quên mật khẩu?
-                    </Link>
+                    </Link> */}
                 </div>
             </form>
         );

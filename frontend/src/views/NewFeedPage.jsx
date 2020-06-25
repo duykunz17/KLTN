@@ -8,7 +8,6 @@ import News from '../components/Post/NewFeeds/News';
 import RecentTrip from '../components/RecentTrip';
 
 import callAPI from '../utils/connectAPI';
-
 class NewFeedPage extends Component {
     constructor(props) {
         super(props);
@@ -68,6 +67,7 @@ class NewFeedPage extends Component {
 
                 {
                     this.state.postsPopular.length > 0 ? (
+
                         <div className="recent_trip_area">
                             <div className="container">
                                 <div className="row justify-content-center">

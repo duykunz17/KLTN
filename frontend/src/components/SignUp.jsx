@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-
+import { Link } from 'react-router-dom';
 import callAPI from '../utils/connectAPI';
 
 class SignUp extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             name: '',
@@ -22,7 +22,7 @@ class SignUp extends Component {
         var value = event.target.value;
 
         this.setState({
-            [name] : value
+            [name]: value
         });
     };
 
@@ -83,8 +83,8 @@ class SignUp extends Component {
 
         if (checkName && checkEmail && checkUsername && checkPass && checkConPass) {
             callAPI('account/add', 'POST', { name, email, username, password })
-                .then(res =>{
-                    if (res.data.message){
+                .then(res => {
+                    if (res.data.message) {
                         Swal.fire({
                             icon: 'error',
                             title: res.data.message
@@ -148,7 +148,7 @@ class SignUp extends Component {
                 </div>
                 <span id="errUsername"></span>
 
-                <div className="wrap-input100 validate-input" data-validate="Mật khẩu là bắt buộc" > 
+                <div className="wrap-input100 validate-input" data-validate="Mật khẩu là bắt buộc" >
                     <input className="input100" type="password" name="password" placeholder="Mật khẩu" required
                         value={this.state.password}
                         onChange={(event) => this.onChange(event)}
@@ -174,6 +174,12 @@ class SignUp extends Component {
 
                 <div className="container-login100-form-btn">
                     <button type="submit" className="login100-form-btn"> Đăng ký </button>
+                </div>
+
+                <div className="text-center p-t-20">
+                    <Link to='/login' className="txt2">
+                        <i className="fa fa-long-arrow-left m-l-5" aria-hidden="true" /> Đăng nhập
+                    </Link>
                 </div>
             </form>
         );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SignUp from '../components/SignUp';
 
+
 class SignUpPage extends Component {
     render() {
         return (
@@ -14,6 +15,9 @@ class SignUpPage extends Component {
                         <div className="login100-form validate-form" style={{marginTop:'30px'}}>
                             <SignUp />
                         </div>
+                        
+                        
+
                     </div>
                 </div>
             </div>

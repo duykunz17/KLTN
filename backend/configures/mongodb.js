@@ -15,4 +15,4 @@ require('dotenv').config();
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect(PARAMTERS.ATLAS_URI_MONGO, () => console.log("MongoDB database connection successfully"));
+mongoose.connect(process.env.DATABASE_URL || PARAMTERS.ATLAS_URI_MONGO, () => console.log("MongoDB database connection successfully"));

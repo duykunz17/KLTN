@@ -82,7 +82,7 @@ class ProductDetail extends Component {
                             <h1 className="display-5 text-left">{product.name}</h1>
                             {
                                 product.status === true ?
-                                    <p className="text-bold">Trạng thái: <span className="text-green">Còn hàng</span></p>
+                                    <p className="text-bold">Trạng thái: <span className="text-green">Còn hàng</span>  ({product.quantity} sản phẩm)</p>
                                     :
                                     <p className="text-bold">Trạng thái: <span className="text-red">Hết hàng</span></p>
                             }
