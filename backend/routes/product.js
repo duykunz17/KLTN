@@ -52,8 +52,15 @@ router.route('/search=:info').get((req, res) => {
             .then(products => res.json({products}))
             .catch(err => res.status(400).json('Error'+ err))
 });
+
 router.route('/:id').get((req, res) => {
     dbProduct.findById(req.params.id)
+        .then(products => res.json(products))
+        .catch(err => res.status(400).json('Error' + err))
+});
+
+router.route('/productType').get((req, res) => {
+    dbProduct.find()
         .then(products => res.json(products))
         .catch(err => res.status(400).json('Error' + err))
 });

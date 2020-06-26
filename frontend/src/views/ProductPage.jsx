@@ -13,6 +13,8 @@ import Product from '../components/Products/Product';
 import PagesNumber from '../components/Menu/PagesNumber/PagesNumber';
 
 import callAPI from '../utils/connectAPI';
+import Category from '../components/Products/Category';
+import CategoryItem from '../components/Products/CategoryItem';
 
 class ProductPage extends Component {
     constructor(props) {
@@ -20,12 +22,13 @@ class ProductPage extends Component {
         this.state = {
             products: [],
             pages: [
-              {
-                number: 1
-              }  
+                {
+                    number: 1
+                }
             ],
             currentPage: 1,
-            amountCurrentItemCart: 0
+            amountCurrentItemCart: 0,
+            category:[]
         }
     }
 
@@ -35,7 +38,7 @@ class ProductPage extends Component {
                 let { products, totalPages } = res.data;
                 let pages = [];
                 for (let i = 1; i <= totalPages; i++)
-                    pages.push({number: i});
+                    pages.push({ number: i });
                 this.setState({
                     products, pages
                 });
@@ -48,8 +51,8 @@ class ProductPage extends Component {
     }
 
     onChangePage = (pageNumber) => {
-        this.setState({currentPage: pageNumber});
-        
+        this.setState({ currentPage: pageNumber });
+
         callAPI(`product/page=${pageNumber}`, 'GET', null)
             .then(res => {
                 let { products } = res.data;
@@ -86,7 +89,7 @@ class ProductPage extends Component {
                             icon: 'warning',
                             title: res.data.message,
                         });
-                    
+
                     else {
                         let { products } = res.data;
                         console.log(products[0])
@@ -108,8 +111,23 @@ class ProductPage extends Component {
                     <Product
                         key={index}
                         product={product}
-                        amountCurrentItemCart = {amountCurrentItemCart}
-                        onAddItemIntoCart = {this.onAddItemIntoCart}
+                        amountCurrentItemCart={amountCurrentItemCart}
+                        onAddItemIntoCart={this.onAddItemIntoCart}
+                    />
+                );
+            });
+        }
+        return result;
+    }
+
+    showCategoryProduct = (products) => {
+        let result = null;
+        if (products.length > 0) {
+            result = products.map((product, index) => {
+                return (
+                    <CategoryItem
+                        key={index}
+                        product={product}
                     />
                 );
             });
@@ -118,18 +136,21 @@ class ProductPage extends Component {
     }
 
     render() {
-        
+
         var { products, pages, currentPage, amountCurrentItemCart } = this.state;
         // console.log(products);
         return (
             <div>
-                <Header amountCurrentItemCart={amountCurrentItemCart}  />
+                <Header amountCurrentItemCart={amountCurrentItemCart} />
+                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm sản phẩm gì?" input="Nhập tên sản phẩm" />
+                <Category>
+                    {this.showCategoryProduct(products)}
+                </Category>
                 
-                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm sản phẩm gì?" input="Nhập tên sản phẩm"/>
-
                 <div className="product_list">
+                    
                     <ProductList>
-                        { this.showProductList(products, amountCurrentItemCart) }
+                        {this.showProductList(products, amountCurrentItemCart)}
                     </ProductList>
 
                     {
@@ -140,7 +161,7 @@ class ProductPage extends Component {
                     }
                 </div>
 
-                <Footer/>
+                <Footer />
             </div>
         );
     }
