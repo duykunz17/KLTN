@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Footer extends Component {
+class FooterAdmin extends Component {
     render() {
         return (
             <footer className="footer">
@@ -15,7 +15,7 @@ class Footer extends Component {
                                     </div>
                                     <p><i className="fa fa-map-marker"></i>  328 Phạm Văn Đồng, phường 1, <br />quận Gò Vấp, Tp. Hồ Chí Minh</p><br />
                                     <p><i className="fa fa-phone"></i>  (+84) 585868587</p><br />
-                                    <p><i className="fa fa-envelope"></i>  thanhduySofEng@gmail.com</p>
+                                    <p><i className="fa fa-envelope"></i>  cauamchannel.98@gmail.com</p>
                                 </div>
                             </div>
                             <div className="col-xl-2 col-md-6 col-lg-2">
@@ -53,16 +53,16 @@ class Footer extends Component {
                                 <div className="footer_widget">
                                     <h3 className="footer_title"> Địa điểm </h3>
                                     <ul className="links double_links">
-                                        <li><Link to='/place/5eeb32cf98f87129604c4ecc'>Cà Mau</Link></li>
-                                        <li><Link to='/place/5eeb31b398f87129604c4793'>Hà Nội</Link></li>
-                                        <li><Link to='/place/5eeb31db98f87129604c48e0'>Lâm Đồng</Link></li>
-                                        <li><Link to='/place/5eeb31ba98f87129604c480f'>Tp. Hồ Chí Minh</Link></li>
-                                        <li><Link to='/place/5eeb322798f87129604c4ac6'>Cần Thơ</Link></li>
-                                        <li><Link to='/place/5eeb32b798f87129604c4e40'>Đồng Tháp</Link></li>
-                                        <li><Link to='/place/5eeb31c698f87129604c485a'>Đà Nẵng</Link></li>
-                                        <li><Link to='/place/5eeb31cc98f87129604c48aa'>Bà Rịa - Vũng Tàu</Link></li>
-                                        <li><Link to='/place/5eeb32df98f87129604c4f0c'>Hà Giang</Link></li>
-                                        <li><Link to='/place/5eeb321a98f87129604c4a95'>Hải Phòng</Link></li>
+                                        <li>Cà Mau</li>
+                                        <li>Hà Nội</li>
+                                        <li>Lâm Đồng</li>
+                                        <li>Tp. Hồ Chí Minh</li>
+                                        <li>Cần Thơ</li>
+                                        <li>Đồng Tháp</li>
+                                        <li>Đà Nẵng</li>
+                                        <li>Bà Rịa - Vũng Tàu</li>
+                                        <li>Hà Giang</li>
+                                        <li>Hải Phòng</li>
                                     </ul>
                                 </div>
                             </div>
@@ -71,22 +71,22 @@ class Footer extends Component {
                                     <h3 className="footer_title"> Hình ảnh nổi bật </h3>
                                     <div className="instagram_feed">
                                         <div className="single_insta">
-                                            <img src="../../images/instagram/1.png" alt="" />
+                                                <img src="../../images/instagram/1.png" alt="" />
                                         </div>
                                         <div className="single_insta">
-                                            <img src="../../images/instagram/2.png" alt="" />
+                                                <img src="../../images/instagram/2.png" alt="" />
                                         </div>
                                         <div className="single_insta">
-                                            <img src="../../images/instagram/3.png" alt="" />
+                                                <img src="../../images/instagram/3.png" alt="" />
                                         </div>
                                         <div className="single_insta">
-                                            <img src="../../images/instagram/4.png" alt="" />
+                                                <img src="../../images/instagram/4.png" alt="" />
                                         </div>
                                         <div className="single_insta">
-                                            <img src="../../images/instagram/5.png" alt="" />
+                                                <img src="../../images/instagram/5.png" alt="" />
                                         </div>
                                         <div className="single_insta">
-                                            <img src="../../images/instagram/6.png" alt="" />
+                                                <img src="../../images/instagram/6.png" alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -113,4 +113,4 @@ class Footer extends Component {
     }
 }
 
-export default Footer;
+export default FooterAdmin;

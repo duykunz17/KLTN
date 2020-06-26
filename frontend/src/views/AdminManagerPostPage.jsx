@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 
 import HeaderAdmin from '../components/Admin/HeaderAdmin';
-import Footer from '../components/Home/Footer';
 
 import ListPostUser from '../components/Admin/PostManager/ListPostUser';
 import PostUser from '../components/Admin/PostManager/PostUser';
@@ -11,6 +10,7 @@ import * as Config from '../constants/parameterConfig';
 import callAPI from '../utils/connectAPI';
 
 import io from 'socket.io-client';
+import FooterAdmin from '../components/Admin/FooterAdmin';
 const socket = io(Config.ENDPOINT_SOKET);
 export default class AdminMangerPostPage extends Component {
     constructor(props) {
@@ -118,7 +118,7 @@ export default class AdminMangerPostPage extends Component {
                     </div>
                 </div>
 
-                <Footer />
+                <FooterAdmin />
             </div>
         );
     }

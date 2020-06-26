@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import HeaderAdmin from '../components/Admin/HeaderAdmin';
-import Footer from '../components/Home/Footer';
 
 import StatisticalProductBestSeller from '../components/Admin/Statistics/StatisticalProductBestSeller';
+import FooterAdmin from '../components/Admin/FooterAdmin';
 
 class StatisticalProductBestSellerPage extends Component {
     render() {
@@ -12,7 +12,7 @@ class StatisticalProductBestSellerPage extends Component {
                 
                 <StatisticalProductBestSeller/>
                 
-                <Footer/>
+                <FooterAdmin/>
             </div>
         );
     }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import HeaderAdmin from '../components/Admin/HeaderAdmin';
-import Footer from '../components/Home/Footer';
 
 import RevenueStatistics from '../components/Admin/Statistics/RevenueStatistics';
+import FooterAdmin from '../components/Admin/FooterAdmin';
 
 export default class StatisticalRevenueSalePage extends Component {
     render() {
@@ -12,7 +12,7 @@ export default class StatisticalRevenueSalePage extends Component {
 
                 <RevenueStatistics />
             
-                <Footer/>
+                <FooterAdmin/>
             </div>
         );
     }

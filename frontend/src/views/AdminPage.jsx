@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import HeaderAdmin from '../components/Admin/HeaderAdmin';
-import Footer from '../components/Home/Footer';
 
 import ProductsDataTable from '../components/Admin/ProductsManager/ProductsDataTable';
+import FooterAdmin from '../components/Admin/FooterAdmin';
 
 
 class AdminPage extends Component {
@@ -19,7 +19,7 @@ class AdminPage extends Component {
                     </div>
                 </div> 
                 <ProductsDataTable/>
-                <Footer/>
+                <FooterAdmin/>
             </div>
         );
     }

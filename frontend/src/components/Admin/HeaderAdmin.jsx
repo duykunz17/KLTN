@@ -32,9 +32,7 @@ class HeaderAdmin extends Component {
                                 <div className="row align-items-center">
                                     <div className="col-xl-2 col-lg-2">
                                         <div className="logo">
-                                            <Link to="/">
-                                                <img src="../images/ddtravel.png" width="170px" height="100px" alt="logo" />
-                                            </Link>
+                                            <img src="../images/ddtravel.png" width="170px" height="100px" alt="logo" />
                                         </div>
                                     </div>
                                     <div className="col-xl-6 col-lg-6">
