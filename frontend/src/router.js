@@ -7,6 +7,7 @@ import SignUpPage from './views/SignUpPage';
 import PlaceDetailPage from './views/PlaceDetailPage';
 import NotFoundpage from "./views/NotFoundpage";
 import ProductPage from './views/ProductPage';
+import ProductDetailPage from './views/ProductDetailPage';
 import PlacePage from './views/PlacePage';
 import AboutPage from './views/AboutPage';
 import PurchasedPage from './views/PurchasedPage';
@@ -15,7 +16,6 @@ import NewFeedPage from './views/NewFeedPage';
 import PostDetailPage from './views/PostDetailPage';
 import DestinationDetailPage from './views/DestinationDetailPage';
 import ListSchedulePage from './views/ListSchedulePage';
-import ProductDetailPage from './views/ProductDetailPage';
 import ScheduleDetailPage from './views/ScheduleDetailPage';
 import CheckoutPage from './views/CheckoutPage';
 

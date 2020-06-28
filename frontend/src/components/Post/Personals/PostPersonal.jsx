@@ -4,12 +4,17 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { MDBRow, MDBCol, MDBCardBody, MDBMask, MDBIcon, MDBView } from "mdbreact";
 
-import callAPI from '../../../utils/connectAPI';
-
 // import icons
 import iconOnline from '../Icons/iconOnline.png';
 import iconWaiting from '../Icons/iconWaiting.png';
 import iconGray from '../Icons/iconGray.png';
+
+import callAPI from '../../../utils/connectAPI';
+// new
+// import * as Config from '../../../constants/parameterConfig';
+
+// import io from 'socket.io-client';
+// const socket = io(Config.ENDPOINT_SOKET);
 
 export default class PostPersonal extends Component {
     constructor(props) {
@@ -38,12 +43,22 @@ export default class PostPersonal extends Component {
     componentDidMount() {
         let { currentPost, account } = this.props;
         this.onSetState(currentPost, account);
+
+        // new
+        // // ask connect socket.server
+        // socket.emit('joinInteraction', { account, post_id: currentPost._id }, () => { });
+
+        // // receive result
+        // socket.on('interactivePost', post => {
+        //     console.log('sumlike: ' + post.result.sumLike);
+        //     this.onSetState(post.result, account);
+        // })
     }
     componentDidUpdate(prevState) {
-        
         if (this.props.countPost !== prevState.countPost)
             // if (this.props.currentPost)
             this.loadAgainPostById(this.props.currentPost._id);
+
     }
 
     showStatusOfPost = (status) => {
@@ -63,7 +78,7 @@ export default class PostPersonal extends Component {
                 break;
         }
         return (
-            <label style={{fontSize:'20px'}}>
+            <label style={{ fontSize: '20px' }}>
                 {strStatus} &nbsp; <img src={icon} alt='icon' />
             </label>
         )
@@ -89,6 +104,10 @@ export default class PostPersonal extends Component {
             .then(res => {
                 let post = res.data.post;
                 this.onSetState(post, this.props.account);
+
+                // if (isRealtime)
+                //     socket.emit('interactiveAction', post);
+
             })
     }
 
@@ -105,19 +124,19 @@ export default class PostPersonal extends Component {
 
         let data = {}, path = '', getIdInteract = checkInteraction;
         if (actions === 1) {
-            console.log('new like')
+            // console.log('new like');
             path = 'post/newlike/';
             let interactions = { account: this.props.account, like: true };
             data = { interactions, sumLike: sumLike + 1 };
         }
         else if (actions === 2) {
-            console.log('like again')
+            // console.log('like again');
             path = 'post/likeagain/';
             let interactions = { getIdInteract, like: true };
             data = { interactions, sumLike: sumLike + 1 };
         }
         else if (actions === 3) {
-            console.log('dislike')
+            // console.log('dislike');
             path = 'post/dislike/';
             let interactions = { getIdInteract, like: false };
             data = { interactions, sumLike: sumLike - 1 };
@@ -137,8 +156,21 @@ export default class PostPersonal extends Component {
 
                     if (getIdInteract === null)
                         this.loadAgainPostById(currentPost._id);
-                    else
+                    else {
                         this.setState({ sumLike, liked });
+
+                        // new
+                        // let post = currentPost;
+                        // post.interactions.forEach((el, index) => {
+                        //     if (el.account._id === this.props.account._id)
+                        //         el.like = liked;
+
+                        //     if (index === post.interactions.length - 1) {
+                        //         post.sumLike = sumLike;
+                        //         socket.emit('interactiveAction', post);
+                        //     }
+                        // });
+                    }
                 }
             })
             .catch((err) => { console.log(err) })
@@ -160,14 +192,14 @@ export default class PostPersonal extends Component {
                                 &nbsp;&nbsp;
                             <div className="number">
                                 <span>
-                                    <span style={{fontWeight:'bold', paddingRight:'130px', fontSize:'20px'}}>{currentPost.account.person.name}</span>
+                                    <span style={{ fontWeight: 'bold', paddingRight: '130px', fontSize: '20px' }}>{currentPost.account.person.name}</span>
 
                                     <br />
-                                    <Moment format="DD-MM-YYYY" style={{fontSize:'20px'}}>
-                                        {currentPost.postDate} 
+                                    <Moment format="DD-MM-YYYY" style={{ fontSize: '20px' }}>
+                                        {currentPost.postDate}
                                     </Moment>
-                                    <span style={{fontSize:'20px'}}>&nbsp;lúc&nbsp;</span>
-                                    <Moment format="HH:mm:ss" style={{fontSize:'20px'}}>
+                                    <span style={{ fontSize: '20px' }}>&nbsp;lúc&nbsp;</span>
+                                    <Moment format="HH:mm:ss" style={{ fontSize: '20px' }}>
                                         {currentPost.postDate}
                                     </Moment>
                                 </span>
@@ -175,10 +207,10 @@ export default class PostPersonal extends Component {
                         </div>
                     </div>
                 </div>
-                <p className="mt-3 mb-2 d-flex justify-content" style={{fontSize:'20px'}}>
+                <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
                     {currentPost.content}
                 </p>
-                <p className="d-flex justify-content-end" style={{fontSize:'20px'}}>Trạng thái: &nbsp; {this.showStatusOfPost(currentPost.status)}</p>
+                <p className="d-flex justify-content-end" style={{ fontSize: '20px' }}>Trạng thái: &nbsp; {this.showStatusOfPost(currentPost.status)}</p>
                 <MDBRow>
                     {currentPost.images.map((img, index) => {
                         if (currentPost.images.length === 1) {
@@ -237,9 +269,9 @@ export default class PostPersonal extends Component {
                     <span>
                         <MDBIcon icon="comment" /> {currentPost.comments.length} bình luận
                     </span>
-                    
+
                 </MDBCardBody>
-                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i className="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
+                <Link to={'/post-detail/' + currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i className="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
                 <button className="btn btn-danger" onClick={this.onDeletePost}><i className="fa fa-trash" aria-hidden="true"></i> Xóa bài </button>
                 <hr className="my-5" />
             </MDBCol>

@@ -21,14 +21,14 @@ class ProductPage extends Component {
         super(props);
         this.state = {
             products: [],
+            categorys: [],
             pages: [
                 {
                     number: 1
                 }
             ],
             currentPage: 1,
-            amountCurrentItemCart: 0,
-            category:[]
+            amountCurrentItemCart: 0
         }
     }
 
@@ -48,6 +48,12 @@ class ProductPage extends Component {
 
     componentDidMount() {
         this.getProductsWhenConnectMongo();
+
+        callAPI('product/category', 'GET', null)
+            .then(res => {
+                let { productTypes } = res.data;
+                this.setState({ categorys: productTypes });
+            })
     }
 
     onChangePage = (pageNumber) => {
@@ -120,31 +126,53 @@ class ProductPage extends Component {
         return result;
     }
 
-    showCategoryProduct = (products) => {
+    showCategoryProduct = (categorys) => {
         let result = null;
-        if (products.length > 0) {
-            result = products.map((product, index) => {
+        if (categorys.length > 0) {
+            result = categorys.map((category, index) => {
                 return (
                     <CategoryItem
                         key={index}
-                        product={product}
+                        category={category}
+                        onShownListProductByType={this.onShownListProductByType}
                     />
                 );
             });
+            result.unshift(
+                <CategoryItem
+                        key={result.length + 1}
+                        category='TT'
+                        onShownListProductByType={this.onShownListProductByType}
+                />
+            );
         }
         return result;
     }
 
+    onShownListProductByType = (type) => {
+        if (type === 'TT')
+            this.getProductsWhenConnectMongo();
+        else
+            callAPI('product/category/'+type, 'GET', null)
+                .then(res => {
+                    let { products } = res.data;
+                    this.setState({
+                        products, pages: []
+                    });
+                })
+                .catch((err) => { console.log(err) })
+    }
+
     render() {
 
-        var { products, pages, currentPage, amountCurrentItemCart } = this.state;
+        var { products, categorys, pages, currentPage, amountCurrentItemCart } = this.state;
         // console.log(products);
         return (
             <div>
                 <Header amountCurrentItemCart={amountCurrentItemCart} />
                 <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm sản phẩm gì?" input="Nhập tên sản phẩm" />
                 <Category>
-                    {this.showCategoryProduct(products)}
+                    {this.showCategoryProduct(categorys)}
                 </Category>
                 
                 <div className="product_list">

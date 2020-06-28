@@ -100,7 +100,16 @@ export default class ModalActionsProduct extends Component {
                 title: 'Ảnh không được để rỗng',
             });
         else {
-            let checkQuantity = false, checkPrice = false;
+            let checkType = false, checkQuantity = false, checkPrice = false;
+            if (productType !== '') {
+                checkType = true;
+                document.getElementById('errType').innerHTML = '';
+            }
+            else {
+                document.getElementById('errType').style.color = 'red';
+                document.getElementById('errType').innerHTML = 'Loại sản phẩm không được rỗng.';
+            }
+
             if (quantity !== '') {
                 if (quantity < 0) {
                     document.getElementById('errQuantity').style.color = 'red';
@@ -128,10 +137,10 @@ export default class ModalActionsProduct extends Component {
             }
             else {
                 document.getElementById('errPrice').style.color = 'red';
-                document.getElementById('errPrice').innerHTML = 'Số lượng không được rỗng.';
+                document.getElementById('errPrice').innerHTML = 'Giá không được rỗng.';
             }
 
-            if (checkPrice && checkQuantity) {
+            if (checkType && checkPrice && checkQuantity) {
                 if (file) {
                     await uploadImageToFirebase(file, url => {
                         // console.log(url);
@@ -181,6 +190,14 @@ export default class ModalActionsProduct extends Component {
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-sm-1" />
+                                    <label htmlFor="productType" className="col-sm-3 col-form-label text-right"></label>
+                                    <div className="col-sm-8">
+                                        <span id="errType" />
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div className="col-sm-1" />
                                     <label htmlFor="description" className="col-sm-3 col-form-label text-right">Mô tả</label>
                                     <div className="col-sm-6">
                                         <input className="form-control" name="description" value={description} onChange={this.onChange} />
@@ -207,7 +224,7 @@ export default class ModalActionsProduct extends Component {
                                 <div className="form-group row">
                                     <div className="col-sm-1" />
                                     <label htmlFor="price" className="col-sm-3 col-form-label text-right"></label>
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-8">
                                         <span id="errPrice" />
                                     </div>
                                 </div>
@@ -222,7 +239,7 @@ export default class ModalActionsProduct extends Component {
                                 <div className="form-group row">
                                     <div className="col-sm-1" />
                                     <label htmlFor="quantity" className="col-sm-3 col-form-label text-right"></label>
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-8">
                                         <span id="errQuantity" />
                                     </div>
                                 </div>

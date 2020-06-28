@@ -24,6 +24,12 @@ router.route('/').get((req, res) => {
             .catch(err => res.status(400).json('Error'+ err))            
     });
 });
+router.route('/category').get((req, res) => {
+    dbProduct.distinct("productType")
+        .then(types => res.json({productTypes: types}))
+        .catch(err => res.status(400).json('Error'+ err))
+});
+
 router.route('/page=:page').get((req, res) => {
     let page = req.params.page;
     let skip = (page - 1) * 6;        // bỏ qua số lượng đã tải ban đầu
@@ -59,10 +65,13 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error' + err))
 });
 
-router.route('/productType').get((req, res) => {
-    dbProduct.find()
-        .then(products => res.json(products))
-        .catch(err => res.status(400).json('Error' + err))
+/** Handling category 26/06/2020 */
+
+router.route('/category/:type').get((req, res) => {
+    let productType = req.params.type;
+    dbProduct.find({productType})
+        .then(products => res.json({products}))
+        .catch(err => res.status(400).json('Error'+ err))
 });
 
 // const puppeteer = require("puppeteer");

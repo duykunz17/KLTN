@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 import { MDBCol, MDBRow, MDBCardBody, MDBMask, MDBIcon, MDBView } from "mdbreact";
 
 import callAPI from '../../../utils/connectAPI';
+// new
+// import * as Config from '../../../constants/parameterConfig';
+
+// import io from 'socket.io-client';
+// const socket = io(Config.ENDPOINT_SOKET);
 
 export default class News extends Component {
 
@@ -19,7 +24,7 @@ export default class News extends Component {
         }
     }
 
-    onSetSate = (currentPost, account) => {
+    onSetState = (currentPost, account) => {
         let interactions = currentPost.interactions, liked = false, checkInteraction = null;
         if (interactions.length > 0 && account)
             interactions.forEach(item => {
@@ -36,14 +41,28 @@ export default class News extends Component {
         let { currentPost } = this.props;
         let account = JSON.parse(sessionStorage.getItem("user"));
 
-        this.onSetSate(currentPost, account);
+        this.onSetState(currentPost, account);
+
+        // new
+        // // ask connect socket.server
+        // socket.emit('joinInteraction', { account, post_id: currentPost._id }, () => { });
+
+        // // receive result
+        // socket.on('interactivePost', post => {
+        //     console.log('sumlike: '+post.result.sumLike);
+
+        //     this.onSetState(post.result, account);
+        // })
     }
 
     loadAgainPostById = (post_id) => {
         callAPI('post/' + post_id, 'GET', null)
             .then(res => {
                 let post = res.data.post;
-                this.onSetSate(post, this.state.account);
+                this.onSetState(post, this.state.account);
+
+                // if (isRealtime)
+                //     socket.emit('interactiveAction', post);
             })
     }
 
@@ -73,7 +92,7 @@ export default class News extends Component {
                 data = { interactions, sumLike: sumLike + 1 };
             }
             else if (actions === 3) {
-                console.log('dislike')
+                // console.log('dislike')
                 path = 'post/dislike/';
                 let interactions = { getIdInteract, like: false };
                 data = { interactions, sumLike: sumLike - 1 };
@@ -93,8 +112,21 @@ export default class News extends Component {
 
                         if (getIdInteract === null)
                             this.loadAgainPostById(currentPost._id);
-                        else
+                        else {
                             this.setState({ sumLike, liked });
+
+                            // new
+                            // let post = currentPost;
+                            // post.interactions.forEach((el, index) => {
+                            //     if (el.account._id === account._id)
+                            //         el.like = liked;
+                                
+                            //     if (index === post.interactions.length - 1) {
+                            //         post.sumLike = sumLike;
+                            //         socket.emit('interactiveAction', post);
+                            //     }
+                            // });
+                        }
                     }
                 })
                 .catch((err) => { console.log(err) })
@@ -120,14 +152,14 @@ export default class News extends Component {
                                 &nbsp;&nbsp;
                             <div className="number">
                                 <span>
-                                    <span style={{fontWeight:'bold', paddingRight:'130px', fontSize:'20px'}}>{currentPost.account.person.name}</span>
+                                    <span style={{ fontWeight: 'bold', paddingRight: '130px', fontSize: '20px' }}>{currentPost.account.person.name}</span>
 
                                     <br />
-                                    <Moment format="DD-MM-YYYY" style={{fontSize:'20px'}}>
-                                        {currentPost.postDate} 
+                                    <Moment format="DD-MM-YYYY" style={{ fontSize: '20px' }}>
+                                        {currentPost.postDate}
                                     </Moment>
-                                    <span style={{fontSize:'20px'}}>&nbsp;lúc&nbsp;</span>
-                                    <Moment format="HH:mm:ss" style={{fontSize:'20px'}}>
+                                    <span style={{ fontSize: '20px' }}>&nbsp;lúc&nbsp;</span>
+                                    <Moment format="HH:mm:ss" style={{ fontSize: '20px' }}>
                                         {currentPost.postDate}
                                     </Moment>
                                 </span>
@@ -135,7 +167,7 @@ export default class News extends Component {
                         </div>
                     </div>
                 </div>
-                <p className="mt-3 mb-2 d-flex justify-content" style={{fontSize:'20px'}}>
+                <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
                     {currentPost.content}
                 </p>
                 <MDBRow>
@@ -196,9 +228,9 @@ export default class News extends Component {
                     <span>
                         <MDBIcon icon="comment" /> {currentPost.comments.length} bình luận
                     </span>
-                    
+
                 </MDBCardBody>
-                <Link to={'/post-detail/'+ currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i className="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
+                <Link to={'/post-detail/' + currentPost._id} className="btn btn-info" style={{ marginRight: "15px" }}><i className="fa fa-info-circle" aria-hidden="true"></i> Xem thêm </Link>
                 <hr className="my-5" />
             </MDBCol>
         );

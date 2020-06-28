@@ -97,7 +97,7 @@ export default class ContentPost extends Component {
     }
     render() {
         let { post, liked, sumComment } = this.props;
-        console.log(post)
+        // console.log(post);
         let styleCSS = liked ? "red" : null;
         return (
             <div className="single-post">

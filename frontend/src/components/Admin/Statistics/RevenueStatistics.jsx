@@ -65,7 +65,9 @@ export default class RevenueStatistics extends Component {
         this.setState({
             startDate: date
         });
-        this.handlingStatical(date);
+
+        if (date)
+            this.handlingStatical(date);
     };
     render() {
         let {startDate, years} = this.state;
@@ -79,7 +81,7 @@ export default class RevenueStatistics extends Component {
                             onChange={(date) => this.onChange(date)}
                             maxDate={new Date()}
                             showDisabledMonthNavigation
-                            dateFormat="dd/MM/yyyy"
+                            dateFormat="yyyy"
                             popperPlacement='bottom'
                             popperModifiers={{
                                 flip: {
@@ -96,7 +98,7 @@ export default class RevenueStatistics extends Component {
                     </h3>
                 </div>
                 <MDBContainer>
-                    <h3 className="mt-5" style={{marginBottom: '20px'}}>Thống kê doanh thu theo năm {startDate.getFullYear()} </h3>
+                    <h3 className="mt-5" style={{marginBottom: '20px'}}>Thống kê doanh thu theo năm {startDate ? startDate.getFullYear() : ''} </h3>
                     <Bar data={years} options={{ legend: { display: false } }} />                    
                 </MDBContainer>
             </div>

@@ -6,49 +6,51 @@ import {
     MDBNavbarToggler,
     MDBCollapse,
     MDBContainer
-  } from 'mdbreact';
-  import { BrowserRouter as Router } from 'react-router-dom';
+} from 'mdbreact';
+
 class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          collapseID: ''      
-      }
+            collapseID: ''
+        }
     }
-  
+
     toggleCollapse = collapseID => () => {
-      this.setState(prevState => ({
-        collapseID: prevState.collapseID !== collapseID ? collapseID : ''
-      }));
+        this.setState(prevState => ({
+            collapseID: prevState.collapseID !== collapseID ? collapseID : ''
+        }));
     };
 
     render() {
         return (
-            <Router>
             <MDBContainer>
-              <MDBNavbar
-                color='light-blue lighten-4'
-                style={{ marginTop: '10px', marginBottom:'10px' }}
-                light
-              >
-                <MDBContainer>
-                  <MDBNavbarBrand>Danh mục sản phẩm</MDBNavbarBrand>
-                  <MDBNavbarToggler
-                    onClick={this.toggleCollapse('navbarCollapse1')}
-                  />
-                  <MDBCollapse
-                    id='navbarCollapse1'
-                    isOpen={this.state.collapseID}
-                    navbar
-                  >
-                    <MDBNavbarNav left>
-                      {this.props.children}
-                    </MDBNavbarNav>
-                  </MDBCollapse>
-                </MDBContainer>
-              </MDBNavbar>
+                <MDBNavbar
+                    color='light-blue lighten-4'
+                    style={{ marginTop: '10px', marginBottom: '10px' }}
+                    light
+                >
+                    <MDBContainer>
+                        <MDBNavbarBrand>
+                            <h3>Danh mục sản phẩm</h3>
+                        </MDBNavbarBrand>
+                        <MDBNavbarToggler
+                            onClick={this.toggleCollapse('navbarCollapse1')}
+                        />
+                        <MDBCollapse
+                            id='navbarCollapse1'
+                            isOpen={this.state.collapseID}
+                            navbar
+                        >
+                            <MDBNavbarNav left>
+                                <ul className="nav flex-column">
+                                    {this.props.children}
+                                </ul>
+                            </MDBNavbarNav>
+                        </MDBCollapse>
+                    </MDBContainer>
+                </MDBNavbar>
             </MDBContainer>
-          </Router>
         );
     }
 }

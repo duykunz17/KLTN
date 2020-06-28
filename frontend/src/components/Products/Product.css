@@ -33,4 +33,13 @@ h1{
     font-weight: bold;
     color: black;
     opacity: 1;
-} 
+}
+
+.css-category {
+    width: 100%;
+    line-height: 50px;
+    font-size: 20px;
+}
+.menu-category:hover {
+    background-color: khaki;
+}

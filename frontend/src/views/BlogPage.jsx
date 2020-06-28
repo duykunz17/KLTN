@@ -88,14 +88,13 @@ class BlogPage extends Component {
                         title: res.data.message,
                     })
                     this.setState({ posts: posts.filter(el => el._id !== post._id), countPost: countPost - 1 });
-
-                    if (post.state !== 'W')
+                    if (post.status === 'W')
                         socket.emit('submitPost', post, () => { });
                 }
             }).catch((err) => { console.log(err) })
     }
 
-    displayListPostByUser = (posts) => {
+    displayListPostByUser = (posts, countPost) => {
         let result = null;
         if (posts.length > 0)
             result = posts.map((currentPost, index) => {
@@ -105,7 +104,7 @@ class BlogPage extends Component {
                         currentPost={currentPost}
                         account={this.state.account}
                         onDeletePost={this.onDeletePost}
-                        countPost={this.state.countPost}
+                        countPost={countPost}
                     />
                 )
             });
@@ -123,7 +122,7 @@ class BlogPage extends Component {
                         title: 'Bài đã đăng thành công',
                     })
 
-                    post.interactions = []; post.comments = []; post.sumLike = 0;
+                    post.interactions = []; post.comments = []; post.sumLike = 0; post.status = 'W';
                     socket.emit('submitPost', post, () => { });
 
                     this.getPostsOfAccount(this.state.account);
@@ -219,7 +218,7 @@ class BlogPage extends Component {
                                                 <FormPost onSavePost={this.onSavePost} countPost={countPost} />
 
                                                 <ListPostPersonal>
-                                                    {this.displayListPostByUser(posts)}
+                                                    {this.displayListPostByUser(posts, countPost)}
                                                 </ListPostPersonal>
                                             </div>
                                         </div>

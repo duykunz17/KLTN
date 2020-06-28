@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 var server = http.createServer(app);
 
 var io = socketio(server);
-const { addUser, removeUser, getUser, getUserByName, getUserInPost } = require('./usersOnline');
+const { addUser, removeUser, getUser, getUserByName /** , getUserInPost */ } = require('./usersOnline');
 
 io.on('connection', (socket) => {
     socket.on('joinDetailPost', ({account, post_id}, callback) => {
@@ -76,6 +76,31 @@ io.on('connection', (socket) => {
 
         callback();
     });
+
+    // handling interaction of post 27/06/2020
+    // socket.on('joinInteraction', ({account, post_id}, callback) => {
+    //     let name = '';
+    //     if (account)
+    //         name = account._id;
+    //     else
+    //         name = socket.id;
+
+    //     let { error, user } = addUser({id: socket.id, name, room: 'inter-'+post_id});
+    //     if (error) return callback(error);
+
+    //     socket.join(user.room);
+
+    //     // callback({users: getUserInRoom(user.room)});
+    //     callback();
+    // });
+    // socket.on('interactiveAction', post => {
+    //     // console.log(post.interactions);
+    //     // console.log('*******************************')
+    //     // It is only sent to one user
+    //     let user = getUser(socket.id);
+    //     // It is sent to post in the room
+    //     io.to(user.room).emit('interactivePost', {result: post});
+    // })
 
     socket.on('disconnect', () => {
         removeUser(socket.id);

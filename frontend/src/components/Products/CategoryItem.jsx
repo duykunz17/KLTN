@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import {
-    MDBNavItem,
-    MDBNavLink
-} from 'mdbreact';
+import { Link } from 'react-router-dom';
+
 
 class CategoryItem extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            products: []
-        }
-    }
 
     render() {
-        let { product } = this.props;
+        let { category } = this.props;
         return (
-            <MDBNavItem >
-                <MDBNavLink to="" >{product.productType}</MDBNavLink>
-            </MDBNavItem>
+            <li className="menu-category">
+                {
+                    category !== 'TT' ?
+                        <Link to={`/product/${category}`} className="css-category" >
+                            <span onClick={() => this.props.onShownListProductByType(category)} >{category}</span>
+                        </Link>
+                    :
+                        <Link to={`/product`} className="css-category" >
+                            <span onClick={() => this.props.onShownListProductByType(category)} > Tất cả </span>
+                        </Link>
+                }
+            </li>
         );
     }
 }

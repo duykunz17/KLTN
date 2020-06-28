@@ -56,7 +56,7 @@ router.route('/post-popular').get((req, res) => {
         checkDay = getDayOfMonth(day, checkMonth);
     }
 
-    dbPost.find({ "status": 'A', postDate: { $gte: new Date(`${checkYear}-${checkMonth}-${checkDay}`), $lt: new Date(`${year}-${month}-${day + 1}`) } }).sort({ sumLike: -1 }).limit(3)
+    dbPost.find({ "status": 'A', sumLike: {$gt: 0}, postDate: { $gte: new Date(`${checkYear}-${checkMonth}-${checkDay}`), $lt: new Date(`${year}-${month}-${day + 1}`) } }).sort({ sumLike: -1 }).limit(3)
         .then(posts => {
             if (posts.length <= 0)
                 return res.json(null);
@@ -119,44 +119,61 @@ router.route('/:id').get((req, res) => {
     dbPost.findById(req.params.id)
         .then(post => {
             let comments = post.comments;
-            comments.forEach(async (el, index) => {
-                let acc = await getAccountById(el.account._id);
-                el.account = acc;
-                if (index === comments.length - 1) {
-                    post.comments = comments;
-                    return res.json({post});
-                }
-            });
+            if (comments.length > 0)
+                comments.forEach(async (el, index) => {
+                    let acc = await getAccountById(el.account._id);
+                    el.account = acc;
+                    if (index === comments.length - 1) {
+                        post.comments = comments;
+                        return res.json({post});
+                    }
+                });
+            else
+                return res.json({post});
         })
         .catch(err => res.status(400).json('Error' + err));
 });
-router.route('/newlike/:id').post((req, res) => {
+
+var getSumlikeByPost_id = async (post_id) => {
+    let sumLike = await dbPost.findById(post_id)
+        .then(result => {
+            // console.log(result);
+            return result.sumLike;
+        })
+        .catch(err => err);
+    return sumLike;
+}
+
+router.route('/newlike/:id').post(async (req, res) => {
     let { interactions, sumLike } = req.body;
+    sumLike = await getSumlikeByPost_id(req.params.id);
     dbPost.updateOne(
         { _id: req.params.id },
         {
             $push: { interactions: interactions },
-            $set: { sumLike: sumLike }
+            $set: { sumLike: sumLike + 1 }
         }
     ).then(result => res.json({ result }))
         .catch(err => res.status(400).json('Error' + err));
 });
-router.route('/dislike/:id').post((req, res) => {
+router.route('/dislike/:id').post(async (req, res) => {
     let { interactions, sumLike } = req.body;
+    sumLike = await getSumlikeByPost_id(req.params.id);
     dbPost.updateOne(
         { _id: req.params.id, "interactions._id": interactions.getIdInteract },
         {
-            $set: { sumLike: sumLike, "interactions.$.like": false }
+            $set: { sumLike: sumLike - 1, "interactions.$.like": false }
         }
     ).then(result => res.json({ result }))
         .catch(err => res.status(400).json('Error' + err));
 });
-router.route('/likeagain/:id').post((req, res) => {
+router.route('/likeagain/:id').post(async (req, res) => {
     let { interactions, sumLike } = req.body;
+    sumLike = await getSumlikeByPost_id(req.params.id);
     dbPost.updateOne(
         { _id: req.params.id, "interactions._id": interactions.getIdInteract },
         {
-            $set: { sumLike: sumLike, "interactions.$.like": true }
+            $set: { sumLike: sumLike + 1, "interactions.$.like": true }
         }
     ).then(result => res.json({ result }))
         .catch(err => res.status(400).json('Error' + err));

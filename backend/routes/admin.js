@@ -47,6 +47,8 @@ router.route('/product/update/:id').post((req, res) => {
 
             if (product.quantity == 0)
                 product.status = false;
+            else
+                product.status = true;
 
             product.save()
                 .then(() => res.json({messSuccess: 'Cập nhật sản phẩm thành công'}))
