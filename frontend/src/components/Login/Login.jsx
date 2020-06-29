@@ -55,7 +55,7 @@ class Login extends Component {
                 <span className="login100-form-title">
                     Đăng nhập
                 </span>
-                <div className="wrap-input100 validate-input" data-validate="Tài khoản bắt buộc nhập">
+                <div className="wrap-input50 validate-input" data-validate="Tài khoản bắt buộc nhập">
                     <input className="input100" type="text" name="username" placeholder="Tài khoản"
                         onChange={this.onChange} value={username} 
                     />
@@ -64,9 +64,9 @@ class Login extends Component {
                         <i className="fa fa-user" aria-hidden="true" />
                     </span>
                 </div>
-                <span id="errUsername"></span>
+                <span id="errUsername" style={{marginLeft:'35px'}}></span>
 
-                <div className="wrap-input100 validate-input" data-validate="Mật khẩu bắt buộc nhập">
+                <div className="wrap-input50 validate-input" data-validate="Mật khẩu bắt buộc nhập">
                     <input className="input100" type="password" name="password" placeholder="Mật khẩu"
                         onChange={this.onChange} value={password}
                     />
@@ -75,7 +75,7 @@ class Login extends Component {
                         <i className="fa fa-lock" aria-hidden="true" />
                     </span>
                 </div>
-                <span id="errPass"></span>
+                <span id="errPass" style={{marginLeft:'35px'}}></span>
 
                 <div className="container-login100-form-btn">
                     <button type="submit" className="login100-form-btn"> Đăng nhập </button>

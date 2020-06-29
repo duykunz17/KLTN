@@ -246,7 +246,7 @@ export default class UpdateInfo extends Component {
                             </div>
                             <div className="form-group mr-inputInfo p-tl-gender">
                                 <input type="checkbox" name="gender"
-                                    value={gender} onChange={this.onChange} checked={gender} /> Nam
+                                    value={gender} onChange={this.onChange} checked={gender} style={{marginLeft:'5px'}}/> Nam
                         </div>
                         </div>
                         <div className="row col-md-9" style={{float:'right'}}>

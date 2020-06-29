@@ -4,8 +4,8 @@ export default class NotFoundpage extends Component {
     render() {
         return (
             <div className="container">
-                <div className="alert alert-warning">
-                    <h1>Không tìm thấy đường dẫn trang</h1>
+                <div className="row">
+                    <img src='./images/404.png' alt="404" width='95%' height='50%'></img>
                 </div>
             </div>
           );

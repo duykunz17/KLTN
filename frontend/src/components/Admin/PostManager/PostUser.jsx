@@ -59,24 +59,30 @@ export default class PostUser extends Component {
         return (
             <MDBCol lg="12" xl="12">
                 <div className="d-flex">
-                    <div style={{ float: "left", width: "95%", textAlign: "left" }}>
-                        <p>
-                            Đăng bởi: &nbsp;&nbsp; <strong> {currentPost.account.person.name} </strong>
-                        </p>
-                    </div>
-                    <div style={{ float: "right", width: "50%", textAlign: "left" }}>
-                        <p>
-                            Trang thái: &nbsp; {this.showStatusOfPost(currentPost.status)}
-                        </p>
+                    <div className="info">
+                        <div className="social_wrap d-flex align-items-center justify-content">
+                            <div className="avatar">
+                                <img src={currentPost.account.avatar} className="avatar" alt="ava" />
+                            </div>
+                                &nbsp;&nbsp;
+                            <div className="number">
+                                <span>
+                                    <span style={{ fontWeight: 'bold', paddingRight: '130px', fontSize: '20px' }}>{currentPost.account.person.name}</span>
+
+                                    <br />
+                                    <Moment format="DD-MM-YYYY" style={{ fontSize: '20px' }}>
+                                        {currentPost.postDate}
+                                    </Moment>
+                                    <span style={{ fontSize: '20px' }}>&nbsp;lúc&nbsp;</span>
+                                    <Moment format="HH:mm:ss" style={{ fontSize: '20px' }}>
+                                        {currentPost.postDate}
+                                    </Moment>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p className="d-flex">
-                    Ngày đăng: &nbsp;&nbsp;
-                    <Moment format="YYYY-MM-DD HH:mm:ss">
-                        {currentPost.postDate}
-                    </Moment>
-                </p>
-                <p className="d-flex">
+                <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
                     {currentPost.content}
                 </p>
                 <MDBRow>
@@ -131,17 +137,19 @@ export default class PostUser extends Component {
                 </MDBRow>
                 <MDBCardBody>
                     <span className="mr-2">
-                        <button onClick={() => this.addLike(currentPost._id)}><MDBIcon icon="heart" /></button> {currentPost.sumLike} thích
+                        <button><MDBIcon icon="heart" /></button> {currentPost.sumLike} thích
                     </span>
 
                     <span>
                         <MDBIcon icon="comment" /> {currentPost.comments.length} bình luận
                     </span>
+
                 </MDBCardBody>
                 <button className="btn btn-info" style={{marginRight: "15px"}} onClick={() => this.onHandlingPost(1)} > Duyệt bài </button>
                 <button className="btn btn-danger" onClick={() => this.onHandlingPost(2)}> &nbsp;Xóa bài&nbsp; </button>
                 <hr className="my-5" />
             </MDBCol>
+            
         );
     }
 }
