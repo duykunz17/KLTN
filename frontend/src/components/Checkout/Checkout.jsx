@@ -26,7 +26,7 @@ class Checkout extends Component {
                 return (
                     <div key={index} >
                         <h5><img src={element.images} alt="anh" style={{height:'75px', width:'60px', border: '1px solid #cfcfcf'}} />
-                            &nbsp;{element.quantity} x {element.name} x {element.price}.000₫</h5>
+                            &nbsp;{element.quantity} x {element.name} x ${element.price}</h5>
                         <div className="hr-line-dashed" />
                     </div>
                 );
@@ -82,7 +82,7 @@ class Checkout extends Component {
                             <h5>Sản phẩm: </h5>
                             {this.displayCartItem(cart.products)}
                             <h5>Thành tiền:</h5>
-                            <b style={{color:'red'}}>{cart.total}.000₫</b>
+                            <b style={{color:'red'}}>${cart.total}</b>
                         </div>
                     </div>
                 </div>

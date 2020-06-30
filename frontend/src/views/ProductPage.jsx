@@ -98,7 +98,7 @@ class ProductPage extends Component {
 
                     else {
                         let { products } = res.data;
-                        console.log(products[0])
+                        // console.log(products[0])
                         this.setState({
                             products
                         });
@@ -116,6 +116,7 @@ class ProductPage extends Component {
                 return (
                     <Product
                         key={index}
+                        currentPage={this.state.currentPage}
                         product={product}
                         amountCurrentItemCart={amountCurrentItemCart}
                         onAddItemIntoCart={this.onAddItemIntoCart}
