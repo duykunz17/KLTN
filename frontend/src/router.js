@@ -45,7 +45,7 @@ const ROUTERS = [
         main: () => <SignUpPage/>
     },
     {
-        path: '/product',
+        path: '/products',
         exact: false,
         main: () => <ProductPage />
     },
@@ -55,17 +55,17 @@ const ROUTERS = [
         main: (object) => <ProductDetailPage object={object} />
     },
     {
-        path: '/place',
+        path: '/places',
         exact: true,
         main: () => <PlacePage/>
     },
     {
-        path: '/place/:id',
+        path: '/places/:id',
         exact: true,
         main: (object) => <PlaceDetailPage object={object} />
     },
     {
-        path: '/place/destination/:id',
+        path: '/places/destination/:id',
         exact : false,
         main: (object) => <DestinationDetailPage object={object} />
     },
@@ -75,7 +75,7 @@ const ROUTERS = [
         main: () => <AboutPage/>
     },
     {
-        path: '/schedule',
+        path: '/schedules',
         exact: false,
         main: ({history}) => <SchedulePage history={history}/>
     },

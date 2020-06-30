@@ -34,7 +34,7 @@ class PlaceDetailPage extends Component {
                         <img src={currentDestination.images} alt="" />
                     </div>
                     <div className="place_info">
-                    <Link to={"/place/destination/" + currentDestination._id} key={currentDestination._id}><h3> {currentDestination.name}</h3></Link>
+                    <Link to={"/places/destination/" + currentDestination._id} key={currentDestination._id}><h3> {currentDestination.name}</h3></Link>
                         <p>{currentDestination.area}</p>
                         <div className="rating_days d-flex justify-content-between">
                             <StarRating
@@ -44,7 +44,7 @@ class PlaceDetailPage extends Component {
                                 editing={false}
                             />
                             <span className="d-flex justify-content-end align-items-center">
-                                <Link to="">{currentDestination.review} đánh giá</Link>
+                                <Link to={`/places/${place._id}`}>{currentDestination.review} đánh giá</Link>
                             </span>
                         </div>
 

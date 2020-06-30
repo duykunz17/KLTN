@@ -187,24 +187,24 @@ class Header extends Component {
                                             <nav>
                                                 <ul id="navigation">
                                                     <li><Link className="active" to="/">trang chủ</Link></li>
-                                                    <li><Link to="">diễn đàn <i className="fa fa-angle-down" /></Link>
+                                                    <li><Link to="/newfeed">diễn đàn <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/blog">trang cá nhân</Link></li>
                                                             <li><Link to="/newfeed">cộng đồng</Link></li>
                                                         </ul>
                                                     </li>
                                                     <li>
-                                                        <Link to="/place">địa điểm</Link>
+                                                        <Link to="/places">địa điểm</Link>
                                                     </li>
-                                                    <li><Link to="">mua sắm <i className="fa fa-angle-down" /></Link>
+                                                    <li><Link to="/products">mua sắm <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
-                                                            <li><Link to="/product">sản phẩm</Link></li>
+                                                            <li><Link to="/products">sản phẩm</Link></li>
                                                             <li><Link to="/payment-history">lịch sử đặt/mua hàng</Link></li>
                                                         </ul>
                                                     </li>
-                                                    <li><Link to="">hành trình <i className="fa fa-angle-down" /></Link>
+                                                    <li><Link to="/schedules">hành trình <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
-                                                            <li><Link to="/schedule">Tạo lịch trình</Link></li>
+                                                            <li><Link to="/schedules">Tạo lịch trình</Link></li>
                                                             <li><Link to="/list-schedule">Xem lịch trình</Link></li>
                                                         </ul>
                                                     </li>
@@ -230,17 +230,7 @@ class Header extends Component {
                                             &nbsp;&nbsp;
                                             <div className="number">
                                                 <Link to="/blog">
-                                                    {user ?
-                                                        (
-                                                            <span>
-
-                                                                    {user.person.name}
-
-                                                            </span>
-
-                                                        )
-                                                        : ''
-                                                    }
+                                                    { user ? ( <span> {user.person.name} </span> ) : '' }
                                                 </Link>
                                             </div>
                                             

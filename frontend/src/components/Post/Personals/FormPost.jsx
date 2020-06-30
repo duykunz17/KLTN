@@ -19,11 +19,10 @@ export default class FormPost extends Component {
             files: []
         });
         let files = Array.from(event.target.files);
-        //console.log(file)
         if (files.length > 0) {
             files.forEach((f) => {
                 let reader = new FileReader();
-
+                // console.log(f.type);
                 reader.onloadend = () => {
                     this.setState({
                         files: [...this.state.files, f],
@@ -48,7 +47,13 @@ export default class FormPost extends Component {
 
     displayListImagePost = (filePath) => {
         return filePath.map((currentPath, index) => {
-            return (<img src={currentPath} key={index} alt="errorImage" style={{ width: "70px", marginRight: "10px" }}></img>)
+            return (
+                <div key={index}>
+                    <img src={currentPath} alt="errorImage" style={{ width: "70px", marginRight: "10px" }} />
+                    <br /><br />
+                    <span id="errImage"></span>
+                </div>
+            )
         })
     }
 
@@ -71,16 +76,29 @@ export default class FormPost extends Component {
             });
 
         if (files.length > 0) {
-            await uploadMultipleImagePost(files, url => {
-                images = url;
-                if (images.length === files.length) {
-                    let post = {
-                        content: this.state.content,
-                        images: images
-                    }
-                    this.props.onSavePost(post);
+            let checkImage = true;
+            files.forEach(f => {
+                let rexImage = /^image\/(jpeg|jpg|png|gif)/;
+                if (!rexImage.test(f.type)) {
+                    checkImage = false;
+                    document.getElementById('errImage').style.color = 'red';
+                    document.getElementById('errImage').innerHTML = 'File không hợp lệ (đuôi file phải là "jpeg|jpg|png|gif"). Hãy thử lại!';
                 }
-            })
+            });
+
+            if (checkImage) {
+                document.getElementById('errImage').innerHTML = '';
+                await uploadMultipleImagePost(files, url => {
+                    images = url;
+                    if (images.length === files.length) {
+                        let post = {
+                            content: this.state.content,
+                            images: images
+                        }
+                        this.props.onSavePost(post);
+                    }
+                });
+            }
         }
     }
 

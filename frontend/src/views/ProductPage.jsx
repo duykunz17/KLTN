@@ -140,9 +140,9 @@ class ProductPage extends Component {
             });
             result.unshift(
                 <CategoryItem
-                        key={result.length + 1}
-                        category='TT'
-                        onShownListProductByType={this.onShownListProductByType}
+                    key={result.length + 1}
+                    category='TT'
+                    onShownListProductByType={this.onShownListProductByType}
                 />
             );
         }
@@ -153,7 +153,7 @@ class ProductPage extends Component {
         if (type === 'TT')
             this.getProductsWhenConnectMongo();
         else
-            callAPI('product/category/'+type, 'GET', null)
+            callAPI('product/category/' + type, 'GET', null)
                 .then(res => {
                     let { products } = res.data;
                     this.setState({
@@ -174,13 +174,11 @@ class ProductPage extends Component {
                 <Category>
                     {this.showCategoryProduct(categorys)}
                 </Category>
-                
+
                 <div className="product_list">
-                    
                     <ProductList>
                         {this.showProductList(products, amountCurrentItemCart)}
                     </ProductList>
-
                     {
                         (pages.length > 1) ? (
                             /* Phân trang */
@@ -188,7 +186,6 @@ class ProductPage extends Component {
                         ) : null
                     }
                 </div>
-
                 <Footer />
             </div>
         );

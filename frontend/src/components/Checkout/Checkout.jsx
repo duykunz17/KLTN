@@ -87,7 +87,7 @@ class Checkout extends Component {
                     </div>
                 </div>
                 <div className="button-redirect">
-                    <Link to="/product" className="btn btn-success">Tiếp tục mua hàng</Link>
+                    <Link to="/products" className="btn btn-success">Tiếp tục mua hàng</Link>
                     <button type='button' className="btn btn-warning" onClick={() => this.onSaveBill("Thanh toán khi nhận hàng (COD)")}>Xác nhận đặt hàng</button>
                 </div>
             </div>

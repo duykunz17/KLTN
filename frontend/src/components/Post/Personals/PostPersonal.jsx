@@ -69,7 +69,7 @@ export default class PostPersonal extends Component {
                 icon = iconOnline;
                 break;
             case 'D':
-                strStatus = "Đã xóa";
+                strStatus = "Không được duyệt";
                 icon = iconGray;
                 break;
             case 'W': default:

@@ -10,11 +10,11 @@ class CategoryItem extends Component {
             <li className="menu-category">
                 {
                     category !== 'TT' ?
-                        <Link to={`/product/${category}`} className="css-category" >
+                        <Link to={`/products/${category}`} className="css-category" >
                             <span onClick={() => this.props.onShownListProductByType(category)} >{category}</span>
                         </Link>
                     :
-                        <Link to={`/product`} className="css-category" >
+                        <Link to={`/products`} className="css-category" >
                             <span onClick={() => this.props.onShownListProductByType(category)} > Tất cả </span>
                         </Link>
                 }

@@ -4,7 +4,7 @@ var socketio = require('socket.io');
 var http = require('http');
 
 var createError = require('http-errors');
-//var path = require('path');
+var path = require('path');
 // var cookieParser = require('cookie-parser');
 // var logger = require('morgan');
 
@@ -124,7 +124,7 @@ app.use('/post', postRouter);
 app.use('/schedule', scheduleRouter);
 
 // app.use(express.static(path.join(__dirname, 'build')));
-// app.get('/*', (req, res) => {
+// app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 //   });
 

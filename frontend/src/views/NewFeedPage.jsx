@@ -64,7 +64,6 @@ class NewFeedPage extends Component {
         return (
             <div>
                 <Header/>
-
                 {
                     this.state.postsPopular.length > 0 ? (
 

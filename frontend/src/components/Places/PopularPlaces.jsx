@@ -22,7 +22,7 @@ class PopularPlaces extends Component {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="more_place_btn text-center">
-                                <Link to='/place' className="boxed-btn4" >Xem thêm</Link>
+                                <Link to='/places' className="boxed-btn4" >Xem thêm</Link>
                             </div>
                         </div>
                     </div>

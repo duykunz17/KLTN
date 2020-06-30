@@ -17,7 +17,7 @@ class Banner extends Component {
                             <div className="carousel-caption d-md-block">
                                 <h3>Hon Khoai</h3>
                                 <p>Huyện Trần Văn Thời, Tỉnh Cà Mau</p>
-                                <Link to="/place/destination/5eeb32cf98f87129604c4ed3" className="boxed-btn3">Khám phá ngay</Link>
+                                <Link to="/places/destination/5eeb32cf98f87129604c4ed3" className="boxed-btn3">Khám phá ngay</Link>
                             </div>
                         </div>
 
@@ -26,7 +26,7 @@ class Banner extends Component {
                             <div className="carousel-caption d-md-block">
                                 <h3>Cau Dat</h3>
                                 <p>Tp. Đà Lạt, Tỉnh Lâm Đồng</p>
-                                <Link to="/place/destination/5eeb31db98f87129604c48ed" className="boxed-btn3">Khám phá ngay</Link>
+                                <Link to="/places/destination/5eeb31db98f87129604c48ed" className="boxed-btn3">Khám phá ngay</Link>
                             </div>
                         </div>
                         
@@ -35,7 +35,7 @@ class Banner extends Component {
                             <div className="carousel-caption d-md-block">
                                 <h3>Tram Chim</h3>
                                 <p>Huyện Tam Nông, tỉnh Đồng Tháp</p>
-                                <Link to="/place/destination/5eeb32b798f87129604c4e43" className="boxed-btn3">Khám phá ngay</Link>
+                                <Link to="/places/destination/5eeb32b798f87129604c4e43" className="boxed-btn3">Khám phá ngay</Link>
                             </div>
                         </div>
                     </div>

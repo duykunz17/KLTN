@@ -39,13 +39,13 @@ class HeaderAdmin extends Component {
                                         <div className="main-menu  d-none d-lg-block">
                                             <nav>
                                                 <ul id="navigation">
-                                                    <li><Link to="">quản lý <i className="fa fa-angle-down" /></Link>
+                                                    <li><Link to="/admin/product-management">quản lý <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/admin/product-management">sản phẩm dịch vụ</Link></li>
                                                             <li><Link to="/admin/post-management">bài đăng</Link></li>
                                                         </ul>
                                                     </li>
-                                                    <li><Link to="">thống kê <i className="fa fa-angle-down" /></Link>
+                                                    <li><Link to="/admin/statistical-product-best-seller">thống kê <i className="fa fa-angle-down" /></Link>
                                                         <ul className="submenu">
                                                             <li><Link to="/admin/statistical-product-best-seller">sản phẩm bán chạy</Link></li>
                                                             <li><Link to="/admin/statistical-renvenue-sale">doanh thu sản phẩm</Link></li>
@@ -57,50 +57,32 @@ class HeaderAdmin extends Component {
                                     </div>
                                     <div className="col-xl-4 col-lg-4 d-none d-lg-block">
                                         <div className="social_wrap d-flex align-items-center justify-content-end">
-                                        {/* {
-                                            user ? (
-                                                <div className="avatar">
-                                                    {
-                                                        this.state.filePath ?
-                                                            <img src={this.state.filePath} className="avatar" alt="ava"/>
-                                                        :
-                                                           <img src={user.avatar} className="avatar" alt="ava" />
-                                                    }
-                                                </div>
-                                            ) : ''
-                                        } */}
-                                            {/* &nbsp;&nbsp;
-                                            <div className="number">
-                                                <p>
-                                                    {user ?
-                                                        (
-                                                            <span>
-                                                                <button data-toggle="modal" data-target="#updateInfoModal"> {user.person.name} </button>
-                                                            </span>
-                                                        )
-                                                        : ''
-                                                    }
-                                                </p>
-                                            </div> */}
-                                            
+                                            {/* {
+                                                user ? (
+                                                    <div className="avatar">
+                                                        {
+                                                            this.state.filePath ?
+                                                                <img src={this.state.filePath} className="avatar" alt="ava"/>
+                                                            :
+                                                            <img src={user.avatar} className="avatar" alt="ava" />
+                                                        }
+                                                    </div>
+                                                ) : ''
+                                            } */}
                                         </div>
                                     </div>
                                     
                                     <div className="seach_icon">
-                                        
                                             <Link to='/login'>
                                                 <i className="fa fa-sign-out" style={{fontSize: '1.5rem'}} onClick={() => this.isLogout()}></i>
                                             </Link>
-
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 {/* { user ? <Modal user={user} /> : null } */}
-
             </header>
         );
     }

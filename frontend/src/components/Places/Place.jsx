@@ -12,7 +12,7 @@ export default class Place extends Component {
                         <img src={place.images} alt="err" title={place.name} />
                     </div>
                     <div className="place_info">
-                        <Link to={"/place/" + place._id} key={place._id}><h3> {place.name}</h3></Link>
+                        <Link to={"/places/" + place._id} key={place._id}><h3> {place.name}</h3></Link>
                         <p>{place.area}</p>
                     </div>
                 </div>

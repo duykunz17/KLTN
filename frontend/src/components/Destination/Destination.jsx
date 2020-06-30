@@ -15,7 +15,7 @@ export default class Destination extends Component {
                         {/* <Link to="" className="prise">$500</Link> */}
                     </div>
                     <div className="place_info">
-                        <Link to={"/place/destination/" + destination._id} key={destination._id}><h3> {destination.name}</h3></Link>
+                        <Link to={"/places/destination/" + destination._id} key={destination._id}><h3> {destination.name}</h3></Link>
                         
                         <div className="rating_days d-flex justify-content-between">
                             <StarRating

@@ -45,6 +45,8 @@ export default class UpdateInfo extends Component {
             this.setState({ file });
             let reader = new FileReader();
 
+            document.getElementById('errUploadImage').innerHTML = '';
+
             reader.onloadend = () => {
                 this.setState({
                     filePath: reader.result
@@ -100,52 +102,58 @@ export default class UpdateInfo extends Component {
             user.person.email = email;
 
             if (file) {
-                let uploadTask = storage.ref(`images/${file.name}`).put(file);
-                await uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // progress function
-                        let process = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-                        Swal.fire({
-                            title: 'Đang tải ảnh',
-                            allowEscapeKey: false,
-                            allowOutsideClick: false,
-                            background: '#19191a',
-                            showConfirmButton: false,
-                            onOpen: () => {
-                                Swal.showLoading();
-                            },
-                            timer: process,
-                            timerProgressBar: true
-                        });
-                    },
-                    (error) => {
-                        console.log('Error: ' + error);
-                    },
-                    () => {
-                        // complete function
-                        storage.ref('images').child(file.name).getDownloadURL().then(url => {
-                            // console.log('url: ' + url);
-                            user.avatar = url;
+                let rexImage = /^image\/(jpeg|jpg|png|gif)/;
+                if (!rexImage.test(file.type)) {
+                    document.getElementById('errUploadImage').style.color = 'red';
+                    document.getElementById('errUploadImage').innerHTML = 'File không hợp lệ (đuôi file phải là "jpeg|jpg|png|gif"). Hãy thử lại!';
+                }
+                else {
+                    let uploadTask = storage.ref(`images/${file.name}`).put(file);
+                    await uploadTask.on('state_changed',
+                        (snapshot) => {
+                            // progress function
+                            let process = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                            Swal.fire({
+                                title: 'Đang tải ảnh',
+                                allowEscapeKey: false,
+                                allowOutsideClick: false,
+                                background: '#19191a',
+                                showConfirmButton: false,
+                                onOpen: () => {
+                                    Swal.showLoading();
+                                },
+                                timer: process,
+                                timerProgressBar: true
+                            });
+                        },
+                        (error) => {
+                            console.log('Error: ' + error);
+                        },
+                        () => {
+                            // complete function
+                            storage.ref('images').child(file.name).getDownloadURL().then(url => {
+                                // console.log('url: ' + url);
+                                user.avatar = url;
 
-                            // update into database
-                            callAPI(`account/update-info/${user._id}`, 'POST', user)
-                                .then(res => {
-                                    if (res.data.messSuccess) {
-                                        sessionStorage.setItem("user", JSON.stringify(user));
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: res.data.messSuccess,
-                                        });
+                                // update into database
+                                callAPI(`account/update-info/${user._id}`, 'POST', user)
+                                    .then(res => {
+                                        if (res.data.messSuccess) {
+                                            sessionStorage.setItem("user", JSON.stringify(user));
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: res.data.messSuccess,
+                                            });
 
-                                        this.props.onOpenFormUpdateInfo(true, user, true);
-                                    }
-                                })
-                                .catch(err => console.log(err));
+                                            this.props.onOpenFormUpdateInfo(true, user, true);
+                                        }
+                                    })
+                                    .catch(err => console.log(err));
+                            }
+                            );
                         }
-                        );
-                    }
-                );
-
+                    );
+                }
             }
             else {
                 // update into database
@@ -173,7 +181,7 @@ export default class UpdateInfo extends Component {
                 <p className="text-center mt-3 " style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}> Cập nhật thông tin cá nhân </p>
                 <hr />
                 <div className="row">
-                    <div className="col-md-4 mt-uploadInfo" style={{borderRight: '2px solid #e5e5e5', height: '380px'}}>
+                    <div className="col-md-4 mt-uploadInfo" style={{ borderRight: '2px solid #e5e5e5', height: '380px', textAlign: 'center' }}>
                         <div className="ImgPreview m-l-80 m-t-20">
                             {this.state.filePath ?
                                 <img src={this.state.filePath} alt="Info" className="ImgPreview" />
@@ -181,9 +189,11 @@ export default class UpdateInfo extends Component {
                             }
                         </div>
 
+                        <span id="errUploadImage" ></span>
+                        <br />
                         <ImageUpload onUploadImage={this.onUploadImage} />
                     </div>
-                    <div className="col-md-8 mt-uploadInfo" style={{marginTop:'-40px', marginBottom:'20px'}}>
+                    <div className="col-md-8 mt-uploadInfo" style={{ marginTop: '-40px', marginBottom: '20px' }}>
                         <div className="row">
                             <div className="col-md-4 ml-1">
                                 <div className="form-group">
@@ -246,10 +256,10 @@ export default class UpdateInfo extends Component {
                             </div>
                             <div className="form-group mr-inputInfo p-tl-gender">
                                 <input type="checkbox" name="gender"
-                                    value={gender} onChange={this.onChange} checked={gender} style={{marginLeft:'5px'}}/> Nam
+                                    value={gender} onChange={this.onChange} checked={gender} style={{ marginLeft: '5px' }} /> Nam
                         </div>
                         </div>
-                        <div className="row col-md-9" style={{float:'right'}}>
+                        <div className="row col-md-9" style={{ float: 'right' }}>
                             <button type="button" className="btn btn-secondary m-r-15 ml-2 btn-Widthinfo" onClick={() => this.props.onOpenFormUpdateInfo(false, null, false)}>
                                 <i className="fa fa-window-close" aria-hidden="true" /> Đóng
                             </button>

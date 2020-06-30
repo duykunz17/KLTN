@@ -46,8 +46,9 @@ export default class LoginPage extends Component {
     onLinkSocialNetWorks = async (data) => {
         await callAPI('account/login-social', 'POST', data)
             .then(res => {
-                sessionStorage.setItem("user", JSON.stringify(res.data.user));
-                this.redirectHome();
+                let user = res.data.user;
+                sessionStorage.setItem("user", JSON.stringify(user));
+                this.redirectHome(user);
             })
     }
 

@@ -83,7 +83,7 @@ export default class Product extends Component {
                 <div className="single_product">
                     <div className="thumb">
                         <img src={product.images} alt="product-img" title={product.name}/>
-                        <Link to='' className="prise">${product.price}</Link>
+                        <Link to='/products' className="prise">${product.price}</Link>
                         {product.amountPurchase > 0 ? <span className="product-hot">Hot</span> : null}
                     </div>
                     <div className="product_info">

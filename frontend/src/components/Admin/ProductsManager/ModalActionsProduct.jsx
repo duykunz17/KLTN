@@ -46,6 +46,7 @@ export default class ModalActionsProduct extends Component {
                 file: null,
                 filePath: null
             });
+            document.getElementById('errUploadImage').innerHTML = '';
     }
 
     componentDidMount() {
@@ -80,8 +81,9 @@ export default class ModalActionsProduct extends Component {
         if (file) {
             this.setState({ file, images: file.name });
 
-            let reader = new FileReader();
+            document.getElementById('errUploadImage').innerHTML = '';
 
+            let reader = new FileReader();
             reader.onloadend = () => {
                 this.setState({
                     filePath: reader.result
@@ -142,13 +144,20 @@ export default class ModalActionsProduct extends Component {
 
             if (checkType && checkPrice && checkQuantity) {
                 if (file) {
-                    await uploadImageToFirebase(file, url => {
-                        // console.log(url);
-                        images = url;
-                        let product = { _id, name, productType, description, images, price, quantity };
-    
-                        this.props.updateInfoProduct(product);
-                    })
+                    let rexImage = /^image\/(jpeg|jpg|png|gif)/;
+                    if (!rexImage.test(file.type)) {
+                        document.getElementById('errUploadImage').style.color = 'red';
+                        document.getElementById('errUploadImage').innerHTML = 'File không hợp lệ (đuôi file phải là "jpeg|jpg|png|gif"). Hãy thử lại!';
+                    }
+                    else {
+                        await uploadImageToFirebase(file, url => {
+                            // console.log(url);
+                            images = url;
+                            let product = { _id, name, productType, description, images, price, quantity };
+        
+                            this.props.updateInfoProduct(product);
+                        })
+                    }
                 }
                 else {
                     let product = { _id, name, productType, description, images, price, quantity };
@@ -214,6 +223,14 @@ export default class ModalActionsProduct extends Component {
                                         <input type="file" name="file" onChange={this.onChangeImage} />
                                     </div>
                                 </div>
+                                <div className="form-group row">
+                                    <div className="col-sm-1" />
+                                    <label htmlFor="images" className="col-sm-3 col-form-label text-right"></label>
+                                    <div className="col-sm-8">
+                                        <span id="errUploadImage" />
+                                    </div>
+                                </div>
+
                                 <div className="form-group row">
                                     <div className="col-sm-1" />
                                     <label htmlFor="price" className="col-sm-3 col-form-label text-right">Giá</label>

@@ -9,7 +9,7 @@ class Utilities extends Component {
                     <div className="col-lg-3 col-md-6">
                     <div className="single_travel text-center">
                         <div className="icon">
-                        <Link to="/schedule"><img src="images/map.svg" alt="" style={{width:'100px', height:'100px'}}/></Link>
+                        <Link to="/schedules"><img src="images/map.svg" alt="" style={{width:'100px', height:'100px'}}/></Link>
                         </div>
                         <h3>Lập hành trình</h3>
                         <p>Giúp người dùng dễ dàng và tiết kiệm thời gian với tiện ích lập hành trình cho chuyến đi.</p>
@@ -27,7 +27,7 @@ class Utilities extends Component {
                     <div className="col-lg-3 col-md-6">
                     <div className="single_travel text-center">
                         <div className="icon">
-                        <Link to="/place"><img src="images/global.svg" alt="" style={{width:'100px', height:'100px'}}/></Link>
+                        <Link to="/places"><img src="images/global.svg" alt="" style={{width:'100px', height:'100px'}}/></Link>
                         </div>
                         <h3>Điểm đến</h3>
                         <p>Khám phá, nắm bắt các thông tin cơ bản từ các điểm đến và đánh giá chi tiết từ thành viên. </p>
@@ -36,7 +36,7 @@ class Utilities extends Component {
                     <div className="col-lg-3 col-md-6">
                     <div className="single_travel text-center">
                         <div className="icon">
-                        <Link to="/product"><img src="images/product.svg" alt="" style={{width:'100px', height:'100px'}}/></Link>
+                        <Link to="/products"><img src="images/product.svg" alt="" style={{width:'100px', height:'100px'}}/></Link>
                         </div>
                         <h3>Dịch vụ bán sản phẩm</h3>
                         <p>Hỗ trợ các bạn việc chuẩn bị đồ dùng cần thiết cho chuyến đi tốt nhất trên khắp các điểm đến. </p>
