@@ -9,6 +9,7 @@ var countAllPlaces = (cbCount) => {
     });
 }
 
+// loading place for place page
 router.route('/list-place').get((req, res) => {
     countAllPlaces((cbCount) => {
         // rounds a number up to the next largest whole number
@@ -20,8 +21,12 @@ router.route('/list-place').get((req, res) => {
     });
 });
 
+// loading place's name for schedule page
 router.route('/').get((req, res) => {
-        dbPlace.aggregate( [ { $project : { name : 1 } } ] )
+        dbPlace.aggregate( [
+            { $project : { name : 1 } },
+            { $sort: {name: 1} }
+        ])
             .then(places => res.json(places) )
             .catch(err => res.status(400).json('Error'+ err))
 
