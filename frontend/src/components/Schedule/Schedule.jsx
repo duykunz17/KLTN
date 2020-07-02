@@ -310,10 +310,10 @@ class Schedule extends Component {
                 .catch(err => console.log(err))
 
             // checking email of user
-            if (schedule.account.person.email)
-                callAPI('schedule/sendMail', 'POST', '')
-                    .then(res => console.log(res))
-                    .catch(err => console.log(err))
+            // if (schedule.account.person.email)
+            //     callAPI('schedule/sendMail', 'POST', '')
+            //         .then(res => console.log(res))
+            //         .catch(err => console.log(err))
         }
     }
 
