@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import Moment from 'react-moment';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -147,7 +148,7 @@ class Schedule extends Component {
                     if (item[1].status === true) {
                         let place = this.state.places[item[1].index];
                         result = (
-                            <div key={index}>
+                            <div key={index} className="width-scroll" >
                                 <div style={{ textAlign: 'center', padding: '20px 0px 20px 0px' }}>
                                     <b>Điểm đến du lịch ở {place.name}</b>
                                 </div>
@@ -491,7 +492,9 @@ class Schedule extends Component {
                                                 </button>
                                             </div>
                                             <div className="col-8" style={{ border: '0.5px solid black' }}>
-                                                {this.listPlaceSelected()}
+                                                <ScrollToBottom className="scroll-schedule">
+                                                    {this.listPlaceSelected()}
+                                                </ScrollToBottom>
                                             </div>
                                         </div>
                                     </div>

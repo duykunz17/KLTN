@@ -34,3 +34,22 @@
     font-weight: 300;
     margin-bottom: 25px;
 }
+
+/*** *******************/
+.tt-uppercase {
+    text-transform: uppercase;
+    width: 230px;
+    height: 50px;
+    margin-left: 85px;
+    margin-top: 15px;
+}
+.your-rating {
+    margin-left: 85px;
+    /* margin-top: 80px; */
+}
+.ava-your-rating p {
+    font-size: 45px;
+    font-weight: bold;
+    margin-left: 80px;
+    margin-bottom: 25px;
+}

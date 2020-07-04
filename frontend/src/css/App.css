@@ -191,3 +191,12 @@
   font-weight: 400;
 }
 
+/* hiding input review */
+.style-btn-review input[type='file'] {
+  display: none;
+}
+.clicked-btn-review {
+  cursor: pointer;
+  transition: color 200ms;
+  /* margin-right: 5px; */
+}

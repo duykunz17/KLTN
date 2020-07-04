@@ -16,7 +16,8 @@ class DestinationDetail extends Component {
     componentDidMount() {
         callAPI(`place/destination/${this.props.object.match.params.id}`, 'GET', null)
             .then(res => {
-                if(res.data.length >0){
+                if(res.data.length > 0){
+                    // console.log(res.data[0]);
                     this.setState({
                         destination: res.data[0]
                     })
@@ -47,9 +48,8 @@ class DestinationDetail extends Component {
                                         <p>{destination.description}</p>
                                     </div>
                                 </div>
-
                             </div>
-
+                            
                             {destination._id ? <EvaluationDestination destination={destination} /> : null}
 
                         </div>

@@ -5,6 +5,7 @@ import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
 import Search from '../components/Home/Search/Search';
 import Place from '../components/Places/Place';
+import Destination from '../components/Destination/Destination';
 
 // import components PagesNumber in Menu
 import PagesNumber from '../components/Menu/PagesNumber/PagesNumber';
@@ -16,23 +17,25 @@ class PlacePage extends Component {
         super(props);
         this.state = {
             places: [],
+            destinations: null,
+            infoSearch: null,
             pages: [
                 {
-                  number: 1
-                }  
-              ],
+                    number: 1
+                }
+            ],
             currentPage: 1
         }
     }
 
-    getPlacesWhenConnectMongo = () =>{
+    getPlacesWhenConnectMongo = () => {
         callAPI('place/list-place', 'GET', null)
             .then(res => {
                 let { places, totalPages } = res.data;
                 let pages = [];
                 for (let i = 1; i <= totalPages; i++)
-                    pages.push({number: i});
-                this.setState({ places, pages });
+                    pages.push({ number: i });
+                this.setState({ places, pages, destinations: null });
                 // console.log(res.data);
             })
             .catch((err) => { console.log(err) })
@@ -43,12 +46,12 @@ class PlacePage extends Component {
     }
 
     onChangePage = (pageNumber) => {
-        this.setState({currentPage: pageNumber});
-        
+        this.setState({ currentPage: pageNumber });
+
         callAPI(`place/list-place/page=${pageNumber}`, 'GET', null)
             .then(res => {
                 let { places } = res.data;
-                this.setState({ places });
+                this.setState({ places, destinations: null });
             })
             .catch((err) => { console.log(err) })
     }
@@ -68,6 +71,27 @@ class PlacePage extends Component {
         return result;
     }
 
+    showDestination = (places) => {
+        let result = null;
+        if (places.length > 0) {
+            result = places.map(item => {
+                // sử dụng filter 
+                let des = item.destination.filter(el => el.name.toLowerCase().indexOf(this.state.infoSearch.toLowerCase()) > -1)
+                return (
+                    des.map((currentDestination, index) => {
+                        return (
+                            <Destination
+                                key={index}
+                                destination={currentDestination}
+                            />
+                        );
+                    })
+                );
+            });
+        }
+        return result;
+    }
+
     receiveInfoSearch = (infoSearch) => {
         if (infoSearch)
             callAPI(`place/search=${infoSearch}`, 'GET', null)
@@ -77,10 +101,15 @@ class PlacePage extends Component {
                             icon: 'warning',
                             title: res.data.message,
                         });
-                    
+
                     else {
-                        let { places } = res.data;
-                        this.setState({ places });
+                        let { places, destinations } = res.data;
+                        if (places)
+                            this.setState({ places, destinations: null });
+                        else {
+                            // destinations == places nhưng tượng trưng kết quả tìm kiếm những điểm đến trong place
+                            this.setState({ destinations, infoSearch });
+                        }
                     }
                 })
                 .catch((err) => { console.log(err) });
@@ -89,12 +118,12 @@ class PlacePage extends Component {
     }
 
     render() {
-        var { places, pages, currentPage } = this.state;
+        var { places, destinations, pages, currentPage } = this.state;
         return (
             <div>
                 <Header />
-                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm địa điểm gì?" input="Nhập tên địa điểm"/>
-                <div className="popular_places_area" style={{textAlign:'center'}}>
+                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm địa điểm gì?" input="Nhập tên địa điểm" />
+                <div className="popular_places_area" style={{ textAlign: 'center' }}>
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-6">
@@ -105,14 +134,17 @@ class PlacePage extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            {this.showPlaces(places)}
+                            {
+                                destinations ? this.showDestination(destinations) : this.showPlaces(places)
+                            }
                         </div>
                     </div>
-
                     {
-                        (pages.length > 1) ? (
-                            /* Phân trang */
-                            <PagesNumber pages={pages} currentPage={currentPage} onChangePage={this.onChangePage} />
+                        destinations === null ? (
+                            (pages.length > 1) ? (
+                                /* Phân trang */
+                                <PagesNumber pages={pages} currentPage={currentPage} onChangePage={this.onChangePage} />
+                            ) : null
                         ) : null
                     }
                 </div>

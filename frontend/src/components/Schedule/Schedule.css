@@ -131,3 +131,11 @@ input[type=date] {
     margin: 0px;
     font-weight: bold;
 }
+
+.scroll-schedule {
+    width: 100%;
+    height: 800px;
+}
+.scroll-schedule .width-scroll {
+    width: 97%;
+}

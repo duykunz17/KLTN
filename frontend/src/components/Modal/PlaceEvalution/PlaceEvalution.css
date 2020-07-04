@@ -1,0 +1,244 @@
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    outline: 0;
+}
+.modal-lg {
+    width: 80% !important;
+}
+.fade .in {
+    opacity: 1;
+}
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.clearfix {
+    margin: 15px;
+}
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.modal-header .close {
+    margin-top: -2px;
+}
+button .close {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+.fs-25 {
+    font-size: 25px !important;
+}
+.h-30 {
+    height: 30px !important;
+}
+.overflow-hidden {
+    overflow: hidden !important;
+}
+.modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+}
+.fs-16 {
+    font-size: 16px !important;
+}
+.fc-nineth, .h\:nineth:hover, .h\:fc-nineth:hover {
+    color: var(--nineth-color) !important;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+}
+.p-0 {
+    padding: 0 !important;
+}
+.m-0 {
+    margin: 0 !important;
+}
+.w-fit {
+    width: 100% !important;
+    text-align: left;
+}
+.pl-20 {
+    padding-left: 20px !important;
+}
+.pr-20 {
+    padding-right: 20px !important;
+}
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+.mt-10 {
+    margin-top: 10px !important;
+}
+.d-block {
+    display: block !important;
+}
+.w-fit {
+    width: 100% !important;
+}
+.w-50\% {
+    width: 50% !important;
+}
+.lh-24 {
+    line-height: 24px !important;
+}
+.fs-12 {
+    font-size: 16px !important;
+}
+.d-inline-block {
+    display: inline-block !important;
+}
+.fc-sixth, .h\:fc-sixth:hover {
+    color: #666666 !important;
+}
+
+.ps-relative {
+    position: relative !important;
+}
+.h-50 {
+    height: 50px !important;
+}
+.pl-10 {
+    padding-left: 10px !important;
+}
+.outline-none, .h\:outline-none:hover, .f\:outline-none:focus, .a\:outline-none:active, .v\:outline-none:visited {
+    outline: 0 !important;
+}
+.bar-5 {
+    border-radius: 5px !important;
+}
+.content-p-5 {
+    padding: 5px !important;
+}
+.bn, .h\:bn:hover, .lc\:bn:last-child {
+    border-style: none !important;
+    border-width: 0 !important;
+}
+.card5 {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1) !important;
+}
+.bg-primary, .h\:bg-primary:hover {
+    background-color: #ff8c00 !important;
+}
+
+.va-top {
+    vertical-align: top;
+}
+.c-pointer {
+    cursor: pointer !important;
+}
+.fs-18 {
+    font-size: 18px !important;
+}
+.d-inline-block {
+    display: inline-block !important;
+}
+
+#review-place .ajax-file-upload-container {
+    width: 100% !important;
+    margin: 0px !important;
+}
+.ajax-file-upload-container {
+    margin: 0px 0px 20px 0px;
+}
+.ajax-file-upload-container {
+    top: 0px;
+    position: relative;
+    width: 100%;
+}
+
+.ajax-file-upload-preview {
+    width: 160px !important;
+    height: 100px !important;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #ff8c00 !important;
+}
+.ajax-file-upload-statusbar img {
+    width: 70px !important;
+    height: 70px !important;
+    border: 1px solid #e02f2f;
+    padding: 5px;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+.mb-20 {
+    margin-bottom: 20px !important;
+}
+.m-0 {
+    margin: 0 !important;
+}
+.ta-center {
+    text-align: center !important;
+}
+
+.w-200 {
+    width: 200px !important;
+}
+.lh-50 {
+    line-height: 50px !important;
+}
+.fc-white, .h\:fc-white:hover {
+    color: #fff !important;
+}
+
+@media (min-width: 992px) {
+    .modal-lg {
+        width: 900px;
+    }
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 600px;
+        margin: 30px auto;
+    }
+}
+@media (min-width: 768px) {
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+        box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    }
+}

@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const moment = require('moment');
+
 const dbPlace = require('../models/Place');
 
 var countAllPlaces = (cbCount) => {
@@ -71,9 +73,17 @@ router.route('/search=:info').get((req, res) => {
         })
             .then(places => {
                 if (places.length > 0)
-                    res.json({places});
-                else
-                    res.json({message: 'Không tìm thấy thông tin về địa điểm này'});
+                    res.json({places, destinations: null});
+                else {
+                    dbPlace.find({destination:{$elemMatch: {name: {$regex: info, $options: 'i'}}}})
+                        .then(destinations => {
+                            // console.log(destinations)
+                            if (destinations.length > 0)
+                                return res.json({places: null, destinations: destinations});    // return list places
+                            return res.json({message: 'Không tìm thấy thông tin về địa điểm này'});
+                        })
+                        .catch(err => res.json('Error' + err))
+                }
             })
             .catch(err => res.status(400).json('Error' + err))
     else
@@ -83,15 +93,15 @@ router.route('/search=:info').get((req, res) => {
 });
 
 router.route('/popular-place').get((req, res) => {
-    dbPlace.find({destination:{$elemMatch: {rating: {$gt: 3.49}}}}).sort({'destination.$.review': -1}).limit(15)
+    dbPlace.find({destination:{$elemMatch: {rating: {$gte: 4}}}}).sort({'destination.$.review': -1}).limit(15)
         .then(places => {
             let temps = places.map(place => {
-                let destination = place.destination.filter(des => des.rating > 3.49 && des.review >= 20);
-                return destination;
+                let destination = place.destination.filter(des => des.rating >= 4 && des.review >= 1000);
+                return destination.sort((a, b) => b.review - a.review);
                 // return res.json(place.destination.filter(des => des.rating > 3.49));
             })
-            // console.log(temps[0]);
-            return res.json(temps[0]);
+            // console.log(temps.length);
+            return res.json(temps);
         })
         .catch(err => res.json('Error' + err))
 })
@@ -122,12 +132,14 @@ router.route('/destination/:id').get((req, res) => {
 // })
 
 router.route('/evaluate-destination/:id').post((req, res) => {
-    let { rating, review, account, voted } = req.body;
+    let { rating, review, account, voted, title, content, images } = req.body;
+    let nowdate = moment(new Date());
+
     rating = rating.toFixed(1);
     // console.log(req.body)
     dbPlace.updateOne(
         {"destination._id":req.params.id},
-        {$push: { "destination.$.evaluations": {account, voted} },
+        {$push: { "destination.$.evaluations": {account, reviewdate: nowdate, voted, title, content, images} },
         $set: { "destination.$.rating": rating,  "destination.$.review": review}
     }).then(result => res.json({result}))
     .catch(err => res.status(400).json('Error' + err));

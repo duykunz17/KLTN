@@ -17,31 +17,29 @@ class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            places: [],
+            places: [],     // it's destination
             posts: []
         }
     }
 
     componentDidMount() {
         callAPI('place/popular-place', 'GET', null)
-            .then(res => {
-                this.setState({
-                    places: res.data
-                })
+            .then(async res => {
+                this.setState({ places: res.data });
             })
             .catch((err) => { console.log(err) })
 
-        callAPI('post/post-recent', 'GET', null)
-            .then(res => {
-                this.setState({
-                    posts: res.data
-                })
-            })
-            .catch((err) => { console.log(err) })
+        // callAPI('post/post-recent', 'GET', null)
+        //     .then(res => {
+        //         this.setState({
+        //             posts: res.data
+        //         })
+        //     })
+        //     .catch((err) => { console.log(err) })
     }
 
     render() {
-        var { places, posts } = this.state;
+        var { places } = this.state;
         return (
             <div className="HomePage">
                 <Header />
@@ -51,7 +49,7 @@ class HomePage extends Component {
                     {this.showPlaces(places)}
                 </PopularPlaces>
                 <Utilities />
-                <div className="recent_trip_area">
+                {/* <div className="recent_trip_area">
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-6">
@@ -64,7 +62,7 @@ class HomePage extends Component {
                             {this.showPostRecent(posts)}
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <Footer />
             </div >
         );
@@ -73,13 +71,22 @@ class HomePage extends Component {
     showPlaces = (places) => {
         let result = null;
         if (places.length > 0) {
-            result = places.map((currentPlace, index) => {
-                return (
-                    <Destination
-                        key={index}
-                        destination={currentPlace}
-                    />
-                );
+            result = places.map(currentPlace => {
+                let destinations = [];
+                if (currentPlace.length > 0)
+                    for (let i = 0; i < currentPlace.length - 6; i++) {
+                        destinations.push(currentPlace[i]);
+                    }
+
+                destinations = destinations.sort((a, b) => b.review - a.review);
+                return destinations.map((des, index) => {
+                    return (
+                        <Destination
+                            key={index}
+                            destination={des}
+                        />
+                    );
+                })
             });
         }
         return result;

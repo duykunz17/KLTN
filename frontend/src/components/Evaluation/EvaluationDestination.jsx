@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import './evaluation.css';
 
 import StarRating from './StarRating';
+import ModalPlaceEvalution from '../Modal/PlaceEvalution/ModalPlaceEvalution';
 
+
+import uploadMultipleImagePost from '../../utils/uploadMultipleImagePost';
 import callAPI from '../../utils/connectAPI';
 
 export default class EvaluationDestination extends Component {
@@ -13,6 +16,7 @@ export default class EvaluationDestination extends Component {
         this.state = {
             destination: {},
             user: null,
+            isButtonEvaluation: false,
             rating: 0
         }
     }
@@ -25,24 +29,70 @@ export default class EvaluationDestination extends Component {
                 if (item.account._id === user._id)
                     rating += item.voted;
             });
-        this.setState({user, destination, rating});        
+        this.setState({ user, destination, rating });
     }
 
-    onSaveRating = (ratingValue) => {
+    // onSaveRating = (ratingValue) => {
+    //     let destination = this.state.destination, avg_rating = (destination.rating + ratingValue) / 2;
+    //     let data = { rating: avg_rating, review: destination.review + 1, account: this.state.user, voted: ratingValue };
+    //     callAPI(`place/evaluate-destination/${destination._id}`, 'POST', data)
+    //         .then(res => {
+    //             if (res.data.result) {
+    //                 destination.rating = avg_rating;
+    //                 destination.review += 1;
+    //                 this.setState({ destination, rating: ratingValue });
+    //             }
+    //         }).catch(err => console.log(err));
+    // }
+    onSubmitReview = async (title, content, ratingValue, files) => {
         let destination = this.state.destination, avg_rating = (destination.rating + ratingValue) / 2;
-        let data = {rating: avg_rating, review: destination.review + 1, account: this.state.user, voted: ratingValue};
-        callAPI(`place/evaluate-destination/${destination._id}`, 'POST', data)
-            .then(res => {
-                if (res.data.result) {
-                    destination.rating = avg_rating;
-                    destination.review += 1;
-                    this.setState({destination, rating: ratingValue});
+        let data = {
+            rating: avg_rating, review: destination.review + 1,
+            account: this.state.user,
+            voted: ratingValue,
+            title,
+            content,
+            images: []
+        };
+
+        if (files.length > 0) {
+            await uploadMultipleImagePost(files, url => {
+                data.images = url;
+                if (data.images.length === files.length) {
+                    callAPI(`place/evaluate-destination/${destination._id}`, 'POST', data)
+                        .then(res => {
+                            if (res.data.result) {
+                                destination.rating = avg_rating;
+                                destination.review += 1;
+                                this.setState({ destination, rating: ratingValue });
+
+                                // console.log(res.data.result);
+                                // sử dụng this props để gọi đến thằng cha load Review vừa đánh giá
+                            }
+                        }).catch(err => console.log(err));
                 }
-            }).catch(err => console.log(err));
+            });
+        }
+        else {
+            callAPI(`place/evaluate-destination/${destination._id}`, 'POST', data)
+                .then(res => {
+                    if (res.data.result) {
+                        destination.rating = avg_rating;
+                        destination.review += 1;
+                        this.setState({ destination, rating: ratingValue });
+
+                        // sử dụng this props để gọi đến thằng cha load Review vừa đánh giá
+                    }
+                }).catch(err => console.log(err));
+        }
+    }
+
+    onOpenToggleModal = (isButtonEvaluation) => {
+        this.setState({ isButtonEvaluation })
     }
 
     render() {
-        let {destination, user, rating} = this.state;
+        let { destination, user, isButtonEvaluation, rating } = this.state;
         let toFixedRating = Number(destination.rating).toFixed(1);
         return (
             <div className="containt-review">
@@ -50,6 +100,8 @@ export default class EvaluationDestination extends Component {
                     <div className="col-lg-4 col-md-4">
                         <h3>Đánh giá</h3>
                     </div>
+                    <div className="col-lg-2 col-md-2" />
+                    <div className="col-lg-4 col-md-4"> <h3>Đánh giá của bạn</h3> </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-6 col-md-6 style-css">
@@ -65,19 +117,35 @@ export default class EvaluationDestination extends Component {
                     {
                         user ? (
                             <div className="col-lg-4 col-md-4 style-css">
-                                <div className="your-rating"> <p>Đánh giá của bạn</p> </div>
-                                <StarRating
-                                    numberOfStars={5}
-                                    value={rating}
-                                    size={40}
-                                    // If rating > 0 then you have evaluated so you can't edit
-                                    editing={rating > 0 ? false : true}
-                                    saveRating={this.onSaveRating}
-                                />
+                                {
+                                    rating > 0 ? (
+                                        <div>
+                                            <div className="ava-your-rating"> <p>{rating}.0</p> </div>
+                                            <div className="your-rating">
+                                                <StarRating
+                                                    numberOfStars={5}
+                                                    value={rating}
+                                                    size={40}
+                                                    // If rating > 0 then you have evaluated so you can't edit
+                                                    editing={false}
+                                                />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <button className="btn btn-warning tt-uppercase"
+                                            data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
+
+                                            Viết đánh giá
+                                        </button>
+                                    )
+                                }
+                                {
+                                    isButtonEvaluation ? <ModalPlaceEvalution destination={destination} onSubmitReview={this.onSubmitReview} /> : null
+                                }
                             </div>
-                        ) : null 
+                        ) : null
                     }
-                    
+
                 </div>
             </div>
         );
