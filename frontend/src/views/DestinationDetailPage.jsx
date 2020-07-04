@@ -10,26 +10,32 @@ class DestinationDetail extends Component {
         super(props);
 
         this.state = {
-            destination: null
+            destination: null,
+            evaluations: []
         }
     }
 
     componentDidMount() {
         callAPI(`place/destination/${this.props.object.match.params.id}`, 'GET', null)
             .then(res => {
-                if(res.data.length > 0){
-                    //console.log(res.data[0]);
+                if(res.data.length > 0) {
+                    let destination = res.data[0];
+
                     this.setState({
-                        destination: res.data[0]
+                        destination,
+                        evaluations: destination.evaluations
                     })
                 }
             })
             .catch((err) => console.log(err))
     }
 
+    onReceiveReview = (evaluations) => {
+        this.setState({evaluations});
+    }
+
     render() {
-        let { destination } = this.state;
-        
+        let { destination, evaluations } = this.state;
         if (destination === null)
             return null;
         return (
@@ -52,14 +58,14 @@ class DestinationDetail extends Component {
                                 </div>
                             </div>
                             
-                            {destination._id ? <EvaluationDestination destination={destination} /> : null}
+                            {destination._id ? <EvaluationDestination destination={destination} onReceiveReview={this.onReceiveReview} /> : null}
                             
                             <div className="destination_info ml-3">
                                 <h3>Các đánh giá chia sẻ kinh nghiệm ở {destination.name}</h3> 
-                            </div>   
-                            
-                            <ListReview destination={destination} />
-                            
+                            </div>
+                            {
+                                evaluations.length > 0 ? <ListReview evaluations={evaluations} /> : null
+                            }
                         </div>
                     </div>
 

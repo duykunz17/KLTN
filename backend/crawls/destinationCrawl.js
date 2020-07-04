@@ -1,7 +1,7 @@
 const fs = require('fs');
 const puppeteer = require("puppeteer");
 
-let data = JSON.parse(fs.readFileSync('./data/place.json', 'utf8'));
+let data = JSON.parse(fs.readFileSync('./datas/place.json', 'utf8'));
 
 const getDescriptionDes = async (page) => {
     var descriptionDes = await page.evaluate(() =>
@@ -125,7 +125,7 @@ const getDescriptionDes = async (page) => {
         data[index].destination = destination;
     }
     console.log('OK');
-    fs.writeFileSync('./data/place.json', JSON.stringify(data), 'utf8');
+    fs.writeFileSync('./datas/place.json', JSON.stringify(data), 'utf8');
 
     await browser.close();
 })();

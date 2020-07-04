@@ -23,9 +23,9 @@ class ListReview extends Component {
     }
 
     render() {
-        let { destination } = this.props;
+        let { evaluations } = this.props;
         return (
-            destination.evaluations.map((item, index) => {
+            evaluations.map((item, index) => {
                 return (
                     <MDBCol key={index} lg="12" xl="12">
                         <div className="d-flex">
@@ -55,7 +55,9 @@ class ListReview extends Component {
                         </p>
 
                         <MDBRow>
-                            {this.displayImages(item.images)}
+                            {
+                                item.images.length > 0 ? this.displayImages(item.images) : ''
+                            }
                         </MDBRow>
 
                         <p className="d-flex justify-content mt-1" style={{ fontSize: '20px', marginTop: '-20px' }}>

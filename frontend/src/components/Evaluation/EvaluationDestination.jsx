@@ -53,7 +53,7 @@ export default class EvaluationDestination extends Component {
             title,
             content,
             images: []
-        };
+        }, evalutions = destination.evaluations;
 
         if (files.length > 0) {
             await uploadMultipleImagePost(files, url => {
@@ -68,6 +68,9 @@ export default class EvaluationDestination extends Component {
 
                                 // console.log(res.data.result);
                                 // sử dụng this props để gọi đến thằng cha load Review vừa đánh giá
+                                evalutions.push(data);
+                                this.props.onReceiveReview(evalutions);
+
                             }
                         }).catch(err => console.log(err));
                 }
@@ -82,6 +85,8 @@ export default class EvaluationDestination extends Component {
                         this.setState({ destination, rating: ratingValue });
 
                         // sử dụng this props để gọi đến thằng cha load Review vừa đánh giá
+                        evalutions.push(data);
+                        this.props.onReceiveReview(evalutions);
                     }
                 }).catch(err => console.log(err));
         }

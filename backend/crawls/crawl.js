@@ -7,7 +7,7 @@ var fs = require('fs');
 
 const dbPlace = require('../models/Place');
 
-const data = JSON.parse(fs.readFileSync('./data/place.json', 'utf8'));
+const data = JSON.parse(fs.readFileSync('./datas/place.json', 'utf8'));
 
 var insertDocumentIntoMongodb = (places) => {
     console.log('Starting...')

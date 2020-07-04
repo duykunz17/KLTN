@@ -61,7 +61,7 @@ var getDestination = async (page) => {
     }
 
     console.log('OK');
-    fs.writeFileSync('./data/place.json', JSON.stringify(places), 'utf8');
+    fs.writeFileSync('./datas/place.json', JSON.stringify(places), 'utf8');
 
     await browser.close();
 })();
