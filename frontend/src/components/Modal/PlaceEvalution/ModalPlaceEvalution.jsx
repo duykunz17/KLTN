@@ -149,6 +149,7 @@ export default class ModalPlaceEvalution extends Component {
                             <div className="w-fit d-block m-0 pl-20 pr-20 mb-10">
                                 <textarea name="content" className="w-fit d-block bn bar-5 card5 outline-none content-p-5"
                                     value={content} onChange={this.onChange}
+                                    placeholder="Nội dung đánh giá"
                                     style={{ width: "160px", height: "100px", display: "inline-block", border: "5px dotted #ddd", borderRadius: "13px", overflow: "hidden" }} >
                                 </textarea>
                                 <div className="w-fit d-block">

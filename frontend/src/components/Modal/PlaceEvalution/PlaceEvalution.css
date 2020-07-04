@@ -110,9 +110,9 @@ button .close {
 .mt-10 {
     margin-top: 10px !important;
 }
-.d-block {
+/* .d-block {
     display: block !important;
-}
+} */
 .w-fit {
     width: 100% !important;
 }

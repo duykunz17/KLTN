@@ -193,7 +193,6 @@ export default class PostPersonal extends Component {
                             <div className="number">
                                 <span>
                                     <span style={{ fontWeight: 'bold', paddingRight: '130px', fontSize: '20px' }}>{currentPost.account.person.name}</span>
-
                                     <br />
                                     <Moment format="DD-MM-YYYY" style={{ fontSize: '20px' }}>
                                         {currentPost.postDate}

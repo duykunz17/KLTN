@@ -4,6 +4,7 @@ import Footer from '../components/Home/Footer';
 
 import callAPI from '../utils/connectAPI';
 import EvaluationDestination from '../components/Evaluation/EvaluationDestination';
+import ListReview from '../components/Destination/ListReview';
 class DestinationDetail extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +18,7 @@ class DestinationDetail extends Component {
         callAPI(`place/destination/${this.props.object.match.params.id}`, 'GET', null)
             .then(res => {
                 if(res.data.length > 0){
-                    // console.log(res.data[0]);
+                    //console.log(res.data[0]);
                     this.setState({
                         destination: res.data[0]
                     })
@@ -28,6 +29,7 @@ class DestinationDetail extends Component {
 
     render() {
         let { destination } = this.state;
+        
         if (destination === null)
             return null;
         return (
@@ -51,7 +53,13 @@ class DestinationDetail extends Component {
                             </div>
                             
                             {destination._id ? <EvaluationDestination destination={destination} /> : null}
-
+                            
+                            <div className="destination_info ml-3">
+                                <h3>Các đánh giá chia sẻ kinh nghiệm ở {destination.name}</h3> 
+                            </div>   
+                            
+                            <ListReview destination={destination} />
+                            
                         </div>
                     </div>
 

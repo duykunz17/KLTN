@@ -97,21 +97,23 @@ export default class EvaluationDestination extends Component {
         return (
             <div className="containt-review">
                 <div className="row">
-                    <div className="col-lg-4 col-md-4">
-                        <h3>Đánh giá</h3>
+                    <div className="col-lg-5 col-md-4" style={{marginLeft:'20px'}}>
+                        <h3>Đánh giá chung</h3>
                     </div>
-                    <div className="col-lg-2 col-md-2" />
-                    <div className="col-lg-4 col-md-4"> <h3>Đánh giá của bạn</h3> </div>
+                    <div className="col-lg-1 col-md-2" />
+                    <div className="col-lg-4 col-md-4" style={{marginLeft:'-25px'}}> <h3>Đánh giá của bạn</h3> </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-6 col-md-6 style-css">
                         <div className="ava-rating"> <p>{toFixedRating}</p> </div>
+                        <div className="ml-4">
                         <StarRating
                             numberOfStars={5}
                             value={toFixedRating}
                             size={40}
                             editing={false}
                         />
+                        </div>
                         <div className="total-rating"> <p>{destination.review} người đánh giá</p> </div>
                     </div>
                     {
