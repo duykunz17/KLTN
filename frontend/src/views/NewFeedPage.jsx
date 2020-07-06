@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
+
 import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
 
@@ -8,6 +10,11 @@ import News from '../components/Post/NewFeeds/News';
 import RecentTrip from '../components/RecentTrip';
 
 import callAPI from '../utils/connectAPI';
+
+import * as Config from '../constants/parameterConfig';
+import io from 'socket.io-client';
+const socket = io(Config.ENDPOINT_SOKET);
+
 class NewFeedPage extends Component {
     constructor(props) {
         super(props);
@@ -33,7 +40,22 @@ class NewFeedPage extends Component {
                         postsPopular: res.data
                     });
             })
-            .catch((err) => { console.log(err) })
+            .catch((err) => { console.log(err) });
+
+        let account = JSON.parse(sessionStorage.getItem("user"));
+        // ask connect socket.server
+        socket.emit('joinAdmin', { account }, () => { });
+
+        // receive result when admin has handled a post
+        socket.on('haveHandledPost', post => {
+            let p = post.result;
+            Swal.fire({
+                position: 'top-end',
+                title: p.account.person.name + ' đã chia sẻ cảm nghĩ',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
     }
 
     showPostPopular = (postsPopular) => {
@@ -63,7 +85,7 @@ class NewFeedPage extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header />
                 {
                     this.state.postsPopular.length > 0 ? (
 
@@ -72,7 +94,7 @@ class NewFeedPage extends Component {
                                 <div className="row justify-content-center">
                                     <div className="col-lg-6">
                                         <div className="section_title text-center mb_70">
-                                            <h2 style={{ fontWeight: 'bold', fontSize:'30px', color:'black' }} > Bài đăng nổi bật </h2>
+                                            <h2 style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }} > Bài đăng nổi bật </h2>
                                         </div>
                                     </div>
                                 </div>
@@ -85,9 +107,9 @@ class NewFeedPage extends Component {
                 }
 
                 <NewFeed>
-                    { this.displayListNews(this.state.posts) }
+                    {this.displayListNews(this.state.posts)}
                 </NewFeed>
-                <Footer/>
+                <Footer />
             </div>
         );
     }

@@ -52,7 +52,7 @@ const ROUTERS = [
     {
         path: '/product-detail/:id',
         exact: false,
-        main: (object) => <ProductDetailPage object={object} />
+        main: ({match, history}) => <ProductDetailPage match={match} history={history} />
     },
     {
         path: '/places',
@@ -62,12 +62,12 @@ const ROUTERS = [
     {
         path: '/places/:id',
         exact: true,
-        main: (object) => <PlaceDetailPage object={object} />
+        main: ({match, history}) => <PlaceDetailPage match={match} history={history} />
     },
     {
         path: '/places/destination/:id',
         exact : false,
-        main: (object) => <DestinationDetailPage object={object} />
+        main: ({match, history}) => <DestinationDetailPage match={match} history={history} />
     },
     {
         path: '/about',
@@ -82,7 +82,7 @@ const ROUTERS = [
     {
         path: '/schedule-detail/:id',
         exact: false,
-        main: (object) => <ScheduleDetailPage object={object} />
+        main: ({match, history}) => <ScheduleDetailPage match={match} history={history} />
     },
     {
         path: '/list-schedule',
@@ -93,7 +93,7 @@ const ROUTERS = [
     {
         path: '/post-detail/:id',
         exact: false,
-        main: ({match}) => <PostDetailPage match={match} />
+        main: ({match, history}) => <PostDetailPage match={match} history={history} />
     },
     {
         path: '/newfeed',

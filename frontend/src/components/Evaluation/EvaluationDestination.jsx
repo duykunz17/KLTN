@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 
 import './evaluation.css';
 
@@ -93,7 +94,13 @@ export default class EvaluationDestination extends Component {
     }
 
     onOpenToggleModal = (isButtonEvaluation) => {
-        this.setState({ isButtonEvaluation })
+        if (this.state.user)
+            this.setState({ isButtonEvaluation });
+        else
+            Swal.fire({
+                icon: 'warning',
+                title: "Vui lòng đăng nhập trước khi đánh giá.",
+            });
     }
 
     render() {
@@ -102,22 +109,22 @@ export default class EvaluationDestination extends Component {
         return (
             <div className="containt-review">
                 <div className="row">
-                    <div className="col-lg-5 col-md-4" style={{marginLeft:'20px'}}>
+                    <div className="col-lg-5 col-md-4" style={{ marginLeft: '20px' }}>
                         <h3>Đánh giá chung</h3>
                     </div>
                     <div className="col-lg-1 col-md-2" />
-                    <div className="col-lg-4 col-md-4" style={{marginLeft:'-25px'}}> <h3>Đánh giá của bạn</h3> </div>
+                    <div className="col-lg-4 col-md-4" style={{ marginLeft: '-25px' }}> <h3>Đánh giá của bạn</h3> </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-6 col-md-6 style-css">
                         <div className="ava-rating"> <p>{toFixedRating}</p> </div>
                         <div className="ml-4">
-                        <StarRating
-                            numberOfStars={5}
-                            value={toFixedRating}
-                            size={40}
-                            editing={false}
-                        />
+                            <StarRating
+                                numberOfStars={5}
+                                value={toFixedRating}
+                                size={40}
+                                editing={false}
+                            />
                         </div>
                         <div className="total-rating"> <p>{destination.review} người đánh giá</p> </div>
                     </div>
@@ -139,18 +146,25 @@ export default class EvaluationDestination extends Component {
                                             </div>
                                         </div>
                                     ) : (
-                                        <button className="btn btn-warning tt-uppercase"
-                                            data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
+                                            <button className="btn btn-warning tt-uppercase"
+                                                data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
 
-                                            Viết đánh giá
-                                        </button>
-                                    )
+                                                Viết đánh giá
+                                            </button>
+                                        )
                                 }
                                 {
                                     isButtonEvaluation ? <ModalPlaceEvalution destination={destination} onSubmitReview={this.onSubmitReview} /> : null
                                 }
                             </div>
-                        ) : null
+                        ) : (
+                                <div className="col-lg-4 col-md-4 style-css">
+                                    <button className="btn btn-warning tt-uppercase"
+                                        data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
+                                        Viết đánh giá
+                                    </button>
+                                </div>
+                            )
                     }
 
                 </div>

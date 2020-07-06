@@ -100,7 +100,7 @@ export default class News extends Component {
 
             callAPI(path + currentPost._id, 'POST', data)
                 .then(res => {
-                    if (res.data.result) {
+                    if (res !== undefined && res.data.result) {
                         if (actions === 3) {
                             sumLike--;
                             liked = false;
@@ -120,7 +120,7 @@ export default class News extends Component {
                             // post.interactions.forEach((el, index) => {
                             //     if (el.account._id === account._id)
                             //         el.like = liked;
-                                
+
                             //     if (index === post.interactions.length - 1) {
                             //         post.sumLike = sumLike;
                             //         socket.emit('interactiveAction', post);
@@ -128,6 +128,11 @@ export default class News extends Component {
                             // });
                         }
                     }
+                    else
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Bài đăng này đã bị xóa',
+                        })
                 })
                 .catch((err) => { console.log(err) })
         }

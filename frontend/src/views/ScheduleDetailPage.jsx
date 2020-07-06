@@ -17,12 +17,17 @@ class ScheduleDetailPage extends Component {
     }
 
     componentDidMount() {
-        callAPI(`schedule/${this.props.object.match.params.id}`, 'GET', null)
+        callAPI(`schedule/${this.props.match.params.id}`, 'GET', null)
             .then(res => {
-                this.setState({
-                    scheduleList: res.data.scheduleList,
-                    schedule: res.data
-                })
+                if (res !== undefined)
+                    this.setState({
+                        scheduleList: res.data.scheduleList,
+                        schedule: res.data
+                    });
+                else {
+                    let history = this.props.history;
+                    history.push('/notfound');
+                }
             })
             .catch((err) => console.log(err))
     }

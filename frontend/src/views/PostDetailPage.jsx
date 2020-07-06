@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
+
 import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
 
@@ -42,8 +44,14 @@ export default class PostDetailPage extends Component {
     loadAgainPostById = (post_id) => {
         callAPI('post/' + post_id, 'GET', null)
             .then(res => {
-                let post = res.data.post;
-                this.onSetState(post, this.state.account)
+                if (res !== undefined) {
+                    let post = res.data.post;
+                    this.onSetState(post, this.state.account);
+                }
+                else {
+                    let history = this.props.history;
+                    history.push('/notfound');
+                }
             })
     }
 
@@ -63,9 +71,14 @@ export default class PostDetailPage extends Component {
     onActionsLike = (currentPost, path, data) => {
         callAPI(path + currentPost._id, 'POST', data)
             .then(res => {
-                if (res.data.result) {
+                if (res !== undefined && res.data.result) {
                     this.loadAgainPostById(currentPost._id);
                 }
+                else
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Bài đăng này đã bị xóa',
+                    });
             })
             .catch((err) => { console.log(err) })
     }
@@ -76,9 +89,14 @@ export default class PostDetailPage extends Component {
 
         callAPI('post/comments/' + post._id, 'POST', comment)
             .then(res => {
-                if (res.data.result) {
+                if (res !== undefined && res.data.result) {
                     socket.emit('sendComment', comment, () => {});
                 }
+                else
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Bài đăng này đã bị xóa',
+                    });
             })
             .catch((err) => { console.log(err) })
     }

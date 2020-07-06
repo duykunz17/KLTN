@@ -20,17 +20,17 @@ router.route('/add').post((req, res) => {
 	// console.log(email);
 	if (email) {
 		let mailOptions = {
-			from: PARAMTERS.USER_SENDMAIL,
+			from: process.env.USER_SENDMAIL || PARAMTERS.USER_SENDMAIL,
 			to: account.person.email,
 			subject: title,
-			html: 'Hi, ' + account.person.name + '! Đây là thông tin hành trình của bạn: <p>Bắt đầu chuyến đi: <b>'+startDate.toString().substr(0,10)+'</b><p> <p>Kết thúc chuyến đi: <b>'+endDate.toString().substr(0,10)+'</b> <p> Các địa điểm khám phá:<b>'+hashtag.map(item => {return ' ' + item})+'</b></p> <p> Xem chi tiết lịch trình chuyến đi của bạn tại: <link>http://localhost:3000/list-schedule/ </link></p>'
+			html: 'Hi, ' + account.person.name + '! Đây là thông tin hành trình của bạn: <p>Bắt đầu chuyến đi: <b>'+startDate.toString().substr(0,10)+'</b><p> <p>Kết thúc chuyến đi: <b>'+endDate.toString().substr(0,10)+'</b> <p> Các địa điểm khám phá:<b>'+hashtag.map(item => {return ' ' + item})+'</b></p> <p> Xem chi tiết lịch trình chuyến đi của bạn tại: <link>localhost:3000/list-schedule/ </link></p>'
 		};
 		
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-			  user: PARAMTERS.USER_SENDMAIL,
-			  pass: PARAMTERS.PASS_SENDMAIL
+			  user: process.env.USER_SENDMAIL || PARAMTERS.USER_SENDMAIL,
+			  pass: process.env.PASS_SENDMAIL || PARAMTERS.PASS_SENDMAIL
 			}
 		});
 		

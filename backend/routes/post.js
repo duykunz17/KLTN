@@ -123,7 +123,7 @@ router.route('/:id').get((req, res) => {
                 comments.forEach(async (el, index) => {
                     let acc = await getAccountById(el.account._id);
                     el.account = acc;
-                    if (index === comments.length - 1) {
+                    if (index == comments.length - 1) {
                         post.comments = comments;
                         return res.json({post});
                     }

@@ -16,22 +16,28 @@ class DestinationDetail extends Component {
     }
 
     componentDidMount() {
-        callAPI(`place/destination/${this.props.object.match.params.id}`, 'GET', null)
+        callAPI(`place/destination/${this.props.match.params.id}`, 'GET', null)
             .then(res => {
-                if(res.data.length > 0) {
-                    let destination = res.data[0];
+                if (res !== undefined) {
+                    if (res.data.length > 0) {
+                        let destination = res.data[0];
 
-                    this.setState({
-                        destination,
-                        evaluations: destination.evaluations
-                    })
+                        this.setState({
+                            destination,
+                            evaluations: destination.evaluations
+                        })
+                    }
+                }
+                else {
+                    let history = this.props.history;
+                    history.push('/notfound');
                 }
             })
             .catch((err) => console.log(err))
     }
 
     onReceiveReview = (evaluations) => {
-        this.setState({evaluations});
+        this.setState({ evaluations });
     }
 
     render() {
@@ -40,7 +46,7 @@ class DestinationDetail extends Component {
             return null;
         return (
             <div>
-                <Header/>
+                <Header />
                 <div>
                     <div className="destination_banner_wrap overlay" style={{ backgroundImage: `url(${destination.images})` }}>
                         <div className="destination_text text-center">
@@ -57,11 +63,11 @@ class DestinationDetail extends Component {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             {destination._id ? <EvaluationDestination destination={destination} onReceiveReview={this.onReceiveReview} /> : null}
-                            
+
                             <div className="destination_info ml-3">
-                                <h3>Các đánh giá chia sẻ kinh nghiệm ở {destination.name}</h3> 
+                                <h3>Các đánh giá chia sẻ kinh nghiệm ở {destination.name}</h3>
                             </div>
                             {
                                 evaluations.length > 0 ? <ListReview evaluations={evaluations} /> : null

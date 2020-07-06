@@ -16,11 +16,16 @@ class PlaceDetailPage extends Component {
     }
 
     componentDidMount() {
-        callAPI(`place/${this.props.object.match.params.id}`, 'GET', null)
+        callAPI(`place/${this.props.match.params.id}`, 'GET', null)
             .then(res => {
-                this.setState({
-                    place: res.data
-                })
+                if (res !== undefined)
+                    this.setState({
+                        place: res.data
+                    });
+                else {
+                    let history = this.props.history;
+                    history.push('/notfound');
+                }
             })
             .catch((err) => console.log(err))
     }

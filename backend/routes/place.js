@@ -111,11 +111,34 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error' + err))
 })
 
+/** get account by Id */
+var dbAccount = require('../models/Account');
+var getAccountById = async (account_id) => {
+    let account = await dbAccount.findById(account_id)
+        .then(result => {
+            // console.log(result);
+            return result;
+        })
+        .catch(err => err);
+    return account;
+}
 router.route('/destination/:id').get((req, res) => {
     dbPlace.find({destination:{$elemMatch: {_id: req.params.id}}})
         .then(places => 
-            places.map(place => {
-                return res.json(place.destination.filter(des => des._id == req.params.id));
+            places.map(async place => {
+                let destination = await place.destination.filter(des => des._id == req.params.id);
+                let evaluations = destination[0].evaluations;
+                if (evaluations.length > 0) {
+                    evaluations.forEach(async (el, index) => {
+                        el.account = await getAccountById(el.account._id);
+                        if (index == evaluations.length - 1) {
+                            destination[0].evaluations = evaluations;
+                            return res.json(destination);
+                        }
+                    });
+                }
+                else
+                    return res.json(destination);
             })
         )
         .catch(err => res.status(400).json('Error' + err))

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
     constructor (props) {
@@ -81,9 +82,11 @@ class Login extends Component {
                     <button type="submit" className="login100-form-btn"> Đăng nhập </button>
                 </div>
                 <div className="text-center p-t-15">
-                    {/* <Link className="txt" to='/'>
-                        Quên mật khẩu?
-                    </Link> */}
+                    <Link className="txt" to='/' style={{fontSize: "16px"}}>
+                        <i className="fa fa-long-arrow-left m-l-5" aria-hidden="true" />
+                        &nbsp;
+                        Trang chủ
+                    </Link>
                 </div>
             </form>
         );

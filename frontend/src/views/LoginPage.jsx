@@ -69,7 +69,7 @@ export default class LoginPage extends Component {
                             <LinkSocialNetworks onLinkSocialNetWorks={this.onLinkSocialNetWorks} />
 
                             <div className="text-center p-t-20">
-                                <Link to='/sign-up' className="txt2">
+                                <Link to='/sign-up' className="txt2" style={{fontSize: "16px"}}>
                                     Đăng ký
                                     <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
                                 </Link>

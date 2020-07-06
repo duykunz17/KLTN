@@ -52,7 +52,13 @@ io.on('connection', (socket) => {
 
     // handling review post of admin
     socket.on('joinAdmin', ({account}, callback) => {
-        let { error, user } = addUser({id: socket.id, name: account._id, room: 'adminroom'});
+        let name = '';
+        if (account)
+            name = account._id;
+        else
+            name = socket.id;
+
+        let { error, user } = addUser({id: socket.id, name, room: 'adminroom'});
         if (error) return callback(error);
 
         // console.log(getUserInPost('adminroom'))
@@ -67,12 +73,22 @@ io.on('connection', (socket) => {
         // It is sent to all users in the room
         io.to(user.room).emit('receivePost', {result: post});
 
+        // this user is deleting his a post
+        // if (post.status === 'A')
+        //     io.to(user.room).emit('deletePost', {result: post});
+
         callback();
     });
     socket.on('handlingPost', (post, callback) => {
         // It is only sent to one user
         let account = getUserByName(post.account._id);
         io.to(account.id).emit('resultHandling', {result: post});
+
+        if (post.status === 'A') {
+            // Sending a announment from newfeeds page.
+            let userAdmin = getUser(socket.id);
+            io.to(userAdmin.room).emit('haveHandledPost', {result: post});
+        }
 
         callback();
     });

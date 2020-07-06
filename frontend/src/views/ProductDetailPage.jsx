@@ -14,11 +14,16 @@ class ProductDetailPage extends Component {
     }
 
     componentDidMount() {
-        callAPI(`product/${this.props.object.match.params.id}`, 'GET', null)
+        callAPI(`product/${this.props.match.params.id}`, 'GET', null)
             .then(res => {
-                this.setState({
-                    product: res.data
-                })
+                if (res !== undefined)
+                    this.setState({
+                        product: res.data
+                    });
+                else {
+                    let history = this.props.history;
+                    history.push('/notfound');
+                }
             })
             .catch((err) => console.log(err))
     }
