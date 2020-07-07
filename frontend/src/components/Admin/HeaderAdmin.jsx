@@ -21,7 +21,7 @@ class HeaderAdmin extends Component {
             window.location.href = '/login';
         }
     }
-    
+
     render() {
         return (
             <header>
@@ -57,25 +57,19 @@ class HeaderAdmin extends Component {
                                     </div>
                                     <div className="col-xl-4 col-lg-4 d-none d-lg-block">
                                         <div className="social_wrap d-flex align-items-center justify-content-end">
-                                            {/* {
-                                                user ? (
-                                                    <div className="avatar">
-                                                        {
-                                                            this.state.filePath ?
-                                                                <img src={this.state.filePath} className="avatar" alt="ava"/>
-                                                            :
-                                                            <img src={user.avatar} className="avatar" alt="ava" />
-                                                        }
-                                                    </div>
-                                                ) : ''
-                                            } */}
+                                            <div className="number">
+                                                <span> Admin </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="seach_icon">
-                                            <Link to='/login'>
-                                                <i className="fa fa-sign-out" style={{fontSize: '1.5rem'}} onClick={() => this.isLogout()}></i>
-                                            </Link>
+                                        <Link to='/login'>
+                                            <i className="fa fa-sign-out" style={{ fontSize: '1.5rem' }} onClick={() => this.isLogout()}></i>
+                                        </Link>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="mobile_menu d-block d-lg-none"></div>
                                     </div>
                                 </div>
                             </div>

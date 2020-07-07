@@ -5,8 +5,7 @@ var http = require('http');
 
 var createError = require('http-errors');
 var path = require('path');
-// var cookieParser = require('cookie-parser');
-// var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 // connect mongodb
 require('./configures/mongodb');
@@ -14,12 +13,15 @@ require('./configures/mongodb');
 var app = express();
 const port = process.env.PORT || 3001;
 
+// use to connect gmail
+// https://accounts.google.com/b/0/DisplayUnlockCaptcha
+
 app.use(cors());
-// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 var server = http.createServer(app);
 
 var io = socketio(server);
@@ -37,7 +39,6 @@ io.on('connection', (socket) => {
         if (error) return callback(error);
 
         socket.join(user.room);
-
         // callback({users: getUserInRoom(user.room)});
         callback();
     });
@@ -46,7 +47,6 @@ io.on('connection', (socket) => {
         io.to(user.room).emit('comment', {result: comment});
 
         // io.emit('listUserOnline', {room: user.room, users: getUserInRoom(user.room)});
-
         callback();
     });
 
@@ -71,7 +71,8 @@ io.on('connection', (socket) => {
     socket.on('submitPost', (post, callback) => {
         let user = getUser(socket.id);
         // It is sent to all users in the room
-        io.to(user.room).emit('receivePost', {result: post});
+        if (user)
+            io.to(user.room).emit('receivePost', {result: post});
 
         // this user is deleting his a post
         // if (post.status === 'A')
@@ -82,7 +83,8 @@ io.on('connection', (socket) => {
     socket.on('handlingPost', (post, callback) => {
         // It is only sent to one user
         let account = getUserByName(post.account._id);
-        io.to(account.id).emit('resultHandling', {result: post});
+        if (account)
+            io.to(account.id).emit('resultHandling', {result: post});
 
         if (post.status === 'A') {
             // Sending a announment from newfeeds page.
@@ -139,10 +141,10 @@ app.use('/bill', billRouter);
 app.use('/post', postRouter);
 app.use('/schedule', scheduleRouter);
 
-// app.use(express.static(path.join(__dirname, 'build')));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-//   });
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 
 // catch 404 and forward to error handler

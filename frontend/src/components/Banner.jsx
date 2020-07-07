@@ -22,11 +22,11 @@ class Banner extends Component {
                         </div>
 
                         <div className="carousel-item">
-                            <img src="https://media.gody.vn//images/lam-dong/doi-che-cau-dat/1-2017/20170104091915-doi-che-cau-dat-gody%20(5).jpg" style={{width:'1920px', height:'650px'}} className="d-block w-100" alt="..." />
+                            <img src="https://media.gody.vn//images/binh-dinh/eo-gio/11-2016/20161111080624-eo-gio-quy-nhon-gody%20(2).jpg" style={{width:'1920px', height:'650px'}} className="d-block w-100" alt="..." />
                             <div className="carousel-caption d-md-block">
-                                <h3>Cau Dat</h3>
-                                <p>Tp. Đà Lạt, Tỉnh Lâm Đồng</p>
-                                <Link to="/places/destination/5f004219df601cc08d5ea694" className="boxed-btn3">Khám phá ngay</Link>
+                                <h3>Eo Gio</h3>
+                                <p>Tp. Quy Nhơn, Tỉnh Bình Định</p>
+                                <Link to="/places/destination/5f004219df601cc08d5eaab0" className="boxed-btn3">Khám phá ngay</Link>
                             </div>
                         </div>
                         

@@ -18,10 +18,11 @@ class PlaceDetailPage extends Component {
     componentDidMount() {
         callAPI(`place/${this.props.match.params.id}`, 'GET', null)
             .then(res => {
-                if (res !== undefined)
+                if (res !== undefined) {
                     this.setState({
                         place: res.data
                     });
+                }
                 else {
                     let history = this.props.history;
                     history.push('/notfound');
@@ -70,12 +71,16 @@ class PlaceDetailPage extends Component {
                 <Header />
 
                 <div>
-                    <div className="destination_banner_wrap overlay" style={{ backgroundImage: `url(${place.images})` }}>
-                        <div className="destination_text text-center">
-                            <h3>{place.name}</h3>
-                            <p>{place.area}</p>
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src={place.images} style={{width:'1920px', height:'650px'}} className="d-block w-100" alt="..." />
+                            <div className="carousel-caption d-md-block">
+                                <h3 style={{marginTop:'-200px', fontFamily:'"Times New Roman", Times, serif', fontStyle:"italic", fontSize: "95px"}}>{place.name}</h3>
+                                <p>{place.area}</p>
+                            </div>
                         </div>
                     </div>
+
                     <div className="destination_details_info">
                         <div className="container">
                             <div className="row justify-content-center">

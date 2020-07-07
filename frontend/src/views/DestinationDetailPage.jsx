@@ -48,9 +48,10 @@ class DestinationDetail extends Component {
             <div>
                 <Header />
                 <div>
-                    <div className="destination_banner_wrap overlay" style={{ backgroundImage: `url(${destination.images})` }}>
-                        <div className="destination_text text-center">
-                            <h3>{destination.name}</h3>
+                    <div className="carousel-item active">
+                        <img src={destination.images} style={{ width: '1920px', height: '650px' }} className="d-block w-100" alt="..." />
+                        <div className="carousel-caption d-md-block">
+                            <h3 style={{ marginTop: '-250px', fontFamily: '"Times New Roman", Times, serif', fontStyle: "italic" }}>{destination.name}</h3>
                         </div>
                     </div>
                     <div className="destination_details_info">
@@ -77,7 +78,7 @@ class DestinationDetail extends Component {
 
                 </div>
                 <Footer />
-            </div>
+            </div >
         );
     }
 }

@@ -49,12 +49,20 @@ class NewFeedPage extends Component {
         // receive result when admin has handled a post
         socket.on('haveHandledPost', post => {
             let p = post.result;
-            Swal.fire({
+            Swal.mixin({
+                toast: true,
                 position: 'top-end',
-                title: p.account.person.name + ' đã chia sẻ cảm nghĩ',
                 showConfirmButton: false,
-                timer: 1500
-            });
+                timer: 3000,
+                timerProgressBar: true,
+                onOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            }).fire({
+                icon: 'info',
+                title: p.account.person.name + ' đã chia sẻ cảm nghĩ'
+            })
         });
     }
 
