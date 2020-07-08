@@ -108,65 +108,72 @@ export default class EvaluationDestination extends Component {
         let toFixedRating = Number(destination.rating).toFixed(1);
         return (
             <div className="containt-review">
-                <div className="row">
-                    <div className="col-lg-5 col-md-4" style={{ marginLeft: '20px' }}>
-                        <h3>Đánh giá chung</h3>
-                    </div>
-                    <div className="col-lg-1 col-md-2" />
-                    <div className="col-lg-4 col-md-4" style={{ marginLeft: '-25px' }}> <h3>Đánh giá của bạn</h3> </div>
-                </div>
-                <div className="row">
-                    <div className="col-lg-6 col-md-6 style-css">
-                        <div className="ava-rating"> <p>{toFixedRating}</p> </div>
-                        <div className="ml-4">
-                            <StarRating
-                                numberOfStars={5}
-                                value={toFixedRating}
-                                size={40}
-                                editing={false}
-                            />
+                <div className="review-left">
+                    <div className="row">
+                        <div className="col-lg-12 col-md-12">
+                            <h3>Đánh giá chung</h3>
                         </div>
-                        <div className="total-rating"> <p>{destination.review} người đánh giá</p> </div>
                     </div>
-                    {
-                        user ? (
-                            <div className="col-lg-4 col-md-4 style-css">
-                                {
-                                    rating > 0 ? (
-                                        <div>
-                                            <div className="ava-your-rating"> <p>{rating}.0</p> </div>
-                                            <div className="your-rating">
-                                                <StarRating
-                                                    numberOfStars={5}
-                                                    value={rating}
-                                                    size={40}
-                                                    // If rating > 0 then you have evaluated so you can't edit
-                                                    editing={false}
-                                                />
-                                            </div>
-                                        </div>
-                                    ) : (
-                                            <button className="btn btn-warning tt-uppercase"
-                                                data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
-
-                                                Viết đánh giá
-                                            </button>
-                                        )
-                                }
-                                {
-                                    isButtonEvaluation ? <ModalPlaceEvalution destination={destination} onSubmitReview={this.onSubmitReview} /> : null
-                                }
+                    <div className="row">
+                        <div className="col-lg-12 col-md-12 style-review">
+                            <div className="ava-rating"> <p>{toFixedRating}</p> </div>
+                            <div className="ml-4">
+                                <StarRating
+                                    numberOfStars={5}
+                                    value={toFixedRating}
+                                    size={40}
+                                    editing={false}
+                                />
                             </div>
-                        ) : (
-                                <div className="col-lg-4 col-md-4 style-css">
-                                    <button className="btn btn-warning tt-uppercase"
-                                        data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
-                                        Viết đánh giá
-                                    </button>
-                                </div>
-                            )
-                    }
+                            <div className="total-rating"> <p>{destination.review} người đánh giá</p> </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div className="review-right">
+                    <div className="row">
+                        <div className="col-lg-12 col-md-12" style={{ marginLeft: '-25px' }}> <h3>Đánh giá của bạn</h3> </div>
+                    </div>
+                    <div className="row">
+                        {
+                            user ? (
+                                <div className="col-lg-12 col-md-12">
+                                    {
+                                        rating > 0 ? (
+                                            <div className="style-rating">
+                                                <div className="ava-your-rating"> <p>{rating}.0</p> </div>
+                                                <div>
+                                                    <StarRating
+                                                        numberOfStars={5}
+                                                        value={rating}
+                                                        size={40}
+                                                        // If rating > 0 then you have evaluated so you can't edit
+                                                        editing={false}
+                                                    />
+                                                </div>
+                                            </div>
+                                        ) : (
+                                                <button className="btn btn-warning tt-uppercase"
+                                                    data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
+
+                                                    Viết đánh giá
+                                                </button>
+                                            )
+                                    }
+                                    {
+                                        isButtonEvaluation ? <ModalPlaceEvalution destination={destination} onSubmitReview={this.onSubmitReview} /> : null
+                                    }
+                                </div>
+                            ) : (
+                                    <div className="col-lg-12 col-md-12">
+                                        <button className="btn btn-warning tt-uppercase"
+                                            data-toggle="modal" data-target="#placeReview" onClick={() => this.onOpenToggleModal(true)}>
+                                            Viết đánh giá
+                                        </button>
+                                    </div>
+                                )
+                        }
+                    </div>
                 </div>
             </div>
         );

@@ -16,8 +16,15 @@
 .containt-review .row h3 {
     margin-left: 80px;
 }
-.style-css {
-    margin-top: 25px;
+
+.review-left {
+    float: left;
+    width: 485px;
+    text-align: center;
+}
+
+.style-review {
+    margin-left: 30px;
 }
 .ava-rating p {
     font-size: 45px;
@@ -40,16 +47,13 @@
     text-transform: uppercase;
     width: 230px;
     height: 50px;
-    margin-left: 85px;
-    margin-top: 15px;
+    margin: 50px 2px 105px 20px;
 }
-.your-rating {
-    margin-left: 85px;
-    /* margin-top: 80px; */
+.style-rating {
+    margin: 35px 5px 80px 10px;
 }
 .ava-your-rating p {
     font-size: 45px;
     font-weight: bold;
-    margin-left: 80px;
     margin-bottom: 25px;
 }
