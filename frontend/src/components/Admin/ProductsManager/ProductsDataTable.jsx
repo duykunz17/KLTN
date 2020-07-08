@@ -204,6 +204,7 @@ class DataTable extends Component {
                                 pagesAmount={10}
                                 paginationLabel={["Trang trước", "Trang kế"]}
                                 searchLabel="Tìm theo tên sản phẩm"
+                                noRecordsFoundLabel="Không tìm thấy sản phẩm"
                                 noBottomColumns
                             >
                             </MDBDataTable>

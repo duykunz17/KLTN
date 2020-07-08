@@ -53,10 +53,10 @@ export default class ItemPurchase extends Component {
                         <p>Giá: ${product.price} </p>
                     </div>
                 </div>
-                <div className="col-lg-3 col-md-3 style-review">
+                <div className="col-lg-3 col-md-3 style-review-purchase">
                     <p> ${product.quantity * product.price} </p>
                 </div>
-                <div className="col-lg-3 col-md-3 style-review">
+                <div className="col-lg-3 col-md-3 style-review-purchase">
                     {
                         this.props.isCheckout === false ? null : (
                             // if product.itemEvaluation === null

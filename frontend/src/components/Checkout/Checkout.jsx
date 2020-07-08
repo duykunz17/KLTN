@@ -45,6 +45,7 @@ class Checkout extends Component {
     };
 
     onSaveBill = (checkout) => {
+        console.log(this.state.shipAddress)
         if (this.state.shipAddress !== '')
             this.props.onOrderProducts(checkout, this.state.shipAddress);
         else
@@ -63,17 +64,17 @@ class Checkout extends Component {
                     <div className="panel-left">
                         <div className="panel-title">Thông tin cá nhân</div>
                         <div className="panel-body">
-                            <h5>Tên:</h5>
-                            <p>{user.person.name}</p>
-                            <h5>Số điện thoại :</h5>
-                            <p>{user.person.phone}</p>
-                            <h5>Email: </h5>
-                            <p>{user.person.email}</p>
+                            <p>Tên: <span style={{fontSize: "16px", fontWeight: "800"}}>{user.person.name}</span> </p>
+                            <br />
+                            <p>Số điện thoại: <span style={{fontSize: "16px", fontWeight: "800"}}>{user.person.phone}</span> </p>
+                            <br />
+                            <p>Email: <span style={{fontSize: "16px", fontWeight: "800"}}>{user.person.email}</span> </p>
+                            <br />
                         </div>
                         <div className="panel-title">Địa chỉ nhận hàng</div>
                         <div className="panel-body">
                             
-                            <input className="form-control" type="text" defaultValue={this.state.shipAddress} name="shipAddress" onChange={(event) => this.onChange(event)}/>
+                            <input className="form-control" type="text" value={this.state.shipAddress} name="shipAddress" onChange={(event) => this.onChange(event)}/>
                         </div>
                     </div>
                     <div className="panel-right">

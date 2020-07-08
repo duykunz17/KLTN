@@ -97,7 +97,7 @@ class PlaceDetailPage extends Component {
 
                     <div className="popular_places_area">
                         <div className="container">
-                            <h3>Các điểm du lịch tại {place.name}</h3>
+                            <h3 style={{marginBottom: "25px"}}>Các điểm du lịch tại {place.name}</h3>
                             <div className="row">
                                 {this.showDestination(place)}
                             </div>

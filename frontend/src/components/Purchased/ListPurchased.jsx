@@ -49,7 +49,7 @@ export default class ListPurchase extends Component {
 
                         </div>
                         <div className="col-lg-4 col-md-4" style={{paddingLeft: "120px"}}>
-                            <p className="style-font">Tổng tiền: &nbsp; ${bill.total} </p>
+                            <p className="style-total">Tổng tiền: &nbsp; ${bill.total} </p>
                         </div>
                     </div>
 

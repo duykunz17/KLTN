@@ -16,7 +16,8 @@ class ProductDetailPage extends Component {
     componentDidMount() {
         callAPI(`product/${this.props.match.params.id}`, 'GET', null)
             .then(res => {
-                if (res !== undefined)
+                console.log(res);
+                if (res !== undefined && res.data)
                     this.setState({
                         product: res.data
                     });

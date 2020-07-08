@@ -79,7 +79,7 @@ router.route('/update/:id').post((req, res) => {
         { _id: req.params.id, "billDetail._id": product._id },
         { $set: { "billDetail.$.itemEvaluation": product.itemEvaluation } }
     )
-        .then(() => {
+        .then(res, () => {
             dbProduct.findById(product._id).then(el => {
                 if (el) {
                     if (el.rating && el.review) {
@@ -94,7 +94,7 @@ router.route('/update/:id').post((req, res) => {
                         el.review = 1;
                     }
                     el.rating = el.rating.toFixed(1);
-                    el.save().then(res => res.json({ product }));
+                    return el.save().then(res => res.json({ product }));
                 }
             });
         })

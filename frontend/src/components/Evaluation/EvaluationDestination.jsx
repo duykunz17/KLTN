@@ -115,7 +115,7 @@ export default class EvaluationDestination extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-12 col-md-12 style-review">
+                        <div className="col-lg-12 col-md-12 style-destination-review">
                             <div className="ava-rating"> <p>{toFixedRating}</p> </div>
                             <div className="ml-4">
                                 <StarRating

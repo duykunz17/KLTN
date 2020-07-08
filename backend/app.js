@@ -44,6 +44,9 @@ io.on('connection', (socket) => {
     });
     socket.on('sendComment', (comment, callback) => {
         let user = getUser(socket.id);
+
+        comment.commentDate = new Date();
+
         io.to(user.room).emit('comment', {result: comment});
 
         // io.emit('listUserOnline', {room: user.room, users: getUserInRoom(user.room)});

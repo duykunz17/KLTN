@@ -53,16 +53,16 @@ class Footer extends Component {
                                 <div className="footer_widget">
                                     <h3 className="footer_title"> Địa điểm </h3>
                                     <ul className="links double_links">
-                                        <li><Link to='/places/5eeb32cf98f87129604c4ecc'>Cà Mau</Link></li>
-                                        <li><Link to='/places/5eeb31b398f87129604c4793'>Hà Nội</Link></li>
-                                        <li><Link to='/places/5eeb31db98f87129604c48e0'>Lâm Đồng</Link></li>
-                                        <li><Link to='/places/5eeb31ba98f87129604c480f'>Tp. Hồ Chí Minh</Link></li>
-                                        <li><Link to='/places/5eeb322798f87129604c4ac6'>Cần Thơ</Link></li>
-                                        <li><Link to='/places/5eeb32b798f87129604c4e40'>Đồng Tháp</Link></li>
-                                        <li><Link to='/places/5eeb31c698f87129604c485a'>Đà Nẵng</Link></li>
-                                        <li><Link to='/places/5eeb31cc98f87129604c48aa'>Bà Rịa - Vũng Tàu</Link></li>
-                                        <li><Link to='/places/5eeb32df98f87129604c4f0c'>Hà Giang</Link></li>
-                                        <li><Link to='/places/5eeb321a98f87129604c4a95'>Hải Phòng</Link></li>
+                                        <li><Link to='/places/5f004219df601cc08d5eac72'>Cà Mau</Link></li>
+                                        <li><Link to='/places/5f004218df601cc08d5ea53a'>Hà Nội</Link></li>
+                                        <li><Link to='/places/5f004219df601cc08d5ea687'>Lâm Đồng</Link></li>
+                                        <li><Link to='/places/5f004218df601cc08d5ea5b6'>Tp. Hồ Chí Minh</Link></li>
+                                        <li><Link to='/places/5f004219df601cc08d5ea86d'>Cần Thơ</Link></li>
+                                        <li><Link to='/places/5f004219df601cc08d5eabe6'>Đồng Tháp</Link></li>
+                                        <li><Link to='/places/5f004218df601cc08d5ea601'>Đà Nẵng</Link></li>
+                                        <li><Link to='/places/5f004219df601cc08d5ea651'>Bà Rịa - Vũng Tàu</Link></li>
+                                        <li><Link to='/places/5f004219df601cc08d5eacb2'>Hà Giang</Link></li>
+                                        <li><Link to='/places/5f004219df601cc08d5ea83c'>Hải Phòng</Link></li>
                                     </ul>
                                 </div>
                             </div>

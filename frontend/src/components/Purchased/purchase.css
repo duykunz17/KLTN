@@ -15,6 +15,11 @@
     font-size: 20px;
     font-weight: bold;
 }
+.style-total {
+    margin-left: 75px;
+    font-size: 20px;
+    font-weight: bold;
+}
 
 .item-purchase {
     padding-left: 35px;
@@ -29,7 +34,7 @@
     float: left;
 }
 
-.style-review {
+.style-review-purchase {
     text-align: center;
     padding-top: 35px;
 }
