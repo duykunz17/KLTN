@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 
 import uploadMultipleImagePost from '../../../utils/uploadMultipleImagePost';
+import callAPI from '../../../utils/connectAPI';
 
 export default class FormPost extends Component {
     constructor(props) {
@@ -9,7 +10,9 @@ export default class FormPost extends Component {
         this.state = {
             content: '',
             files: [],
-            filePath: []
+            filePath: [],
+            tag: '',
+            listTag: []
         }
     }
 
@@ -68,7 +71,7 @@ export default class FormPost extends Component {
 
     onSubmit = async (event) => {
         event.preventDefault();
-        let { images, files } = this.state;
+        let { images, files, tag } = this.state;
         if (files.length <= 0)
             Swal.fire({
                 icon: 'warning',
@@ -88,21 +91,74 @@ export default class FormPost extends Component {
 
             if (checkImage) {
                 document.getElementById('errImage').innerHTML = '';
-                await uploadMultipleImagePost(files, url => {
-                    images = url;
-                    if (images.length === files.length) {
-                        let post = {
-                            content: this.state.content,
-                            images: images
+                let rexTag = /(^#)([a-zA-Z\d]+)/;
+                if (!rexTag.test(tag))
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Bạn chưa chọn tag địa điểm'
+                    });
+
+                else
+                    await uploadMultipleImagePost(files, url => {
+                        images = url;
+                        if (images.length === files.length) {
+                            let post = {
+                                content: this.state.content,
+                                images: images,
+                                hashtag: tag
+                            }
+                            this.props.onSavePost(post);
                         }
-                        this.props.onSavePost(post);
-                    }
-                });
+                    });
             }
         }
     }
 
+    onChangeTag = async (event) => {
+        var name = event.target.name;
+        var value = event.target.value;
+
+        this.setState({
+            [name]: value
+        });
+
+        let rexTag = /(^#)([a-zA-Z\d]+)/;
+        if (value && !rexTag.test(value))
+            await callAPI(`place/hashtag=${value}`, 'GET', null)
+                .then(async res => {
+                    if (res !== undefined) {
+                        let { places } = res.data;
+                        if (places.length > 0) {
+                            let listTag = [];
+                            places.forEach(item => {
+                                let des = item.destination.filter(el => el.name.toLowerCase().indexOf(value.toLowerCase()) > -1);
+                                des.forEach((el, index) => {
+                                    if (index < 5)
+                                        listTag.push(el.name);
+                                });
+                            });
+                            this.setState({ listTag });
+                        }
+                    }
+                })
+                .catch((err) => { console.log(err) });
+    }
+
+    showListTags = (listTag) => {
+        let result = null;
+        if (listTag.length > 0) {
+            result = listTag.map((el, index) => {
+                return (
+                    <option key={index} value={"#" + el} />
+                );
+            });
+        }
+        return result;
+    }
+
     render() {
+        let { tag, listTag } = this.state;
+
         return (
             <div className="card w-100" style={{ borderRadius: '10px' }}>
                 <p className="text-center mt-3" style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}> Tạo bài viết </p>
@@ -119,6 +175,17 @@ export default class FormPost extends Component {
                         {
                             this.state.filePath.length > 0
                                 ? this.displayListImagePost(this.state.filePath)
+                                : null
+                        }
+                    </div>
+                    <div className="input-group mt-2 mb-4">
+                        <input list="browsers" name="tag" className="text-hashtag btn-lg btn-block"
+                            placeholder="Tag địa điểm check-in" onChange={(event) => this.onChangeTag(event)} value={tag} />
+                        {
+                            listTag.length > 0 ?
+                                <datalist id="browsers" >
+                                    {this.showListTags(listTag)}
+                                </datalist>
                                 : null
                         }
                     </div>

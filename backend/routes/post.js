@@ -83,14 +83,38 @@ router.route('/account/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error' + err));
 });
 
+router.route('/search=:info').get((req, res) => {
+    let info = req.params.info;
+    if (info) {
+        dbPost.find({"status": 'A', $or: [
+                // $options: 'i' không phân biệt hoa thường
+                {content: {$regex: info, $options: 'i'}},
+                {hashtag: {$regex: info, $options: 'i'}}
+            ]
+        }).sort({ postDate: -1 })
+            .then(posts => {
+                if (posts.length > 0) {
+                    posts.forEach(async (el, index) => {
+                        let acc = await getAccountById(el.account._id);
+                        el.account = acc;
+        
+                        if (index === posts.length - 1)
+                            return res.json({posts});
+                    });
+                }
+                else
+                    res.json({message: 'Không tìm thấy thông tin bài viết liên quan'});
+            })
+            .catch(err => res.status(400).json('Error' + err))
+    }
+});
+
 router.route('/add').post((req, res) => {
-    let account = req.body.account;
-    let content = req.body.content;
+    let {account, content, hashtag, images} = req.body;
     let postDate = moment(new Date());
-    let images = req.body.images;
     let status = 'W';         // W: waiting (chờ duyệt), D: deleted (hủy bài đăng), A: accepted (chấp nhận)
 
-    var newPost = new dbPost({ account, content, postDate, images, status, sumLike: 0, interactions: [], comments: [] });
+    var newPost = new dbPost({ account, content, postDate, images, status, hashtag, sumLike: 0, interactions: [], comments: [] });
     newPost.save()
         .then(() => res.json({ result: newPost }))
         .catch(err => res.status(400).json('Error' + err))

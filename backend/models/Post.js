@@ -10,6 +10,7 @@ const postSchema = new Schema({
     sumLike: {type: Number},
     sumComment: {type: Number},
     status: {type: String},
+    hashtag: {type: String},
     interactions: [
         {
             like: {type: Boolean},

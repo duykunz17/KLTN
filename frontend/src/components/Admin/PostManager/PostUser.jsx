@@ -85,6 +85,9 @@ export default class PostUser extends Component {
                 <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
                     {currentPost.content}
                 </p>
+                <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
+                    {currentPost.hashtag}
+                </p>
                 <MDBRow>
                     {currentPost.images.map((img, index) => {
                         if (currentPost.images.length === 1) {

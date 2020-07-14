@@ -209,6 +209,9 @@ export default class PostPersonal extends Component {
                 <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
                     {currentPost.content}
                 </p>
+                <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
+                    {currentPost.hashtag}
+                </p>
                 <p className="d-flex justify-content-end" style={{ fontSize: '20px' }}>Trạng thái: &nbsp; {this.showStatusOfPost(currentPost.status)}</p>
                 <MDBRow>
                     {currentPost.images.map((img, index) => {

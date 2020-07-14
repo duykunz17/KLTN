@@ -191,6 +191,18 @@
   font-weight: 400;
 }
 
+.text-hashtag {
+  font-size: 24px;
+  line-height: 2.5;
+  color: #666666;
+  display: block;
+  width: 100%;
+  background-color: #f2f0f5;
+  height: 50px;
+  border-radius: 20px;
+  padding: 0px 10px 5px 10px;
+}
+
 /* hiding input review */
 .style-btn-review input[type='file'] {
   display: none;

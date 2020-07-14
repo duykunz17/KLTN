@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 
 import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
+import Search from '../components/Home/Search/Search';
 
 import NewFeed from '../components/Post/NewFeeds/NewFeed';
 import News from '../components/Post/NewFeeds/News';
@@ -90,10 +91,38 @@ class NewFeedPage extends Component {
             })
     }
 
+    receiveInfoSearch = (infoSearch) => {
+        if (infoSearch)
+            callAPI(`post/search=${infoSearch}`, 'GET', null)
+                .then(res => {
+                    if (res.data.message)
+                        Swal.fire({
+                            icon: 'warning',
+                            title: res.data.message,
+                        });
+
+                    else {
+                        let { posts } = res.data;
+                        this.setState({ posts });
+                    }
+                })
+                .catch((err) => { console.log(err) });
+        else {
+            callAPI('post', 'GET', null)
+                .then(res => {
+                    this.setState({
+                        posts: res.data
+                    });
+                })
+                .catch((err) => { console.log(err) })
+        }
+    }
+
     render() {
         return (
             <div>
                 <Header />
+                <Search receiveInfoSearch={this.receiveInfoSearch} title="Bạn muốn tìm bài viết về?" input="Nhập thông tin bài viết" />
                 {
                     this.state.postsPopular.length > 0 ? (
 

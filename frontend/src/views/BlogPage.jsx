@@ -187,23 +187,23 @@ class BlogPage extends Component {
                                             <div className="card ml-3" style={{ borderRadius: '10px' }}>
                                                 <p className="text-center mt-3" style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}> Giới thiệu </p>
                                                 <hr />
-                                                <div className="text-left ml-2">
-                                                    <p style={{ lineHeight: '3' }}><i className="fa fa-user" aria-hidden="true"></i> Họ và tên: <span style={{ fontWeight: 'bold' }}>{name}</span> </p>
+                                                <div className="text-left ml-2" style={{marginTop: "-20px"}} >
+                                                    <p style={{ lineHeight: '4' }}><i className="fa fa-user" aria-hidden="true"></i> Họ và tên: <span style={{ fontWeight: 'bold' }}>{name}</span> </p>
                                                     {gender === true ?
-                                                        <p style={{ lineHeight: '3' }}><i className="fa fa-transgender" aria-hidden="true"></i> Giới tính: <span style={{ fontWeight: 'bold' }}>Nam</span> </p>
-                                                        : <p style={{ lineHeight: '3' }}><i className="fa fa-transgender" aria-hidden="true"></i> Giới tính: <span style={{ fontWeight: 'bold' }}>Nữ</span> </p>
+                                                        <p style={{ lineHeight: '4' }}><i className="fa fa-transgender" aria-hidden="true"></i> Giới tính: <span style={{ fontWeight: 'bold' }}>Nam</span> </p>
+                                                        : <p style={{ lineHeight: '4' }}><i className="fa fa-transgender" aria-hidden="true"></i> Giới tính: <span style={{ fontWeight: 'bold' }}>Nữ</span> </p>
                                                     }
-                                                    <p style={{ lineHeight: '3' }}><i className="fa fa-envelope" aria-hidden="true"></i> Email: <span style={{ fontWeight: 'bold' }}>{email}</span> </p>
-                                                    <p style={{ lineHeight: '3' }}><i className="fa fa-phone" aria-hidden="true"></i> Số điện thoại: <span style={{ fontWeight: 'bold' }}>{phone}</span> </p>
-                                                    <p style={{ lineHeight: '3' }}><i className="fa fa-map-marker" aria-hidden="true"></i> Đến từ: <span style={{ fontWeight: 'bold' }}>{address}</span> </p>
+                                                    <p style={{ lineHeight: '4' }}><i className="fa fa-envelope" aria-hidden="true"></i> Email: <span style={{ fontWeight: 'bold' }}>{email}</span> </p>
+                                                    <p style={{ lineHeight: '4' }}><i className="fa fa-phone" aria-hidden="true"></i> Số điện thoại: <span style={{ fontWeight: 'bold' }}>{phone}</span> </p>
+                                                    <p style={{ lineHeight: '4' }}><i className="fa fa-map-marker" aria-hidden="true"></i> Đến từ: <span style={{ fontWeight: 'bold' }}>{address}</span> </p>
                                                 </div>
                                                 <hr />
-                                                <div style={{ marginBottom: '10px' }} className="ml-2 mr-2 mb-3">
+                                                <div style={{ margin: "6px 0px 25px 0px" }} className="ml-2 mr-2" >
                                                     <button type="button" className="btn btn-secondary btn-lg btn-block" style={{ borderRadius: '20px' }} onClick={() => this.onOpenFormUpdateInfo(true, null, false)} >Cập nhật thông tin cá nhân</button>
                                                 </div>
                                             </div>
 
-                                            <div className="card ml-3" style={{ borderRadius: '10px', marginTop: '52px' }}>
+                                            <div className="card ml-3" style={{ borderRadius: '10px', marginTop: '48px' }}>
                                                 <p className="text-center mt-3" style={{ fontWeight: 'bold', fontSize: '30px', color: 'black' }}> Ảnh </p>
                                                 <hr />
                                                 <ImagesPost posts={posts} />

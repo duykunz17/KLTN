@@ -92,6 +92,21 @@ router.route('/search=:info').get((req, res) => {
             .catch(err => res.status(400).json('Error'+ err))
 });
 
+router.route('/hashtag=:tag').get((req, res) => {
+    let info = req.params.tag;
+    if (info)
+        dbPlace.find({destination:{$elemMatch: {name: {$regex: info, $options: 'i'}}}}).limit(2)
+            .then(places => {
+                // console.log(destinations)
+                if (places.length > 0)
+                    return res.json({places})
+
+                return res.json({message: 'Không tìm thấy thông tin về địa điểm này'});
+            })
+            .catch(err => res.json('Error' + err))
+});
+
+
 router.route('/popular-place').get((req, res) => {
     dbPlace.find({destination:{$elemMatch: {rating: {$gte: 4}}}}).sort({'destination.$.review': -1}).limit(15)
         .then(places => {

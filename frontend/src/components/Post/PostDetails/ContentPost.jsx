@@ -120,6 +120,9 @@ export default class ContentPost extends Component {
                             </li>
                         </ul>
                     </h2>
+                    <p className="mt-3 mb-2 d-flex justify-content" style={{ fontSize: '20px' }}>
+                        {post.hashtag}
+                    </p>
                     <p className="quote-wrapper">
                         {post.content}
                     </p>
